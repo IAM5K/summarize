@@ -1,0 +1,7 @@
+{
+  "name": "summarise",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
