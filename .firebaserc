@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "summarize-ng"
+  },
+  "targets": {
+    "summarize-ng": {
+      "hosting": {
+        "app": [
+          "sumarize"
+        ]
+      }
+    }
+  }
+}

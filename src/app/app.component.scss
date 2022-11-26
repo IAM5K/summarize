@@ -1,7 +1,14 @@
+ion-split-pane{
+  border-top: .5px solid #00000020;  
+}
+@media screen and (min-width:992px) {
+  ion-menu{
+    width: 250px;
+  }
+}
 ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
-
 ion-menu.md ion-content {
   --padding-start: 8px;
   --padding-end: 8px;

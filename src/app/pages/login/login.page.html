@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ pageTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ pageTitle }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <label for="username">Username</label>
+    <input type="text" id="username" [(ngModel)]="username">
+    <label for="password">Password</label>
+    <input type="password" id="password" [(ngModel)]="password" >
+    <button (click)="login()">Login</button>
+    <p>{{username | json}} & {{password | json}}</p>
+  </div>
+</ion-content>
