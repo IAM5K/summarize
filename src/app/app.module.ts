@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -40,6 +40,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     ScreenTrackingService,UserTrackingService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

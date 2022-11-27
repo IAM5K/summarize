@@ -4,7 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/auth-guard';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
@@ -64,7 +64,11 @@ const routes: Routes = [
 		path: '**',
 		redirectTo: '',
 		pathMatch: 'full'
-	}
+	},
+  {
+    path: 'header',
+    loadChildren: () => import('./pages/header/header.module').then( m => m.HeaderPageModule)
+  }
 ];
 
 @NgModule({
