@@ -15,8 +15,9 @@ import { User } from 'src/app/models/interface/user.model';
 	providedIn: 'root'
 })
 export class AuthService {
-	isLogin: boolean = false;
+	isLogin: boolean = true;
 	userDoc: AngularFirestoreDocument | undefined;
+	user!: firebase.User | null;
 	// userRef = this.afs.collection(`user`)
 	constructor(private auth: Auth, private afs: AngularFirestore,
     private firebaseAuth: AngularFireAuth,
@@ -37,6 +38,7 @@ export class AuthService {
 			await this.getEmailBasedUser(user.user)
 
 			localStorage.setItem('user', JSON.stringify(user.user))
+			this.isLogin=true
 			return user;
 		} catch (e) {
 			return null;
@@ -44,12 +46,14 @@ export class AuthService {
 	}
 
 	logout() {
+		this.isLogin=false;
 		localStorage.clear()
 		return signOut(this.auth);
 	}
 	async googleSignin() {
 	  const provider = new firebase.auth.GoogleAuthProvider();
 	  const credential = await this.firebaseAuth.signInWithPopup(provider);
+		this.isLogin=true
 	  return this.updateUserData(credential.user);
 	}
 	async getEmailBasedUser(user: any) {
@@ -69,25 +73,6 @@ export class AuthService {
 		else if (userRef.get() == undefined) {
 			userRef.set(user, { merge: true })
 		}
-
-		// var user=await this.userRef.doc(uid).valueChanges().subscribe((res:any) => {
-		// 	if (res.uid!== undefined) {
-		// 	console.log(res.uid);
-		// 	} else {
-		// 		console.log("Not Found");	
-		// 	}
-		// })
-
-		// let userRef = this.afs.doc(`user/${uid}`).valueChanges({ uid: uid }).subscribe((res: any) => {
-		// 	if (res.uid !== undefined) {
-		// 		console.log(res.uid);
-		// 		return true
-		// 	} else {
-		// 		console.log("Not Found");
-		// 		return false
-		// 	}
-		// })
-		// return userRef;
 	}
 
 
@@ -114,4 +99,5 @@ export class AuthService {
 	  }
 
 	}
+
 }
