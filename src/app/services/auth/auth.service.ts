@@ -47,7 +47,7 @@ export class AuthService {
 
 	logout() {
 		this.isLogin=false;
-		localStorage.clear()
+		localStorage.clear();
 		return signOut(this.auth);
 	}
 	async googleSignin() {
