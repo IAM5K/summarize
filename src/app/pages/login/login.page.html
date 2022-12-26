@@ -25,7 +25,7 @@
     </ion-item>
 
     <ion-button type="submit" expand="block" [disabled]="!credentials.valid">Log in</ion-button>
-    <ion-button type="button" expand="block" color="secondary" (click)="register()">Create account</ion-button>
+    <ion-button type="button" expand="block" color="secondary" [disabled]="!credentials.valid" (click)="register()">Create account</ion-button>
     <ion-button type="button" expand="block" color="success" (click)="loginWithGoogle()">Login with Google</ion-button>
 
   </form>
