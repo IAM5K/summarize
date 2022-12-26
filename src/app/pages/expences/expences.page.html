@@ -1,9 +1,109 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Expences</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ pageTitle }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title>{{ pageTitle }}</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
 
+  <div id="container">
+
+    <div class="card ion-margin ion-padding ">
+      <h1 class="mt-0 h2">Add Expence</h1>
+      <div class="form-container">
+        <form [formGroup]="expenceForm" (ngSubmit)="addExpence()" novalidate>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Date</ion-label>
+              <ion-input formControlName="date" type="date"></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Amount</ion-label>
+              <ion-input formControlName="amount" type="number" clear-input></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Description</ion-label>
+              <ion-input formControlName="description" type="text" placeholder="Description about item purchased, location etc." clear-input></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Type</ion-label>
+              <ion-select formControlName="type" interface="popover" placeholder="Category of Expence">
+                <ion-select-option value="emi">Bills & Emis</ion-select-option>
+                <ion-select-option value="education">Education</ion-select-option>
+                <ion-select-option value="food">Food</ion-select-option>
+                <ion-select-option value="grocery">Groceries</ion-select-option>
+                <ion-select-option value="health">Health and personal care</ion-select-option>
+                <ion-select-option value="utilities">Home and utilities</ion-select-option>
+                <ion-select-option value="insurance">Insurance</ion-select-option>
+                <ion-select-option value="rent">Rent</ion-select-option>
+                <ion-select-option value="transportation">Transportation</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Spent On</ion-label>
+              <ion-select formControlName="spendedOn" interface="popover" placeholder="On whom it is Spent">
+                <ion-select-option value="self">Self</ion-select-option>
+                <ion-select-option value="group">Group</ion-select-option>
+                <ion-select-option value="family">Family</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+
+          <div class="input-item">
+            <ion-button color="primary" type="submit" size="medium">Submit</ion-button>
+            <ion-button color="primary" type="reset" size="medium">Reset</ion-button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="data-table card ion-margin ion-padding">
+      <div class="table-title">
+        <h2 class="mt-0 h2" *ngIf="expencesCount == 0">No Expences found</h2>
+        <h2 class="mt-0 h2" *ngIf="expencesCount !== 0">My Expences</h2>
+      </div>
+      <div class="filters"></div>
+      <div class="data-grid" *ngIf="expencesCount > 0">
+        <ion-grid class="border-6">
+          <ion-row>
+            <!-- <ion-col size="1">S.No</ion-col> -->
+            <ion-col size="1">Date</ion-col>
+            <ion-col size="1">Cost</ion-col>
+            <ion-col size="1">Type</ion-col>
+            <ion-col size="1">Description</ion-col>
+            <ion-col size="1">Spent On</ion-col>
+            <ion-col size="1">Action</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let expence of Expences; index as i">
+            <!-- <ion-col size="1">{{ i + 1 }}</ion-col> -->
+            <ion-col size="1">{{ expence?.date }}</ion-col>
+            <ion-col size="1">{{ expence?.amount }}</ion-col>
+            <ion-col size="1">{{ expence?.type }}</ion-col>
+            <ion-col size="1">{{ expence?.description }}</ion-col>
+            <ion-col size="1">{{ expence?.spendedOn }}</ion-col>
+            <ion-col size="1">Edit / Delete</ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </div>
+    </div>
+
+  </div>
 </ion-content>
