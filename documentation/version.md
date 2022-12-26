@@ -8,6 +8,8 @@
     v d.0.2 : 27-11-2022 : Google Login Working, Login with Email and Password working. User collection > Document created with all data in     Firestore. Files Un-cleaned. Sanitisation Required. 
 
     v d.0.3 : 28-11-2022 : Side Nav requires user to login to display options.
+    
+    v d.0.4 : 26-12-2022 : Profile page added and updated in menu.
 
 ## Release Versions
 
