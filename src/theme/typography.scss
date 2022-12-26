@@ -1,0 +1,47 @@
+/* Difine all custom typography here */
+:root,html,body{
+  font-size: 16px;
+}
+
+.ion-text-bold{
+  font-weight: bold;
+}
+
+
+h1,h2,h3,h4,h5,h6{
+  display: block !important;
+  position: relative;
+  width: 100% !important;
+}
+.h1{
+  font-size: 2rem;
+}
+.h2{
+  font-size: 1.6rem !important;
+  margin-bottom: .5rem;
+}
+.h3{
+  font-size: 1.4rem;
+}
+.h4{
+  font-size: 1.2rem;
+}
+.h5{
+  font-size: 1rem;
+}
+.h6{
+  font-size: .8rem;
+}
+.text-elipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis !important;
+}
+.mt-0{
+  margin-top: 0%;
+  margin-left: 5px;
+}
+
+ion-title{
+  color: var(--ion-color-primary);
+}

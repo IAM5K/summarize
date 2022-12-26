@@ -1,0 +1,11 @@
+.card-background{
+  border-radius: 6px;
+  background-image: linear-gradient(to right, #eeeeee, #f1f1f1, #f4f4f4, #f8f8f8, #fbfbfb50,
+  #fbfbfb00, #fbfbfb00, #fbfbfb50, #f8f8f8, #f4f4f4, #f1f1f1, #eeeeee);
+  box-shadow: 0 0 5px #7fffd450;
+  width: min(96%, calc(100% - 2rem) );
+  margin: max(2%,1rem);
+  // margin-top: 20px;
+  // margin-bottom: 20px;
+  box-sizing: border-box;
+}
