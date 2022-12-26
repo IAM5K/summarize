@@ -68,6 +68,10 @@ const routes: Routes = [
   {
     path: 'header',
     loadChildren: () => import('./pages/header/header.module').then( m => m.HeaderPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   }
 ];
 
