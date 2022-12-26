@@ -13,3 +13,7 @@
 
     v r.0.1 : 27-11-2022 : User login with Firebase implemented. 
             1. Login with Email and Password working.
+
+## Patches
+
+    v p.0.1 : 26-12-2022 :Removed label in sidemenu and border in bottom.
