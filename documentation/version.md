@@ -10,6 +10,10 @@
     v d.0.3 : 28-11-2022 : Side Nav requires user to login to display options.
     
     v d.0.4 : 26-12-2022 : Profile page added and updated in menu.
+    
+    v d.0.5 : 26-12-2022 : Expence page working. Add and Get Expence feature added.
+    
+    v d.0.6 : 27-12-2022 : About Summarise added to Home page.
 
 ## Release Versions
 
@@ -19,3 +23,5 @@
 ## Patches
 
     v p.0.1 : 26-12-2022 :Removed label in sidemenu and border in bottom.
+    v p.0.2 : 27-12-2022 :Create account button disabled.
+    v p.0.3 : 27-12-2022 :Different Custom SCSS added .
