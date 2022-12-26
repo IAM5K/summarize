@@ -12,7 +12,7 @@ export class AppComponent {
   public appPages:any = [];
   public labels:any = [];
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private firebaseAuth: AngularFireAuth,
 		private router: Router) {
   }
@@ -51,7 +51,6 @@ export class AppComponent {
       { title: 'Setup', color: 'warning', url: 'setup', icon: 'settings' },
       { title: 'Contact Us', color: 'tertiary', url: 'support', icon: 'paper-plane' }
     ];
-    this.labels = ['Notes', 'Work', 'Travel', 'Reminders'];
   }
 
   async logout(){
