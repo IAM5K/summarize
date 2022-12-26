@@ -44,11 +44,8 @@ export class AppComponent {
       { title: 'Expences', color: 'success', url: 'expences', icon: 'cash' },
       { title: 'Office', color: 'danger', url: 'office', icon: 'briefcase' },
       { title: 'Analytics', color: 'success', url: 'analytics', icon: 'analytics' },
-      // { title: 'Appointments', color:'tertiary', url: 'appointments', icon: 'calendar' },
-      // { title: 'Organisations', color:'warning', url: 'organisations', icon: 'globe' },
-      // { title: 'Users', color:'purple', url: 'users', icon: 'people' },
-      // { title: 'Notifications', color:'danger', url: 'notifications', icon: 'notifications' },
       { title: 'Setup', color: 'warning', url: 'setup', icon: 'settings' },
+      { title: 'Profile', color: 'warning', url: 'profile', icon: 'person' },
       { title: 'Contact Us', color: 'tertiary', url: 'support', icon: 'paper-plane' }
     ];
   }
