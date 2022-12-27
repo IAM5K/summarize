@@ -182,18 +182,19 @@
 
 }
 
-
 /* Data Table */
 .data-table {
-  height: fit-content;
-  min-height: 80px;
+  height: 400px;
   margin: auto;
   box-sizing: border-box;
   overflow: hidden;
-
 }
 
 .data-grid {
+  overflow-y: auto;
   overflow-x: auto;
   white-space: nowrap;
+  ion-col{
+    word-wrap: break-word;
+  }
 }
