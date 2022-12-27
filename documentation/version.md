@@ -14,6 +14,7 @@
     v d.0.5 : 26-12-2022 : Expence page working. Add and Get Expence feature added.
     
     v d.0.6 : 27-12-2022 : About Summarise added to Home page.
+    v d.0.7 : 27-12-2022 : Added SEO service and Gzip, gulp for compression.
 
 ## Release Versions
 
