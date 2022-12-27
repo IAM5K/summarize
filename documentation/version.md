@@ -20,7 +20,7 @@
 
     v r.0.1 : 27-11-2022 : User login with Firebase implemented. 
             1. Login with Email and Password working.
-    v r.0.1 : 27-12-2022 : Added Expence page with add expence and list expence feature.
+    v r.0.2 : 27-12-2022 : Added Expence page with add expence and list expence feature. 'Robots.txt' and 'Sitemap.xml' added. 
 
 ## Patches
 
