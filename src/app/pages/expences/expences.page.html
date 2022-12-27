@@ -35,7 +35,8 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Description</ion-label>
-              <ion-input formControlName="description" type="text" placeholder="Description about item purchased, location etc." clear-input></ion-input>
+              <ion-input formControlName="description" type="text"
+                placeholder="Description about item purchased, location etc." clear-input></ion-input>
             </ion-item>
           </div>
           <div class="input-item">
@@ -84,24 +85,23 @@
         <ion-grid class="border-6">
           <ion-row>
             <!-- <ion-col size="1">S.No</ion-col> -->
-            <ion-col size="1">Date</ion-col>
+            <ion-col size="2">Date</ion-col>
             <ion-col size="1">Cost</ion-col>
-            <ion-col size="1">Type</ion-col>
-            <ion-col size="1">Description</ion-col>
-            <ion-col size="1">Spent On</ion-col>
-            <ion-col size="1">Action</ion-col>
+            <ion-col size="2">Type</ion-col>
+            <ion-col size="3">Description</ion-col>
+            <ion-col size="2">Spent On</ion-col>
+            <ion-col size="2">Action</ion-col>
           </ion-row>
           <ion-row *ngFor="let expence of Expences; index as i">
             <!-- <ion-col size="1">{{ i + 1 }}</ion-col> -->
-            <ion-col size="1">{{ expence?.date }}</ion-col>
-            <ion-col size="1">{{ expence?.amount }}</ion-col>
-            <ion-col size="1">{{ expence?.type }}</ion-col>
-            <ion-col size="1">{{ expence?.description }}</ion-col>
-            <ion-col size="1">{{ expence?.spendedOn }}</ion-col>
-            <ion-col size="1">Edit / Delete</ion-col>
+            <ion-col size="2">{{ expence?.date }}</ion-col>
+            <ion-col size="1">₹{{ expence?.amount }}</ion-col>
+            <ion-col size="2">{{ expence?.type }}</ion-col>
+            <ion-col size="3" class="ion-text-wrap ion-text-left">{{ expence?.description }}</ion-col>
+            <ion-col size="2">{{ expence?.spendedOn }}</ion-col>
+            <ion-col size="2">Edit / Delete</ion-col>
           </ion-row>
         </ion-grid>
-
       </div>
     </div>
 
