@@ -27,4 +27,4 @@
     v p.0.3 : 27-12-2022 :Different Custom SCSS added .
     v p.0.4 : 27-12-2022 :Portal Title updated and View port maximum-scale set to 5. Added Readme File.
     v p.0.5 : 27-12-2022 :Cumulative layout shift fixed in expences page. Added Meta Description. User Scalable set to true
-    v p.0.6 : 27-12-2022 :Word wrap added to coulmns of table
+    v p.0.6 : 27-12-2022 :Word wrap added to coulmns of table.
