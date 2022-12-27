@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /editor/**
+Sitemap: https://summarize-ng.web.app/sitemap.xml
