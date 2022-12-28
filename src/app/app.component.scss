@@ -124,3 +124,9 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+.summarize-logo{
+  min-height: 89px;
+  @media screen and (min-width:992px) {
+    min-height: 99px;
+  }
+}
