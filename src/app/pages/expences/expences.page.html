@@ -8,16 +8,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-header collapse="condense">
+  <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title>{{ pageTitle }}</ion-title>
     </ion-toolbar>
-  </ion-header> -->
+  </ion-header>
 
   <div id="container">
 
     <div class="card ion-margin ion-padding ">
-      <h1 class="mt-0 h2">Add Expence</h1>
+      <h1 class="mt-0 h2">Add Expense</h1>
       <div class="form-container">
         <form [formGroup]="expenceForm" (ngSubmit)="addExpence()" novalidate>
           <div class="input-item">
@@ -42,7 +42,7 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Type</ion-label>
-              <ion-select formControlName="type" interface="popover" placeholder="Category of Expence">
+              <ion-select formControlName="type" interface="popover" placeholder="Category of Expense">
                 <ion-select-option value="emi">Bills & Emis</ion-select-option>
                 <ion-select-option value="education">Education</ion-select-option>
                 <ion-select-option value="food">Food</ion-select-option>
@@ -77,8 +77,8 @@
 
     <div class="data-table card ion-margin ion-padding">
       <div class="table-title">
-        <h2 class="mt-0 h2" *ngIf="expencesCount == 0">No Expences found</h2>
-        <h2 class="mt-0 h2" *ngIf="expencesCount !== 0">My Expences</h2>
+        <h2 class="mt-0 h2" *ngIf="expencesCount == 0">No Expenses found</h2>
+        <h2 class="mt-0 h2" *ngIf="expencesCount !== 0">My Expenses</h2>
       </div>
       <div class="filters"></div>
       <div class="data-grid" *ngIf="expencesCount > 0">
@@ -96,13 +96,14 @@
             <!-- <ion-col size="1">{{ i + 1 }}</ion-col> -->
             <ion-col size="2">{{ expence?.date }}</ion-col>
             <ion-col size="1">₹{{ expence?.amount }}</ion-col>
-            <ion-col size="2">{{ expence?.type }}</ion-col>
-            <ion-col size="3" class="ion-text-wrap ion-text-left">{{ expence?.description }}</ion-col>
-            <ion-col size="2">{{ expence?.spendedOn }}</ion-col>
+            <ion-col size="2">{{ expence?.type | titlecase }}</ion-col>
+            <ion-col size="3" class="ion-text-wrap ion-text-left">{{ expence?.description | titlecase}}</ion-col>
+            <ion-col size="2">{{ expence?.spendedOn | titlecase}}</ion-col>
             <ion-col size="2">Edit / Delete</ion-col>
           </ion-row>
         </ion-grid>
       </div>
+      <ion-note class="ion-padding">** Edit and Delete features will be availabe soon.</ion-note>
     </div>
 
   </div>
