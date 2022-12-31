@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./analytics.page.scss'],
 })
 export class AnalyticsPage implements OnInit {
-
+  pageTitle = "Analytics"
   constructor() { }
 
   ngOnInit() {
