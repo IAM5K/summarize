@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./office.page.scss'],
 })
 export class OfficePage implements OnInit {
-
+  pageTitle = "Office"
   constructor() { }
 
   ngOnInit() {
