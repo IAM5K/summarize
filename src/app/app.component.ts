@@ -41,12 +41,13 @@ export class AppComponent {
   getSidebar(){
     this.appPages = [
       { title: 'Dashboard', color: 'primary', url: 'home', icon: 'grid' },
-      { title: 'Expences', color: 'success', url: 'expences', icon: 'cash' },
-      { title: 'Office', color: 'danger', url: 'office', icon: 'briefcase' },
+      { title: 'About', color: 'warning', url: 'about', icon: 'reader' },
+      { title: 'Expenses', color: 'success', url: 'expenses', icon: 'cash' },
+      { title: 'Time', color: 'danger', url: 'office', icon: 'hourglass' },
       { title: 'Analytics', color: 'success', url: 'analytics', icon: 'analytics' },
       { title: 'Setup', color: 'warning', url: 'setup', icon: 'settings' },
-      { title: 'Profile', color: 'warning', url: 'profile', icon: 'person' },
-      { title: 'Contact Us', color: 'tertiary', url: 'support', icon: 'paper-plane' }
+      { title: 'Profile', color: 'secondary', url: 'profile', icon: 'person' },
+      { title: 'Support', color: 'tertiary', url: 'support', icon: 'paper-plane' }
     ];
   }
 

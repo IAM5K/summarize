@@ -31,7 +31,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'expences',
+    path: 'expenses',
     loadChildren: () => import('./pages/expences/expences.module').then( m => m.ExpencesPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
 
@@ -60,19 +60,26 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin)
 
   },
-	{
-		path: '**',
-		redirectTo: '',
-		pathMatch: 'full'
-	},
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
   {
     path: 'header',
     loadChildren: () => import('./pages/header/header.module').then( m => m.HeaderPageModule)
   },
-  {
-    path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
-  }
+	{
+		path: '**',
+		redirectTo: 'home',
+		pathMatch: 'full'
+	}
 ];
 
 @NgModule({
