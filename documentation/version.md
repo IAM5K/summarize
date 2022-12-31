@@ -15,6 +15,11 @@
     
     v d.0.6 : 27-12-2022 : About Summarise added to Home page.
     v d.0.7 : 27-12-2022 : Added SEO service and Gzip, gulp for compression.
+    v d.0.8 : 27-12-2022 : Added Logo on side menu.
+    v d.0.9 : 28-12-2022 : Added page title and responsive nav bar to all.
+    v d.1.0 : 28-12-2022 : Added logo and auto update for pwa app.
+    v d.1.1 : 31-12-2022 : Added About component that will have all information guide and update app option.
+
 
 ## Release Versions
 
@@ -30,3 +35,5 @@
     v p.0.4 : 27-12-2022 :Portal Title updated and View port maximum-scale set to 5. Added Readme File.
     v p.0.5 : 27-12-2022 :Cumulative layout shift fixed in expences page. Added Meta Description. User Scalable set to true
     v p.0.6 : 27-12-2022 :Word wrap added to coulmns of table.Firebase Config changes.
+    v p.0.7 : 28-12-2022 :Corrected the spelling of Expense and added appropriate alert controller. Made Self as default value.
+    v p.0.8 : 31-12-2022 :Updated all icons for pwa. Changes office to time
