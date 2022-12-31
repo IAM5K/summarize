@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,8 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 export class ExpenceService {
 
   constructor(
-    private afs:AngularFirestore
+    private afs:AngularFirestore,
+    private alertCtrl:AlertController
   ) { }
   expenseCollection = this.afs.collection('user')
   addExpense(data:any){
@@ -17,7 +19,7 @@ export class ExpenceService {
       userId = JSON.parse(userData).uid
     }
     this.expenseCollection.doc(userId).collection('myExpence').add(data).then(res=>{
-      alert("News Submitted Successfully")
+      this.successAlert();
     }).catch(err=>{
       alert("There was an error in posting. \n Please try again later. Check console for detail.");
       console.warn(err);
@@ -29,6 +31,18 @@ export class ExpenceService {
     if(userData){
       userId = JSON.parse(userData).uid
     }
-    return this.expenseCollection.doc(userId).collection('myExpence').valueChanges({idField:'idField'})
+    return this.expenseCollection.doc(userId).collection('myExpence',ref => ref.orderBy('date', 'desc')).valueChanges({idField:'idField'})
+  }
+
+  async successAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Success',
+      subHeader: 'Expense added Successfully!',
+      cssClass: 'success-alert',
+      // message: 'This is an alert!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 }
