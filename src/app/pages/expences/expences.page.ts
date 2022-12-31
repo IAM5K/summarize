@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./expences.page.scss'],
 })
 export class ExpencesPage implements OnInit {
-  pageTitle = "Expences"
+  pageTitle = "Expenses"
   Expences:any=[];
   expencesCount:number=0
   constructor(
@@ -22,7 +22,7 @@ export class ExpencesPage implements OnInit {
     amount: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     type: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
     description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    spendedOn: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
+    spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]
   })
   ngOnInit() {
