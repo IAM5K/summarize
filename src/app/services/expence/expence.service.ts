@@ -8,30 +8,30 @@ import { AlertController } from '@ionic/angular';
 export class ExpenceService {
 
   constructor(
-    private afs:AngularFirestore,
-    private alertCtrl:AlertController
+    private afs: AngularFirestore,
+    private alertCtrl: AlertController
   ) { }
-  expenseCollection = this.afs.collection('user')
-  addExpense(data:any){
-    let userId=""
+  expenseCollection = this.afs.collection('userData')
+  addExpense(data: any) {
+    let userId = ""
     let userData = localStorage.getItem('UserData')
-    if(userData){
+    if (userData) {
       userId = JSON.parse(userData).uid
     }
-    this.expenseCollection.doc(userId).collection('myExpence').add(data).then(res=>{
+    this.expenseCollection.doc(userId).collection('myExpence').add(data).then(res => {
       this.successAlert();
-    }).catch(err=>{
+    }).catch(err => {
       alert("There was an error in posting. \n Please try again later. Check console for detail.");
       console.warn(err);
     })
   }
-  getExpences(){
-    let userId=""
+  getExpences() {
+    let userId = ""
     let userData = localStorage.getItem('UserData')
-    if(userData){
+    if (userData) {
       userId = JSON.parse(userData).uid
     }
-    return this.expenseCollection.doc(userId).collection('myExpence',ref => ref.orderBy('date', 'desc')).valueChanges({idField:'idField'})
+    return this.expenseCollection.doc(userId).collection('myExpence', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
   }
 
   async successAlert() {
@@ -45,4 +45,5 @@ export class ExpenceService {
 
     await alert.present();
   }
+
 }
