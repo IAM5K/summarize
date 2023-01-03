@@ -10,11 +10,94 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{ pageTitle }}</ion-title>
+      <ion-title>{{ pageTitle }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <h1 class="capitalize ion-margin ion-padding">This page will be availabe soon.</h1>
+
+    <div class="card ion-margin ion-padding ">
+      <h1 class="mt-0 h2">Add Work</h1>
+      <div class="form-container">
+        <form [formGroup]="workForm" (ngSubmit)="addWork()" novalidate>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Date</ion-label>
+              <ion-input formControlName="date" type="date"></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Start Time</ion-label>
+              <ion-input formControlName="startTime" type="time" clear-input></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">End Time</ion-label>
+              <ion-input formControlName="endTime" type="time" clear-input></ion-input>
+            </ion-item>
+          </div>
+
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Description</ion-label>
+              <ion-input formControlName="description" type="text"
+                placeholder="Description about item purchased, location etc." clear-input></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Type</ion-label>
+              <ion-select formControlName="type" interface="popover" placeholder="Category of Expense">
+                <ion-select-option value="coding">Coding</ion-select-option>
+                <ion-select-option value="documentation">Documentation</ion-select-option>
+                <ion-select-option value="support">Support</ion-select-option>
+                <ion-select-option value="discussion">Discussion</ion-select-option>
+                <ion-select-option value="testing">Testing</ion-select-option>
+                <ion-select-option value="research">Research</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-button color="primary" type="submit" size="medium">Submit</ion-button>
+            <ion-button color="primary" type="reset" size="medium">Reset</ion-button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="data-table card ion-margin ion-padding">
+      <div class="table-title">
+        <h2 class="mt-0 h2" *ngIf="worksCount == 0">No Work found</h2>
+        <h2 class="mt-0 h2" *ngIf="worksCount !== 0">My Work</h2>
+      </div>
+      <div class="filters"></div>
+      <div class="data-grid" *ngIf="worksCount > 0">
+        <ion-grid class="border-6">
+          <ion-row>
+            <!-- <ion-col size="1">S.No</ion-col> -->
+            <ion-col size="2">Date</ion-col>
+            <ion-col class="ion-text-wrap" size="1">Start Time</ion-col>
+            <ion-col class="ion-text-wrap" size="1">End Time</ion-col>
+            <ion-col size="2">Type</ion-col>
+            <ion-col size="4">Description</ion-col>
+            <ion-col size="2">Action</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let work of Works; index as i">
+            <!-- <ion-col size="1">{{ i + 1 }}</ion-col> -->
+            <ion-col size="2">{{ work?.date }}</ion-col>
+            <ion-col size="1">{{ work?.startTime }}</ion-col>
+            <ion-col size="1">{{ work?.endTime }}</ion-col>
+            <ion-col size="2">{{ work?.type | titlecase }}</ion-col>
+            <ion-col size="4" class="ion-text-wrap ion-text-left">{{ work?.description | titlecase}}</ion-col>
+            <ion-col size="2">Edit / Delete</ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <ion-note class="ion-padding">** Edit and Delete features will be availabe soon.</ion-note>
+    </div>
+
   </div>
 </ion-content>
