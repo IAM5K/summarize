@@ -38,7 +38,10 @@ export class ExpencesPage implements OnInit {
 
   }
   addExpence() {
-    // console.log(this.expenceForm.value);
     this.expenseService.addExpense(this.expenceForm.value)
+    this.expenceForm.patchValue({
+      amount:'',
+      description:''
+    })
   }
 }
