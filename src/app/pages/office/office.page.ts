@@ -19,8 +19,8 @@ export class OfficePage implements OnInit {
   workForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [new Date(), [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    startTime: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    endTime: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
+    startTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
+    endTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
     type: ['coding', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
     description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     // spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
