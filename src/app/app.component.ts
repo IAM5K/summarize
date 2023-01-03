@@ -43,11 +43,11 @@ export class AppComponent {
       { title: 'Dashboard', color: 'primary', url: 'home', icon: 'grid' },
       { title: 'About', color: 'warning', url: 'about', icon: 'reader' },
       { title: 'Expenses', color: 'success', url: 'expenses', icon: 'cash' },
-      { title: 'Time', color: 'danger', url: 'office', icon: 'hourglass' },
-      { title: 'Analytics', color: 'success', url: 'analytics', icon: 'analytics' },
-      { title: 'Setup', color: 'warning', url: 'setup', icon: 'settings' },
+      { title: 'Time', color: 'danger', url: 'work', icon: 'hourglass' },
+      // { title: 'Analytics', color: 'success', url: 'analytics', icon: 'analytics' },
+      // { title: 'Setup', color: 'warning', url: 'setup', icon: 'settings' },
       { title: 'Profile', color: 'secondary', url: 'profile', icon: 'person' },
-      { title: 'Support', color: 'tertiary', url: 'support', icon: 'paper-plane' }
+      { title: 'Need help', color: 'tertiary', url: 'help', icon: 'help-circle'}
     ];
   }
 
