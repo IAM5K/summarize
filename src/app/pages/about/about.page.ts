@@ -13,8 +13,10 @@ export class AboutPage implements OnInit {
     ) { }
 
   ngOnInit() {
+    let updateCount=0
     this.swUpdate.versionUpdates.subscribe(()=>{
-      if(confirm('Update Available, do you want to install it?')){
+      if(confirm('Update Available, do you want to install it?') && updateCount<5){
+        updateCount = updateCount+1;
         window.location.reload();
       }
     })
