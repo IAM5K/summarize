@@ -43,7 +43,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'office',
+    path: 'work',
     loadChildren: () => import('./pages/office/office.module').then( m => m.OfficePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
 
@@ -53,6 +53,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/setup/setup.module').then( m => m.SetupPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
 
+  },
+  {
+    path: 'help',
+    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'support',
