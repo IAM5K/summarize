@@ -8,6 +8,7 @@ import { SwUpdate } from '@angular/service-worker';
 })
 export class AboutPage implements OnInit {
   pageTitle="About Summarize"
+  infoNote=""
   constructor(
     private swUpdate: SwUpdate
     ) { }
@@ -15,9 +16,11 @@ export class AboutPage implements OnInit {
   ngOnInit() {
     let updateCount=0
     this.swUpdate.versionUpdates.subscribe(()=>{
+      this.infoNote ="Checking for update..."
       if(confirm('Update Available, do you want to install it?') && updateCount<5){
         updateCount = updateCount+1;
         window.location.reload();
+        this.infoNote="Updated."
       }
     })
   }
