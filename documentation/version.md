@@ -35,9 +35,15 @@
 - `p.0.8` : 31-12-2022 :Updated all icons for pwa. Changes office to time
 - `p.0.9` : 31-12-2022 :Disabled Login button with google in case of Email login.
 - `p.1.0` : 31-12-2022 :Content of Homepage coming from TS file.
-- `p.1.1` : 31-12-2022 :Multiple patched
+- `p.1.1` : 01-01-2023 :Multiple patched
   1. Added Work replacing office from routes.
   2. Removed non active components.
   3. Added limit to auto update.
   4. Amount and Description to be auto clear
   5. Validator of Time modified
+- `p.1.2` : 02-01-2023 :Disabled Login button with google in case of Email login.
+- `p.1.3` : 05-01-2023 :Multiple Patches
+  1. Theme color updated
+  2. Refreshment and miscellaneous added to options.
+  3. Keywords added to index page.
+-  
