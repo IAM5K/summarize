@@ -13,20 +13,28 @@
       <ion-title size="large">{{ pageTitle }}</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div class="ion-padding">
+    <form (ngSubmit)="login()" [formGroup]="credentials">
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+        <!-- <ion-note slot="error" *ngIf="(errorControl.email.dirty || email.touched) && errorControl.email">Email is invalid</ion-note> -->
+      </ion-item>
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+        <!-- <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors">Password needs to be 6 characters</ion-note> -->
+      </ion-item>
 
-  <form (ngSubmit)="login()" [formGroup]="credentials">
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
-      <!-- <ion-note slot="error" *ngIf="(errorControl.email.dirty || email.touched) && errorControl.email">Email is invalid</ion-note> -->
-    </ion-item>
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
-      <!-- <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors">Password needs to be 6 characters</ion-note> -->
-    </ion-item>
+      <ion-button type="submit" expand="block" [disabled]="!credentials.valid">Log in</ion-button>
+      <ion-button type="button" expand="block" color="secondary" [disabled]="!credentials.valid"
+        (click)="register()">Create account</ion-button>
 
-    <ion-button type="submit" expand="block" [disabled]="!credentials.valid">Log in</ion-button>
-    <ion-button type="button" expand="block" color="secondary" [disabled]="!credentials.valid" (click)="register()">Create account</ion-button>
+    </form>
+
+    <div class="mt-10">
+      <h1><ion-note color="primary" class="h3 ml-5">Login using Google (Recommended & More Secure)</ion-note></h1>
     <ion-button type="button" expand="block" color="success" [disabled]="credentials.value.email !== '' ||credentials.value.password !== ''" (click)="loginWithGoogle()">Login with Google</ion-button>
 
-  </form>
+    </div>
+  </div>
+
 </ion-content>
