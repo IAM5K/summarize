@@ -4,8 +4,8 @@
       <ion-content>
         <ion-list id="inbox-list">
         <ion-img loading="lazy" src="assets/icon/logo-transparent.png" alt="Summarize Logo" class="summarize-logo" ></ion-img>
-          <ion-list-header>Summarise</ion-list-header>
-          <ion-note>Summarise helps you Rise</ion-note>
+          <ion-list-header>Summarize</ion-list-header>
+          <ion-note>Summarize helps you Rise</ion-note>
           <ng-container *ngIf="isLoggedIn">
             <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
               <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"

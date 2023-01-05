@@ -8,7 +8,7 @@
 - `d.0.3` : 28-11-2022 : Side Nav requires user to login to display options.
 - `d.0.4` : 26-12-2022 : Profile page added and updated in menu.
 - `d.0.5` : 26-12-2022 : Expence page working. Add and Get Expence feature added.    
-- `d.0.6` : 27-12-2022 : About Summarise added to Home page.
+- `d.0.6` : 27-12-2022 : About Summarize added to Home page.
 - `d.0.7` : 27-12-2022 : Added SEO service and Gzip, gulp for compression.
 - `d.0.8` : 27-12-2022 : Added Logo on side menu.
 - `d.0.9` : 28-12-2022 : Added page title and responsive nav bar to all.
@@ -50,4 +50,4 @@
   3. Expence type comes from ts.
   4. Keywords added to index page.
 - `p.1.4` : 05-01-2023 :**(Major Patch)**: Fixed Email based User register issue. 
-- `p.1.5` :
+- `p.1.5` : 05-01-2023 : Summarise spelling changed globally to Summarize.
