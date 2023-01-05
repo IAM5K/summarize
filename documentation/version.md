@@ -45,5 +45,6 @@
 - `p.1.3` : 05-01-2023 :Multiple Patches
   1. Theme color updated
   2. Refreshment and miscellaneous added to options.
-  3. Keywords added to index page.
+  3. Expence type comes from ts.
+  4. Keywords added to index page.
 -  
