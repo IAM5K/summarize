@@ -26,6 +26,7 @@ export class AuthService {
 	async register(email: any, password: any) {
 		try {
 			const user = await createUserWithEmailAndPassword(this.auth, email, password);
+      this.updateUserData(user.user)
 			return user;
 		} catch (e) {
 			return null;
@@ -36,7 +37,6 @@ export class AuthService {
 		try {
 			const user = await signInWithEmailAndPassword(this.auth, email, password);
 			await this.getEmailBasedUser(user.user)
-
 			localStorage.setItem('user', JSON.stringify(user.user))
 			this.isLogin=true
 			return user;
