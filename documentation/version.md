@@ -16,6 +16,8 @@
 - `d.1.1` : 31-12-2022 : Added About component that will have all information guide and update app option.
 - `d.1.2` : 28-12-2022 : Added office functionality and deployed for working condition.
 - `d.1.3` : 28-12-2022 : Added Help module with Installation instruction.
+- `d.1.4` : 05-01-2023 : Added Studies feature.
+- `d.1.5` : 05-01-2023 : Added Status bar Background.
 
 
 ## Release Versions
@@ -47,4 +49,5 @@
   2. Refreshment and miscellaneous added to options.
   3. Expence type comes from ts.
   4. Keywords added to index page.
--  
+- `p.1.4` : 05-01-2023 :**(Major Patch)**: Fixed Email based User register issue. 
+- `p.1.5` :
