@@ -1,0 +1,130 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ pageTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title>{{ pageTitle }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+
+    <div class="card ion-margin ion-padding ">
+      <h1 class="mt-0 h2">Add Studies</h1>
+      <div class="form-container">
+        <form [formGroup]="studiesForm" (ngSubmit)="addStudies()" novalidate>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Date</ion-label>
+              <ion-input formControlName="date" type="date"></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Start Time</ion-label>
+              <ion-input formControlName="startTime" type="time" clear-input></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">End Time</ion-label>
+              <ion-input formControlName="endTime" type="time" clear-input></ion-input>
+            </ion-item>
+          </div>
+
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Subject</ion-label>
+              <ion-input formControlName="subject" type="text"
+                placeholder="Subject studied" clear-input></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Topic</ion-label>
+              <ion-input formControlName="topic" type="text"
+                placeholder="Title of topic studied" clear-input></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Description</ion-label>
+              <ion-input formControlName="description" type="text"
+                placeholder="Description/ Sub-topic / comments about topic" clear-input></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Type</ion-label>
+              <ion-select formControlName="type" interface="popover" placeholder="Category of Studies">
+                <ion-select-option *ngFor="let type of studiesTypes" [value]="type.value">{{type.title}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Spent On</ion-label>
+              <ion-select formControlName="studyMode" interface="popover" placeholder="On whom it is Spent">
+                <ion-select-option value="self">Self</ion-select-option>
+                <ion-select-option value="group">Group</ion-select-option>
+                <ion-select-option value="teacher">Teacher</ion-select-option>
+                <ion-select-option value="online">Online</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+
+          <div class="input-item">
+            <ion-button color="primary" type="submit" size="medium">Submit</ion-button>
+            <ion-button color="primary" type="reset" size="medium">Reset</ion-button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="data-table card ion-margin ion-padding">
+      <div class="table-title">
+        <h2 class="mt-0 h2" *ngIf="studiesCount == 0">No Study Record</h2>
+        <h2 class="mt-0 h2" *ngIf="studiesCount !== 0">My Studies</h2>
+      </div>
+      <div class="filters"></div>
+      <div class="data-grid" *ngIf="studiesCount > 0">
+        <ion-grid class="border-6">
+          <ion-row>
+            <!-- <ion-col size="1">S.No</ion-col> -->
+            <ion-col size="2">Date</ion-col>
+            <ion-col class="ion-text-wrap" size="1">Start Time</ion-col>
+            <ion-col class="ion-text-wrap" size="1">End Time</ion-col>
+            <ion-col size="2">Type</ion-col>
+            <ion-col size="2">Subject</ion-col>
+            <ion-col size="4">Description</ion-col>
+            <ion-col size="2">Topic</ion-col>
+            <!-- <ion-col size="2">Action</ion-col> -->
+          </ion-row>
+          <ion-row *ngFor="let study of Studies; index as i">
+            <!-- <ion-col size="1">{{ i + 1 }}</ion-col> -->
+            <ion-col size="2">{{ study?.date }}</ion-col>
+            <ion-col size="1">{{ study?.startTime }}</ion-col>
+            <ion-col size="1">{{ study?.endTime }}</ion-col>
+            <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.subject | titlecase }}</ion-col>
+            <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.topic | titlecase }}</ion-col>
+            <ion-col size="4" class="ion-text-wrap ion-text-left">{{ study?.description | titlecase}}</ion-col>
+            <ion-col size="2">{{ study?.type | titlecase }}</ion-col>
+            <!-- <ion-col size="2">Edit / Delete</ion-col> -->
+          </ion-row>
+        </ion-grid>
+      </div>
+      <ion-note class="ion-padding" color="secondary" *ngIf="studiesCount !== 0">* Edit & Delete features coming soon.</ion-note>
+    </div>
+
+  </div>
+
+
+</ion-content>

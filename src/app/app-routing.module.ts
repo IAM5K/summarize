@@ -77,8 +77,9 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin)
   },
   {
-    path: 'header',
-    loadChildren: () => import('./pages/header/header.module').then( m => m.HeaderPageModule)
+    path: 'studies',
+    loadChildren: () => import('./pages/studies/studies.module').then( m => m.StudiesPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
   },
 	{
 		path: '**',
