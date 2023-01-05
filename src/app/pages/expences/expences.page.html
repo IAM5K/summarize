@@ -43,15 +43,7 @@
             <ion-item fill="outline">
               <ion-label position="floating">Type</ion-label>
               <ion-select formControlName="type" interface="popover" placeholder="Category of Expense">
-                <ion-select-option value="emi">Bills & Emis</ion-select-option>
-                <ion-select-option value="education">Education</ion-select-option>
-                <ion-select-option value="food">Food</ion-select-option>
-                <ion-select-option value="grocery">Groceries</ion-select-option>
-                <ion-select-option value="health">Health and personal care</ion-select-option>
-                <ion-select-option value="utilities">Home and utilities</ion-select-option>
-                <ion-select-option value="insurance">Insurance</ion-select-option>
-                <ion-select-option value="rent">Rent</ion-select-option>
-                <ion-select-option value="transportation">Transportation</ion-select-option>
+                <ion-select-option *ngFor="let type of expenceTypes" [value]="type.value">{{type.title}}</ion-select-option>
               </ion-select>
             </ion-item>
           </div>

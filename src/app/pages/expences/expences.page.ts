@@ -12,6 +12,18 @@ export class ExpencesPage implements OnInit {
   pageTitle = "Expenses"
   Expences:any=[];
   expencesCount:number=0
+  expenceTypes=[
+    {title:"Emi and Bills", value:"emi"},
+    {title:"Education", value:"education"},
+    {title:"Food", value:"food"},
+    {title:"Groceries", value:"grocery"},
+    {title:"Health and Personal care", value:"health"},
+    {title:"Home and Utilities", value:"utilities"},
+    {title:"Insurance", value:"insurance"},
+    {title:"Refreshments", value:"refreshments"},
+    {title:"Transportation or Travel", value:"transportation"},
+    {title:"Miscellaneous", value:"miscellaneous"},
+  ]
   constructor(
     private fb: FormBuilder,
     private expenseService: ExpenceService
