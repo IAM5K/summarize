@@ -51,3 +51,9 @@
   4. Keywords added to index page.
 - `p.1.4` : 05-01-2023 :**(Major Patch)**: Fixed Email based User register issue. 
 - `p.1.5` : 05-01-2023 : Summarise spelling changed globally to Summarize.
+- `p.1.6` : 05-01-2023 : Multiple Patches:
+  1. Edit / Delete availablity note updated in all pages.
+  2. Checking for Update added in About page.
+  3. Login page UI updated and added recommendation for google login.
+  4. Added Shopping, Bill, Rent options in Expence Types.
+- 

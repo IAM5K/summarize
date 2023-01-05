@@ -13,7 +13,8 @@ export class ExpencesPage implements OnInit {
   Expences:any=[];
   expencesCount:number=0
   expenceTypes=[
-    {title:"Emi and Bills", value:"emi"},
+    {title:"Bills", value:"bill"},
+    {title:"Emi", value:"emi"},
     {title:"Education", value:"education"},
     {title:"Food", value:"food"},
     {title:"Groceries", value:"grocery"},
@@ -21,6 +22,8 @@ export class ExpencesPage implements OnInit {
     {title:"Home and Utilities", value:"utilities"},
     {title:"Insurance", value:"insurance"},
     {title:"Refreshments", value:"refreshments"},
+    {title:"Rent", value:"rent"},
+    {title:"Shopping", value:"shopping"},
     {title:"Transportation or Travel", value:"transportation"},
     {title:"Miscellaneous", value:"miscellaneous"},
   ]
