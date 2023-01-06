@@ -60,4 +60,5 @@
   1. Updated Site Map
   2. Updated Index for SEO
   3. Renamed Expence to Expense from all locations.
+  4. Optimised logo, replaced png with webp.
 - `p.x.x`
