@@ -47,7 +47,16 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache"
+            "value": "public,max-age=31536000,immutable"
+          }
+        ]
+      },
+      {
+        "source": "*/svg/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "private,max-age=36000,"
           }
         ]
       }
