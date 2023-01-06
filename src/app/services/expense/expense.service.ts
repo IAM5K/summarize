@@ -5,7 +5,7 @@ import { AlertController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
-export class ExpenceService {
+export class ExpenseService {
 
   constructor(
     private afs: AngularFirestore,
@@ -18,20 +18,25 @@ export class ExpenceService {
     if (userData) {
       userId = JSON.parse(userData).uid
     }
-    this.expenseCollection.doc(userId).collection('myExpence').add(data).then(res => {
+    this.expenseCollection.doc(userId).collection('myExpense').add(data).then(res => {
       this.successAlert();
     }).catch(err => {
       alert("There was an error in posting. \n Please try again later. Check console for detail.");
       console.warn(err);
     })
   }
-  getExpences() {
+  getExpenses(count: number) {
     let userId = ""
     let userData = localStorage.getItem('UserData')
     if (userData) {
       userId = JSON.parse(userData).uid
     }
-    return this.expenseCollection.doc(userId).collection('myExpence', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
+    if (count > 4) {
+      return this.expenseCollection.doc(userId).collection('myExpence', ref => ref.orderBy('date', 'desc').limit(count)).valueChanges({ idField: 'idField' })
+    }
+    else {
+      return this.expenseCollection.doc(userId).collection('myExpence', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
+    }
   }
 
   async successAlert() {

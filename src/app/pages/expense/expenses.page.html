@@ -14,12 +14,12 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
+  <div id="container ion-margin">
 
     <div class="card ion-margin ion-padding ">
       <h1 class="mt-0 h2">Add Expense</h1>
       <div class="form-container">
-        <form [formGroup]="expenceForm" (ngSubmit)="addExpence()" novalidate>
+        <form [formGroup]="expenseForm" (ngSubmit)="addExpense()" novalidate>
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Date</ion-label>
@@ -43,7 +43,7 @@
             <ion-item fill="outline">
               <ion-label position="floating">Type</ion-label>
               <ion-select formControlName="type" interface="popover" placeholder="Category of Expense">
-                <ion-select-option *ngFor="let type of expenceTypes" [value]="type.value">{{type.title}}</ion-select-option>
+                <ion-select-option *ngFor="let type of expenseTypes" [value]="type.value">{{type.title}}</ion-select-option>
               </ion-select>
             </ion-item>
           </div>
@@ -69,12 +69,12 @@
 
     <div class="data-table card ion-margin ion-padding">
       <div class="table-title">
-        <h2 class="mt-0 h2" *ngIf="expencesCount == 0">No Expenses found</h2>
-        <h2 class="mt-0 h2" *ngIf="expencesCount !== 0">My Expenses</h2>
-      <ion-note class="ion-padding" color="tertiary" *ngIf="expencesCount !== 0">* Edit & Delete features coming soon.</ion-note>
+        <h2 class="mt-0 h2" *ngIf="expensesCount == 0">No Expenses found</h2>
+        <h2 class="mt-0 h2" *ngIf="expensesCount !== 0">My Expenses</h2>
+      <ion-note class="ion-padding" color="tertiary" *ngIf="expensesCount !== 0">* Edit & Delete features coming soon.</ion-note>
       </div>
       <div class="filters"></div>
-      <div class="data-grid" *ngIf="expencesCount > 0">
+      <div class="data-grid" *ngIf="expensesCount > 0">
         <ion-grid class="border-6">
           <ion-row>
             <!-- <ion-col size="1">S.No</ion-col> -->
@@ -85,13 +85,13 @@
             <ion-col size="2">Spent On</ion-col>
             <ion-col size="2">Action</ion-col>
           </ion-row>
-          <ion-row *ngFor="let expence of Expences; index as i">
+          <ion-row *ngFor="let expense of Expenses; index as i">
             <!-- <ion-col size="1">{{ i + 1 }}</ion-col> -->
-            <ion-col size="2">{{ expence?.date }}</ion-col>
-            <ion-col size="1">₹{{ expence?.amount }}</ion-col>
-            <ion-col size="2">{{ expence?.type | titlecase }}</ion-col>
-            <ion-col size="3" class="ion-text-wrap ion-text-left">{{ expence?.description | titlecase}}</ion-col>
-            <ion-col size="2">{{ expence?.spendedOn | titlecase}}</ion-col>
+            <ion-col size="2">{{ expense?.date }}</ion-col>
+            <ion-col size="1">₹{{ expense?.amount }}</ion-col>
+            <ion-col size="2">{{ expense?.type | titlecase }}</ion-col>
+            <ion-col size="3" class="ion-text-wrap ion-text-left">{{ expense?.description | titlecase}}</ion-col>
+            <ion-col size="2">{{ expense?.spendedOn | titlecase}}</ion-col>
             <ion-col size="2">Edit / Delete</ion-col>
           </ion-row>
         </ion-grid>

@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ExpencesPageRoutingModule } from './expences-routing.module';
+import { ExpensesPageRoutingModule } from './expenses-routing.module';
 
-import { ExpencesPage } from './expences.page';
+import { ExpensesPage } from './expenses.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ExpencesPageRoutingModule,
+    ExpensesPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [ExpencesPage]
+  declarations: [ExpensesPage]
 })
-export class ExpencesPageModule {}
+export class ExpensesPageModule {}

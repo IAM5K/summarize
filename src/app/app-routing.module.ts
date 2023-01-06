@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'expenses',
-    loadChildren: () => import('./pages/expences/expences.module').then( m => m.ExpencesPageModule),
+    loadChildren: () => import('./pages/expense/expenses.module').then( m => m.ExpensesPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
 
   },

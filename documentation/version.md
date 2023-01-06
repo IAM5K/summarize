@@ -7,7 +7,7 @@
 - `d.0.2` : 27-11-2022 : Google Login Working, Login with Email and Password working. User collection > Document created with all data in Firestore. Files Un-cleaned. Sanitisation Required. 
 - `d.0.3` : 28-11-2022 : Side Nav requires user to login to display options.
 - `d.0.4` : 26-12-2022 : Profile page added and updated in menu.
-- `d.0.5` : 26-12-2022 : Expence page working. Add and Get Expence feature added.    
+- `d.0.5` : 26-12-2022 : Expense page working. Add and Get Expense feature added.    
 - `d.0.6` : 27-12-2022 : About Summarize added to Home page.
 - `d.0.7` : 27-12-2022 : Added SEO service and Gzip, gulp for compression.
 - `d.0.8` : 27-12-2022 : Added Logo on side menu.
@@ -24,14 +24,14 @@
 
 - `r.0.1` : 27-11-2022 : User login with Firebase implemented. 
   1. Login with Email and Password working.
-- `r.0.2` : 27-12-2022 : Added Expence page with add expence and list expence feature. 'Robots.txt' and 'Sitemap.xml' added. 
+- `r.0.2` : 27-12-2022 : Added Expense page with add expense and list expense feature. 'Robots.txt' and 'Sitemap.xml' added. 
 
 ## Patches
 - `p.0.1` : 26-12-2022 :Removed label in sidemenu and border in bottom.
 - `p.0.2` : 27-12-2022 :Create account button disabled.
 - `p.0.3` : 27-12-2022 :Different Custom SCSS added .
 - `p.0.4` : 27-12-2022 :Portal Title updated and View port maximum-scale set to 5. Added Readme File.
-- `p.0.5` : 27-12-2022 :Cumulative layout shift fixed in expences page. Added Meta Description. User Scalable set to true
+- `p.0.5` : 27-12-2022 :Cumulative layout shift fixed in expenses page. Added Meta Description. User Scalable set to true
 - `p.0.6` : 27-12-2022 :Word wrap added to coulmns of table.Firebase Config changes.
 - `p.0.7` : 28-12-2022 :Corrected the spelling of Expense and added appropriate alert controller. Made Self as default value.
 - `p.0.8` : 31-12-2022 :Updated all icons for pwa. Changes office to time
@@ -47,7 +47,7 @@
 - `p.1.3` : 05-01-2023 :Multiple Patches
   1. Theme color updated
   2. Refreshment and miscellaneous added to options.
-  3. Expence type comes from ts.
+  3. Expense type comes from ts.
   4. Keywords added to index page.
 - `p.1.4` : 05-01-2023 :**(Major Patch)**: Fixed Email based User register issue. 
 - `p.1.5` : 05-01-2023 : Summarise spelling changed globally to Summarize.
@@ -55,5 +55,7 @@
   1. Edit / Delete availablity note updated in all pages.
   2. Checking for Update added in About page.
   3. Login page UI updated and added recommendation for google login.
-  4. Added Shopping, Bill, Rent options in Expence Types.
-- 
+  4. Added Shopping, Bill, Rent options in Expense Types.
+- `p.1.6` : 06-01-2023 : Multiple Patches: 
+  1.  
+- `p.x.x`

@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ExpenceService } from 'src/app/services/expence/expence.service';
 
 import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ExpenseService } from 'src/app/services/expense/expense.service';
 @Component({
-  selector: 'app-expences',
-  templateUrl: './expences.page.html',
-  styleUrls: ['./expences.page.scss'],
+  selector: 'app-expenses',
+  templateUrl: './expenses.page.html',
+  styleUrls: ['./expenses.page.scss'],
 })
-export class ExpencesPage implements OnInit {
+export class ExpensesPage implements OnInit {
   pageTitle = "Expenses"
-  Expences:any=[];
-  expencesCount:number=0
-  expenceTypes=[
+  Expenses:any=[];
+  expensesCount:number=0
+  dataSize=5;
+  expenseTypes=[
     {title:"Bills", value:"bill"},
     {title:"Emi", value:"emi"},
     {title:"Education", value:"education"},
@@ -29,9 +30,9 @@ export class ExpencesPage implements OnInit {
   ]
   constructor(
     private fb: FormBuilder,
-    private expenseService: ExpenceService
+    private expenseService: ExpenseService
   ) { }
-  expenceForm: FormGroup = this.fb.group({
+  expenseForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [Date, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     amount: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
@@ -41,20 +42,20 @@ export class ExpencesPage implements OnInit {
     updatedAt: [serverTimestamp()]
   })
   ngOnInit() {
-    this.getExpences()
+    this.getExpenses()
   }
 
-  async getExpences(){
-    await this.expenseService.getExpences().subscribe(res=>{
-      this.Expences = res
-      this.expencesCount = this.Expences.length
+  async getExpenses(){
+    await this.expenseService.getExpenses(this.dataSize).subscribe((res:any)=>{
+      this.Expenses = res
+      this.expensesCount = this.Expenses.length
     })
 
 
   }
-  addExpence() {
-    this.expenseService.addExpense(this.expenceForm.value)
-    this.expenceForm.patchValue({
+  addExpense() {
+    this.expenseService.addExpense(this.expenseForm.value)
+    this.expenseForm.patchValue({
       amount:'',
       description:''
     })

@@ -1,5 +1,5 @@
 # Features List
-1. Expence Management
+1. Expense Management
 2. Office
 3. Studies
 4. Acheivements
