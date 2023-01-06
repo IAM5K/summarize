@@ -93,7 +93,8 @@
       <div class="table-title">
         <h2 class="mt-0 h2" *ngIf="studiesCount == 0">No Study Record</h2>
         <h2 class="mt-0 h2" *ngIf="studiesCount !== 0">My Studies</h2>
-      </div>
+      <ion-note class="ion-padding" color="tertiary" *ngIf="studiesCount !== 0">* Edit & Delete features coming soon.</ion-note>
+    </div>
       <div class="filters"></div>
       <div class="data-grid" *ngIf="studiesCount > 0">
         <ion-grid class="border-6">
@@ -121,7 +122,6 @@
           </ion-row>
         </ion-grid>
       </div>
-      <ion-note class="ion-padding" color="tertiary" *ngIf="studiesCount !== 0">* Edit & Delete features coming soon.</ion-note>
     </div>
 
   </div>

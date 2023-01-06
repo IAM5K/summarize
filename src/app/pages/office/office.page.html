@@ -72,6 +72,7 @@
       <div class="table-title">
         <h2 class="mt-0 h2" *ngIf="worksCount == 0">No Work found</h2>
         <h2 class="mt-0 h2" *ngIf="worksCount !== 0">My Work</h2>
+      <ion-note class="ion-padding" color="tertiary" *ngIf="worksCount !== 0">* Edit & Delete features coming soon.</ion-note>
       </div>
       <div class="filters"></div>
       <div class="data-grid" *ngIf="worksCount > 0">
@@ -96,7 +97,6 @@
           </ion-row>
         </ion-grid>
       </div>
-      <ion-note class="ion-padding" color="tertiary" *ngIf="worksCount !== 0">* Edit & Delete features coming soon.</ion-note>
     </div>
 
   </div>

@@ -71,6 +71,7 @@
       <div class="table-title">
         <h2 class="mt-0 h2" *ngIf="expencesCount == 0">No Expenses found</h2>
         <h2 class="mt-0 h2" *ngIf="expencesCount !== 0">My Expenses</h2>
+      <ion-note class="ion-padding" color="tertiary" *ngIf="expencesCount !== 0">* Edit & Delete features coming soon.</ion-note>
       </div>
       <div class="filters"></div>
       <div class="data-grid" *ngIf="expencesCount > 0">
@@ -95,7 +96,6 @@
           </ion-row>
         </ion-grid>
       </div>
-      <ion-note class="ion-padding" color="tertiary" *ngIf="expencesCount !== 0">* Edit & Delete features coming soon.</ion-note>
     </div>
 
   </div>
