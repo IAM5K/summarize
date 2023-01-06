@@ -56,6 +56,8 @@
   2. Checking for Update added in About page.
   3. Login page UI updated and added recommendation for google login.
   4. Added Shopping, Bill, Rent options in Expense Types.
-- `p.1.6` : 06-01-2023 : Multiple Patches: 
-  1.  
+- `p.1.7` : 06-01-2023 : Multiple Patches: 
+  1. Updated Site Map
+  2. Updated Index for SEO
+  3. Renamed Expence to Expense from all locations.
 - `p.x.x`
