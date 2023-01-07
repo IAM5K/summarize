@@ -31,10 +31,29 @@
     </form>
 
     <div class="mt-10">
-      <h1><ion-note color="primary" class="h3 ml-5">Login using Google (Recommended & More Secure)</ion-note></h1>
-    <ion-button type="button" expand="block" color="success" [disabled]="credentials.value.email !== '' ||credentials.value.password !== ''" (click)="loginWithGoogle()">Login with Google</ion-button>
+      <h1><ion-note color="primary" class="h3 ml-5">Login with Google (Recommended)</ion-note></h1>
+      <ion-button type="button" expand="block" color="success"
+        [disabled]="credentials.value.email !== '' ||credentials.value.password !== ''"
+        (click)="loginWithGoogle()">Login with Google</ion-button>
 
     </div>
-  </div>
 
+  </div>
+  <div class="card ion-padding">
+
+    <h2><ion-note color="success" class="h3 ml-5">Why use Google Login?</ion-note></h2>
+    <ol>
+      <li>More Secure</li>
+      <li>Easy process</li>
+      <li>No need to remember password</li>
+      <li>Hasle free login on other device.</li>
+    </ol>
+    <h3><ion-note color="success" class="h3 ml-5">Error on Login / Sign Up?</ion-note></h3>
+    <ol>
+      <li>If there is no specific reason to use email, Try Login with Google.</li>
+      <li>For Email based, if you already have an account, Create account will not work.</li>
+      <li>If you donot have an account, Login will not work for you. Create an account first.</li>
+      <li>Verfification of email is required in next step. Please use valid email, else account will be deleted in next 7 days.</li>
+    </ol>
+  </div>
 </ion-content>
