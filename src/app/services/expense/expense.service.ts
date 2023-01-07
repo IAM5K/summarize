@@ -18,7 +18,7 @@ export class ExpenseService {
     if (userData) {
       userId = JSON.parse(userData).uid
     }
-    this.expenseCollection.doc(userId).collection('myExpense').add(data).then(res => {
+    this.expenseCollection.doc(userId).collection('myExpence').add(data).then(res => {
       this.successAlert();
     }).catch(err => {
       alert("There was an error in posting. \n Please try again later. Check console for detail.");
