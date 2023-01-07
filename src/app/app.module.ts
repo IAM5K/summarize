@@ -15,28 +15,32 @@ import { ScreenTrackingService,UserTrackingService } from '@angular/fire/compat/
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
-    AppRoutingModule, 
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    }), 
+    }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAnalytics(() => getAnalytics()), 
-    provideAuth(() => getAuth()), 
-    provideFirestore(() => getFirestore()), 
-    provideStorage(() => getStorage())
+    provideAnalytics(() => getAnalytics()),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+    GoogleTagManagerModule.forRoot({
+      id: environment.GTM_ID,
+    })
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ScreenTrackingService,UserTrackingService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ],

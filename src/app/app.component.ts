@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { isPlatform } from '@ionic/angular';
+import { GoogleTagManagerService } from 'angular-google-tag-manager';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -16,7 +17,8 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private firebaseAuth: AngularFireAuth,
-    private router: Router) {
+    private router: Router,
+    private gtmService: GoogleTagManagerService,) {
   }
 
   ngOnInit() {
@@ -25,10 +27,22 @@ export class AppComponent {
     }
     this.getUser()
   }
-  afterViewinit(): void {
+  ngAfterViewInit():void{
     if (this.isLoggedIn) {
       this.getSidebar()
     }
+    this.router.events.forEach(item => {
+      if (item instanceof NavigationEnd) {
+          const gtmTag = {
+              event: 'page',
+              pageName: item.url
+          };
+          this.gtmService.pushTag(gtmTag);
+      }
+    });
+  }
+  afterViewinit(): void {
+
   }
 
   async getUser() {

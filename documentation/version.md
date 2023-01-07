@@ -18,6 +18,7 @@
 - `d.1.3` : 28-12-2022 : Added Help module with Installation instruction.
 - `d.1.4` : 05-01-2023 : Added Studies feature.
 - `d.1.5` : 05-01-2023 : Added Status bar Background.
+- `d.1.6` : 05-01-2023 : Added Google Tag manager.
 
 
 ## Release Versions
@@ -25,6 +26,14 @@
 - `r.0.1` : 27-11-2022 : User login with Firebase implemented. 
   1. Login with Email and Password working.
 - `r.0.2` : 27-12-2022 : Added Expense page with add expense and list expense feature. 'Robots.txt' and 'Sitemap.xml' added. 
+- `r.1.0` : 07-01-2023 : Multiple Functionality
+  1. Expence Module: Add and View 
+  2. Time / Work Module: Add and View
+  3. Studies Module : Add and View.
+  4. Google Analytics Added.
+  5. SEO Optimised
+  6. Performance Index : To be monitored page wise 
+- `r.x.x` :
 
 ## Patches
 - `p.0.1` : 26-12-2022 :Removed label in sidemenu and border in bottom.
@@ -61,4 +70,13 @@
   2. Updated Index for SEO
   3. Renamed Expence to Expense from all locations.
   4. Optimised logo, replaced png with webp.
+  5. Added Cache control in firebase.json to do caching of svg.
+  6. Removed Unused css and made data grid global.
+  7. Fixed Expence Collection name.
+  8. Auto all data load in 10 seconds.
+  9. Caching of assets, ngsw install mode to prefetch.
+  10. Updated robot.txt and added delay for crawling.
+  11. Installation Instruction updated for pc, md and ios.
+  12. Study Mode label.
+- `p.1.8` : 07-01-2023 : Multiple Patches 
 - `p.x.x`
