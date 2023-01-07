@@ -89,99 +89,6 @@
 
 
 
-/* Dashboard Page */
-.stat-card {
-  position: relative;
-  min-width: 18%;
-}
-
-.news-feed {
-  width: 100%;
-  height: 400px;
-  // background-color: aqua;
-}
-
-.scheme-list {
-  width: 100%;
-  height: 400px;
-  // background-color: aquamarine;
-  overflow-y: scroll;
-
-  ion-list {
-    background-color: transparent;
-  }
-
-  .scheme-item {
-    display: block !important;
-    box-sizing: border-box;
-    width: 100%;
-    height: fit-content;
-    background-color: wheat;
-    margin-bottom: .5rem;
-    border-radius: 6px;
-    border-left: 5px solid red;
-    overflow: hidden;
-    padding: 5px;
-  }
-
-  .scheme-title {
-    display: block;
-    margin: .2rem 0;
-    font-weight: bold;
-    width: 100% !important;
-  }
-
-  .scheme-desc {
-    display: block;
-    margin: 0 0 .2rem 0;
-    width: 100%;
-    height: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-/* Disease Card */
-.disease-card-container {
-  height: auto;
-  width: 100%;
-  display: inline-flex;
-  flex-wrap: wrap;
-  margin: auto;
-  flex-grow: 1;
-
-  @media screen and (max-width:992px) {
-    display: inline-flex !important;
-    flex-direction: row;
-  }
-}
-
-.disease-card {
-  width: 30%;
-  min-width: 30%;
-  height: auto;
-
-  img {
-    height: 250px;
-    width: 100%;
-    object-fit: cover;
-  }
-
-  @media screen and (max-width:992px) {
-    width: 30%;
-    min-width: 340px;
-    height: auto;
-    align-self: stretch;
-
-    img {
-      width: 100%;
-      height: 180px;
-    }
-  }
-
-}
-
 /* Data Table */
 .data-table {
   height: 400px;
@@ -189,12 +96,38 @@
   box-sizing: border-box;
 }
 
+.table-title {
+  min-height: 60px;
+}
+
 .data-grid {
   height: 300px;
   overflow-y: auto;
   overflow-x: auto;
   white-space: nowrap;
-  ion-col{
+
+  ion-grid {
+    border-radius: 6px !important;
+    padding: 0%;
+
+    @media screen and (max-width:992px) {
+      min-width: 720px;
+    }
+  }
+
+  ion-col {
+    border: solid 1px var(--ion-color-dark-tint);
+    color: var(--ion-color-light-contrast);
+    text-align: center;
     word-wrap: break-word;
   }
+
+  ion-row:first-child {
+    position: sticky;
+    top: 0px;
+    z-index: 9;
+    background-color: var(--ion-color-light-tint);
+    font-weight: bold;
+  }
+
 }
