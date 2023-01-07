@@ -43,6 +43,10 @@ export class ExpensesPage implements OnInit {
   })
   ngOnInit() {
     this.getExpenses()
+    setTimeout(() => {
+      this.dataSize=0;
+      this.getExpenses()
+    }, 10000);
   }
 
   async getExpenses(){
