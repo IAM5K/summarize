@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ExpenseService } from 'src/app/services/expense/expense.service';
+import { SeoService } from 'src/app/services/seo/seo.service';
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.page.html',
@@ -10,6 +11,20 @@ import { ExpenseService } from 'src/app/services/expense/expense.service';
 })
 export class ExpensesPage implements OnInit {
   pageTitle = "Expenses"
+  pageMetaTags=[
+    {
+      name:'description',
+      content:"Summarize all your expences here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expences in better way. Soon we will also give finance tips that will help you better."
+    },
+    {
+      name:'keyword',
+      content:'Summarize, Summarize, arise, arize, money managemnet, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
+    },
+    {
+      name:'author',
+      content:'Sandeep Kumar'
+    }
+  ];
   Expenses:any=[];
   expensesCount:number=0
   dataSize=5;
@@ -30,6 +45,7 @@ export class ExpensesPage implements OnInit {
   ]
   constructor(
     private fb: FormBuilder,
+    private seoService: SeoService,
     private expenseService: ExpenseService
   ) { }
   expenseForm: FormGroup = this.fb.group({
@@ -42,26 +58,34 @@ export class ExpensesPage implements OnInit {
     updatedAt: [serverTimestamp()]
   })
   ngOnInit() {
-    this.getExpenses()
-    setTimeout(() => {
-      this.dataSize=0;
-      this.getExpenses()
-    }, 10000);
+    this.getExpenses();
+    this.seoService.seo(this.pageTitle,this.pageMetaTags);
   }
 
   async getExpenses(){
+    this.dataSize=5;
     await this.expenseService.getExpenses(this.dataSize).subscribe((res:any)=>{
-      this.Expenses = res
-      this.expensesCount = this.Expenses.length
+      this.Expenses = res;
+      this.expensesCount = this.Expenses.length;
     })
-
-
   }
+  async getAllExpenses(){
+    this.dataSize=0;
+    await this.expenseService.getExpenses(this.dataSize).subscribe((res:any)=>{
+      this.Expenses = res;
+      this.expensesCount = this.Expenses.length;
+    })
+  }
+
   addExpense() {
-    this.expenseService.addExpense(this.expenseForm.value)
+    this.expenseService.addExpense(this.expenseForm.value);
     this.expenseForm.patchValue({
       amount:'',
       description:''
-    })
+    });
+    this.seoService.eventTrigger("form",this.pageTitle);
+  }
+  deleteExpense(idField:string){
+    this.expenseService.deleteExpense(idField);
   }
 }

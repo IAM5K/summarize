@@ -11,38 +11,46 @@ export class ExpenseService {
     private afs: AngularFirestore,
     private alertCtrl: AlertController
   ) { }
+  successMessage="Expence Added Successfully!"
+  deletedMessage="Expence Deleted Successfully!"
   expenseCollection = this.afs.collection('userData')
-  addExpense(data: any) {
+  getUserId(){
     let userId = ""
     let userData = localStorage.getItem('UserData')
     if (userData) {
       userId = JSON.parse(userData).uid
     }
-    this.expenseCollection.doc(userId).collection('myExpence').add(data).then(res => {
-      this.successAlert();
+    return userId;
+  }
+  addExpense(data: any) {
+    this.expenseCollection.doc(this.getUserId()).collection('myExpence').add(data).then(res => {
+      this.successAlert(this.successMessage);
     }).catch(err => {
       alert("There was an error in posting. \n Please try again later. Check console for detail.");
       console.warn(err);
     })
   }
   getExpenses(count: number) {
-    let userId = ""
-    let userData = localStorage.getItem('UserData')
-    if (userData) {
-      userId = JSON.parse(userData).uid
-    }
     if (count > 4) {
-      return this.expenseCollection.doc(userId).collection('myExpence', ref => ref.orderBy('date', 'desc').limit(count)).valueChanges({ idField: 'idField' })
+      return this.expenseCollection.doc(this.getUserId()).collection('myExpence', ref => ref.orderBy('date', 'desc').limit(count)).valueChanges({ idField: 'idField' })
     }
     else {
-      return this.expenseCollection.doc(userId).collection('myExpence', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
+      return this.expenseCollection.doc(this.getUserId()).collection('myExpence', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
     }
   }
-
-  async successAlert() {
+  deleteExpense(idField:string){
+    this.expenseCollection.doc(this.getUserId()).collection('myExpence').doc(idField).delete().then(
+      ()=>{
+        this.successAlert(this.deletedMessage)
+      }
+    ).catch(err=>{
+      alert(err)
+    })
+  }
+  async successAlert(message:string) {
     const alert = await this.alertCtrl.create({
       header: 'Success',
-      subHeader: 'Expense added Successfully!',
+      subHeader: message,
       cssClass: 'success-alert',
       // message: 'This is an alert!',
       buttons: ['OK'],
