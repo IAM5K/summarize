@@ -91,17 +91,27 @@
 
 /* Data Table */
 .data-table {
-  height: 400px;
+  height: 450px;
   margin: auto;
   box-sizing: border-box;
 }
 
 .table-title {
+  display: flex;
+  align-items:center ;
+  align-content: center;
+  justify-content: space-between;
   min-height: 60px;
+
+  .h2{
+    margin: 5px;
+    display: block;
+    width: 200px;
+  }
 }
 
 .data-grid {
-  height: 300px;
+  height: 310px;
   overflow-y: auto;
   overflow-x: auto;
   white-space: nowrap;
@@ -120,7 +130,16 @@
     color: var(--ion-color-light-contrast);
     text-align: center;
     word-wrap: break-word;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+  .ion-text-left{
+    box-sizing: border-box;
+    padding-left: 10px;
+    justify-content: left;
+  }
+
 
   ion-row:first-child {
     position: sticky;
