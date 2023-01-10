@@ -1,0 +1,17 @@
+.profile-photo {
+  height: 96px;
+  width: 96px;
+  margin: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 15px var(--ion-color-secondary);
+
+  img {
+    height: 96px;
+    width: 96px;
+  }
+
+  @media screen and (max-width:992px) {
+    margin: 20px auto;
+  }
+}
