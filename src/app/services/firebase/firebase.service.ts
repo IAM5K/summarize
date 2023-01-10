@@ -17,8 +17,12 @@ export interface Note {
   providedIn: 'root'
 })
 export class FirebaseService {
-  
-  constructor(private auth: Auth, private firestore: Firestore, private storage: Storage) {}
+
+  constructor(
+    private auth: Auth,
+    private firestore: Firestore,
+    private storage: Storage
+  ) {}
 
   getUserProfile() {
 		const user = this.auth.currentUser;

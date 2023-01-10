@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { SeoService } from 'src/app/services/seo/seo.service';
 
 @Component({
 	selector: 'app-login',
@@ -12,13 +13,28 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class LoginPage implements OnInit {
 	credentials!: FormGroup;
   pageTitle:string="Login Page";
+  pageMetaTags=[
+    {
+      name:'description',
+      content:"Summarize all your expences here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expences in better way. Soon we will also give finance tips that will help you better."
+    },
+    {
+      name:'keyword',
+      content:'Summarize, Summarize, arise, arize, money managemnet, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
+    },
+    {
+      name:'author',
+      content:'Sandeep Kumar'
+    }
+  ];
 
 	constructor(
 		private fb: FormBuilder,
 		private loadingController: LoadingController,
 		private alertController: AlertController,
 		private authService: AuthService,
-		private router: Router
+		private router: Router,
+    private seoService: SeoService
 	) {}
 
 	// Easy access for form fields
@@ -34,6 +50,7 @@ export class LoginPage implements OnInit {
   }
 
 	ngOnInit() {
+    this.seoService.seo(this.pageTitle,this.pageMetaTags)
 		this.credentials = this.fb.group({
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, Validators.minLength(6)]]
