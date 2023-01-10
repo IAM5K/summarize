@@ -13,7 +13,6 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { ScreenTrackingService,UserTrackingService } from '@angular/fire/compat/analytics';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 
@@ -31,7 +30,6 @@ import { GoogleTagManagerModule } from 'angular-google-tag-manager';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),

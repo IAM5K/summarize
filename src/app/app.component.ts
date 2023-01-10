@@ -35,7 +35,7 @@ export class AppComponent {
       if (item instanceof NavigationEnd) {
           const gtmTag = {
               event: 'page',
-              pageName: item.url
+              pageName: item.urlAfterRedirects
           };
           this.gtmService.pushTag(gtmTag);
       }
