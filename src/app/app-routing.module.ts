@@ -81,6 +81,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/studies/studies.module').then( m => m.StudiesPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
+  {
+    path: 'achievement',
+    loadChildren: () => import('./pages/achievement/achievement.module').then( m => m.AchievementPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
 	{
 		path: '**',
 		redirectTo: 'home',
