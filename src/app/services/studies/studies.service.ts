@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
+import { ProfileService } from '../profile/profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +9,15 @@ import { AlertController } from '@ionic/angular';
 export class StudiesService {
 
   constructor(
-  private afs: AngularFirestore,
-  private alertCtrl: AlertController)
-  { }
+    private afs: AngularFirestore,
+    private alertCtrl: AlertController,
+    private profileService: ProfileService
+  ) { }
+
+  userId = this.profileService.getUserProfile()?.uid
   studiesCollection = this.afs.collection('userData')
   addStudies(data: any) {
-    let userId = ""
-    let userData = localStorage.getItem('UserData')
-    if (userData) {
-      userId = JSON.parse(userData).uid
-    }
-    this.studiesCollection.doc(userId).collection('myStudies').add(data).then(res => {
+    this.studiesCollection.doc(this.userId).collection('myStudies').add(data).then(res => {
       this.successAlert();
     }).catch(err => {
       alert("There was an error in posting. \n Please try again later. Check console for detail.");
@@ -26,12 +25,7 @@ export class StudiesService {
     })
   }
   getStudies() {
-    let userId = ""
-    let userData = localStorage.getItem('UserData')
-    if (userData) {
-      userId = JSON.parse(userData).uid
-    }
-    return this.studiesCollection.doc(userId).collection('myStudies', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
+    return this.studiesCollection.doc(this.userId).collection('myStudies', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
   }
 
   async successAlert() {

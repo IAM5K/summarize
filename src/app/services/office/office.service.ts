@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
+import { ProfileService } from '../profile/profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,25 +11,22 @@ export class OfficeService {
   userData = localStorage.getItem('UserData')
   constructor(
     private afs: AngularFirestore,
-    private alertCtrl: AlertController) { }
+    private alertCtrl: AlertController,
+    private profileService : ProfileService
+  ) { }
+
+  userId = this.profileService.getUserProfile()?.uid
 
   successMessage = "Time Log Added Successfully!"
   deletedMessage = "Time Log Deleted Successfully!"
   workCollection = this.afs.collection('userData')
-  getUserId() {
-    let userId = ""
-    let userData = localStorage.getItem('UserData')
-    if (userData) {
-      userId = JSON.parse(userData).uid
-    }
-    return userId;
-  }
+
   getWork(count: number) {
     if (count > 4) {
-      return this.workCollection.doc(this.getUserId()).collection('myWork', ref => ref.orderBy('date', 'desc').limit(count)).valueChanges({ idField: 'idField' })
+      return this.workCollection.doc(this.userId).collection('myWork', ref => ref.orderBy('date', 'desc').limit(count)).valueChanges({ idField: 'idField' })
     }
     else {
-      return this.workCollection.doc(this.getUserId()).collection('myWork', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
+      return this.workCollection.doc(this.userId).collection('myWork', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
     }
   }
   addWork(data: any) {
@@ -49,7 +47,7 @@ export class OfficeService {
 
   getWorkById() { }
   deleteWork(idField: string) {
-    this.workCollection.doc(this.getUserId()).collection('myWork').doc(idField).delete().then(
+    this.workCollection.doc(this.userId).collection('myWork').doc(idField).delete().then(
       () => {
         this.successAlert(this.deletedMessage)
       }
