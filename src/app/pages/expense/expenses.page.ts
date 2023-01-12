@@ -28,6 +28,7 @@ export class ExpensesPage implements OnInit {
   Expenses:any=[];
   expensesCount:number=0
   dataSize=5;
+  dateToday = (new Date().getFullYear()) + "-0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
   expenseTypes=[
     {title:"Bills", value:"bill"},
     {title:"Emi", value:"emi"},
@@ -50,7 +51,7 @@ export class ExpensesPage implements OnInit {
   ) { }
   expenseForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
-    date: [Date, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
+    date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     amount: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     type: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
     description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
