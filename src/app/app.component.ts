@@ -64,6 +64,7 @@ export class AppComponent {
       { title: 'Expenses', color: 'success', url: 'expenses', icon: 'cash' },
       { title: 'Time', color: 'danger', url: 'work', icon: 'hourglass' },
       { title: 'Studies', color: 'primary', url: 'studies', icon: 'book' },
+      { title: 'Acheivements', color: 'warning', url: 'achievement', icon: 'trophy' },
       // { title: 'Analytics', color: 'success', url: 'analytics', icon: 'analytics' },
       // { title: 'Setup', color: 'warning', url: 'setup', icon: 'settings' },
       { title: 'Profile', color: 'secondary', url: 'profile', icon: 'person' },

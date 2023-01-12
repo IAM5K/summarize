@@ -19,6 +19,33 @@
 - `d.1.4` : 05-01-2023 : Added Studies feature.
 - `d.1.5` : 05-01-2023 : Added Status bar Background.
 - `d.1.6` : 05-01-2023 : Added Google Tag manager.
+- `d.1.7` : 10-01-2023 : Multiple Functionality
+  1. CSS : Increased Size of data-table and content vertical align middle 
+  2. Ion color success updated to qualify contrast ratio.
+  3. Marigin class, text success color class, Mobile font size reduced to 14px.
+  4. SEO Service Added for Page Title and Meta tags. 
+  5. Profile Module: Completed. Display Name, Email, and  
+  6. Achievement Module Added.
+  7. Logo Changed back to PNG format as it it required for PWA.
+  8. Office Module: 
+     1. Success alert modified. 
+     2. Delete feature added to service. 
+     3. Count added to limit response size. 
+     4. Auto fill today's Date. 
+     5. Seo update for Title and Meta Tag. 
+     6. Removed Clear Input from Start Time and End Time Input. 
+     7. Show all Button before table. 
+     8. Added Copy to clipboard.
+  9.  Studies Page : Auto fill today's Date, Seo update for Title and Meta Tag. Removed Clear Input from Start Time and End Time Input.
+  10. Expence Module: Success alert modified. Deleate feature added to service. Count added to limit response size. Auto fill today's Date, Seo update for Title and Meta Tag. Removed Clear Input from Start Time and End Time Input. Show all Button before table
+  11. SEO service integrated to Login Help and About Page.
+  12. Extra Analytics  function Removed. Analytics URL changed to Url After Redirects. 
+  13. Formatted / Rearranged tags for Index, Role listitem added for Lighthouse accessibility score. SEO keywords added from Chat GPT.
+- `d.1.8` : 12-01-2023 : Achievement Module Added.
+  1. Add Achievements
+  2. Timeline view for Achievement
+  3. 
+- ``
 
 
 ## Release Versions
@@ -33,6 +60,7 @@
   4. Google Analytics Added.
   5. SEO Optimised
   6. Performance Index : To be monitored page wise 
+- `r.1.1` : 10-01-2023 : Dev version `d.1.7`
 - `r.x.x` :
 
 ## Patches
@@ -78,5 +106,12 @@
   10. Updated robot.txt and added delay for crawling.
   11. Installation Instruction updated for pc, md and ios.
   12. Study Mode label.
-- `p.1.8` : 07-01-2023 : Multiple Patches 
+- `p.1.8` : 12-01-2023 : Multiple Patches
+  1. Submit Disabled for invalid Form.
+  2. Date Auto-fill in Expences.
+  3. Removed Dependencies from Local Storage. Taking user data from auth State. 
+  4. Placeholder for Description in Office Page
+  5. Limitted Corrected to Limited in Dashboard.
+  6. Excieting corrected to exciting in Profile Page. 
+- `p.x.x`
 - `p.x.x`

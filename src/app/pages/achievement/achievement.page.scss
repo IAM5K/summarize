@@ -1,0 +1,179 @@
+.event-container{
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+/* Timeline Container */
+.timeline {
+  overflow: hidden;
+  height: fit-content;
+  width: fit-content;
+  width: 98%;
+  margin: 15px auto;
+  padding: 0% 5%;
+}
+.event-alert{
+  position: relative;
+  display: flex;
+  padding: 2px;
+  background-image: linear-gradient(to right, #d738ff, #ff00b4, #ff446c, #ff8e30, #ffc409);
+  font-size: 1rem;
+  font-weight: bold;
+  :nth-child(1){
+    height: 20px;
+    width: 20px;
+    font-weight: bold;
+    margin: 2px 5px;
+    padding: 2px;
+    border: 1px black;
+  }
+  :nth-child(2){
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 2px 5px;
+    padding: 2px;
+  }
+}
+/* Achievement-card container */
+.achievement-card, .event-alert {
+  position: relative;
+  width: 100%;
+  margin: auto;
+  @media screen and (min-width:720px) {
+    width: 90%;
+  }
+}
+
+/* setting padding based on even or odd */
+.achievement-card:nth-child(odd) {
+  padding: 30px 0 30px 30px;
+}
+.achievement-card:nth-child(even) {
+  padding: 30px 30px 30px 0;
+}
+/* Global ::before */
+.achievement-card::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+
+  border: solid var(--ion-color-primary);
+}
+
+/* Setting the border of top, bottom, left */
+.achievement-card:nth-child(odd)::before {
+  left: 0px;
+  top: -4.5px;
+  bottom: -4.5px;
+  border-width: 5px 0 5px 5px;
+  border-radius: 50px 0 0 50px;
+}
+.achievement-card:nth-child(even)::before {
+  right: 10px;
+  border-width: 5px 0 5px 5px;
+  border-radius: 50px 0 0 50px;
+
+}
+
+/* Setting the top and bottom to "-5px" because earlier it was out of a pixel in mobile devices */
+@media only screen and (max-width: 400px) {
+  .achievement-card:nth-child(odd)::before {
+    top: -5px;
+    bottom: -5px;
+  }
+}
+
+/* Setting the border of top, bottom, right */
+.achievement-card:nth-child(even)::before {
+  right: 0px;
+  top: 0px;
+  bottom: 0;
+  border-width: 5px 5px 5px 0;
+  border-radius: 0 50px 50px 0;
+}
+
+/* Removing the border if it is the first achievement-card */
+.achievement-card:first-child::before {
+  border-top: 0;
+  border-top-left-radius: 0;
+}
+
+/* Removing the border if it is the last achievement-card  and it's odd */
+.achievement-card:last-child:nth-child(odd)::before {
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Removing the border if it is the last achievement-card  and it's even */
+.achievement-card:last-child:nth-child(even)::before {
+  border-bottom: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Information about the timeline */
+.info {
+  display: flex;
+  flex-direction: column;
+  background:white;
+  color:var(--pt-theme-secondary);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 5px #999;
+}
+
+
+/* Dates of the achievement-card */
+
+.dates {
+  color: orangered;
+  position: relative;
+  margin: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Timeline dot  */
+.dates::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  border: 3px solid orangered;
+}
+
+/* text right if the achievement-card is even  */
+.achievement-card:nth-child(even) > .info > span {
+  text-align: right;
+}
+/* setting dot to the left if the achievement-card is odd */
+.achievement-card:nth-child(odd) > .info > .dates::before {
+  left: -50px;
+}
+
+/* setting dot to the right if the achievement-card is odd */
+.achievement-card:nth-child(even) > .info > .dates::before {
+  right: -50px;
+}
+.event-title{
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 5px;
+  color: var(--ion-color-success);
+}
+.event-desc{
+  font-size: 1.1rem;
+  margin: 0 5px;
+  color: var(--ion-color-dark-tint);
+  text-align: justify;
+
+}
+.watchonyt{
+  position: relative;
+  display: flex;
+  height: auto;
+  width: 100%;
+  font-weight: bold;
+}
