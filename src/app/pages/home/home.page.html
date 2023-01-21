@@ -15,24 +15,33 @@
   </ion-header>
 
   <div id="container">
-    <h1 class="ion-text-center">Welcome to Summarize</h1>
+    <h1 class="ion-text-center ion-padding">What gets measured, Gets managed
+      <br><ion-note color="tertiary" class="h4">- Peter F. Drucker</ion-note>
+    </h1>
     <div class="card ion-padding">
       <h2>About Summarize</h2>
       <p class="ion-text-justify" *ngFor="let item of paragraphs">{{item}}</p>
+      <p>More Details in About Page (<a class="color-secondary bold" routerLink="/about">check here</a>)</p>
 
     </div>
+    <section class="features ion-padding ion-justify-content-around ion-margin ion-align-items-stretch ion-wrap">
+      <h3 class="ion-text-center ion-padding h2">Available Features</h3>
+      <div class="feature-card" *ngFor="let f of features" [routerLink]="'/'+f.path"
+
+      [ngStyle]="{'box-shadow': '0 0 5px inset var(--ion-color-'+ f.color +'-tint)'}">
+        <ion-icon slot="start" [color]="f.color" [ios]="f.icon + '-outline'"
+                  [md]="f.icon + '-sharp'"></ion-icon>
+        <ion-note [color]="f.color" >{{f.title}}</ion-note>
+      </div>
+    </section>
     <div class="card ion-padding">
-      <h3>Features Availabe</h3>
-      <ol>
-        <li>Record Expense (<a class="color-secondary bold" routerLink="/expenses">check here</a>)</li>
-        <li>Record Studies (<a class="color-secondary bold" routerLink="/studies">check here</a>)</li>
-        <li>Record Work (<a class="color-secondary bold" routerLink="/work">check here</a>)</li>
-      </ol>
-      <h3>Upcoming Features </h3>
+      <h4 class="h2">Upcoming Features </h4>
       <ol>
         <li>Analyze Expense</li>
         <li>Analyze Studies</li>
         <li>Analyze Work</li>
+        <li>Goal Setting</li>
+        <li>Analyze Studies based on target Exams.</li>
       </ol>
     </div>
   </div>
