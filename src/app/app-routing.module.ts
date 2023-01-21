@@ -38,8 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
 
   },
   {
@@ -56,8 +55,7 @@ const routes: Routes = [
   },
   {
     path: 'help',
-    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
   },
   {
     path: 'support',
@@ -73,8 +71,7 @@ const routes: Routes = [
   },
   {
     path: 'about',
-    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
   },
   {
     path: 'studies',
@@ -84,6 +81,11 @@ const routes: Routes = [
   {
     path: 'achievement',
     loadChildren: () => import('./pages/achievement/achievement.module').then( m => m.AchievementPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'time',
+    loadChildren: () => import('./pages/time/time.module').then( m => m.TimePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
 	{
