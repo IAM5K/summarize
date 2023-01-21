@@ -6,7 +6,7 @@
             <ion-img loading="prefetch" src="assets/icon/logo.webp" alt="Summarize Logo" role="listitem" class="summarize-logo"></ion-img>
             <ion-list-header>Summarize</ion-list-header>
             <ion-note>Summarize helps you Rise</ion-note>
-          <ng-container *ngIf="isLoggedIn">
+          <ng-container>
             <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
               <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
                 routerLinkActive="selected">
@@ -15,7 +15,7 @@
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
-            <ion-item lines="none" detail="false" (click)="logout()">
+            <ion-item  *ngIf="isLoggedIn" lines="none" detail="false" (click)="logout()">
               <ion-icon slot="start" color="danger" [ios]="'log-out-outline'" [md]="'log-out-sharp'"></ion-icon>
               <ion-label>Logout</ion-label>
             </ion-item>

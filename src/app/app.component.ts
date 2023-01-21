@@ -12,7 +12,12 @@ import { GoogleTagManagerService } from 'angular-google-tag-manager';
 })
 export class AppComponent {
   isLoggedIn: any = false;
-  public appPages: any = [];
+  appPages: any = [
+    { title: 'Dashboard', color: 'primary', url: 'home', icon: 'grid' },
+      { title: 'About', color: 'medium', url: 'about', icon: 'reader' },
+      { title: 'Help & Support', color: 'tertiary', url: 'help', icon: 'help-circle' },
+      { title: 'Login', color: 'success', url: 'login', icon: 'log-in' }
+  ];
   public labels: any = [];
   constructor(
     private authService: AuthService,
@@ -53,6 +58,7 @@ export class AppComponent {
       }
       else {
         this.isLoggedIn = false;
+
       }
     });
   }
@@ -60,9 +66,9 @@ export class AppComponent {
   getSidebar() {
     this.appPages = [
       { title: 'Dashboard', color: 'primary', url: 'home', icon: 'grid' },
-      { title: 'About', color: 'warning', url: 'about', icon: 'reader' },
+      { title: 'About', color: 'medium', url: 'about', icon: 'reader' },
       { title: 'Expenses', color: 'success', url: 'expenses', icon: 'cash' },
-      { title: 'Time', color: 'danger', url: 'work', icon: 'hourglass' },
+      { title: 'Time', color: 'danger', url: 'time', icon: 'hourglass' },
       { title: 'Studies', color: 'primary', url: 'studies', icon: 'book' },
       { title: 'Acheivements', color: 'warning', url: 'achievement', icon: 'trophy' },
       // { title: 'Analytics', color: 'success', url: 'analytics', icon: 'analytics' },
