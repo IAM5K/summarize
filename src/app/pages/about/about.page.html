@@ -15,6 +15,19 @@
   </ion-header>
 
   <div id="container">
-    <h1><ion-note color="success" *ngIf="infoNote !==''">{{infoNote}}</ion-note></h1>
+    <div class="card ion-padding">
+      <h1>About Summarize</h1>
+      <p class="ion-text-justify" *ngFor="let item of paragraphs">{{item}}</p>
+
+    </div>
+    <div class="card ion-padding">
+      <h2>Check for Update</h2>
+      <ion-button color="tertiary" (click)="checkForUpdate()">Check for update</ion-button>
+      <p>
+        <ion-text color="dark" *ngIf="lastUpdateOn!==null">Last update check : {{lastUpdateOn }}</ion-text>
+      </p>
+      <ion-note color="success" *ngIf="infoNote !==''">{{infoNote}}</ion-note>
+
+    </div>
   </div>
 </ion-content>
