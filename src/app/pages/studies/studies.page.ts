@@ -28,6 +28,7 @@ export class StudiesPage implements OnInit {
   Studies: any = [];
   studiesCount: number = 0;
   dateToday = (new Date().getFullYear()) + "-0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
+  currentTime = (new Date().getHours()+":"+ new Date().getMinutes())
   constructor(
     private fb: FormBuilder,
     private studiesService: StudiesService,
@@ -38,7 +39,7 @@ export class StudiesPage implements OnInit {
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     startTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
-    endTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
+    endTime: [this.currentTime, [Validators.required, Validators.pattern('^[0-9:]*$')]],
     type: ['read', [Validators.required, Validators.pattern('^[a-z]*$')]],
     subject: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     topic: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
