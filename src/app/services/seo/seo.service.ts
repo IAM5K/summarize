@@ -15,7 +15,9 @@ export class SeoService {
 
   seo(pageTitle: any, metaTag: any) {
     this.titleService.setTitle(pageTitle)
-    this.metaTags.addTags(metaTag)
+    metaTag.forEach((tag:any) => {
+      this.metaTags.updateTag(tag)
+    });
   }
 
   eventTrigger(eventName: string, pageName: string) {
