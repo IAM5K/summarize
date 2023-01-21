@@ -44,8 +44,18 @@
 - `d.1.8` : 12-01-2023 : Achievement Module Added.
   1. Add Achievements
   2. Timeline view for Achievement
-  3. 
-- ``
+- `d.1.9` : 20-01-2023 : Achievement Module Added.
+  1. Features button in home page
+  2. Help content updated and Contact component live.
+  3. Remved login mandate for home, support, about page for better SEO. 
+  4. Instructions added to login page and Dynamic SEO done.
+  5. Ahievement page css update and Auto time filling. Bug: not getting auto filled when time < 10.
+  6. Work component replaced with time component.
+  7. Css cntrast ratio with success, overflow auto, custom-margin and error class added.
+  8. Auto time fill in study page.
+  9. About page content modified, Dynamic SEO, Auto time filling, Auto update function and update button.
+  10. How to component added to About page.
+- `d.x.x` : 01-01-2023
 
 
 ## Release Versions
@@ -113,5 +123,10 @@
   4. Placeholder for Description in Office Page
   5. Limitted Corrected to Limited in Dashboard.
   6. Excieting corrected to exciting in Profile Page. 
-- `p.x.x`
+- `p.1.9` : 20-01-2023 : Multiple Patches
+  1. Updated keywords and Description in Index.
+  2. Added class for Seo data to get data dynamically from one place.
+  3. Changed method `add tags` to `updateTags` in seo service.
+  4. SEO trigger update in components.
+  5. 
 - `p.x.x`
