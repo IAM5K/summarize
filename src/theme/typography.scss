@@ -54,10 +54,21 @@ h1,h2,h3,h4,h5,h6{
 .ml-5{
   margin-left: 5px;
 }
+.mr-10{
+  margin-right: 10px;
+}
+.m-15px{
+  margin: 15px auto;
+}
 
 ion-title{
   color: var(--ion-color-primary);
 }
 .text-success{
   color: var(--ion-color-success);
+}
+
+.error{
+  margin: 5px 0;
+  color: var(--ion-color-danger);
 }
