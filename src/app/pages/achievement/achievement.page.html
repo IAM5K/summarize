@@ -40,13 +40,13 @@
           </div>
           <div class="input-item">
             <ion-item fill="outline">
-              <ion-label position="stacked">Achievement Title </ion-label>
+              <ion-label position="floating">Achievement Title </ion-label>
               <ion-input formControlName="title" type="text"></ion-input>
             </ion-item>
           </div>
           <div class="input-item">
             <ion-item fill="outline">
-              <ion-label position="stacked">Description</ion-label>
+              <ion-label position="floating">Description</ion-label>
               <ion-textarea formControlName="description" autoGrow="true"
                 placeholder="Description about the Achievement.">
               </ion-textarea>
@@ -74,30 +74,34 @@
     <div class="card ion-margin ion-padding event-container">
       <div class="table-title">
         <h2 class="mt-0 h2" *ngIf="achievementsCount == 0">No Achievements found</h2>
-        <h3 class="h2" *ngIf="achievementsCount !== 0">My Achievements</h3>
-        <ion-button *ngIf="achievementsCount == 5" color="primary" (click)="getAllAchievement()" size="medium">All Achievements</ion-button>
-        <ion-button *ngIf="achievementsCount > 5" color="primary" (click)="getAchievement()" size="medium">Latest Only</ion-button>
+        <h2 class="h2" *ngIf="achievementsCount !== 0">My Achievements</h2>
+        <ion-button *ngIf="achievementsCount == 5" color="primary" (click)="getAllAchievement()" size="medium">Show All</ion-button>
+        <ion-button *ngIf="achievementsCount > 5" color="primary" (click)="getAchievement()" size="medium">Latest
+          Only</ion-button>
       </div>
-      <div class="timeline"  *ngIf="achievementsCount !== 0">
-        <div class=" event-alert event-end">
-          <ion-icon name="swap-vertical"></ion-icon>
-          <h4>Many more to come...</h4>
-        </div>
-        <div class="outer w-100">
-          <div class="achievement-card" *ngFor="let event of Achievements">
-            <div class="info">
-              <span class="event-title" *ngIf="event.title">{{event?.title}}</span>
-              <span class="dates">{{event?.workingSince}} - {{event?.achievedOn}}</span>
-              <p class="event-desc">{{event?.description}}</p>
+      <div class="overflow-auto">
+        <div class="timeline" *ngIf="achievementsCount !== 0">
+          <div class=" event-alert event-end">
+            <ion-icon name="swap-vertical"></ion-icon>
+            <h3>Many more to come...</h3>
+          </div>
+          <div class="outer w-100">
+            <div class="achievement-card" *ngFor="let event of Achievements">
+              <div class="info">
+                <span class="event-title" *ngIf="event.title">{{event?.title}}</span>
+                <span class="dates">{{event?.workingSince}} - {{event?.achievedOn}}</span>
+                <p class="event-desc">{{event?.description}}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="event-alert event-start">
-          <ion-icon name="rocket-outline"></ion-icon>
-          <h4>Achievements started following</h4>
+          <div class="event-alert event-start">
+            <ion-icon name="rocket-outline"></ion-icon>
+            <h4>Achievements started following</h4>
+          </div>
         </div>
       </div>
+
+      <ion-note class="mt-15px" color="tertiary" *ngIf="achievementsCount !== 0">* Edit feature coming soon.</ion-note>
     </div>
-    <ion-note class="mt-15px" color="tertiary" *ngIf="achievementsCount !== 0">* Edit feature coming soon.</ion-note>
   </div>
 </ion-content>

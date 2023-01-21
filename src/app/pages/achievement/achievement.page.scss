@@ -1,13 +1,13 @@
 .event-container{
   position: relative;
-  min-height: 100vh;
+  height: 90vh;
   box-sizing: border-box;
   overflow: hidden;
 }
+
 /* Timeline Container */
 .timeline {
-  overflow: hidden;
-  height: fit-content;
+  height: auto;
   width: fit-content;
   width: 98%;
   margin: 15px auto;
@@ -166,14 +166,7 @@
 .event-desc{
   font-size: 1.1rem;
   margin: 0 5px;
-  color: var(--ion-color-dark-tint);
+  color: var(--ion-color-tertiary);
   text-align: justify;
 
-}
-.watchonyt{
-  position: relative;
-  display: flex;
-  height: auto;
-  width: 100%;
-  font-weight: bold;
 }

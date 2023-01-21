@@ -30,6 +30,7 @@ export class AchievementPage implements OnInit {
   achievementsCount: number = 0;
   getCount: number = 0;
   dateToday = (new Date().getFullYear()) + "-0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
+  currentTime = (new Date().getHours()+":"+ new Date().getMinutes())
   achievementTypes = [
     { title: "Adventure", value: "Adventure" },
     { title: "Bussiness", value: "Bussiness" },
@@ -61,7 +62,7 @@ export class AchievementPage implements OnInit {
     workingSince: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     achievedOn: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     title: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    endTime: ['', [Validators.pattern('^[0-9:]*$')]],
+    endTime: [this.currentTime, [Validators.pattern('^[0-9:]*$')]],
     type: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
     description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]
