@@ -14,6 +14,10 @@
     </ion-toolbar>
   </ion-header>
   <div class="ion-padding">
+    <h1 class="ion-text-center m-15px h2">Welcome to Summarize!<br>
+      <ion-note color="danger">*Please Install before login. For installaton guide (<a class="color-secondary bold" routerLink="/help">check here</a>)</ion-note>
+    </h1>
+
     <form (ngSubmit)="login()" [formGroup]="credentials">
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
@@ -31,7 +35,7 @@
     </form>
 
     <div class="mt-10">
-      <h1><ion-note color="primary" class="h3 ml-5">Login with Google (Recommended)</ion-note></h1>
+      <h2><ion-note color="success" class="h3 ml-5">Login with Google (Recommended)</ion-note></h2>
       <ion-button type="button" expand="block" color="success"
         [disabled]="credentials.value.email !== '' ||credentials.value.password !== ''"
         (click)="loginWithGoogle()">Login with Google</ion-button>
@@ -54,6 +58,12 @@
       <li>For Email based, if you already have an account, Create account will not work.</li>
       <li>If you donot have an account, Login will not work for you. Create an account first.</li>
       <li>Verfification of email is required in next step. Please use valid email, else account will be deleted in next 7 days.</li>
+    </ol>
+    <h4><ion-note color="success" class="h3 ml-5">Have doubts / questions about Summarize?</ion-note></h4>
+    <ol>
+      <li>How to install Summarize? : Visit our Help page.</li>
+      <li>Why should I use Summarize? : Visit About page </li>
+      <li>What is the purpose of this tool? : Check our pages and for details read About Page.</li>
     </ol>
   </div>
 </ion-content>
