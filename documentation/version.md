@@ -55,6 +55,7 @@
   8. Auto time fill in study page.
   9. About page content modified, Dynamic SEO, Auto time filling, Auto update function and update button.
   10. How to component added to About page.
+  11. Sitemap and other config update.
 - `d.x.x` : 01-01-2023
 
 
@@ -129,4 +130,9 @@
   3. Changed method `add tags` to `updateTags` in seo service.
   4. SEO trigger update in components.
   5. 
+- `p.2.0` : 22-01-2023 : Multiple Patches
+  1. Sitemap updated.
+  2. Added class for Seo data to get data dynamically from one place.
+  3. Changed method `add tags` to `updateTags` in seo service.
+  4. SEO trigger update in components.
 - `p.x.x`
