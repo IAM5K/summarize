@@ -4,6 +4,7 @@ import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OfficeService } from 'src/app/services/office/office.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
+import { CustomDate } from 'src/app/models/class/date/custom-date';
 
 @Component({
   selector: 'app-time',
@@ -30,8 +31,8 @@ export class TimePage implements OnInit {
   Works: any = [];
   worksCount: number = 0;
   getCount: number = 0;
-  dateToday= (new Date().getFullYear()) + "-0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
-
+  dateToday= new CustomDate().getDateToday();
+  currentTime = (new Date().getHours()+":"+ new Date().getMinutes())
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
@@ -41,7 +42,7 @@ export class TimePage implements OnInit {
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     startTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
-    endTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
+    endTime: [this.currentTime, [Validators.required, Validators.pattern('^[0-9:]*$')]],
     type: ['coding', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
     description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     // spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
