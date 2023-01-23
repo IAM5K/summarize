@@ -15,6 +15,7 @@ export class LoginPage implements OnInit {
 	credentials!: FormGroup;
   pageTitle:string="Login Page";
   pageMetaTags=SeoTags.loginPageTags;
+  title = SeoTags.pageTitle.loginPage
 
 	constructor(
 		private fb: FormBuilder,
@@ -38,7 +39,7 @@ export class LoginPage implements OnInit {
   }
 
 	ngOnInit() {
-    this.seoService.seo(this.pageTitle,this.pageMetaTags)
+    this.seoService.seo(this.title,this.pageMetaTags)
 		this.credentials = this.fb.group({
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, Validators.minLength(6)]]

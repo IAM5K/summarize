@@ -9,12 +9,14 @@ import { SeoService } from 'src/app/services/seo/seo.service';
 })
 export class HelpPage implements OnInit {
   pageTitle="Help & Support"
+
+  title= SeoTags.pageTitle.helpPage
   pageMetaTags= SeoTags.helpPageTags
   constructor(
     private seoService: SeoService) { }
 
   ngOnInit() {
-    this.seoService.seo(this.pageTitle,this.pageMetaTags)
+    this.seoService.seo(this.title,this.pageMetaTags)
   }
 
 }
