@@ -132,7 +132,8 @@
   5. 
 - `p.2.0` : 22-01-2023 : Multiple Patches
   1. Sitemap updated.
-  2. Added class for Seo data to get data dynamically from one place.
-  3. Changed method `add tags` to `updateTags` in seo service.
-  4. SEO trigger update in components.
+  2. custom date class to get customized date and time.
+- `p.2.1` : 23-01-2023 : Multiple Patches
+  1. Page title updated based on criteria.
+  2. Login page updated based on feedback from Iphone devices.
 - `p.x.x`
