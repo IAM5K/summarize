@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
+import { CustomDate } from 'src/app/models/class/date/custom-date';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ExpenseService } from 'src/app/services/expense/expense.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
+import { Options } from 'src/app/models/interface/masterData.model';
+import { AlertService } from 'src/app/services/alert/alert.service';
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.page.html',
@@ -11,43 +13,67 @@ import { SeoService } from 'src/app/services/seo/seo.service';
 })
 export class ExpensesPage implements OnInit {
   pageTitle = "Expenses"
-  pageMetaTags=[
+  pageMetaTags = [
     {
-      name:'description',
-      content:"Summarize all your expences here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expences in better way. Soon we will also give finance tips that will help you better."
+      name: 'description',
+      content: "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better."
     },
     {
-      name:'keyword',
-      content:'Summarize, Summarize, arise, arize, money managemnet, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
-    },
-    {
-      name:'author',
-      content:'Sandeep Kumar'
+      name: 'keyword',
+      content: 'Summarize, Summarize, arise, arize, money managemnet, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
     }
   ];
-  Expenses:any=[];
-  expensesCount:number=0
-  dataSize=5;
-  dateToday = (new Date().getFullYear()) + "-0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
-  expenseTypes=[
-    {title:"Bills", value:"bill"},
-    {title:"Emi", value:"emi"},
-    {title:"Education", value:"education"},
-    {title:"Food", value:"food"},
-    {title:"Groceries", value:"grocery"},
-    {title:"Health and Personal care", value:"health"},
-    {title:"Home and Utilities", value:"utilities"},
-    {title:"Insurance", value:"insurance"},
-    {title:"Refreshments", value:"refreshments"},
-    {title:"Rent", value:"rent"},
-    {title:"Shopping", value:"shopping"},
-    {title:"Transportation or Travel", value:"transportation"},
-    {title:"Miscellaneous", value:"miscellaneous"},
+  Expenses: any = [];
+  expenseSize = "week";
+  expensesCount: number = 0;
+  totalExpense = 0;
+  dataSize = 5;
+  dateToday = new CustomDate().getDateToday()
+  weekBackDate = new CustomDate().getWeekBackDate()
+  expenseTypes = [
+    { title: "Bills", value: "bill" },
+    { title: "Emi", value: "emi" },
+    { title: "Education", value: "education" },
+    { title: "Food", value: "food" },
+    { title: "Groceries", value: "grocery" },
+    { title: "Health", value: "health" },
+    { title: "Home Utilities", value: "utilities" },
+    { title: "Insurance", value: "insurance" },
+    { title: "Personal care", value: "personal care" },
+    { title: "Refreshments", value: "refreshments" },
+    { title: "Rent", value: "rent" },
+    { title: "Shopping", value: "shopping" },
+    { title: "Transportation", value: "transportation" },
+    { title: "Travel", value: "travel" },
+    { title: "Miscellaneous", value: "miscellaneous" },
   ]
+  spentOn = [
+    { value: "self", title: "Self" },
+    { value: "group", title: "Group" },
+    { value: "family", title: "Family" }
+  ]
+  filterType: string = "duration"
+  filterParams: string = ""
+  filterDuration: string = this.weekBackDate
+  durationFilter: Options[] = [
+    // { title: "5 Recent", value: "recent" },
+    { title: "Today", value: this.dateToday },
+    { title: "7 Days", value: this.weekBackDate },
+    { title: "30 Days", value: new CustomDate().getLastMonthDate() },
+    { title: "365 Days", value: new CustomDate().getLastYearDate() },
+    { title: "This Month", value: new CustomDate().getThisMonth() },
+    { title: "This Year", value: new CustomDate().getThisYear() }
+  ]
+  expenseMessage: string = "Getting Last 5 Expenses :"
+  expenseCurrency: string = "₹"
+  showFilter: boolean = false;
+  handlerMessage = '';
+  roleMessage = '';
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
-    private expenseService: ExpenseService
+    private expenseService: ExpenseService,
+    private alertService : AlertService
   ) { }
   expenseForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
@@ -60,33 +86,87 @@ export class ExpensesPage implements OnInit {
   })
   ngOnInit() {
     this.getExpenses();
-    this.seoService.seo(this.pageTitle,this.pageMetaTags);
+    this.seoService.seo(this.pageTitle, this.pageMetaTags);
   }
 
-  async getExpenses(){
-    this.dataSize=5;
-    await this.expenseService.getExpenses(this.dataSize).subscribe((res:any)=>{
+  async getExpenses() {
+    await this.expenseService.getExpenses(this.dataSize).subscribe((res: any) => {
       this.Expenses = res;
       this.expensesCount = this.Expenses.length;
+      this.getTotalExpense()
     })
+    this.expenseMessage = "Total of last 5 Expenses : "
+    this.expenseSize = "week"
   }
-  async getAllExpenses(){
-    this.dataSize=0;
-    await this.expenseService.getExpenses(this.dataSize).subscribe((res:any)=>{
+  async getAllExpenses() {
+    await this.expenseService.getExpenses().subscribe((res: any) => {
       this.Expenses = res;
+      this.totalExpense += res.amount
       this.expensesCount = this.Expenses.length;
     })
+    this.expenseSize = "all"
   }
 
   addExpense() {
     this.expenseService.addExpense(this.expenseForm.value);
     this.expenseForm.patchValue({
-      amount:'',
-      description:''
+      amount: '',
+      description: ''
     });
-    this.seoService.eventTrigger("form",this.pageTitle);
+    this.seoService.eventTrigger("form", this.pageTitle);
   }
-  deleteExpense(idField:string){
-    this.expenseService.deleteExpense(idField);
+  async deleteExpense(idField: string) {
+    const response = await this.alertService.deleteAlert()
+    if ( response == "confirm") {
+      this.expenseService.deleteExpense(idField);
+    }
+  }
+  getTotalExpense() {
+    this.totalExpense = 0
+    this.Expenses.forEach((expense: any) => {
+      this.totalExpense += expense.amount
+    });
+  }
+  filterBy() {
+    switch (this.filterType) {
+      case "duration":
+        this.filterParams = this.weekBackDate
+        break;
+
+      case "spentOn":
+        this.filterParams = "self"
+        break;
+
+      case "type":
+        this.filterParams = "food"
+        break;
+
+      default:
+        this.filterType = "duration"
+        this.filterParams = "week"
+        break;
+    }
+  }
+  async filter() {
+    switch (this.filterType) {
+      case "duration":
+        this.expenseMessage = "Total Expenses since " + this.filterParams + " : ";
+        break;
+      case "spentOn":
+        this.expenseMessage = "Total Expenses on " + this.filterParams + " since " + this.filterDuration + " : ";
+        break;
+      case "type":
+        this.expenseMessage = "Total Expenses for " + this.filterParams + " since " + this.filterDuration + " : ";
+        break;
+      default:
+        this.expenseMessage = "No Expenses found for " + this.filterParams + " : "
+        break;
+    }
+    await this.expenseService.getCustomExpenses(this.filterType, this.filterParams, this.filterDuration).subscribe((res: any) => {
+      this.Expenses = res;
+      this.expensesCount = this.Expenses.length;
+      this.getTotalExpense();
+    })
+
   }
 }
