@@ -1,4 +1,65 @@
+.expense-data {
+  height: 620px;
+  margin: auto;
+  box-sizing: border-box;
+
+  @media screen and (max-width:768px) {
+    height: 700px;
+  }
+}
+
 ion-grid {
   --ion-grid-columns: 12;
 }
 
+.filters {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  box-sizing: border-box;
+  padding: 10px 0;
+  margin-bottom: 10px;
+
+  .input-item {
+    position: relative;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: min(200px, 90%);
+    height: 55px;
+    margin: 5px 10px 10px 0;
+
+    ion-item {
+      width: 100%;
+    }
+  }
+
+  p {
+    font-size: 1.3rem;
+    margin: 0;
+    padding: 5px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  @media screen and (min-width:1024px) {
+    .input-item {
+      width: 200px;
+    }
+  }
+
+  @media screen and (max-width:768px) and (min-width:560px) {
+    height: 200px;
+
+    .input-item {
+      width: 48%;
+    }
+  }
+
+  @media screen and (max-width:560px) {
+    height: 270px;
+
+    .input-item {
+      width: 100%;
+    }
+  }
+}
