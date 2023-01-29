@@ -73,8 +73,13 @@ export class LoginPage implements OnInit {
 			this.showAlert('Login failed', 'Please try again!');
 		}
 	}
-	loginWithGoogle(){
-		this.authService.googleSignin()
+	async loginWithGoogle(){
+		let user =  await this.authService.googleSignin()
+    if (user !== null || undefined) {
+			this.router.navigateByUrl('/home', { replaceUrl: true });
+		} else {
+			this.showAlert('Login failed', 'Please try again!');
+		}
 	}
 
 	async showAlert(header:string, message:string) {
