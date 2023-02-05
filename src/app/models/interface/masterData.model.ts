@@ -14,6 +14,6 @@ export interface Expense {
 }
 export interface Options {
   title:string,
-  value:string| Date
+  value:string| Date|null
 }
 

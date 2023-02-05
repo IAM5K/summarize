@@ -6,6 +6,7 @@ import { ExpenseService } from 'src/app/services/expense/expense.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
 import { Options } from 'src/app/models/interface/masterData.model';
 import { AlertService } from 'src/app/services/alert/alert.service';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.page.html',
@@ -23,13 +24,21 @@ export class ExpensesPage implements OnInit {
       content: 'Summarize, Summarize, arise, arize, money managemnet, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
     }
   ];
+  dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  constructor(
+    private fb: FormBuilder,
+    private seoService: SeoService,
+    private expenseService: ExpenseService,
+    private alertService: AlertService,
+    private datePipe: DatePipe
+  ) {
+  }
   Expenses: any = [];
   expenseSize = "week";
   expensesCount: number = 0;
   totalExpense = 0;
   dataSize = 5;
-  dateToday = new CustomDate().getDateToday()
-  weekBackDate = new CustomDate().getWeekBackDate()
+  weekBackDate: string |null = this.datePipe.transform(new CustomDate().getWeekBackDate() , 'yyyy-MM-dd');
   expenseTypes = [
     { title: "Bills", value: "bill" },
     { title: "Emi", value: "emi" },
@@ -53,28 +62,22 @@ export class ExpensesPage implements OnInit {
     { value: "family", title: "Family" }
   ]
   filterType: string = "duration"
-  filterParams: string = ""
-  filterDuration: string = this.weekBackDate
+  filterParams: any = ""
+  filterDuration: any = this.weekBackDate
   durationFilter: Options[] = [
     // { title: "5 Recent", value: "recent" },
     { title: "Today", value: this.dateToday },
     { title: "7 Days", value: this.weekBackDate },
-    { title: "30 Days", value: new CustomDate().getLastMonthDate() },
-    { title: "365 Days", value: new CustomDate().getLastYearDate() },
-    { title: "This Month", value: new CustomDate().getThisMonth() },
-    { title: "This Year", value: new CustomDate().getThisYear() }
+    { title: "30 Days", value: this.datePipe.transform(new CustomDate().getLastMonthDate() , 'yyyy-MM-dd') },
+    { title: "365 Days", value: this.datePipe.transform(new CustomDate().getLastYearDate() , 'yyyy-MM-dd') },
+    { title: "This Month", value: new CustomDate().getThisMonth()},
+    { title: "This Year", value: new CustomDate().getThisYear()}
   ]
   expenseMessage: string = "Getting Last 5 Expenses :"
   expenseCurrency: string = "₹"
   showFilter: boolean = false;
   handlerMessage = '';
   roleMessage = '';
-  constructor(
-    private fb: FormBuilder,
-    private seoService: SeoService,
-    private expenseService: ExpenseService,
-    private alertService : AlertService
-  ) { }
   expenseForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
@@ -117,7 +120,7 @@ export class ExpensesPage implements OnInit {
   }
   async deleteExpense(idField: string) {
     const response = await this.alertService.deleteAlert()
-    if ( response == "confirm") {
+    if (response == "confirm") {
       this.expenseService.deleteExpense(idField);
     }
   }
