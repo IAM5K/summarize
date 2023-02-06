@@ -65,6 +65,7 @@
 - `d.2.1` : 29-01-2023 : Multiple Features.
   1. Delete toggle added to time management 
   2. Login with google, redirection fixed.  
+- `d.2.2` : 01-05-2023 : Updated details for Update. Added update type and date with version number. 
 - `d.x.x` : 01-01-2023
 
 
@@ -81,6 +82,7 @@
   5. SEO Optimised
   6. Performance Index : To be monitored page wise 
 - `r.1.1` : 10-01-2023 : Dev version `d.1.7`
+- `r.1.2` : 29-01-2023 : Dev version `d.2.1`
 - `r.x.x` :
 
 ## Patches

@@ -18,10 +18,19 @@
     <div class="card ion-padding">
       <h1>About Summarize</h1>
       <p class="ion-text-justify" *ngFor="let item of paragraphs">{{item}}</p>
-
     </div>
+
     <div class="card ion-padding">
       <h2>Check for Update</h2>
+      <ion-list>
+        <ion-item *ngFor="let item of releaseDetails">
+          <ion-label class="version-label">
+            <span >{{item.type}} :</span>
+            <span class="version-tag">{{item.date}} :</span>
+            <span class="ion-text-bold version-tag">{{item.version}}</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
       <ion-button color="tertiary" (click)="checkForUpdate()">Check for update</ion-button>
       <p>
         <ion-text color="dark" *ngIf="lastUpdateOn!==null">Last update check : {{lastUpdateOn }}</ion-text>
