@@ -1,30 +1,36 @@
 import { seoMetaTag } from "../../interface/masterData.model";
 
 export class SeoTags {
+  public static pageTitle:any={
+    homePage:"Summarize : Record, Analyse and Rise | Dashboard",
+    loginPage:"Login | Sign up now and stay optimized with Summarize",
+    aboutPage:"About Summarize : What it is? Why and How to use?",
+    helpPage:"Need Help to install Summarize | Reach out to us | FAQ"
+  }
   public static homePageTags: seoMetaTag[] = [
     {
       name:'description',
-      content:"Summarize (summarize-ng web app) help users manage their time, money, achievements, and studies effectively. Install on any device and boost your productivity."
+      content:"Summarize (summarize-ng web app) help users manage their achievements, money, time, and studies effectively. Install on any device and boost your productivity."
+    },
+    {
+      name:'keywords',
+      content:'Summarize, summarize-ng, Money management, Budgeting, Financial goals, Expense tracking, Time management, Study management, Productivity, Goal setting, Organizational tools, Personal finance, Study planner, Study materials, Study schedule, Study progress, Study tracker, Study management app'
+    }
+  ];
+  public static aboutPageTags: seoMetaTag[] = [
+    {
+      name:'description',
+      content:"Tempting advertisement and deals makes you to spend more money and time to purchase and use their product/service. Summarize helps you in managing acheivement, studies, expenses, time and spend only on needs for better savings."
     },
     {
       name:'keywords',
       content:'Summarize, summarize-ng, Money management, Budgeting, Financial goals, Expense tracking, Time management, Study management, Productivity, Goal setting, Organizational tools, Personal finance, Study planner, Study materials, Study schedule, Study progress, Study notes, Study reminders, Study rewards, Study reports, Study tracker, Study management app'
     }
   ];
-  public static aboutPageTags: seoMetaTag[] = [
-    {
-      name:'description',
-      content:"Summarize all your expences here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expences in better way. Soon we will also give finance tips that will help you better."
-    },
-    {
-      name:'keywords',
-      content:'Summarize, Summarize, arise, arize, money managemnet, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
-    }
-  ];
   public static helpPageTags: seoMetaTag[] = [
     {
       name:'description',
-      content:"Need help to install Summarize (summarize-ng.web.app) on PC ( Windows / MAC / Linux all-dostro ),Install o Android, Install on IOS, Update Summarize."
+      content:"Need help to install Summarize (summarize-ng.web.app) on PC ( Windows / MAC / Linux all-dostro ),Install on Android, Install on IOS, Update Summarize."
     },
     {
       name:'keywords',

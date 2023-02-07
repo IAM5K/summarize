@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { CustomDate } from 'src/app/models/class/date/custom-date';
 import { SeoTags } from 'src/app/models/class/seoTags/seo';
 import { SeoService } from 'src/app/services/seo/seo.service';
 
@@ -10,6 +11,7 @@ import { SeoService } from 'src/app/services/seo/seo.service';
 })
 export class AboutPage implements OnInit {
   pageTitle="About Summarize"
+  title = SeoTags.pageTitle.aboutPage;
   pageMetaTags= SeoTags.aboutPageTags;
   paragraphs=[
     "Summarize is an app that helps you to manage your Time, Money, and work which includes but is not limited to subject-wise studies, notes, to-do's, or office works.",
@@ -20,14 +22,14 @@ export class AboutPage implements OnInit {
   ]
   lastUpdateOn:any=null;
   infoNote="";
-  dateToday = (new Date().getFullYear()) + "-0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
+  dateToday = new CustomDate().getDateToday();
   constructor(
     private swUpdate: SwUpdate,
     private seoService: SeoService
     ) { }
 
   ngOnInit() {
-    this.seoService.seo(this.pageTitle,this.pageMetaTags)
+    this.seoService.seo(this.title,this.pageMetaTags)
     this.lastUpdateOn=localStorage.getItem('lastUpdateOn')
     this.swUpdate.versionUpdates.subscribe(()=>{
       this.infoNote ="Checking for update..."

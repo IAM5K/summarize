@@ -56,6 +56,15 @@
   9. About page content modified, Dynamic SEO, Auto time filling, Auto update function and update button.
   10. How to component added to About page.
   11. Sitemap and other config update.
+- `d.2.0` : 27-01-2023 : Expenses Features.
+  1. Filter based on Duration, Spent on and type.
+  2. Confirmation for delete.
+  3. Removed last week transaction form default to last 5 transaction.
+  4. Custom date class to get different dates for filter
+  5. Alert Serice for delete confirmation for multi use.
+- `d.2.1` : 29-01-2023 : Multiple Features.
+  1. Delete toggle added to time management 
+  2. Login with google, redirection fixed.  
 - `d.x.x` : 01-01-2023
 
 
@@ -129,10 +138,16 @@
   2. Added class for Seo data to get data dynamically from one place.
   3. Changed method `add tags` to `updateTags` in seo service.
   4. SEO trigger update in components.
-  5. 
 - `p.2.0` : 22-01-2023 : Multiple Patches
   1. Sitemap updated.
-  2. Added class for Seo data to get data dynamically from one place.
-  3. Changed method `add tags` to `updateTags` in seo service.
-  4. SEO trigger update in components.
+  2. custom date class to get customized date and time.
+- `p.2.1` : 23-01-2023 : Multiple Patches
+  1. Page title updated based on criteria.
+  2. Login page updated based on feedback from Iphone devices.
+  3. Time Auto-fill in Work management page.
+  4. SEO update for bing
+- `p.2.2` : 27-01-2023 : Removed Screen tracking code to prevent error and double tracking of screen.
+- `p.2.3` : 05-02-2023 : Multiple patches
+  1. Date bug Reported By Vinayak. (Date format for initaial days were d-m-yyyy.) Fixed by using date pipe after values from custom date class.
+  2. Redirect after login using google. 
 - `p.x.x`

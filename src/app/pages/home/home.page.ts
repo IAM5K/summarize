@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MasterData } from 'src/app/models/class/masterData/master-data';
 import { SeoTags } from 'src/app/models/class/seoTags/seo';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
 
 @Component({
@@ -12,6 +10,7 @@ import { SeoService } from 'src/app/services/seo/seo.service';
 })
 export class HomePage implements OnInit {
   pageTitle = "Home"
+  title = SeoTags.pageTitle.homePage
   pageMetaTags = SeoTags.homePageTags;
   features = MasterData.features
   paragraphs = [
@@ -21,20 +20,11 @@ export class HomePage implements OnInit {
     "Note: Your data will not be used for any advertisement or offering any deal/scheme. Also our app donot need any permission to work on your device. Your privacy is important to us. For more queries, you can contact us through the support page. We are also open to feature requests and suggestions."
   ]
   constructor(
-    private authService: AuthService,
-    private seoService: SeoService,
-    private router: Router
+    private seoService: SeoService
   ) { }
 
   ngOnInit() {
-
-    this.seoService.seo(this.pageTitle, this.pageMetaTags);
-  }
-
-  async logout() {
-    await this.authService.logout();
-    this.router.navigateByUrl('login', { replaceUrl: true });
-
+    this.seoService.seo(this.title, this.pageMetaTags);
   }
 
 }

@@ -10,11 +10,11 @@ export class ExpenseService {
   constructor(
     private afs: AngularFirestore,
     private alertCtrl: AlertController,
-    private profileService : ProfileService
+    private profileService: ProfileService
   ) { }
   userId = this.profileService.getUserProfile()?.uid
-  successMessage="Expence Added Successfully!"
-  deletedMessage="Expence Deleted Successfully!"
+  successMessage = "Expence Added Successfully!"
+  deletedMessage = "Expence Deleted Successfully!"
   expenseCollection = this.afs.collection('userData')
 
   addExpense(data: any) {
@@ -25,24 +25,43 @@ export class ExpenseService {
       console.warn(err);
     })
   }
-  getExpenses(count: number) {
-    if (count > 4) {
+  getExpenses(count?: number) {
+    if (count) {
       return this.expenseCollection.doc(this.userId).collection('myExpence', ref => ref.orderBy('date', 'desc').limit(count)).valueChanges({ idField: 'idField' })
     }
     else {
       return this.expenseCollection.doc(this.userId).collection('myExpence', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
     }
   }
-  deleteExpense(idField:string){
+  getCustomExpenses(filterBy?: string, data?: string, duration?:string) {
+    // console.log(filterBy +" : " + data  +" : " +duration );
+    let query = null;
+    switch (filterBy) {
+      case "duration":
+        query = this.expenseCollection.doc(this.userId).collection('myExpence', ref => ref.orderBy('date', 'desc').where('date', '>=', data)).valueChanges({ idField: 'idField' })
+        break;
+      case "spentOn":
+        query = this.expenseCollection.doc(this.userId).collection('myExpence', ref => ref.where('spendedOn', '==', data).orderBy('date').startAt(duration)).valueChanges({ idField: 'idField' })
+        break;
+      case "type":
+        query = this.expenseCollection.doc(this.userId).collection('myExpence', ref => ref.where('type', '==', data).orderBy('date').startAt(duration)).valueChanges({ idField: 'idField' })
+        break;
+      default:
+        query = this.expenseCollection.doc(this.userId).collection('myExpence', ref => ref.orderBy('date', 'desc').limit(5)).valueChanges({ idField: 'idField' });
+        break;
+    }
+    return query;
+  }
+  deleteExpense(idField: string) {
     this.expenseCollection.doc(this.userId).collection('myExpence').doc(idField).delete().then(
-      ()=>{
+      () => {
         this.successAlert(this.deletedMessage)
       }
-    ).catch(err=>{
+    ).catch(err => {
       alert(err)
     })
   }
-  async successAlert(message:string) {
+  async successAlert(message: string) {
     const alert = await this.alertCtrl.create({
       header: 'Success',
       subHeader: message,

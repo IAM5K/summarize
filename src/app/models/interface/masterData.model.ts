@@ -12,3 +12,8 @@ content:string
 
 export interface Expense {
 }
+export interface Options {
+  title:string,
+  value:string| Date|null
+}
+

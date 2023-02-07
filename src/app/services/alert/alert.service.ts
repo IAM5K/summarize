@@ -35,5 +35,28 @@ export class AlertService {
     const { role } = await alert.onDidDismiss();
     this.roleMessage = `Dismissed with role: ${role}`;
   }
-
+  async deleteAlert() {
+    const alert = await this.alertController.create({
+      header: 'Delete permanently?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            this.handlerMessage = 'Delete canceled';
+          },
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.handlerMessage = 'Delete confirmed';
+          },
+        },
+      ],
+    });
+    await alert.present();
+    const role = await alert.onDidDismiss();
+    return role.role
+  }
 }

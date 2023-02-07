@@ -4,6 +4,8 @@ import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OfficeService } from 'src/app/services/office/office.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
+import { CustomDate } from 'src/app/models/class/date/custom-date';
+import { AlertService } from 'src/app/services/alert/alert.service';
 
 @Component({
   selector: 'app-time',
@@ -30,18 +32,19 @@ export class TimePage implements OnInit {
   Works: any = [];
   worksCount: number = 0;
   getCount: number = 0;
-  dateToday= (new Date().getFullYear()) + "-0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
-
+  dateToday= new CustomDate().getDateToday();
+  currentTime = (new Date().getHours()+":"+ new Date().getMinutes())
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
-    private officeService: OfficeService
+    private officeService: OfficeService,
+    private alertService :AlertService
   ) { }
   workForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     startTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
-    endTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
+    endTime: [this.currentTime, [Validators.required, Validators.pattern('^[0-9:]*$')]],
     type: ['coding', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
     description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     // spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
@@ -72,8 +75,11 @@ export class TimePage implements OnInit {
     this.officeService.addWork(this.workForm.value)
   }
 
-  deleteWork(idField: string) {
-    this.officeService.deleteWork(idField)
+  async deleteWork(idField: string) {
+    const response = await this.alertService.deleteAlert()
+    if ( response == "confirm") {
+      this.officeService.deleteWork(idField)
+    }
   }
 
   async copyToClipboard(work: any) {

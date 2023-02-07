@@ -11,7 +11,6 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { ScreenTrackingService,UserTrackingService } from '@angular/fire/compat/analytics';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { GoogleTagManagerModule } from 'angular-google-tag-manager';
@@ -39,7 +38,6 @@ import { GoogleTagManagerModule } from 'angular-google-tag-manager';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    ScreenTrackingService,UserTrackingService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
