@@ -23,6 +23,23 @@ export class AboutPage implements OnInit {
   lastUpdateOn:any=null;
   infoNote="";
   dateToday = new CustomDate().getDateToday();
+  releaseDetails =[
+    {
+      type:"Feature",
+      date:"29-01-2023",
+      version:"r.1.2"
+    },
+    {
+      type:"Last Patch",
+      date:"27-01-2023",
+      version:"p.2.2"
+    },
+    {
+      type:"Latest Patch",
+      date:"05-02-2023",
+      version:"p.2.3"
+    }
+  ]
   constructor(
     private swUpdate: SwUpdate,
     private seoService: SeoService

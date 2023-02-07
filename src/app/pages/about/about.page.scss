@@ -1,0 +1,20 @@
+ion-item {
+  --padding-start: 0px;
+}
+
+.version-label {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+  ion-label {
+  span:first-of-type {
+    width: 33%;
+  }}
+@media screen and (min-width:424px) {
+
+}
+
+.version-tag {
+  text-align: right;
+}
