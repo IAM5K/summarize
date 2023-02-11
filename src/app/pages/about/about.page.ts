@@ -26,18 +26,18 @@ export class AboutPage implements OnInit {
   releaseDetails =[
     {
       type:"Feature",
-      date:"29-01-2023",
-      version:"r.1.2"
+      date:"07-02-2023",
+      version:"r.1.3"
     },
     {
       type:"Last Patch",
-      date:"27-01-2023",
-      version:"p.2.2"
+      date:"05-02-2023",
+      version:"p.2.3"
     },
     {
       type:"Latest Patch",
-      date:"05-02-2023",
-      version:"p.2.3"
+      date:"07-02-2023",
+      version:"p.2.4"
     }
   ]
   constructor(
