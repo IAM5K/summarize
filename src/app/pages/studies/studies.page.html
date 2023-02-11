@@ -56,8 +56,9 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Description</ion-label>
-              <ion-input formControlName="description" type="text"
-                placeholder="Description/ Sub-topic / comments about topic" clear-input></ion-input>
+              <ion-textarea formControlName="description" type="text" autoGrow="true"
+                placeholder="Description/ Sub-topic / comments about topic." clear-input>
+              </ion-textarea>
             </ion-item>
           </div>
           <div class="input-item">
@@ -107,18 +108,21 @@
             <ion-col size="2">Subject</ion-col>
             <ion-col size="4">Description</ion-col>
             <ion-col size="2">Topic</ion-col>
-            <!-- <ion-col size="2">Action</ion-col> -->
+            <ion-col size="2">Action</ion-col>
           </ion-row>
           <ion-row *ngFor="let study of Studies; index as i">
             <!-- <ion-col size="1">{{ i + 1 }}</ion-col> -->
             <ion-col size="2">{{ study?.date }}</ion-col>
-            <ion-col size="1">{{ study?.startTime }}</ion-col>
-            <ion-col size="1">{{ study?.endTime }}</ion-col>
+            <ion-col size="1">{{ study?.startTime | twelveHourFormat }}</ion-col>
+            <ion-col size="1">{{ study?.endTime | twelveHourFormat }}</ion-col>
             <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.subject | titlecase }}</ion-col>
             <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.topic | titlecase }}</ion-col>
             <ion-col size="4" class="ion-text-wrap ion-text-left">{{ study?.description | titlecase}}</ion-col>
             <ion-col size="2">{{ study?.type | titlecase }}</ion-col>
-            <!-- <ion-col size="2">Edit / Delete</ion-col> -->
+            <ion-col size="2">
+              <ion-button class="action-button" color="danger" (click)="deleteStudies(study.idField)">
+              <ion-icon color="light" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+            </ion-button></ion-col>
           </ion-row>
         </ion-grid>
       </div>

@@ -1,13 +1,15 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/services/alert/alert.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
 import { StudiesService } from 'src/app/services/studies/studies.service';
 
 @Component({
   selector: 'app-studies',
   templateUrl: './studies.page.html',
-  styleUrls: ['./studies.page.scss'],
+  styleUrls: ['./studies.page.scss']
 })
 export class StudiesPage implements OnInit {
   pageTitle = "Studies";
@@ -27,14 +29,15 @@ export class StudiesPage implements OnInit {
   ];
   Studies: any = [];
   studiesCount: number = 0;
-  dateToday = (new Date().getFullYear()) + "-0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
   currentTime = (new Date().getHours()+":"+ new Date().getMinutes())
   constructor(
     private fb: FormBuilder,
     private studiesService: StudiesService,
-    private seoService: SeoService
+    private seoService: SeoService,
+    private alertService: AlertService,
+    private datePipe: DatePipe
   ) { }
-
+  dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   studiesForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
@@ -74,6 +77,13 @@ export class StudiesPage implements OnInit {
       topic: '',
       description: ''
     })
+  }
+
+  async deleteStudies(idField:string){
+    const response = await this.alertService.deleteAlert()
+    if (response == "confirm") {
+    this.studiesService.deleteStudies(idField)
+    }
   }
 
 }
