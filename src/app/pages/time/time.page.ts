@@ -6,6 +6,7 @@ import { OfficeService } from 'src/app/services/office/office.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
 import { CustomDate } from 'src/app/models/class/date/custom-date';
 import { AlertService } from 'src/app/services/alert/alert.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-time',
@@ -32,21 +33,22 @@ export class TimePage implements OnInit {
   Works: any = [];
   worksCount: number = 0;
   getCount: number = 0;
-  dateToday= new CustomDate().getDateToday();
   currentTime = (new Date().getHours()+":"+ new Date().getMinutes())
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
     private officeService: OfficeService,
-    private alertService :AlertService
+    private alertService :AlertService,
+    private datePipe: DatePipe
   ) { }
+  dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   workForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     startTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
     endTime: [this.currentTime, [Validators.required, Validators.pattern('^[0-9:]*$')]],
     type: ['coding', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
-    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
+    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-:\']*$')]],
     // spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]
   })
