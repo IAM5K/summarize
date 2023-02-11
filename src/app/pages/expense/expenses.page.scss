@@ -8,6 +8,11 @@
   }
 }
 
+.form-container{
+  min-height: 410px;
+  height: fit-content;
+}
+
 ion-grid {
   --ion-grid-columns: 12;
 }
