@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -29,7 +30,6 @@ export class AchievementPage implements OnInit {
   Achievements: any = [];
   achievementsCount: number = 0;
   getCount: number = 0;
-  dateToday = (new Date().getFullYear()) + "-0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
   currentTime = (new Date().getHours()+":"+ new Date().getMinutes())
   achievementTypes = [
     { title: "Adventure", value: "Adventure" },
@@ -55,8 +55,10 @@ export class AchievementPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
-    private achievementService: AchievementsService
+    private achievementService: AchievementsService,
+    private datePipe: DatePipe
   ) { }
+  dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   achievementForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     workingSince: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
