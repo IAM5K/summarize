@@ -11,11 +11,14 @@ export class UpdateComponent implements OnInit {
   updates=[
     {
       version:"r.1.3",
-      date:"12-02-2023",
+      date:"13-02-2023",
       details:[
         "12 hour Time format added",
         "Expense Filters updated",
-        "Budget Input Added"
+        "Budget Input Added",
+        "Update and details",
+        "Top contributors",
+        "Filter by type bug fixed"
       ]
     },
     {
@@ -23,7 +26,9 @@ export class UpdateComponent implements OnInit {
       date:"29-01-2023",
       details:[
         "12 hour Time format added",
-        "Expense Filters updated"
+        "Expense Filters updated",
+        "Delete Feature for Studies",
+        "Achievement Module Added with timeline flow."
       ]
     },
     {
@@ -34,7 +39,7 @@ export class UpdateComponent implements OnInit {
         "Profile page added",
         "Auto-fill date and time",
         "Added Copy to clipboard",
-        "Achievement Module Added with timeline flow."
+        "Delete for Expense and Work"
       ]
     },
     {
