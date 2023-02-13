@@ -106,9 +106,9 @@
             <ion-col class="ion-text-wrap" size="1">End Time</ion-col>
             <ion-col size="2">Type</ion-col>
             <ion-col size="2">Subject</ion-col>
-            <ion-col size="4">Description</ion-col>
+            <ion-col size="3">Description</ion-col>
             <ion-col size="2">Topic</ion-col>
-            <ion-col size="2">Action</ion-col>
+            <ion-col size="1">Action</ion-col>
           </ion-row>
           <ion-row *ngFor="let study of Studies; index as i">
             <!-- <ion-col size="1">{{ i + 1 }}</ion-col> -->
@@ -117,9 +117,9 @@
             <ion-col size="1">{{ study?.endTime | twelveHourFormat }}</ion-col>
             <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.subject | titlecase }}</ion-col>
             <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.topic | titlecase }}</ion-col>
-            <ion-col size="4" class="ion-text-wrap ion-text-left">{{ study?.description | titlecase}}</ion-col>
+            <ion-col size="3" class="ion-text-wrap ion-text-left">{{ study?.description | titlecase}}</ion-col>
             <ion-col size="2">{{ study?.type | titlecase }}</ion-col>
-            <ion-col size="2">
+            <ion-col size="1">
               <ion-button class="action-button" color="danger" (click)="deleteStudies(study.idField)">
               <ion-icon color="light" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
             </ion-button></ion-col>
