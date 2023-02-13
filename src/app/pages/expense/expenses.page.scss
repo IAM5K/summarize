@@ -13,6 +13,16 @@
   height: fit-content;
 }
 
+.budget-container{
+  min-height: 180px;
+  height: fit-content;
+}
+
+.disclaimer{
+  p{
+    color: var(--ion-color-dark-tint);
+  }
+}
 ion-grid {
   --ion-grid-columns: 12;
 }

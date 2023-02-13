@@ -73,4 +73,17 @@ export class ExpenseService {
     await alert.present();
   }
 
+  getBudget(){
+    return this.expenseCollection.doc(this.userId).collection('myBudget', ref => ref.orderBy('month', 'desc')).valueChanges({ idField: 'idField' })
+  }
+  addBudget(data: any) {
+    this.expenseCollection.doc(this.userId).collection('myBudget').add(data).then(res => {
+      const msg ="Budget Added Successfully!"
+      this.successAlert(msg);
+    }).catch(err => {
+      alert("There was an error in posting. \n Please try again later. Check console for detail.");
+      console.warn(err);
+    })
+  }
+
 }
