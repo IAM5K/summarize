@@ -31,12 +31,32 @@
           </ion-label>
         </ion-item>
       </ion-list>
-      <ion-button color="tertiary" (click)="checkForUpdate()">Check for update</ion-button>
+      <ion-button color="tertiary" (click)="checkForUpdate()">
+        <ion-icon name="download-outline" class="mr-10"></ion-icon>
+        Check for update</ion-button>
+        <ion-button color="primary" [routerLink]="['update']">
+          <ion-icon name="document-outline" class="mr-10"></ion-icon>
+          Update Details
+        </ion-button>
       <p>
         <ion-text color="dark" *ngIf="lastUpdateOn!==null">Last update check : {{lastUpdateOn }}</ion-text>
       </p>
       <ion-note color="success" *ngIf="infoNote !==''">{{infoNote}}</ion-note>
+    </div>
 
+    <div class="card ion-padding">
+      <h3 class="h2">Thanks Awesome Users</h3>
+      <ion-note color="primary" class="h4">Top Contributors in reporting bugs and suggestions :</ion-note>
+      <ol>
+        <li>Vinayak <ion-text color="primary">( 10+ Bugs )</ion-text> </li>
+        <li>Charan</li>
+        <li>Sofia</li>
+      </ol>
+      <ion-note color="danger" class="ion-text-bold">** Hall of frame will be availabe soon. Please keep contributing.</ion-note>
+      <!-- <ion-button color="success" [routerLink]="['hof']">
+        <ion-icon name="ribbon" class="mr-10"></ion-icon>
+        Hall of Frame
+      </ion-button> -->
     </div>
   </div>
 </ion-content>

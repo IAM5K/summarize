@@ -65,7 +65,20 @@
 - `d.2.1` : 29-01-2023 : Multiple Features.
   1. Delete toggle added to time management 
   2. Login with google, redirection fixed.  
-- `d.2.2` : 01-05-2023 : Updated details for Update. Added update type and date with version number. 
+- `d.2.2` : 01-02-2023 : Updated details for Update. Added update type and date with version number. 
+- `d.2.3` : 11-02-2023 : Multiple changes
+  1. Header page removed
+  2. How to component location changed
+  3. Added Hall of frame component
+  4. Added Time format to 12 hours using custom pipe. Requested by Vaishnavi
+  5. Added Update details component for details on Updates.
+  6. Transform time to 12hr and textarea instead of input.
+  7. Formatting of time for auto fill using date pipe.
+  8. Delete with alert feature added to Studies module.
+  9. Edit Studies component added.
+  10. Input changed to text area and css updated.
+  11. Version details in About page.
+  12. Routing Updated (Unused routes removed)
 - `d.x.x` : 01-01-2023
 
 
@@ -152,4 +165,7 @@
 - `p.2.3` : 05-02-2023 : Multiple patches
   1. Date bug Reported By Vinayak. (Date format for initaial days were d-m-yyyy.) Fixed by using date pipe after values from custom date class.
   2. Redirect after login using google. 
+- `p.2.4` : 11-02-2023 : Multiple patches
+  1. Time error due to missing '0' before date. Reported by Vinayak.
+  2. Allow colon and 
 - `p.x.x`
