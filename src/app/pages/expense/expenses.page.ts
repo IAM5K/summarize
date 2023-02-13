@@ -34,6 +34,8 @@ export class ExpensesPage implements OnInit {
   ) {
   }
   Expenses: any = [];
+  Budget: any = [];
+  budgetExists = false;
   expenseSize = "week";
   expensesCount: number = 0;
   totalExpense = 0;
@@ -48,9 +50,11 @@ export class ExpensesPage implements OnInit {
     { title: "Health", value: "health" },
     { title: "Home Utilities", value: "utilities" },
     { title: "Insurance", value: "insurance" },
+    { title: "Investment", value: "investment" },
     { title: "Personal care", value: "personal care" },
     { title: "Refreshments", value: "refreshments" },
     { title: "Rent", value: "rent" },
+    { title: "Saving", value: "saving" },
     { title: "Shopping", value: "shopping" },
     { title: "Transportation", value: "transportation" },
     { title: "Travel", value: "travel" },
@@ -87,9 +91,16 @@ export class ExpensesPage implements OnInit {
     spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]
   })
+  budgetForm: FormGroup = this.fb.group({
+    createdAt: [serverTimestamp()],
+    month: [new CustomDate().getCurrentMonth(), [Validators.required, Validators.pattern('^[0-9-]*$')]],
+    amount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+    updatedAt: [serverTimestamp()]
+  })
+
   ngOnInit() {
-    this.getExpenses();
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
+    this.getExpenses();
   }
 
   async getExpenses() {
@@ -165,11 +176,29 @@ export class ExpensesPage implements OnInit {
         this.expenseMessage = "No Expenses found for " + this.filterParams + " : "
         break;
     }
+    this.Expenses = [];
     await this.expenseService.getCustomExpenses(this.filterType, this.filterParams, this.filterDuration).subscribe((res: any) => {
       this.Expenses = res;
       this.expensesCount = this.Expenses.length;
       this.getTotalExpense();
     })
 
+  }
+
+  async getBudget() {
+    await this.expenseService.getBudget().subscribe((res: any) => {
+      this.Budget = res;
+      if (this.Budget.length>0) {
+      this.budgetExists = true;
+    }
+    })
+
+
+  }
+  addBudget(){
+    this.expenseService.addBudget(this.budgetForm.value)
+  }
+  updateBudget(){
+    console.log(this.budgetForm.value);
   }
 }
