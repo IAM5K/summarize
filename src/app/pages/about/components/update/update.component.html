@@ -4,7 +4,9 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>{{ pageTitle }}</ion-title>
-    <ion-button slot="end" class="mr-10" [routerLink]="['../']" routerLinkActive="router-link-active" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-button slot="end" class="mr-10" [routerLink]="['../']" routerLinkActive="router-link-active" >
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -18,7 +20,15 @@
   <div id="content">
     <div class="card ion-padding">
       <h1>Latest Update</h1>
-      <p></p>
+      <div *ngFor="let item of updates">
+        <ion-text color="success" class="h3">
+          <span class="ion-text-bold">{{item.version}} : </span>
+           {{item.date}}
+        </ion-text>
+        <ul>
+          <li *ngFor="let update of item.details">{{update}}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </ion-content>

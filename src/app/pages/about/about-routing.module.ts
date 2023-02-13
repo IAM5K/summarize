@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AboutPage } from './about.page';
-import { HowtoComponent } from './howto/howto.component';
+import { HofComponent } from './components/hof/hof.component';
+import { HowtoComponent } from './components/howto/howto.component';
+import { UpdateComponent } from './components/update/update.component';
 
 const routes: Routes = [
   {
@@ -12,6 +14,14 @@ const routes: Routes = [
   {
     path: 'howto',
     component: HowtoComponent
+  },
+  {
+    path: 'hof',
+    component: HofComponent
+  },
+  {
+    path: 'update',
+    component: UpdateComponent
   },
 ];
 

@@ -7,7 +7,9 @@ import { IonicModule } from '@ionic/angular';
 import { AboutPageRoutingModule } from './about-routing.module';
 
 import { AboutPage } from './about.page';
-import { HowtoComponent } from './howto/howto.component';
+import { HowtoComponent } from './components/howto/howto.component';
+import { UpdateComponent } from './components/update/update.component';
+import { HofComponent } from './components/hof/hof.component';
 
 @NgModule({
   imports: [
@@ -16,6 +18,11 @@ import { HowtoComponent } from './howto/howto.component';
     IonicModule,
     AboutPageRoutingModule
   ],
-  declarations: [AboutPage,HowtoComponent]
+  declarations: [
+    AboutPage,
+    HowtoComponent,
+    UpdateComponent,
+    HofComponent
+  ]
 })
 export class AboutPageModule {}
