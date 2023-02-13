@@ -45,5 +45,17 @@ export class CustomDate {
     }
     return value
   }
+  getCurrentMonth(){
+    const year = new Date().getFullYear()
+    let month = new Date().getMonth() + 1;
+    let value = ""
+    if (month < 10) {
+      value = year + "-0" + month;
+    }
+    else {
+      value = year + "-" + month;
+    }
+    return value
+  }
 
 }
