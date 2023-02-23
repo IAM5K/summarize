@@ -78,7 +78,14 @@
   9. Edit Studies component added.
   10. Input changed to text area and css updated.
   11. Version details in About page.
-  12. Routing Updated (Unused routes removed)
+  12. Routing Updated (Unused routes removed).
+- `d.2.4` : 13-02-2023 : Multiple Additions
+  1. Budget Input Added,
+  2. Update and details
+  3. Top contributors
+  4. Current month without date.
+  5. Adjusted grid coulmn size in studies.
+  6. Filter by type bug fixed. (Created Index in firestore).
 - `d.x.x` : 01-01-2023
 
 
