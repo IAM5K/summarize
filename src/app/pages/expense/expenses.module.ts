@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ExpensesPageRoutingModule } from './expenses-routing.module';
 
 import { ExpensesPage } from './expenses.page';
+import { AnalyzeComponent } from './components/analyze/analyze.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,10 @@ import { ExpensesPage } from './expenses.page';
     ExpensesPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [ExpensesPage],
+  declarations: [
+    ExpensesPage,
+    AnalyzeComponent
+  ],
   providers:[DatePipe]
 })
 export class ExpensesPageModule {}

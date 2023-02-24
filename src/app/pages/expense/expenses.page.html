@@ -15,6 +15,10 @@
   </ion-header>
 
   <div id="container ion-margin">
+    <div class="ion-margin options-container ">
+      <ion-button color="success" class="ion-float-right" routerLink="analyze">
+        <ion-icon class="mr-10" name="analytics-outline"></ion-icon>Analyze Expenses</ion-button>
+    </div>
     <div class="card ion-margin ion-padding disclaimer">
       <h1 class="mt-0 h2">Record and Analyze Expense</h1>
       <p color="tertiary" class="h5 ml-10 ion-text-justify">* Note : To use upcoming Analyze feature it is required to
@@ -35,7 +39,7 @@
         <div class="input-item">
           <ion-button color="primary" type="submit" size="medium" *ngIf="!budgetExists" (click)="addBudget()">Add Budget</ion-button>
           <ion-button color="primary" type="submit" size="medium" *ngIf="budgetExists" (click)="updateBudget()">Update</ion-button>
-          <ion-button color="success"  *ngIf="!budgetExists"size="medium" (click)="getBudget()">Get Budget</ion-button>
+          <ion-button color="success"  *ngIf="!budgetExists"size="medium" (click)="getBudget()">Get My Budget</ion-button>
           <ion-button color="tertiary" *ngIf="budgetExists" size="medium" (click)="budgetExists=false">Hide Budget</ion-button>
         </div>
       </form>
