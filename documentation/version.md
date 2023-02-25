@@ -86,7 +86,11 @@
   4. Current month without date.
   5. Adjusted grid coulmn size in studies.
   6. Filter by type bug fixed. (Created Index in firestore).
+- `d.2.5` : 24-02-2023 : 
+  1. Analyze expense component created and routes defined with back button from Analyze component.
+  2. Edit Expense component added.
 - `d.x.x` : 01-01-2023
+  
 
 
 ## Release Versions
