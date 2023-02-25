@@ -15,6 +15,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 import { DatePipe } from '@angular/common';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +35,8 @@ import { DatePipe } from '@angular/common';
     provideStorage(() => getStorage()),
     GoogleTagManagerModule.forRoot({
       id: environment.GTM_ID,
-    })
+    }),
+    NgChartsModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
