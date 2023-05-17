@@ -12,6 +12,7 @@ export class ExpenseService {
     private alertCtrl: AlertController,
     private profileService: ProfileService
   ) { }
+  analyseExpense:any;
   userId = this.profileService.getUserProfile()?.uid
   successMessage = "Expence Added Successfully!"
   deletedMessage = "Expence Deleted Successfully!"
@@ -81,7 +82,17 @@ export class ExpenseService {
       const msg ="Budget Added Successfully!"
       this.successAlert(msg);
     }).catch(err => {
-      alert("There was an error in posting. \n Please try again later. Check console for detail.");
+      alert("There was an error in posting.\n Please try again later. Check console for detail. \nContact /report us in case of no success ");
+      console.warn(err);
+    })
+  }
+
+  updateBudget(data: any) {
+    this.expenseCollection.doc(this.userId).collection('myBudget').doc(data.idField).update(data).then(res => {
+      const msg ="Budget updated successfully!"
+      this.successAlert(msg);
+    }).catch(err => {
+      alert("There was an error in updating budget. \n Please try again later. Check console for detail. \nContact /report us in case of no success ");
       console.warn(err);
     })
   }
