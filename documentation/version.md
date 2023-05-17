@@ -89,9 +89,17 @@
 - `d.2.5` : 24-02-2023 : 
   1. Analyze expense component created and routes defined with back button from Analyze component.
   2. Edit Expense component added.
+- `d.2.6` : 25-02-2023 : Multiple updates
+  1. Ng charts added.
+- `d.2.7` : 17-05-2023 : Multiple Updates
+  1. Analyze component with budget cards and monthly and category wise graph.
+  2. Add budget, update budget. Passing data to analyze component.
+  3. Functions in Budget `getCurrentBudget()` & `getTotalBudget()`.
+  4. Daily expense and monthly expense.
+  5. Getting total expense from `total-expenses.ts`.
+- `d.2.8` : 17-05-2023 : Multiple Updates
+  1. Edit study module started.
 - `d.x.x` : 01-01-2023
-  
-
 
 ## Release Versions
 
