@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { StudiesPageRoutingModule } from './studies-routing.module';
 import { StudiesPage } from './studies.page';
 import { TwelveHourFormatPipeModule } from 'src/app/models/pipe/time/twelve-hour-format.module';
+import { EditStudiesComponent } from './components/edit-studies/edit-studies.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { TwelveHourFormatPipeModule } from 'src/app/models/pipe/time/twelve-hour
     ReactiveFormsModule,
     TwelveHourFormatPipeModule
   ],
-  declarations: [StudiesPage]
+  declarations: [
+    StudiesPage,
+    EditStudiesComponent
+  ]
 })
 export class StudiesPageModule {}
