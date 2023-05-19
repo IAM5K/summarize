@@ -89,7 +89,7 @@ export class ExpensesPage implements OnInit {
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     amount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-    type: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')]],
+    type: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]*$')]],
     description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
     spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]

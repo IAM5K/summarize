@@ -186,5 +186,8 @@
   2. Redirect after login using google. 
 - `p.2.4` : 11-02-2023 : Multiple patches
   1. Time error due to missing '0' before date. Reported by Vinayak.
-  2. Allow colon and 
+  2. Allow colon and other required special characters. Reported by Charan
+- `p.2.5` : 20-05-2023 : Multiple patches
+  1. Validaion issue in personal care is fixed.
+  2. Next line ability added for time and studies.
 - `p.x.x`
