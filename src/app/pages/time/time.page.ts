@@ -48,7 +48,7 @@ export class TimePage implements OnInit {
     startTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
     endTime: [this.currentTime, [Validators.required, Validators.pattern('^[0-9:]*$')]],
     type: ['coding', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
-    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-:\']*$')]],
+    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n .,-:\']*$')]],
     // spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]
   })

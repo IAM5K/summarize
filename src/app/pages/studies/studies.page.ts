@@ -45,8 +45,8 @@ export class StudiesPage implements OnInit {
     endTime: [this.currentTime, [Validators.required, Validators.pattern('^[0-9:]*$')]],
     type: ['read', [Validators.required, Validators.pattern('^[a-z]*$')]],
     subject: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    topic: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
+    topic: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9\n .,-]*$')]],
+    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9\n .,-]*$')]],
     studyMode: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]
   })
