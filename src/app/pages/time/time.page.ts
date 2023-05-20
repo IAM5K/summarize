@@ -33,7 +33,8 @@ export class TimePage implements OnInit {
   Works: any = [];
   worksCount: number = 0;
   getCount: number = 0;
-  currentTime = (new Date().getHours()+":"+ new Date().getMinutes())
+  currentDate = new Date()
+  currentTime = this.datePipe.transform(this.currentDate, 'hh:mm');
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
@@ -45,8 +46,8 @@ export class TimePage implements OnInit {
   workForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    startTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
-    endTime: [this.currentTime, [Validators.required, Validators.pattern('^[0-9:]*$')]],
+    startTime: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 :-]*$')]],
+    endTime: [this.currentTime, [Validators.required, Validators.pattern('^[a-zA-Z0-9 :-]*$')]],
     type: ['coding', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
     description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n .,-:\']*$')]],
     // spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
@@ -75,6 +76,10 @@ export class TimePage implements OnInit {
   }
   addWork() {
     this.officeService.addWork(this.workForm.value)
+    this.workForm.patchValue({
+      startTime : "",
+      description : ""
+    })
   }
 
   async deleteWork(idField: string) {
