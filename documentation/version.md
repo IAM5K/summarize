@@ -190,4 +190,6 @@
 - `p.2.5` : 20-05-2023 : Multiple patches
   1. Validaion issue in personal care is fixed.
   2. Next line ability added for time and studies.
+  3. Time format made compatible with all system perference.
+  4. Pre formatting added in expense, studies and time UI. It now supports next line and pre formatting.
 - `p.x.x`

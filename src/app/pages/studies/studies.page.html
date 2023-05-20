@@ -117,7 +117,7 @@
             <ion-col size="1">{{ study?.endTime | twelveHourFormat }}</ion-col>
             <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.subject | titlecase }}</ion-col>
             <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.topic | titlecase }}</ion-col>
-            <ion-col size="3" class="ion-text-wrap ion-text-left">{{ study?.description | titlecase}}</ion-col>
+            <ion-col size="3" class="ion-text-wrap ion-text-left"><pre>{{ study?.description }}</pre></ion-col>
             <ion-col size="2">{{ study?.type | titlecase }}</ion-col>
             <ion-col size="1">
               <ion-button class="action-button" color="danger" (click)="deleteStudies(study.idField)">

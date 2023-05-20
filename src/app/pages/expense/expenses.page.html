@@ -144,7 +144,7 @@
             <ion-col size="2">{{ expense?.date }}</ion-col>
             <ion-col size="1">₹{{ expense?.amount }}</ion-col>
             <ion-col size="2">{{ expense?.type | titlecase }}</ion-col>
-            <ion-col size="3" class="ion-text-wrap ion-text-left">{{ expense?.description | titlecase}}</ion-col>
+            <ion-col size="3" class="ion-text-wrap ion-text-left"><pre>{{ expense?.description}}</pre></ion-col>
             <ion-col size="2">{{ expense?.spendedOn | titlecase}}</ion-col>
             <ion-col size="2">
               <!-- <ion-button class="action-button" color="secondary">
