@@ -115,6 +115,8 @@
   6. Performance Index : To be monitored page wise 
 - `r.1.1` : 10-01-2023 : Dev version `d.1.7`
 - `r.1.2` : 29-01-2023 : Dev version `d.2.1`
+- `r.1.3` : 13-02-2023 : Dev version `d.2.1`
+- `r.1.4` : 17-05-2023 : Dev version `d.2.8`
 - `r.x.x` :
 
 ## Patches
@@ -192,4 +194,5 @@
   2. Next line ability added for time and studies.
   3. Time format made compatible with all system perference.
   4. Pre formatting added in expense, studies and time UI. It now supports next line and pre formatting.
+  5. Update details.
 - `p.x.x`

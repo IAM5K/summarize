@@ -10,6 +10,16 @@ export class UpdateComponent implements OnInit {
   constructor() { }
   updates=[
     {
+      version:"r.1.4",
+      date:"17-05-2023",
+      details:[
+        "Budget Management Added",
+        "Monthly Expense Analysis",
+        "Filter by type bug fixed",
+        "Update and details"
+      ]
+    },
+    {
       version:"r.1.3",
       date:"13-02-2023",
       details:[
