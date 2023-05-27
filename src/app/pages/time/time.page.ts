@@ -35,14 +35,16 @@ export class TimePage implements OnInit {
   getCount: number = 0;
   currentDate = new Date()
   currentTime = this.datePipe.transform(this.currentDate, 'hh:mm');
+  workByDate:any = []
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
     private officeService: OfficeService,
-    private alertService :AlertService,
+    private alertService: AlertService,
     private datePipe: DatePipe
   ) { }
   dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  workOf = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   workForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
@@ -60,31 +62,31 @@ export class TimePage implements OnInit {
 
   async getWork() {
     this.getCount = 5;
-    await this.officeService.getWork(this.getCount).subscribe(res => {
-      this.Works = res
-      this.worksCount = this.Works.length
+    this.officeService.getWork(this.getCount).subscribe(res => {
+      this.Works = res;
+      this.worksCount = this.Works.length;
     })
 
   }
   async getAllWork() {
     this.getCount = 0;
-    await this.officeService.getWork(this.getCount).subscribe(res => {
-      this.Works = res
-      this.worksCount = this.Works.length
+    this.officeService.getWork(this.getCount).subscribe(res => {
+      this.Works = res;
+      this.worksCount = this.Works.length;
     })
 
   }
   addWork() {
     this.officeService.addWork(this.workForm.value)
     this.workForm.patchValue({
-      startTime : "",
-      description : ""
+      startTime: "",
+      description: ""
     })
   }
 
   async deleteWork(idField: string) {
     const response = await this.alertService.deleteAlert()
-    if ( response == "confirm") {
+    if (response == "confirm") {
       this.officeService.deleteWork(idField)
     }
   }
@@ -92,6 +94,24 @@ export class TimePage implements OnInit {
   async copyToClipboard(work: any) {
     await Clipboard.write({
       string: `${work.description} : (${work.startTime} - ${work.endTime}) `
+    });
+  }
+  async getAllWorkOf() {
+    if (this.workOf !== null) {
+       (await this.officeService.getWorkByDate(this.workOf)).subscribe((res:any) => {
+        this.workByDate = res;
+      })
+    }
+  }
+
+  async copyAllOfDay(){
+    let dataString:string = "";
+    this.workByDate.forEach((element:any) => {
+      dataString += `${element.startTime} - ${element.endTime} (${element.type}) : ${element.description} \n`
+    });
+    console.log(dataString);
+    await Clipboard.write({
+      string: dataString
     });
   }
 }

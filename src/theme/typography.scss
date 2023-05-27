@@ -60,6 +60,10 @@ pre{
   display: block;
   margin-top:15px;
 }
+.mb-15px{
+  display: block;
+  margin-bottom:15px;
+}
 .ml-5{
   margin-left: 5px;
 }
@@ -72,7 +76,9 @@ pre{
 .m-15px{
   margin: 15px auto;
 }
-
+.pdb-15px{
+  padding-bottom: 30px;
+}
 ion-title{
   color: var(--ion-color-primary);
 }
