@@ -29,7 +29,7 @@ export class StudiesPage implements OnInit {
   ];
   Studies: any = [];
   studiesCount: number = 0;
-  currentTime = (new Date().getHours()+":"+ new Date().getMinutes())
+  currentTime = this.datePipe.transform(new Date(), 'hh:mm');
   constructor(
     private fb: FormBuilder,
     private studiesService: StudiesService,
