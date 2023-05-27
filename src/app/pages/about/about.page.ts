@@ -27,17 +27,17 @@ export class AboutPage implements OnInit {
     {
       type:"Feature",
       date:"20-05-2023",
-      version:"r.2.8"
+      version:"r.1.5"
     },
     {
       type:"Last Patch",
-      date:"07-02-2023",
-      version:"p.2.4"
+      date:"20-02-2023",
+      version:"p.2.5"
     },
     {
       type:"Latest Patch",
-      date:"20-05-2023",
-      version:"p.2.5"
+      date:"27-05-2023",
+      version:"p.2.6"
     }
   ]
   constructor(
