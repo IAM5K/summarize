@@ -99,6 +99,10 @@
   5. Getting total expense from `total-expenses.ts`.
 - `d.2.8` : 17-05-2023 : Multiple Updates
   1. Edit study module started.
+- `d.2.9` : 27-05-2023 : 
+  1. Added resize feature to time page.
+  2. Get all data for a day.
+  3. Copy to clipboard for a day work summary. 
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
@@ -195,4 +199,8 @@
   3. Time format made compatible with all system perference.
   4. Pre formatting added in expense, studies and time UI. It now supports next line and pre formatting.
   5. Update details.
+- `p.2.6` : 26-05-2023 : Multiple patches
+  1. Time format in studies page
+  2. Table headers in study data table
+  3. Update Details
 - `p.x.x`
