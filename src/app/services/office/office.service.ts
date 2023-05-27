@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, QuerySnapshot } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
 import { ProfileService } from '../profile/profile.service';
 
@@ -45,7 +45,9 @@ export class OfficeService {
 
   }
 
-  getWorkById() { }
+  async getWorkByDate(date:string) {
+    return this.workCollection.doc(this.userId).collection('myWork',(ref)=> ref.where('date','==',date).orderBy('startTime','asc')).valueChanges()
+  }
   deleteWork(idField: string) {
     this.workCollection.doc(this.userId).collection('myWork').doc(idField).delete().then(
       () => {

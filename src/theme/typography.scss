@@ -35,6 +35,15 @@ h1,h2,h3,h4,h5,h6{
 .h6{
   font-size: .8rem;
 }
+
+pre{
+  display: block;
+  padding: 4px 1px;
+  margin: 5px inherit;
+  white-space: pre-line;
+  word-break: break-word;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 .text-elipsis{
   white-space: nowrap;
   overflow: hidden;
@@ -51,6 +60,10 @@ h1,h2,h3,h4,h5,h6{
   display: block;
   margin-top:15px;
 }
+.mb-15px{
+  display: block;
+  margin-bottom:15px;
+}
 .ml-5{
   margin-left: 5px;
 }
@@ -63,7 +76,9 @@ h1,h2,h3,h4,h5,h6{
 .m-15px{
   margin: 15px auto;
 }
-
+.pdb-15px{
+  padding-bottom: 30px;
+}
 ion-title{
   color: var(--ion-color-primary);
 }

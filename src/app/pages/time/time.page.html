@@ -73,7 +73,7 @@
     <div class="data-table card ion-margin ion-padding">
       <div class="table-title">
         <h2 class="mt-0 h2" *ngIf="worksCount == 0">No Work found</h2>
-        <h3 class="h2" *ngIf="worksCount !==0">My Work</h3>
+        <h2 class="mt-0 h2" *ngIf="worksCount !==0">My Work</h2>
         <ion-button *ngIf="worksCount == 5" color="primary" (click)="getAllWork()" size="medium">All Works</ion-button>
         <ion-button *ngIf="worksCount > 5" color="primary" (click)="getWork()" size="medium">Latest Only</ion-button>
       </div>
@@ -95,7 +95,9 @@
             <ion-col size="1">{{ work?.startTime }}</ion-col>
             <ion-col size="1">{{ work?.endTime }}</ion-col>
             <ion-col size="2">{{ work?.type | titlecase }}</ion-col>
-            <ion-col size="4" class="ion-text-wrap ion-text-left">{{ work?.description | titlecase}}</ion-col>
+            <ion-col size="4" class="ion-text-wrap ion-text-left">
+              <pre>{{ work?.description}}</pre>
+            </ion-col>
             <ion-col size="2">
               <ion-button class="action-button" color="secondary" (click)="copyToClipboard(work)">
                 <ion-icon color="light" [ios]="'clipboard-outline'" [md]="'clipboard-sharp'"></ion-icon>
@@ -107,7 +109,32 @@
           </ion-row>
         </ion-grid>
       </div>
-      <ion-note class="mt-15px" color="tertiary" *ngIf="worksCount !== 0">* Edit and copy features coming soon.</ion-note>
+      <ion-note class="mt-15px" color="tertiary" *ngIf="worksCount !== 0">* Edit and copy features coming
+        soon.</ion-note>
+    </div>
+
+    <div class="card ion-margin ion-padding pdb-15px">
+      <h3 class="h2 mt-0">Get all for a day</h3>
+      <div class="mt-15px">
+        <form #getWorkOf="ngForm" (ngSubmit)="getAllWorkOf()">
+          <div class="input-item">
+            <ion-item fill="outline">
+              <ion-label position="floating">Date</ion-label>
+              <ion-input type="date" name="workOf" [(ngModel)]="workOf"></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-item">
+            <ion-button color="primary" type="submit" size="medium">Submit</ion-button>
+          </div>
+        </form>
+      </div>
+      <div class="works" *ngIf="workByDate.length>0">
+        <h4>Work logged on {{workOf}}</h4>
+        <p *ngFor="let work of workByDate">
+            {{work.startTime}} - {{work.endTime}} : {{work.description}}
+        </p>
+        <ion-button (click)="copyAllOfDay()" color="success">Copy to clipboard</ion-button>
+      </div>
     </div>
   </div>
 </ion-content>

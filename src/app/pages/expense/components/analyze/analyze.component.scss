@@ -1,0 +1,43 @@
+.overview-cards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 0 1;
+  align-items: center;
+  justify-content: center;
+
+  ion-card {
+    min-width: 300px;
+  }
+}
+
+.line-graph,
+.bar-graph,
+.pie-chart {
+  overflow: auto;
+}
+
+.linechart {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  canvas {
+    display: block;
+    position: relative;
+  }
+}
+
+.pie-chart {
+  position: relative;
+  height: auto;
+  overflow: auto;
+  width: min(500px,100%);
+
+  canvas {
+    display: block;
+    position: relative;
+    width: min(500px,100%);
+    margin-top: 10px;
+    height: auto;
+  }
+}

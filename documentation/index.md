@@ -1,8 +1,16 @@
 # Features List
-1. Expense Management
-2. Office
-3. Studies
-4. Acheivements
+1. Dashboard
+   1. Update Goal Status.
+2. Expense Management
+   1. Add / Edit /Delete Expense.
+   2. Analyze
+   3. Set Goal
+3. Office
+4. Studies
+   1. Add / Edit /Delete.
+   2. Analyze
+   3. Set Goal
+5. Acheivements
 
 # Module / Functionality
 1. SEO
@@ -126,3 +134,25 @@ The dashboard of the Summarize app should have several key elements to help user
 1. A feature for creating and tracking rewards for achieving the goals
 1. A feature for creating reports, such as expense reports, that can help users understand their spending habits and make more informed financial decisions.
 Overall, the dashboard should be designed to be easy to navigate and use, with clear and concise information that helps users stay on top of their time, money, achievements, and studies.
+
+# Fuctionality
+## Expense Analysis
+### Card with Total Stats (Large cards)
+1. Total Expense in Dynamic color
+2. Total Budget
+### Overall Analysis Line Graph Parameters
+1. Total Expense Line 
+2. Daily Expense Line  
+3. Daily Limit Horizontal Line
+4. Monthly limit horizontal line
+### Category wise Pie Chart
+1. Category
+2. Amount with percentage (if possible)
+### Category wise Data Table
+1. All category
+2. Expense per category
+3. Last Line with total and different color
+### Mothly Expense Bar Graph
+1. Month Wise Expense
+2. Compasrision with alloted Budget
+## Goal Setting and Analysis 

@@ -7,16 +7,21 @@ import { IonicModule } from '@ionic/angular';
 import { ExpensesPageRoutingModule } from './expenses-routing.module';
 
 import { ExpensesPage } from './expenses.page';
-
+import { AnalyzeComponent } from './components/analyze/analyze.component';
+import { NgChartsModule } from 'ng2-charts';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ExpensesPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgChartsModule
   ],
-  declarations: [ExpensesPage],
+  declarations: [
+    ExpensesPage,
+    AnalyzeComponent
+  ],
   providers:[DatePipe]
 })
 export class ExpensesPageModule {}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CustomDate } from 'src/app/models/class/date/custom-date';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -7,12 +7,14 @@ import { SeoService } from 'src/app/services/seo/seo.service';
 import { Options } from 'src/app/models/interface/masterData.model';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.page.html',
   styleUrls: ['./expenses.page.scss'],
 })
 export class ExpensesPage implements OnInit {
+  @Output() expenseData = new EventEmitter<any>();
   pageTitle = "Expenses"
   pageMetaTags = [
     {
@@ -30,7 +32,8 @@ export class ExpensesPage implements OnInit {
     private seoService: SeoService,
     private expenseService: ExpenseService,
     private alertService: AlertService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router: Router
   ) {
   }
   Expenses: any = [];
@@ -40,7 +43,7 @@ export class ExpensesPage implements OnInit {
   expensesCount: number = 0;
   totalExpense = 0;
   dataSize = 5;
-  weekBackDate: string |null = this.datePipe.transform(new CustomDate().getWeekBackDate() , 'yyyy-MM-dd');
+  weekBackDate: string | null = this.datePipe.transform(new CustomDate().getWeekBackDate(), 'yyyy-MM-dd');
   expenseTypes = [
     { title: "Bills", value: "bill" },
     { title: "Emi", value: "emi" },
@@ -58,7 +61,7 @@ export class ExpensesPage implements OnInit {
     { title: "Shopping", value: "shopping" },
     { title: "Transportation", value: "transportation" },
     { title: "Travel", value: "travel" },
-    { title: "Miscellaneous", value: "miscellaneous" },
+    { title: "Miscellaneous", value: "miscellaneous" }
   ]
   spentOn = [
     { value: "self", title: "Self" },
@@ -72,10 +75,10 @@ export class ExpensesPage implements OnInit {
     // { title: "5 Recent", value: "recent" },
     { title: "Today", value: this.dateToday },
     { title: "7 Days", value: this.weekBackDate },
-    { title: "30 Days", value: this.datePipe.transform(new CustomDate().getLastMonthDate() , 'yyyy-MM-dd') },
-    { title: "365 Days", value: this.datePipe.transform(new CustomDate().getLastYearDate() , 'yyyy-MM-dd') },
-    { title: "This Month", value: new CustomDate().getThisMonth()},
-    { title: "This Year", value: new CustomDate().getThisYear()}
+    { title: "30 Days", value: this.datePipe.transform(new CustomDate().getLastMonthDate(), 'yyyy-MM-dd') },
+    { title: "365 Days", value: this.datePipe.transform(new CustomDate().getLastYearDate(), 'yyyy-MM-dd') },
+    { title: "This Month", value: new CustomDate().getThisMonth() },
+    { title: "This Year", value: new CustomDate().getThisYear() }
   ]
   expenseMessage: string = "Getting Last 5 Expenses :"
   expenseCurrency: string = "₹"
@@ -85,9 +88,9 @@ export class ExpensesPage implements OnInit {
   expenseForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    amount: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    type: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
-    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
+    amount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+    type: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]*$')]],
+    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
     spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]
   })
@@ -115,10 +118,11 @@ export class ExpensesPage implements OnInit {
   async getAllExpenses() {
     await this.expenseService.getExpenses().subscribe((res: any) => {
       this.Expenses = res;
-      this.totalExpense += res.amount
       this.expensesCount = this.Expenses.length;
+      sessionStorage.setItem("total_expense", JSON.stringify(this.Expenses))
     })
     this.expenseSize = "all"
+
   }
 
   addExpense() {
@@ -188,17 +192,61 @@ export class ExpensesPage implements OnInit {
   async getBudget() {
     await this.expenseService.getBudget().subscribe((res: any) => {
       this.Budget = res;
-      if (this.Budget.length>0) {
-      this.budgetExists = true;
-    }
+      if (this.Budget.length > 0) {
+        this.budgetExists = true;
+      }
+      sessionStorage.setItem("budget", JSON.stringify(this.Budget))
     })
 
 
   }
-  addBudget(){
-    this.expenseService.addBudget(this.budgetForm.value)
+  async addBudget() {
+    let month = this.budgetForm.value.month;
+    let savedBudget: any;
+    let monthExists: any;
+    await this.getBudget().then(res => {
+      let tempBudget = sessionStorage.getItem('budget')
+      if (tempBudget) {
+        savedBudget = JSON.parse(tempBudget)
+      }
+      else {
+        alert("There was some error in adding budget. Try later or report via help section.")
+      }
+      monthExists = savedBudget.find((item: any) =>
+        item.month == month
+      )
+    })
+    if (monthExists) {
+      alert("This month already exists.Please use update section to verify and update.")
+    }
+    else {
+      await this.expenseService.addBudget(this.budgetForm.value);
+      sessionStorage.setItem("budget", JSON.stringify(this.Budget))
+    }
+
+
   }
-  updateBudget(){
-    console.log(this.budgetForm.value);
+  async updateBudget() {
+    const month = this.budgetForm.value.month;
+    const updatedBudget = this.Budget.filter((item: any) =>
+      item.month == this.budgetForm.value.month
+    )
+    if (updatedBudget !== undefined && updatedBudget.length > 0) {
+      const newBudget = updatedBudget[0]
+      newBudget.amount = this.budgetForm.value.amount
+      newBudget.updatedAt = serverTimestamp()
+      await this.expenseService.updateBudget(newBudget)
+    } else {
+      const message = `Budget for ${month} does not exist. Please add first.`
+      this.expenseService.successAlert(message)
+    }
+    sessionStorage.setItem("budget", JSON.stringify(this.Budget))
+
+  }
+
+  async analyzeExpense() {
+    this.getAllExpenses();
+    await this.getBudget();
+    this.router.navigateByUrl('expenses/analyze');
   }
 }

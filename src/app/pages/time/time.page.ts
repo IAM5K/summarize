@@ -33,22 +33,25 @@ export class TimePage implements OnInit {
   Works: any = [];
   worksCount: number = 0;
   getCount: number = 0;
-  currentTime = (new Date().getHours()+":"+ new Date().getMinutes())
+  currentDate = new Date()
+  currentTime = this.datePipe.transform(this.currentDate, 'hh:mm');
+  workByDate:any = []
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
     private officeService: OfficeService,
-    private alertService :AlertService,
+    private alertService: AlertService,
     private datePipe: DatePipe
   ) { }
   dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  workOf = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   workForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    startTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
-    endTime: [this.currentTime, [Validators.required, Validators.pattern('^[0-9:]*$')]],
+    startTime: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 :-]*$')]],
+    endTime: [this.currentTime, [Validators.required, Validators.pattern('^[a-zA-Z0-9 :-]*$')]],
     type: ['coding', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
-    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-:\']*$')]],
+    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n .,-:\']*$')]],
     // spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]
   })
@@ -59,27 +62,31 @@ export class TimePage implements OnInit {
 
   async getWork() {
     this.getCount = 5;
-    await this.officeService.getWork(this.getCount).subscribe(res => {
-      this.Works = res
-      this.worksCount = this.Works.length
+    this.officeService.getWork(this.getCount).subscribe(res => {
+      this.Works = res;
+      this.worksCount = this.Works.length;
     })
 
   }
   async getAllWork() {
     this.getCount = 0;
-    await this.officeService.getWork(this.getCount).subscribe(res => {
-      this.Works = res
-      this.worksCount = this.Works.length
+    this.officeService.getWork(this.getCount).subscribe(res => {
+      this.Works = res;
+      this.worksCount = this.Works.length;
     })
 
   }
   addWork() {
     this.officeService.addWork(this.workForm.value)
+    this.workForm.patchValue({
+      startTime: "",
+      description: ""
+    })
   }
 
   async deleteWork(idField: string) {
     const response = await this.alertService.deleteAlert()
-    if ( response == "confirm") {
+    if (response == "confirm") {
       this.officeService.deleteWork(idField)
     }
   }
@@ -87,6 +94,24 @@ export class TimePage implements OnInit {
   async copyToClipboard(work: any) {
     await Clipboard.write({
       string: `${work.description} : (${work.startTime} - ${work.endTime}) `
+    });
+  }
+  async getAllWorkOf() {
+    if (this.workOf !== null) {
+       (await this.officeService.getWorkByDate(this.workOf)).subscribe((res:any) => {
+        this.workByDate = res;
+      })
+    }
+  }
+
+  async copyAllOfDay(){
+    let dataString:string = "";
+    this.workByDate.forEach((element:any) => {
+      dataString += `${element.startTime} - ${element.endTime} (${element.type}) : ${element.description} \n`
+    });
+    console.log(dataString);
+    await Clipboard.write({
+      string: dataString
     });
   }
 }

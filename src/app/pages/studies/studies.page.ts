@@ -29,7 +29,7 @@ export class StudiesPage implements OnInit {
   ];
   Studies: any = [];
   studiesCount: number = 0;
-  currentTime = (new Date().getHours()+":"+ new Date().getMinutes())
+  currentTime = this.datePipe.transform(new Date(), 'hh:mm');
   constructor(
     private fb: FormBuilder,
     private studiesService: StudiesService,
@@ -45,8 +45,8 @@ export class StudiesPage implements OnInit {
     endTime: [this.currentTime, [Validators.required, Validators.pattern('^[0-9:]*$')]],
     type: ['read', [Validators.required, Validators.pattern('^[a-z]*$')]],
     subject: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    topic: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
+    topic: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9\n .,-]*$')]],
+    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9\n .,-]*$')]],
     studyMode: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]
   })

@@ -86,8 +86,24 @@
   4. Current month without date.
   5. Adjusted grid coulmn size in studies.
   6. Filter by type bug fixed. (Created Index in firestore).
+- `d.2.5` : 24-02-2023 : 
+  1. Analyze expense component created and routes defined with back button from Analyze component.
+  2. Edit Expense component added.
+- `d.2.6` : 25-02-2023 : Multiple updates
+  1. Ng charts added.
+- `d.2.7` : 17-05-2023 : Multiple Updates
+  1. Analyze component with budget cards and monthly and category wise graph.
+  2. Add budget, update budget. Passing data to analyze component.
+  3. Functions in Budget `getCurrentBudget()` & `getTotalBudget()`.
+  4. Daily expense and monthly expense.
+  5. Getting total expense from `total-expenses.ts`.
+- `d.2.8` : 17-05-2023 : Multiple Updates
+  1. Edit study module started.
+- `d.2.9` : 27-05-2023 : 
+  1. Added resize feature to time page.
+  2. Get all data for a day.
+  3. Copy to clipboard for a day work summary. 
 - `d.x.x` : 01-01-2023
-
 
 ## Release Versions
 
@@ -103,6 +119,9 @@
   6. Performance Index : To be monitored page wise 
 - `r.1.1` : 10-01-2023 : Dev version `d.1.7`
 - `r.1.2` : 29-01-2023 : Dev version `d.2.1`
+- `r.1.3` : 13-02-2023 : Dev version `d.2.1`
+- `r.1.4` : 17-05-2023 : Dev version `d.2.8`
+- `r.1.5` : 27-05-2023 : Dev version `d.2.9`
 - `r.x.x` :
 
 ## Patches
@@ -174,5 +193,15 @@
   2. Redirect after login using google. 
 - `p.2.4` : 11-02-2023 : Multiple patches
   1. Time error due to missing '0' before date. Reported by Vinayak.
-  2. Allow colon and 
+  2. Allow colon and other required special characters. Reported by Charan
+- `p.2.5` : 20-05-2023 : Multiple patches
+  1. Validaion issue in personal care is fixed.
+  2. Next line ability added for time and studies.
+  3. Time format made compatible with all system perference.
+  4. Pre formatting added in expense, studies and time UI. It now supports next line and pre formatting.
+  5. Update details.
+- `p.2.6` : 26-05-2023 : Multiple patches
+  1. Time format in studies page
+  2. Table headers in study data table
+  3. Update Details
 - `p.x.x`
