@@ -35,22 +35,22 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">End Time</ion-label>
-              <ion-input formControlName="endTime" type="time" ></ion-input>
+              <ion-input formControlName="endTime" type="time"></ion-input>
             </ion-item>
           </div>
 
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Subject</ion-label>
-              <ion-input formControlName="subject" type="text"
-                placeholder="Subject studied / Book Name" clear-input></ion-input>
+              <ion-input formControlName="subject" type="text" placeholder="Subject studied / Book Name"
+                clear-input></ion-input>
             </ion-item>
           </div>
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Topic</ion-label>
-              <ion-input formControlName="topic" type="text"
-                placeholder="Chapter/Topic/Sub-topic studied" clear-input></ion-input>
+              <ion-input formControlName="topic" type="text" placeholder="Chapter/Topic/Sub-topic studied"
+                clear-input></ion-input>
             </ion-item>
           </div>
           <div class="input-item">
@@ -65,7 +65,8 @@
             <ion-item fill="outline">
               <ion-label position="floating">Type</ion-label>
               <ion-select formControlName="type" interface="popover" placeholder="Category of Studies">
-                <ion-select-option *ngFor="let type of studiesTypes" [value]="type.value">{{type.title}}</ion-select-option>
+                <ion-select-option *ngFor="let type of studiesTypes"
+                  [value]="type.value">{{type.title}}</ion-select-option>
               </ion-select>
             </ion-item>
           </div>
@@ -94,8 +95,9 @@
       <div class="table-title">
         <h2 class="mt-0 h2" *ngIf="studiesCount == 0">No Study Record</h2>
         <h2 class="mt-0 h2" *ngIf="studiesCount !== 0">My Studies</h2>
-      <ion-note class="ion-padding" color="tertiary" *ngIf="studiesCount !== 0">* Edit & Delete features coming soon.</ion-note>
-    </div>
+        <ion-note class="ion-padding" color="tertiary" *ngIf="studiesCount !== 0">* Edit & Delete features coming
+          soon.</ion-note>
+      </div>
       <div class="filters"></div>
       <div class="data-grid" *ngIf="studiesCount > 0">
         <ion-grid class="border-6">
@@ -117,12 +119,14 @@
             <ion-col size="1">{{ study?.endTime | twelveHourFormat }}</ion-col>
             <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.subject | titlecase }}</ion-col>
             <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.topic | titlecase }}</ion-col>
-            <ion-col size="3" class="ion-text-wrap ion-text-left"><pre>{{ study?.description }}</pre></ion-col>
+            <ion-col size="3" class="ion-text-wrap ion-text-left">
+              <pre>{{ study?.description }}</pre>
+            </ion-col>
             <ion-col size="2">{{ study?.type | titlecase }}</ion-col>
             <ion-col size="1">
               <ion-button class="action-button" color="danger" (click)="deleteStudies(study.idField)">
-              <ion-icon color="light" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
-            </ion-button></ion-col>
+                <ion-icon color="light" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+              </ion-button></ion-col>
           </ion-row>
         </ion-grid>
       </div>
