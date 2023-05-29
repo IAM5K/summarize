@@ -106,6 +106,8 @@
 - `d.3.0` : 29-05-2023 : 
   1. Edit Studies feature added.
   2. Study table changed to card.
+  3. Update details
+  4. Supported Browser details updated.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
