@@ -16,12 +16,12 @@
 
   <div id="container">
     <div class="card ion-margin ion-padding ">
-      <h1 class="mt-0 h2">Add Studies</h1>
+      <h1 class="mt-0 h2">{{editMode?"Update":"Add"}} Studies</h1>
       <div class="form-container">
-        <form [formGroup]="studiesForm" (ngSubmit)="addStudies()" novalidate>
+        <form [formGroup]="studiesForm" (ngSubmit)="manageStudies()" novalidate>
           <div class="input-item">
             <ion-item fill="outline">
-              <ion-label position="floating">Date</ion-label>
+              <ion-label [position]="editMode?'stacked':'floating'">Date</ion-label>
               <ion-input formControlName="date" type="date"></ion-input>
             </ion-item>
           </div>
@@ -81,52 +81,42 @@
             </ion-item>
           </div>
           <div class="input-item">
-            <ion-button color="primary" type="submit" size="medium" [disabled]="studiesForm.invalid">Submit</ion-button>
+            <ion-button color="primary" type="submit" size="medium"
+              [disabled]="studiesForm.invalid">{{editMode?"Update":"Submit"}}</ion-button>
             <ion-button color="primary" type="reset" size="medium">Reset</ion-button>
           </div>
         </form>
       </div>
     </div>
 
-    <div class="data-table card ion-margin ion-padding">
-      <div class="table-title">
-        <h2 class="mt-0 h2" *ngIf="studiesCount == 0">No Study Record</h2>
-        <h2 class="mt-0 h2" *ngIf="studiesCount !== 0">My Studies</h2>
-        <ion-note class="ion-padding" color="tertiary" *ngIf="studiesCount !== 0">* Edit & Delete features coming
-          soon.</ion-note>
-      </div>
-      <div class="filters"></div>
-      <div class="data-grid" *ngIf="studiesCount > 0">
-        <ion-grid class="border-6">
-          <ion-row>
-            <!-- <ion-col size="1">S.No</ion-col> -->
-            <ion-col size="2">Date</ion-col>
-            <ion-col class="ion-text-wrap" size="1">Start Time</ion-col>
-            <ion-col class="ion-text-wrap" size="1">End Time</ion-col>
-            <ion-col size="2">Subject</ion-col>
-            <ion-col size="2">Topic</ion-col>
-            <ion-col size="3">Description</ion-col>
-            <ion-col size="2">Type</ion-col>
-            <ion-col size="1">Action</ion-col>
-          </ion-row>
-          <ion-row *ngFor="let study of Studies; index as i">
-            <!-- <ion-col size="1">{{ i + 1 }}</ion-col> -->
-            <ion-col size="2">{{ study?.date }}</ion-col>
-            <ion-col size="1">{{ study?.startTime | twelveHourFormat }}</ion-col>
-            <ion-col size="1">{{ study?.endTime | twelveHourFormat }}</ion-col>
-            <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.subject | titlecase }}</ion-col>
-            <ion-col size="2" class="ion-text-wrap ion-text-left">{{ study?.topic | titlecase }}</ion-col>
-            <ion-col size="3" class="ion-text-wrap ion-text-left">
-              <pre>{{ study?.description }}</pre>
-            </ion-col>
-            <ion-col size="2">{{ study?.type | titlecase }}</ion-col>
-            <ion-col size="1">
-              <ion-button class="action-button" color="danger" (click)="deleteStudies(study.idField)">
-                <ion-icon color="light" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
-              </ion-button></ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
+    <div class="studies ion-margin">
+      <h2 class="mt-0 h2" *ngIf="studiesCount == 0">No Study Record</h2>
+      <h2 class="mt-0 h2" *ngIf="studiesCount !== 0">My Studies</h2>
+      <ion-card *ngFor="let study of Studies">
+        <ion-card-header>
+          <ion-text color="primary">{{study?.date}}</ion-text>
+          <ion-card-title>Topic: {{study?.topic}}</ion-card-title>
+          <ion-card-subtitle>Subject: {{study?.subject}}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p><span class="bold">Description: </span> {{study?.description}}</p>
+          <p><span class="bold">Date: </span> {{study?.startTime}}</p>
+          <p><span class="bold">Answered By at</span> {{study?.endTime}}</p>
+          <ion-button class="action-button" color="secondary" (click)="editStudies(study)">
+            <ion-icon color="light" [ios]="'pencil-outline'" [md]="'pencil-sharp'"></ion-icon>
+          </ion-button>
+          <ion-button class="action-button" color="danger" (click)="deleteStudies(study.idField)">
+            <ion-icon color="light" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+          </ion-button>
+          <!-- <ion-button *ngIf="study.answeredAt==''" (click)="replystudy(study)" color="success" >Answer </ion-button> -->
+          <!-- <ion-button *ngIf="study.answeredAt!==''" (click)="replystudy(study)" color="warning" >Update </ion-button> -->
+          <!-- <ion-button (click)="delstudy(study?.idField)"color="danger" >
+            <ion-icon name="trash" >Trash</ion-icon>
+          </ion-button> -->
+        </ion-card-content>
+      </ion-card>
     </div>
+
   </div>
 </ion-content>

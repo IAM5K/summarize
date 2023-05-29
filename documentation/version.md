@@ -103,6 +103,9 @@
   1. Added resize feature to time page.
   2. Get all data for a day.
   3. Copy to clipboard for a day work summary. 
+- `d.3.0` : 29-05-2023 : 
+  1. Edit Studies feature added.
+  2. Study table changed to card.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions

@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -35,8 +35,10 @@ export class StudiesPage implements OnInit {
     private studiesService: StudiesService,
     private seoService: SeoService,
     private alertService: AlertService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private viewportScroller: ViewportScroller
   ) { }
+  editMode:boolean = false;
   dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   studiesForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
@@ -57,6 +59,7 @@ export class StudiesPage implements OnInit {
     { title: "Write", value: "write" },
     { title: "Test", value: "test" }
   ]
+  updateDataId:string ="";
   ngOnInit() {
     this.getStudies()
     this.seoService.seo(this.pageTitle, this.pageMetaTags)
@@ -70,8 +73,17 @@ export class StudiesPage implements OnInit {
 
 
   }
-  addStudies() {
-    this.studiesService.addStudies(this.studiesForm.value)
+  manageStudies(idField?:string){
+    if (this.editMode) {
+      console.log();
+
+      this.updateStudies(this.studiesForm.value)
+    } else {
+      this.addStudies(this.studiesForm.value)
+    }
+
+    this.editMode = false
+    this.studiesForm.get('date')?.enable();
     this.studiesForm.patchValue({
       subject: '',
       topic: '',
@@ -79,11 +91,39 @@ export class StudiesPage implements OnInit {
     })
   }
 
+  addStudies(value: any) {
+    this.studiesService.addStudies(value)
+  }
+
+  updateStudies(value:any) {
+    console.log(value);
+    this.studiesService.updateStudies(value,this.updateDataId)
+    this.updateDataId=""
+
+  }
+
   async deleteStudies(idField:string){
     const response = await this.alertService.deleteAlert()
     if (response == "confirm") {
     this.studiesService.deleteStudies(idField)
     }
+  }
+  async editStudies(data:any){
+    this.studiesForm.patchValue({
+      createdAt:data.createdAt,
+      date:data.date,
+      startTime:data.startTime,
+      endTime:data.endTime,
+      type:data.type,
+      subject:data.subject,
+      topic:data.topic,
+      description:data.description,
+      studyMode:data.studyMode,
+      updatedAt: serverTimestamp()
+    })
+    this.updateDataId= data.idField;
+    this.studiesForm.get('date')?.disable();
+    this.editMode = true;
   }
 
 }

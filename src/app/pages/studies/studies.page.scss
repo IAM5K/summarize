@@ -1,7 +1,18 @@
-.form-container{
+.form-container {
   min-height: 610px;
   height: fit-content;
 }
 ion-grid {
-  --ion-grid-columns: 14;
+  min-width: 1080px;
+  --ion-grid-columns: 13;
 }
+
+.studies {
+  ion-card{
+    margin:20px 0%;
+  }
+  ion-button {
+    margin-right: 15px;
+  }
+}
+// 9351525551
