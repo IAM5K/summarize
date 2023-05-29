@@ -204,4 +204,5 @@
   1. Time format in studies page
   2. Table headers in study data table
   3. Update Details
+- `p.2.7` : 29-05-2023 : Modified options in expense type. Added Donate
 - `p.x.x`

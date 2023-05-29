@@ -61,6 +61,7 @@ export class ExpensesPage implements OnInit {
     { title: "Shopping", value: "shopping" },
     { title: "Transportation", value: "transportation" },
     { title: "Travel", value: "travel" },
+    { title: "Donate", value: "donated" },
     { title: "Miscellaneous", value: "miscellaneous" }
   ]
   spentOn = [
