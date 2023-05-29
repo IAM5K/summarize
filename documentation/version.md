@@ -125,6 +125,7 @@
 - `r.1.3` : 13-02-2023 : Dev version `d.2.1`
 - `r.1.4` : 17-05-2023 : Dev version `d.2.8`
 - `r.1.5` : 27-05-2023 : Dev version `d.2.9`
+- `r.1.6` : 29-05-2023 : Dev version `d.3.0`, `p.2.7`
 - `r.x.x` :
 
 ## Patches

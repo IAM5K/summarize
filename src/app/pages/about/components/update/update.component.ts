@@ -10,6 +10,16 @@ export class UpdateComponent implements OnInit {
   constructor() { }
   updates=[
     {
+      version:"r.1.6",
+      date:"27-05-2023",
+      details:[
+        "Edit Studies feature added",
+        "Study table changed to card",
+        "Options added in Expense type",
+        "Update and details"
+      ]
+    },
+    {
       version:"r.1.5",
       date:"27-05-2023",
       details:[
