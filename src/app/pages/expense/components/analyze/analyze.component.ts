@@ -80,7 +80,7 @@ export class AnalyzeComponent implements OnInit {
   async ngOnInit() {
     this.setGraphHeight();
     this.setGraphWidth();
-    const currentMonth = "2023-05"
+    const currentMonth = "2023-06"
     await this.getExpense(currentMonth);
     let total_expense: any = sessionStorage.getItem("total_expense")
     let total_budget: any = sessionStorage.getItem("budget")

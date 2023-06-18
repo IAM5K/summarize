@@ -46,7 +46,7 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Type</ion-label>
-              <ion-select formControlName="type" placeholder="Category of Expense">
+              <ion-select formControlName="type" interface="popover" placeholder="Category of Expense">
                 <ion-select-option *ngFor="let type of expenseTypes"
                   [value]="type.value">{{type.title}}</ion-select-option>
               </ion-select>
@@ -55,7 +55,7 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Spent On</ion-label>
-              <ion-select formControlName="spendedOn" placeholder="On whom it is Spent">
+              <ion-select formControlName="spendedOn" interface="popover" placeholder="On whom it is Spent">
                 <ion-select-option *ngFor="let item of spentOn" [value]="item.value">{{item.title}}</ion-select-option>
               </ion-select>
             </ion-item>
@@ -80,7 +80,7 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Filter By</ion-label>
-              <ion-select [(ngModel)]="filterType" name="filterType" placeholder="Filter By"
+              <ion-select [(ngModel)]="filterType" name="filterType" interface="popover" placeholder="Filter By"
                 (ionChange)="filterBy()">
                 <ion-select-option value="duration">Duration</ion-select-option>
                 <ion-select-option value="spentOn">Spent On</ion-select-option>
@@ -92,7 +92,7 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Parameter</ion-label>
-              <ion-select [(ngModel)]="filterParams" name="filterParams" placeholder="parameter"
+              <ion-select [(ngModel)]="filterParams" name="filterParams" interface="popover" placeholder="parameter"
                 (ionChange)="filter()">
                 <ng-container *ngIf="filterType == 'duration'">
                   <ion-select-option *ngFor="let item of durationFilter" [value]="item.value">{{ item.title

@@ -63,7 +63,7 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Type</ion-label>
-              <ion-select formControlName="type" placeholder="Category of Studies">
+              <ion-select formControlName="type" interface="popover" placeholder="Category of Studies">
                 <ion-select-option *ngFor="let type of studiesTypes"
                   [value]="type.value">{{type.title}}</ion-select-option>
               </ion-select>
@@ -72,7 +72,7 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Study Mode</ion-label>
-              <ion-select formControlName="studyMode" placeholder="On whom it is Spent">
+              <ion-select formControlName="studyMode" interface="popover" placeholder="On whom it is Spent">
                 <ion-select-option value="self">Self</ion-select-option>
                 <ion-select-option value="group">Group</ion-select-option>
                 <ion-select-option value="teacher">Teacher</ion-select-option>

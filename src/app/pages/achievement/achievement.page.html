@@ -55,7 +55,7 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Type</ion-label>
-              <ion-select formControlName="type" placeholder="Type of Achievement">
+              <ion-select formControlName="type" interface="popover" placeholder="Type of Achievement">
                 <ion-select-option *ngFor="let type of achievementTypes"
                   [value]="type.value">{{type.title}}</ion-select-option>
               </ion-select>
