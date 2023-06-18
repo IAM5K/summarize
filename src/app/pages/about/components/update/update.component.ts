@@ -76,7 +76,7 @@ export class UpdateComponent implements OnInit {
       version:"r.1.0",
       date:"07-01-2023",
       details:[
-        "Expence Module: Add and View ",
+        "Expense Module: Add and View ",
         "Time / Work Module: Add and View",
         "Studies Module : Add and View."
       ]

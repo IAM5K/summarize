@@ -37,7 +37,7 @@
      7. Show all Button before table. 
      8. Added Copy to clipboard.
   9.  Studies Page : Auto fill today's Date, Seo update for Title and Meta Tag. Removed Clear Input from Start Time and End Time Input.
-  10. Expence Module: Success alert modified. Deleate feature added to service. Count added to limit response size. Auto fill today's Date, Seo update for Title and Meta Tag. Removed Clear Input from Start Time and End Time Input. Show all Button before table
+  10. Expense Module: Success alert modified. Deleate feature added to service. Count added to limit response size. Auto fill today's Date, Seo update for Title and Meta Tag. Removed Clear Input from Start Time and End Time Input. Show all Button before table
   11. SEO service integrated to Login Help and About Page.
   12. Extra Analytics  function Removed. Analytics URL changed to Url After Redirects. 
   13. Formatted / Rearranged tags for Index, Role listitem added for Lighthouse accessibility score. SEO keywords added from Chat GPT.
@@ -108,6 +108,9 @@
   2. Study table changed to card.
   3. Update details
   4. Supported Browser details updated.
+- `d.3.1` : 18-06-2023 :
+  1. Upgraded Ionic to version 7 and NPM to 9.7.1.
+  2. 
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
@@ -116,7 +119,7 @@
   1. Login with Email and Password working.
 - `r.0.2` : 27-12-2022 : Added Expense page with add expense and list expense feature. 'Robots.txt' and 'Sitemap.xml' added. 
 - `r.1.0` : 07-01-2023 : Multiple Functionality
-  1. Expence Module: Add and View 
+  1. Expense Module: Add and View 
   2. Time / Work Module: Add and View
   3. Studies Module : Add and View.
   4. Google Analytics Added.
@@ -163,11 +166,11 @@
 - `p.1.7` : 06-01-2023 : Multiple Patches: 
   1. Updated Site Map
   2. Updated Index for SEO
-  3. Renamed Expence to Expense from all locations.
+  3. Renamed Expense to Expense from all locations.
   4. Optimised logo, replaced png with webp.
   5. Added Cache control in firebase.json to do caching of svg.
   6. Removed Unused css and made data grid global.
-  7. Fixed Expence Collection name.
+  7. Fixed Expense Collection name.
   8. Auto all data load in 10 seconds.
   9. Caching of assets, ngsw install mode to prefetch.
   10. Updated robot.txt and added delay for crawling.
@@ -175,7 +178,7 @@
   12. Study Mode label.
 - `p.1.8` : 12-01-2023 : Multiple Patches
   1. Submit Disabled for invalid Form.
-  2. Date Auto-fill in Expences.
+  2. Date Auto-fill in Expenses.
   3. Removed Dependencies from Local Storage. Taking user data from auth State. 
   4. Placeholder for Description in Office Page
   5. Limitted Corrected to Limited in Dashboard.
