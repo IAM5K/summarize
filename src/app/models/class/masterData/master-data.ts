@@ -17,7 +17,7 @@ export class MasterData {
     {
       title:"Studies",
       icon:"book",
-      color:"medium",
+      color:"tertiary",
       path:"studies"
     },
     {
