@@ -154,7 +154,7 @@
           </ion-row>
         </ion-grid>
       </div>
-      <div class="mt-15px">
+      <div class="mt-15px" *ngIf="expensesCount > 0">
         <ion-button (click)="analyzeExpense()" color="success" >
           <ion-icon class="mr-10" name="analytics-outline"></ion-icon>Analyze Expenses
         </ion-button>
