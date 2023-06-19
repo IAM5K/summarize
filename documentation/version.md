@@ -110,7 +110,10 @@
   4. Supported Browser details updated.
 - `d.3.1` : 18-06-2023 :
   1. Upgraded Ionic to version 7 and NPM to 9.7.1.
-  2. 
+  2. Expence spelling correction.
+- `d.3.2` : 19-06-2023 :
+  1. Upgraded Home page content.
+  2. Export Expense data to excel in two sheets, expense-data and Category data.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions

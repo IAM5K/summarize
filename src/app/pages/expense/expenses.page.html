@@ -15,10 +15,7 @@
   </ion-header>
 
   <div id="container ion-margin">
-    <div class="ion-margin options-container ">
-      <ion-button (click)="analyzeExpense()" color="success" class="ion-float-right">
-        <ion-icon class="mr-10" name="analytics-outline"></ion-icon>Analyze Expenses</ion-button>
-    </div>
+
     <div class="card ion-margin ion-padding ">
       <h1 class="mt-0 h2">Add Expense</h1>
       <div class="form-container">
@@ -157,8 +154,14 @@
           </ion-row>
         </ion-grid>
       </div>
+      <div class="mt-15px">
+        <ion-button (click)="analyzeExpense()" color="success" >
+          <ion-icon class="mr-10" name="analytics-outline"></ion-icon>Analyze Expenses
+        </ion-button>
+        <ion-button color="tertiary" size="medium" (click)="exportData()">Export Data</ion-button>
 
-      <ion-note class="mt-15px" color="tertiary" *ngIf="expensesCount !== 0">* Edit feature coming soon.</ion-note>
+      </div>
+      <!-- <ion-note  color="tertiary" *ngIf="expensesCount !== 0">* Edit feature coming soon.</ion-note> -->
     </div>
 
     <div class="card ion-margin ion-padding disclaimer">
@@ -180,7 +183,7 @@
           </ion-item>
         </div>
         <div class="input-item">
-          <ion-button color="primary" type="submit" size="medium" *ngIf="!budgetExists" (click)="addBudget()">Add Budget</ion-button>
+          <ion-button color="primary" type="submit" size="medium" *ngIf="!budgetExists" [disabled]="budgetForm.invalid" (click)="addBudget()">Add Budget</ion-button>
           <ion-button color="primary" type="submit" size="medium" *ngIf="budgetExists" (click)="updateBudget()">Update</ion-button>
           <ion-button color="success" *ngIf="!budgetExists" size="medium" (click)="getBudget()">Get My Budget</ion-button>
           <ion-button color="tertiary" *ngIf="budgetExists" size="medium" (click)="budgetExists=false">Go to Add Budget</ion-button>

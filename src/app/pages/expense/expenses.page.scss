@@ -7,7 +7,7 @@
   box-sizing: border-box;
 
   @media screen and (max-width:768px) {
-    height: 700px;
+    height: 800px;
   }
 }
 
@@ -79,5 +79,8 @@ ion-grid {
     .input-item {
       width: 100%;
     }
+  }
+  .data-grid{
+    box-shadow: 0 0 1px white ;
   }
 }

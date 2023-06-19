@@ -8,6 +8,9 @@ import { Options } from 'src/app/models/interface/masterData.model';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
+import { Analyze } from './modules/analyze';
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.page.html',
@@ -249,5 +252,32 @@ export class ExpensesPage implements OnInit {
     this.getAllExpenses();
     await this.getBudget();
     this.router.navigateByUrl('expenses/analyze');
+  }
+
+  // Export data
+  async exportData() {
+    const data: any[] = this.Expenses.map((item:any) => ({
+      Date: item.date,
+      Cost: item.amount,
+      Description: item.description.replace(/\n/g, '\n '),
+      Type:item.type,
+      SpentOn: item.spendedOn
+    }));
+    let categoryWiseData =  await new Analyze().getCategoryWiseData(this.Expenses);
+    console.log(categoryWiseData);
+
+    const filename= "ExpenseData"+ new Date().getTime() +".xlsx"
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+    const categoryData: XLSX.WorkSheet = XLSX.utils.json_to_sheet(categoryWiseData);
+    const workbook: XLSX.WorkBook = {
+      Sheets: {
+        'Expense Data': worksheet,
+        'Category wise' : categoryData
+      },
+      SheetNames: ['Expense Data', 'Category wise']
+    };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const excelBlob: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    FileSaver.saveAs(excelBlob, filename);
   }
 }
