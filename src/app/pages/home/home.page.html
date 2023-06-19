@@ -18,14 +18,8 @@
     <h1 class="ion-text-center ion-padding">What gets measured, Gets managed
       <br><ion-note color="tertiary" class="h4">- Peter F. Drucker</ion-note>
     </h1>
-    <div class="card ion-padding">
-      <h2>About Summarize</h2>
-      <p class="ion-text-justify" *ngFor="let item of paragraphs">{{item}}</p>
-      <p>More Details in About Page (<a class="color-secondary bold" routerLink="/about">check here</a>)</p>
-
-    </div>
     <section class="features ion-padding ion-justify-content-around ion-margin ion-align-items-stretch ion-wrap">
-      <h3 class="ion-text-center ion-padding h2">Available Features</h3>
+      <h2 class="ion-text-center ion-padding h2 mt0">Available Features</h2>
       <div class="feature-card" *ngFor="let f of features" [routerLink]="'/'+f.path"
 
       [ngStyle]="{'box-shadow': '0 0 5px inset var(--ion-color-'+ f.color +'-tint)'}">
@@ -35,9 +29,14 @@
       </div>
     </section>
     <div class="card ion-padding">
+      <h3>About Summarize</h3>
+      <p class="ion-text-justify" *ngFor="let item of paragraphs">{{item}}</p>
+      <p>More Details in About Page (<a class="color-secondary bold" routerLink="/about">check here</a>)</p>
+
+    </div>
+    <div class="card ion-padding">
       <h4 class="h2">Upcoming Features </h4>
       <ol>
-        <li>Analyze Expense</li>
         <li>Analyze Studies</li>
         <li>Analyze Work</li>
         <li>Goal Setting</li>
