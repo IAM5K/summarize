@@ -114,6 +114,7 @@
 - `d.3.2` : 19-06-2023 :
   1. Upgraded Home page content.
   2. Export Expense data to excel in two sheets, expense-data and Category data.
+  3. Update info.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
@@ -134,6 +135,7 @@
 - `r.1.4` : 17-05-2023 : Dev version `d.2.8`
 - `r.1.5` : 27-05-2023 : Dev version `d.2.9`
 - `r.1.6` : 29-05-2023 : Dev version `d.3.0`, `p.2.7`
+- `r.1.7` : 21-06-2023 : Dev version `d.3.2`, `p.2.9`
 - `r.x.x` :
 
 ## Patches
@@ -218,4 +220,5 @@
   3. Update Details
 - `p.2.7` : 29-05-2023 : Modified options in expense type. Added Donate
 - `p.2.8` : 06-06-2023 : Fixed dropdown feature of ion-select due to Chrome changes. 
+- `p.2.9` : 21-06-2023 : Disabled update budget button if ammount or date is invalid. 
 - `p.x.x`
