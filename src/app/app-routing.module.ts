@@ -55,6 +55,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/time/time.module').then(m => m.TimePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
+  {
+    path: 'goal',
+    loadChildren: () => import('./pages/goal/goal.module').then(m => m.GoalPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
   // {
   //   path: 'folder/:id',
   //   loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule),
@@ -79,6 +84,10 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'goal',
+    loadChildren: () => import('./pages/goal/goal.module').then( m => m.GoalPageModule)
   }
 ];
 

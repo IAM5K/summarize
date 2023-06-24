@@ -67,9 +67,10 @@ export class AppComponent {
     this.appPages = [
       { title: 'Dashboard', color: 'primary', url: 'home', icon: 'grid' },
       { title: 'About', color: 'medium', url: 'about', icon: 'reader' },
+      { title: 'Goal', color: 'warning', url: 'goal', icon: 'bulb' },
       { title: 'Expenses', color: 'success', url: 'expenses', icon: 'cash' },
-      { title: 'Time', color: 'danger', url: 'time', icon: 'hourglass' },
       { title: 'Studies', color: 'primary', url: 'studies', icon: 'book' },
+      { title: 'Time', color: 'danger', url: 'time', icon: 'hourglass' },
       { title: 'Acheivements', color: 'warning', url: 'achievement', icon: 'trophy' },
       // { title: 'Analytics', color: 'success', url: 'analytics', icon: 'analytics' },
       // { title: 'Setup', color: 'warning', url: 'setup', icon: 'settings' },
