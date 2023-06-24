@@ -17,3 +17,8 @@ export interface Options {
   value:string| Date|null
 }
 
+export interface DataDescription {
+  title:string,
+  description:string
+}
+
