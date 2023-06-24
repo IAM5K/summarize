@@ -10,6 +10,15 @@ export class UpdateComponent implements OnInit {
   constructor() { }
   updates=[
     {
+      version:"r.1.7",
+      date:"21-06-2023",
+      details:[
+        "Export expense data to Excel",
+        "Update budget button disabled for default",
+        "Update and details"
+      ]
+    },
+    {
       version:"r.1.6",
       date:"27-05-2023",
       details:[
