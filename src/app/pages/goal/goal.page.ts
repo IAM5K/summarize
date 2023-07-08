@@ -18,7 +18,7 @@ export class GoalPage implements OnInit {
 
   pageTitle="Goal"
 
-  title= SeoTags.pageTitle.helpPage
+  title= SeoTags.pageTitle.goalPage
   pageMetaTags= SeoTags.helpPageTags
   constructor(
     private seoService: SeoService,
@@ -27,11 +27,6 @@ export class GoalPage implements OnInit {
     private alertService: AlertService,
     private datePipe: DatePipe,
     private router: Router) { }
-    spentOn = [
-      { value: "self", title: "Self" },
-      { value: "group", title: "Group" },
-      { value: "family", title: "Family" }
-    ]
     dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     goalType = GoalData.goalType
     goalFor = GoalData.goalFor
@@ -45,12 +40,14 @@ export class GoalPage implements OnInit {
       reward: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
       resource: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
       description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
-      spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
+      actionSteps: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
+      penalty: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
       updatedAt: [serverTimestamp()]
     })
   ngOnInit() {
     this.seoService.seo(this.title,this.pageMetaTags)
   }
+  rewardError="Only alphabets and numbers allowed"
 
   addGoal() {
     console.log(this.goalForm.value);

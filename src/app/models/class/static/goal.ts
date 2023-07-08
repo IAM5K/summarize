@@ -7,14 +7,19 @@ export class GoalData {
       value:'Daily'
     },
     {
-      title:'Short Team',
+      title:'Tomorrow',
+      value:'Tomorrow'
+    },
+    {
+      title:'Short Term',
       value:'Short Term'
     },
     {
-      title:'Long Team',
+      title:'Long Term',
       value:'Long Term'
     }
   ]
+
   public static goalFor:Options[]=[
     { title: 'Adventure', value: 'Adventure' },
     { title: 'Business', value: 'Business' },
@@ -151,48 +156,47 @@ export class GoalData {
     }
   ]
 
-  public static goalSetting=[
+  public static goalSetting:DataDescription[] =[
     {
-      step: 'Goal Category',
+      title: 'Goal Category',
       description: 'Select a category or domain for your goal, such as personal development, career, health, relationships, etc.'
     },
     {
-      step: 'Goal Description',
+      title: 'Goal Description',
       description: 'Describe your goal in detail, including what you want to achieve and why it is important to you.'
     },
     {
-      step: 'Specificity',
+      title: 'Specificity',
       description: 'Make your goal more specific by defining measurable outcomes, setting deadlines, or identifying key milestones.'
     },
     {
-      step: 'Action Steps',
+      title: 'Action Steps',
       description: 'Outline the specific action steps or tasks you need to take to work towards your goal.'
     },
     {
-      step: 'Resources Needed',
+      title: 'Resources Needed',
       description: 'Identify any resources you require to achieve your goal, such as time, money, tools, or support from others.'
     },
     {
-      step: 'Potential Obstacles',
+      title: 'Potential Obstacles',
       description: 'Anticipate potential obstacles or challenges you might face while pursuing your goal.'
     },
     {
-      step: 'Strategies and Solutions',
+      title: 'Strategies and Solutions',
       description: 'Brainstorm and document strategies you can employ to overcome obstacles and find solutions to challenges.'
     },
     {
-      step: 'Timeline',
+      title: 'Timeline',
       description: 'Set a timeline or target date for achieving your goal, establishing a sense of urgency and accountability.'
     },
     {
-      step: 'Progress Tracking',
+      title: 'Progress Tracking',
       description: 'Track your progress towards your goal using a checklist, milestones, or a progress bar.'
     },
     {
-      step: 'Motivation and Rewards',
+      title: 'Motivation and Rewards',
       description: 'Identify your motivation for achieving the goal and determine any rewards or incentives you can give yourself upon successful completion.'
     }
   ]
-
 
 }
