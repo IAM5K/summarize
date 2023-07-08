@@ -35,7 +35,7 @@ export class SupportService {
 
 
   formatDate(str:any){
-    if(str == (null|| undefined)){
+    if(str === (null|| undefined)){
       return false
     }
     else{

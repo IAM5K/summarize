@@ -63,14 +63,14 @@ export class AuthService {
 		if (userRef.get()) {
 			userRef.get().subscribe((res: any) => {
 				let responseData = res.data()
-				if (responseData == undefined) {
+				if (responseData === undefined) {
 					const data = JSON.parse(JSON.stringify(user))
 					userRef.set(data, { merge: true })
 				}
 				localStorage.setItem('UserData', JSON.stringify(user))
 			})
 		}
-		else if (userRef.get() == undefined) {
+		else if (userRef.get() === undefined) {
 			userRef.set(user, { merge: true })
 		}
 	}
@@ -86,7 +86,7 @@ export class AuthService {
 		if (userRef.get()) {
 			userRef.get().subscribe((res: any) => {
 				let responseData = res.data()
-				if (responseData == undefined) {
+				if (responseData === undefined) {
 					const data = JSON.parse(JSON.stringify(user))
 					userRef.set(data, { merge: true })
 				}

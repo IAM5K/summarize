@@ -69,7 +69,7 @@
 
     <div class="expense-data card ion-margin ion-padding">
       <div class="table-title">
-        <h2 class="mt-0 h2" *ngIf="expensesCount == 0">No Expenses found</h2>
+        <h2 class="mt-0 h2" *ngIf="expensesCount === 0">No Expenses found</h2>
         <h2 class="h2" *ngIf="expensesCount !== 0">My Expenses</h2>
       </div>
       <div class="filters">
@@ -91,15 +91,15 @@
               <ion-label position="floating">Parameter</ion-label>
               <ion-select [(ngModel)]="filterParams" name="filterParams" interface="popover" placeholder="parameter"
                 (ionChange)="filter()">
-                <ng-container *ngIf="filterType == 'duration'">
+                <ng-container *ngIf="filterType === 'duration'">
                   <ion-select-option *ngFor="let item of durationFilter" [value]="item.value">{{ item.title
                     }}</ion-select-option>
                 </ng-container>
-                <ng-container *ngIf="filterType == 'spentOn'">
+                <ng-container *ngIf="filterType === 'spentOn'">
                   <ion-select-option *ngFor="let item of spentOn" [value]="item.value">{{ item.title
                     }}</ion-select-option>
                 </ng-container>
-                <ng-container *ngIf="filterType == 'type'">
+                <ng-container *ngIf="filterType === 'type'">
                   <ion-select-option *ngFor="let item of expenseTypes"
                     [value]="item.value">{{item.title}}</ion-select-option>
                 </ng-container>
@@ -119,9 +119,9 @@
           <p class="ion-text-bold"> {{expenseMessage}} {{expenseCurrency}} {{totalExpense}}</p>
         </form>
 
-        <!-- <ion-button *ngIf="expenseSize == 'week'" color="primary" (click)="getAllExpenses()" size="medium">All
+        <!-- <ion-button *ngIf="expenseSize === 'week'" color="primary" (click)="getAllExpenses()" size="medium">All
           Expenses</ion-button>
-        <ion-button *ngIf="expenseSize == 'all'" color="primary" (click)="getExpenses()" size="medium">Latest
+        <ion-button *ngIf="expenseSize === 'all'" color="primary" (click)="getExpenses()" size="medium">Latest
           Only</ion-button> -->
 
       </div>

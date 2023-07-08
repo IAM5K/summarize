@@ -122,6 +122,9 @@
   4. Goal page form and ts configs for it.
   5. Goal info page with routing.
   6. Goal Service initalization.
+- `d.3.4` : 08-07-2023 :
+  1. Goal Info page.
+  2. Goal page and Module.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
@@ -227,5 +230,6 @@
   3. Update Details
 - `p.2.7` : 29-05-2023 : Modified options in expense type. Added Donate
 - `p.2.8` : 06-06-2023 : Fixed dropdown feature of ion-select due to Chrome changes. 
-- `p.2.9` : 21-06-2023 : Disabled update budget button if ammount or date is invalid. 
+- `p.2.9` : 21-06-2023 : Disabled update budget button if ammount or date is invalid.
+- `p.3.0` : 08-07-2023 : '==' converted to '==='. 
 - `p.x.x`

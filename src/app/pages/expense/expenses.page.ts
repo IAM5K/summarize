@@ -139,7 +139,7 @@ export class ExpensesPage implements OnInit {
   }
   async deleteExpense(idField: string) {
     const response = await this.alertService.deleteAlert()
-    if (response == "confirm") {
+    if (response === "confirm") {
       this.expenseService.deleteExpense(idField);
     }
   }
@@ -217,7 +217,7 @@ export class ExpensesPage implements OnInit {
         alert("There was some error in adding budget. Try later or report via help section.")
       }
       monthExists = savedBudget.find((item: any) =>
-        item.month == month
+        item.month === month
       )
     })
     if (monthExists) {
@@ -233,7 +233,7 @@ export class ExpensesPage implements OnInit {
   async updateBudget() {
     const month = this.budgetForm.value.month;
     const updatedBudget = this.Budget.filter((item: any) =>
-      item.month == this.budgetForm.value.month
+      item.month === this.budgetForm.value.month
     )
     if (updatedBudget !== undefined && updatedBudget.length > 0) {
       const newBudget = updatedBudget[0]

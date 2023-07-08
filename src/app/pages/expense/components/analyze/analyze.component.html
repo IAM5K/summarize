@@ -27,7 +27,7 @@
     <ion-card color="secondary">
       <ion-card-header>
         <ion-card-title>
-          ₹ <span *ngIf="currentExpense == 0">Calculating</span>
+          ₹ <span *ngIf="currentExpense === 0">Calculating</span>
           <span *ngIf="currentExpense !== 0">{{currentExpense}}</span>
         </ion-card-title>
         <ion-card-subtitle>This Month Expenses</ion-card-subtitle>

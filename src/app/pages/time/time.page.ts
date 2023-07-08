@@ -86,7 +86,7 @@ export class TimePage implements OnInit {
 
   async deleteWork(idField: string) {
     const response = await this.alertService.deleteAlert()
-    if (response == "confirm") {
+    if (response === "confirm") {
       this.officeService.deleteWork(idField)
     }
   }

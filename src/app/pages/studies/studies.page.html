@@ -90,7 +90,7 @@
     </div>
 
     <div class="studies ion-margin">
-      <h2 class="mt-0 h2" *ngIf="studiesCount == 0">No Study Record</h2>
+      <h2 class="mt-0 h2" *ngIf="studiesCount === 0">No Study Record</h2>
       <h2 class="mt-0 h2" *ngIf="studiesCount !== 0">My Studies</h2>
       <ion-card *ngFor="let study of Studies">
         <ion-card-header>

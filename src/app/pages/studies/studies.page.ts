@@ -104,7 +104,7 @@ export class StudiesPage implements OnInit {
 
   async deleteStudies(idField:string){
     const response = await this.alertService.deleteAlert()
-    if (response == "confirm") {
+    if (response === "confirm") {
     this.studiesService.deleteStudies(idField)
     }
   }
