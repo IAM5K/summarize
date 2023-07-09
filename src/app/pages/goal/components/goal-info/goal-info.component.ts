@@ -10,7 +10,7 @@ import { DataDescription } from 'src/app/models/interface/masterData.model';
 export class GoalInfoComponent implements OnInit {
   title:string = "Goal Settng";
   goalSetting:DataDescription[] = GoalData.goalSetting;
-  goalDetails:DataDescription[] = GoalData.goalSetting;
+  goalDetails:DataDescription[] = GoalData.goalDetails;
 
   constructor() { }
 

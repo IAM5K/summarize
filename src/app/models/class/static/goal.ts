@@ -120,11 +120,7 @@ export class GoalData {
     },
     {
       title: 'Relationship',
-      description: 'Cultivate meaningful connections, build trust, and foster healthy interactions with others based on mutual respect and understanding.'
-    },
-    {
-      title: 'Relationships',
-      description: 'Nurture and strengthen bonds with family, friends, and loved ones through open communication, empathy, and quality time together.'
+      description: 'Cultivate meaningful connections, build trust, and foster healthy interactions with others based on mutual respect and understanding. Nurture and strengthen bonds with family, friends, and loved ones through open communication, empathy, and quality time together'
     },
     {
       title: 'Social Connections',
@@ -157,6 +153,10 @@ export class GoalData {
   ]
 
   public static goalSetting:DataDescription[] =[
+    {
+      title: 'Goal Term',
+      description: 'Select goal term or target duration, like daily goal, tomorrow, short term or long term.Set a target date accordingly.'
+    },
     {
       title: 'Goal Category',
       description: 'Select a category or domain for your goal, such as personal development, career, health, relationships, etc.'
