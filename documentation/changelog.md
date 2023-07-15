@@ -1,6 +1,6 @@
-# Changelog
+# Package and Dependency Changelog
 
-### Initialization Packages
+## Initialization Packages
 
   $`npm -v` : 8.5.5
 
@@ -62,7 +62,7 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.7.2"
 
-# Update on 25 Feb 2023
+## Update on 25 Feb 2023
 
 ```
 Fetching dependency metadata from registry...
@@ -81,4 +81,50 @@ Fetching dependency metadata from registry...
     Updating package.json with dependency @angular/service-worker @ "15.2.0" (was "14.2.12")...
 UPDATE package.json (2502 bytes)
 
+```
+## Update on 15 July 2023
+``` vim
+The installed Angular CLI version is outdated.
+Installing a temporary Angular CLI versioned 16.1.4 to perform the update.
+✔ Packages successfully installed.
+Using package manager: npm
+Collecting installed dependencies...
+Found 7 dependencies.
+Fetching dependency metadata from registry...
+    Updating package.json with dependency @angular-devkit/build-angular @ "16.1.4" (was "15.2.9")...
+    Updating package.json with dependency @angular/cli @ "16.1.4" (was "15.2.9")...
+    Updating package.json with dependency @angular/compiler @ "16.1.5" (was "15.2.9")...
+    Updating package.json with dependency @angular/compiler-cli @ "16.1.5" (was "15.2.9")...
+    Updating package.json with dependency @angular/language-service @ "16.1.5" (was "15.2.9")...
+    Updating package.json with dependency @angular/common @ "16.1.5" (was "15.2.9")...
+    Updating package.json with dependency @angular/core @ "16.1.5" (was "15.2.9")...
+    Updating package.json with dependency @angular/forms @ "16.1.5" (was "15.2.9")...
+    Updating package.json with dependency @angular/platform-browser @ "16.1.5" (was "15.2.9")...
+    Updating package.json with dependency @angular/platform-browser-dynamic @ "16.1.5" (was "15.2.9")...
+    Updating package.json with dependency @angular/router @ "16.1.5" (was "15.2.9")...
+    Updating package.json with dependency @angular/service-worker @ "16.1.5" (was "15.2.9")...
+    Updating package.json with dependency zone.js @ "0.13.1" (was "0.11.8")...
+UPDATE package.json (2692 bytes)
+✔ Packages successfully installed.
+** Executing migrations of package '@angular/cli' **
+
+▸ Remove 'defaultProject' option from workspace configuration.
+  The project to use will be determined from the current working directory.
+  Migration completed (No changes made).
+
+▸ Replace removed 'defaultCollection' option in workspace configuration with 'schematicCollections'.
+  Migration completed (No changes made).
+
+▸ Update the '@angular-devkit/build-angular:server' builder configuration to disable 'buildOptimizer' for non optimized builds.
+  Migration completed (No changes made).
+
+** Executing migrations of package '@angular/core' **
+
+▸ In Angular version 15.2, the guard and resolver interfaces (CanActivate, Resolve, etc) were deprecated.
+  This migration removes imports and 'implements' clauses that contain them.
+UPDATE src/app/guards/auth.guard.ts (1471 bytes)
+  Migration completed (1 file modified).
+
+▸ As of Angular v16, the `moduleId` property of `@Component` is deprecated as it no longer has any effect.
+  Migration completed (No changes made).
 ```
