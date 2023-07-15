@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CustomDate } from 'src/app/models/class/date/custom-date';
 import { SeoTags } from 'src/app/models/class/seoTags/seo';
 import { GoalData } from 'src/app/models/class/static/goal';
 import { AlertService } from 'src/app/services/alert/alert.service';
@@ -16,10 +17,9 @@ import { SeoService } from 'src/app/services/seo/seo.service';
 })
 export class GoalPage implements OnInit {
 
-  pageTitle="Goal"
-
-  title= SeoTags.pageTitle.goalPage
-  pageMetaTags= SeoTags.helpPageTags
+  pageTitle = "Goal"
+  title = SeoTags.pageTitle.goalPage
+  pageMetaTags = SeoTags.helpPageTags
   constructor(
     private seoService: SeoService,
     private fb: FormBuilder,
@@ -27,36 +27,52 @@ export class GoalPage implements OnInit {
     private alertService: AlertService,
     private datePipe: DatePipe,
     private router: Router) { }
-    dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    goalType = GoalData.goalType
-    goalFor = GoalData.goalFor
-    goalForm: FormGroup = this.fb.group({
-      createdAt: [serverTimestamp()],
-      date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-      progress: [0, [Validators.required, Validators.pattern('^[0-9]*$'),Validators.max(100),Validators.min(0)]],
-      gTerm: ['Daily', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]*$')]],
-      type: ['Studies', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]*$')]],
-      title: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9, -.]*$')]],
-      reward: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
-      resource: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
-      description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
-      actionSteps: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
-      penalty: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
-      updatedAt: [serverTimestamp()]
-    })
+  dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  goalType = GoalData.goalType
+  goalFor = GoalData.goalFor
+  goalForm: FormGroup = this.fb.group({
+    createdAt: [serverTimestamp()],
+    date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
+    progress: [0, [Validators.required, Validators.pattern('^[0-9]*$'), Validators.max(100), Validators.min(0)]],
+    gTerm: ['Daily', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]*$')]],
+    type: ['Studies', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]*$')]],
+    title: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9, -.]*$')]],
+    reward: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
+    resource: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
+    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
+    actionSteps: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
+    penalty: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
+    updatedAt: [serverTimestamp()]
+  })
   ngOnInit() {
-    this.seoService.seo(this.title,this.pageMetaTags)
+    this.seoService.seo(this.title, this.pageMetaTags)
   }
-  rewardError="Only alphabets and numbers allowed"
+  rewardError = "Only alphabets and numbers allowed"
 
   addGoal() {
-    console.log(this.goalForm.value);
+    this.goalService.addGoal(this.goalForm.value);
+  }
+  dateUpdate() {
+    let targetDate = this.dateToday;
+    switch (this.goalForm.value.gTerm) {
+      case "Daily":
+        targetDate = this.dateToday
+        break;
+      case "Tomorrow":
+        targetDate = new CustomDate().getDateTomorrow() ;
+        break;
+      case "Short Term":
+        targetDate = ""
+        break;
+      case "Long Term":
+        targetDate = ""
+        break;
+      default:
+        break;
+    }
 
-    // this.goalService.addGoal(this.goalForm.value);
-    // this.goalForm.patchValue({
-    //   amount: '',
-    //   description: ''
-    // });
-    // this.seoService.eventTrigger("form", this.pageTitle);
+    this.goalForm.patchValue({
+      date: targetDate
+    })
   }
 }

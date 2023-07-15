@@ -92,12 +92,14 @@
               <ion-select [(ngModel)]="filterParams" name="filterParams" interface="popover" placeholder="parameter"
                 (ionChange)="filter()">
                 <ng-container *ngIf="filterType === 'duration'">
-                  <ion-select-option *ngFor="let item of durationFilter" [value]="item.value">{{ item.title
-                    }}</ion-select-option>
+                  <ion-select-option *ngFor="let item of durationFilter" [value]="item.value">
+                    {{item.title }}
+                  </ion-select-option>
                 </ng-container>
                 <ng-container *ngIf="filterType === 'spentOn'">
-                  <ion-select-option *ngFor="let item of spentOn" [value]="item.value">{{ item.title
-                    }}</ion-select-option>
+                  <ion-select-option *ngFor="let item of spentOn" [value]="item.value">
+                    {{ item.title }}
+                  </ion-select-option>
                 </ng-container>
                 <ng-container *ngIf="filterType === 'type'">
                   <ion-select-option *ngFor="let item of expenseTypes"
@@ -107,7 +109,7 @@
             </ion-item>
           </div>
           <div class="input-item">
-            <ion-item fill="outline" [disabled]="filterType =='duration'">
+            <ion-item fill="outline" [disabled]="filterType ==='duration'">
               <ion-label position="floating">Duration</ion-label>
               <ion-select [(ngModel)]="filterDuration" name="filterDuration" placeholder="Filter By"
                 (ionChange)="filter()">
@@ -141,7 +143,9 @@
             <ion-col size="2">{{ expense?.date }}</ion-col>
             <ion-col size="1">₹{{ expense?.amount }}</ion-col>
             <ion-col size="2">{{ expense?.type | titlecase }}</ion-col>
-            <ion-col size="3" class="ion-text-wrap ion-text-left"><pre>{{ expense?.description}}</pre></ion-col>
+            <ion-col size="3" class="ion-text-wrap ion-text-left">
+              <pre>{{ expense?.description}}</pre>
+            </ion-col>
             <ion-col size="2">{{ expense?.spendedOn | titlecase}}</ion-col>
             <ion-col size="2">
               <!-- <ion-button class="action-button" color="secondary">
@@ -155,7 +159,7 @@
         </ion-grid>
       </div>
       <div class="mt-15px" *ngIf="expensesCount > 0">
-        <ion-button (click)="analyzeExpense()" color="success" >
+        <ion-button (click)="analyzeExpense()" color="success">
           <ion-icon class="mr-10" name="analytics-outline"></ion-icon>Analyze Expenses
         </ion-button>
         <ion-button color="tertiary" size="medium" (click)="exportData()">Export Data</ion-button>
@@ -183,10 +187,14 @@
           </ion-item>
         </div>
         <div class="input-item">
-          <ion-button color="primary" type="submit" size="medium" *ngIf="!budgetExists" [disabled]="budgetForm.invalid" (click)="addBudget()">Add Budget</ion-button>
-          <ion-button color="primary" type="submit" size="medium" *ngIf="budgetExists" [disabled]="budgetForm.invalid" (click)="updateBudget()">Update</ion-button>
-          <ion-button color="success" *ngIf="!budgetExists" size="medium" (click)="getBudget()">Get My Budget</ion-button>
-          <ion-button color="tertiary" *ngIf="budgetExists" size="medium" (click)="budgetExists=false">Go to Add Budget</ion-button>
+          <ion-button color="primary" type="submit" size="medium" *ngIf="!budgetExists" [disabled]="budgetForm.invalid"
+            (click)="addBudget()">Add Budget</ion-button>
+          <ion-button color="primary" type="submit" size="medium" *ngIf="budgetExists" [disabled]="budgetForm.invalid"
+            (click)="updateBudget()">Update</ion-button>
+          <ion-button color="success" *ngIf="!budgetExists" size="medium" (click)="getBudget()">Get My
+            Budget</ion-button>
+          <ion-button color="tertiary" *ngIf="budgetExists" size="medium" (click)="budgetExists=false">Go to Add
+            Budget</ion-button>
         </div>
       </form>
       <div *ngIf="budgetExists">

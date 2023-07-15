@@ -24,7 +24,7 @@
         <form [formGroup]="goalForm" (ngSubmit)="addGoal()" novalidate>
           <div class="input-item">
             <ion-select aria-label="Goal Term" label="Goal Term" formControlName="gTerm" placeholder="Select goal term"
-              helperText="Enter a valid email" errorText="Invalid email" fill="outline">
+              helperText="Enter a valid email" errorText="Invalid email" fill="outline" (ionChange)="dateUpdate()">
               <ion-select-option *ngFor="let item of goalType" [value]="item.value"
                 aria-label="Goal Type option">{{item.title}}</ion-select-option>
             </ion-select>
@@ -40,8 +40,8 @@
             </ion-select>
           </div>
           <div class="input-item">
-            <ion-input label="Title" formControlName="title" labelPlacement="floating" fill="outline"
-              placeholder="Short title of the goal"></ion-input>
+            <ion-input label="Title" formControlName="title" labelPlacement="floating" fill="outline" placeholder="Short title of the goal">
+            </ion-input>
           </div>
           <div class="input-item">
             <ion-textarea label="Description" formControlName="description" labelPlacement="floating" fill="outline"
@@ -49,11 +49,11 @@
           </div>
           <div class="input-item">
             <ion-textarea label="Resouce Required" formControlName="resource" labelPlacement="floating" fill="outline"
-              placeholder="List of resources needed /involved"></ion-textarea>
+              placeholder="List of resources needed /involved" autoGrow="true"></ion-textarea>
           </div>
           <div class="input-item">
             <ion-textarea label="Action Steps" formControlName="actionSteps" labelPlacement="floating" fill="outline"
-              placeholder="Enter text"></ion-textarea>
+              placeholder="Enter text" autoGrow="true"></ion-textarea>
           </div>
           <div class="input-item">
             <ion-input label="Current Progress" formControlName="progress" labelPlacement="floating" fill="outline"
