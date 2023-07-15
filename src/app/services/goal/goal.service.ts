@@ -31,7 +31,7 @@ export class GoalService {
   updateGoal(data: any,idField:string) {
     this.goalCollection.doc(this.userId).collection('myGoal').doc(idField).update(data).then(res => {
       this.successAlert( this.updateMessage );
-    }).catch(err => {
+    }).catch((err:Error) => {
       alert("There was an error in posting. \n Please try again later. Check console for detail.");
       console.warn(err);
     })
@@ -45,7 +45,7 @@ export class GoalService {
       () => {
         this.successAlert(this.deletedMessage)
       }
-    ).catch(err => {
+    ).catch((err:Error) => {
       alert(err)
     })
   }
