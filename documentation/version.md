@@ -128,6 +128,9 @@
 - `d.3.5` : 09-07-2023 :
   1. Goal page and goal info UI Completed .
   2. Custom date pipe to get tomorrow's date.
+- `d.3.6` : 16-07-2023 :
+  1. Dashboard adjustment of feature buttons
+  2. 
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
