@@ -3,10 +3,10 @@ import { Features } from "../../interface/masterData.model";
 export class MasterData {
   public static features:Features[] =[
     {
-      title:"Achievements",
-      icon:"trophy",
-      color:"warning",
-      path:"achievement"
+      title:"Goal",
+      icon:"bulb",
+      color:"secondary",
+      path:"goal"
     },
     {
       title:"Expenses",
@@ -19,6 +19,12 @@ export class MasterData {
       icon:"book",
       color:"tertiary",
       path:"studies"
+    },
+    {
+      title:"Achievements",
+      icon:"trophy",
+      color:"warning",
+      path:"achievement"
     },
     {
       title:"Time",

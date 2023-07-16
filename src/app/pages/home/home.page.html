@@ -20,13 +20,13 @@
     </h1>
     <section class="features ion-padding ion-justify-content-around ion-margin ion-align-items-stretch ion-wrap">
       <h2 class="ion-text-center ion-padding h2 mt0">Available Features</h2>
-      <div class="feature-card" *ngFor="let f of features" [routerLink]="'/'+f.path"
-
-      [ngStyle]="{'box-shadow': '0 0 5px inset var(--ion-color-'+ f.color +'-tint)'}">
-        <ion-icon slot="start" [color]="f.color" [ios]="f.icon + '-outline'"
-                  [md]="f.icon + '-sharp'"></ion-icon>
+      <div class="feature-card-container">
+        <div class="feature-card" *ngFor="let f of features" [routerLink]="'/'+f.path" [ngStyle]="{'box-shadow': '0 0 5px inset var(--ion-color-'+ f.color +'-tint)'}">
+        <ion-icon slot="start" [color]="f.color" [ios]="f.icon + '-outline'" [md]="f.icon + '-sharp'"></ion-icon>
         <ion-note [color]="f.color" >{{f.title}}</ion-note>
       </div>
+      </div>
+
     </section>
     <div class="card ion-padding">
       <h3>About Summarize</h3>

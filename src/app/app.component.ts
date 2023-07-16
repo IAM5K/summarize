@@ -19,6 +19,7 @@ export class AppComponent {
       { title: 'Login', color: 'success', url: 'login', icon: 'log-in' }
   ];
   public labels: any = [];
+  versionNumber:number = 2.0;
   constructor(
     private authService: AuthService,
     private firebaseAuth: AngularFireAuth,
@@ -67,7 +68,7 @@ export class AppComponent {
     this.appPages = [
       { title: 'Dashboard', color: 'primary', url: 'home', icon: 'grid' },
       { title: 'About', color: 'medium', url: 'about', icon: 'reader' },
-      { title: 'Goal', color: 'warning', url: 'goal', icon: 'bulb' },
+      { title: 'Goal', color: 'secondary', url: 'goal', icon: 'bulb' },
       { title: 'Expenses', color: 'success', url: 'expenses', icon: 'cash' },
       { title: 'Studies', color: 'primary', url: 'studies', icon: 'book' },
       { title: 'Time', color: 'danger', url: 'time', icon: 'hourglass' },
