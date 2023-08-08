@@ -21,6 +21,7 @@ export class GoalService {
   goalCollection = this.afs.collection('userData')
   addGoal(data: any) {
     this.goalCollection.doc(this.userId).collection('myGoal').add(data).then(res => {
+      console.log(res)
       this.successAlert( this.addMessage );
     }).catch(err => {
       alert("There was an error in posting. \n Please try again later. Check console for detail.");
@@ -37,7 +38,7 @@ export class GoalService {
     })
   }
   getGoal() {
-    return this.goalCollection.doc(this.userId).collection('myGoal', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
+    return this.goalCollection.doc(this.userId).collection("myGoal").valueChanges({ idField: "idField" })
   }
 
   deleteGoal(idField: string) {

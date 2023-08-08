@@ -6,6 +6,18 @@ h1{
   color: var(--ion-color-primary);
   font-size: 2rem;
 }
+.daily-goal{
+  position: relative;
+  min-height: 100px;
+  height: auto;
+  width: 100%;
+  @media screen and (min-width:992px) {
+    width: 48%;
+    margin: 5px auto;
+  }
+}
+
+
 .features{
   position: relative;
   height: auto;
@@ -39,7 +51,7 @@ h1{
   width: 23%;
   min-width: 230px;
   height: 60px;
-  margin: 5px auto;
+  margin: 10px auto;
   border-radius: 6px;
   ion-icon,ion-note{
   font-size: 1.5rem;

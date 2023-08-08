@@ -46,7 +46,8 @@ export class GoalData {
     { title: 'Studies', value: 'Studies' },
     { title: 'Time Management', value: 'Time Management' },
     { title: 'Travel', value: 'Travel' },
-    { title: 'Well-being', value: 'Well-being' }
+    { title: 'Well-being', value: 'Well-being' },
+    { title: 'Work', value: 'Work' }
   ]
 
   public static goalDetails:DataDescription[]=[

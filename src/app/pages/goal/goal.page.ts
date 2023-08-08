@@ -44,8 +44,14 @@ export class GoalPage implements OnInit {
     penalty: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
     updatedAt: [serverTimestamp()]
   })
+  goalData:any;
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags)
+    this.goalService.getGoal().subscribe(res=>{
+      console.log(res);
+      this.goalData=res
+
+    })
   }
   rewardError = "Only alphabets and numbers allowed"
 

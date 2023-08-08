@@ -21,4 +21,8 @@ export interface DataDescription {
   title:string,
   description:string
 }
+export interface Goal {
+  title?:string,
+  description?:string
+}
 
