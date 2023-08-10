@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { StudiesPage } from './studies.page';
 import { EditStudiesComponent } from './components/edit-studies/edit-studies.component';
+import { FreeResourceComponent } from './components/free-resource/free-resource.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path:'edit-studies',
     component:EditStudiesComponent
+  },
+  {
+    path:'free-resource',
+    component:FreeResourceComponent
   }
 ];
 

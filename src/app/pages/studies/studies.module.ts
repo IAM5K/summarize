@@ -6,6 +6,7 @@ import { StudiesPageRoutingModule } from './studies-routing.module';
 import { StudiesPage } from './studies.page';
 import { TwelveHourFormatPipeModule } from 'src/app/models/pipe/time/twelve-hour-format.module';
 import { EditStudiesComponent } from './components/edit-studies/edit-studies.component';
+import { FreeResourceComponent } from './components/free-resource/free-resource.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { EditStudiesComponent } from './components/edit-studies/edit-studies.com
   ],
   declarations: [
     StudiesPage,
-    EditStudiesComponent
+    EditStudiesComponent,
+    FreeResourceComponent
   ]
 })
 export class StudiesPageModule {}
