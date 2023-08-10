@@ -31,7 +31,7 @@ export class HomePage implements OnInit, AfterViewInit,OnDestroy {
 
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags);
-    this.getGoal()
+    // this.getGoal()
   }
   ngAfterViewInit() {
     // this.getGoal()
@@ -44,7 +44,7 @@ export class HomePage implements OnInit, AfterViewInit,OnDestroy {
     })
   }
   ngOnDestroy(){
-    console.log("page Destroyed")
-    this.goalSubscription.unsubscribe();
+    console.log("Home page Destroyed")
+    // this.goalSubscription.unsubscribe();
   }
 }

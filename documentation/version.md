@@ -131,6 +131,9 @@
 - `d.3.6` : 16-07-2023 :
   1. Dashboard adjustment of feature buttons
   2. Goal page changes
+- `d.3.7` : 10-08-2023 :
+  1. Free Resource page
+  2. Removed goal from dashboard
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
