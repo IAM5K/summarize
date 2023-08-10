@@ -134,6 +134,7 @@
 - `d.3.7` : 10-08-2023 :
   1. Free Resource page
   2. Removed goal from dashboard
+  3. Added link to help page
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
