@@ -60,6 +60,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/goal/goal.module').then(m => m.GoalPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
+  {
+    path: 'goal',
+    loadChildren: () => import('./pages/goal/goal.module').then( m => m.GoalPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  // {
+  //   path: 'admin',
+  //   loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule),
+  //   ...canActivate(redirectUnauthorizedToLogin)
+  // },
   // {
   //   path: 'folder/:id',
   //   loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule),
@@ -84,10 +94,6 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full'
-  },
-  {
-    path: 'goal',
-    loadChildren: () => import('./pages/goal/goal.module').then( m => m.GoalPageModule)
   }
 ];
 
