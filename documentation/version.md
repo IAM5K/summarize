@@ -138,8 +138,9 @@
 - `d.3.8` : 31-08-2023 :
   1. Admin pages
   2. Free resource services
-- `d.3.9` : 03-09-2023 :
+- `d.3.9` : 03-09-2023 : 4 hours
   1. Study Data
+  2. Raw data in documentation
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
