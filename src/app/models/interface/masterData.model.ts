@@ -26,3 +26,14 @@ export interface Goal {
   description?:string
 }
 
+export interface Syllabus{
+  unit_id:number,
+  unit_name:string,
+  topics?:topic[],
+  sub_topics?: string[],
+  practicals?:string[]
+}
+interface topic {
+  name:string,
+  sub_topics?: string[] 
+}
