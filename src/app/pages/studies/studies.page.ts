@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert/alert.service';
+import { ProfileService } from 'src/app/services/profile/profile.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
 import { StudiesService } from 'src/app/services/studies/studies.service';
 
@@ -36,7 +37,8 @@ export class StudiesPage implements OnInit {
     private seoService: SeoService,
     private alertService: AlertService,
     private datePipe: DatePipe,
-    private viewportScroller: ViewportScroller
+    private viewportScroller: ViewportScroller,
+    private profileService: ProfileService
   ) { }
   editMode:boolean = false;
   dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -63,6 +65,9 @@ export class StudiesPage implements OnInit {
   ngOnInit() {
     this.getStudies()
     this.seoService.seo(this.pageTitle, this.pageMetaTags)
+    const educationDetails = this.profileService.getEducationalDetail();
+    console.log(educationDetails);
+    
   }
 
   async getStudies() {

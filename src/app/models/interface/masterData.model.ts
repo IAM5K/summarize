@@ -37,3 +37,7 @@ interface topic {
   name:string,
   sub_topics?: string[] 
 }
+export interface EducationLevel{
+  level:string,
+  subjects:string[]
+} 
