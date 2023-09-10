@@ -142,6 +142,7 @@
   1. Study Data
   2. Raw data in documentation
   3. Added study interface and static data for Intermediate : 06-09-2023
+  4. Education detail Form in profile 
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
@@ -154,7 +155,7 @@
   2. Time / Work Module: Add and View
   3. Studies Module : Add and View.
   4. Google Analytics Added.
-  5. SEO Optimised
+  5. SEO Optimized
   6. Performance Index : To be monitored page wise 
 - `r.1.1` : 10-01-2023 : Dev version `d.1.7`
 - `r.1.2` : 29-01-2023 : Dev version `d.2.1`
@@ -166,12 +167,12 @@
 - `r.x.x` :
 
 ## Patches
-- `p.0.1` : 26-12-2022 :Removed label in sidemenu and border in bottom.
+- `p.0.1` : 26-12-2022 :Removed label in side-menu and border in bottom.
 - `p.0.2` : 27-12-2022 :Create account button disabled.
 - `p.0.3` : 27-12-2022 :Different Custom SCSS added .
 - `p.0.4` : 27-12-2022 :Portal Title updated and View port maximum-scale set to 5. Added Readme File.
 - `p.0.5` : 27-12-2022 :Cumulative layout shift fixed in expenses page. Added Meta Description. User Scalable set to true
-- `p.0.6` : 27-12-2022 :Word wrap added to coulmns of table.Firebase Config changes.
+- `p.0.6` : 27-12-2022 :Word wrap added to columns of table.Firebase Config changes.
 - `p.0.7` : 28-12-2022 :Corrected the spelling of Expense and added appropriate alert controller. Made Self as default value.
 - `p.0.8` : 31-12-2022 :Updated all icons for pwa. Changes office to time
 - `p.0.9` : 31-12-2022 :Disabled Login button with google in case of Email login.
@@ -191,7 +192,7 @@
 - `p.1.4` : 05-01-2023 :**(Major Patch)**: Fixed Email based User register issue. 
 - `p.1.5` : 05-01-2023 : Summarise spelling changed globally to Summarize.
 - `p.1.6` : 05-01-2023 : Multiple Patches:
-  1. Edit / Delete availablity note updated in all pages.
+  1. Edit / Delete availability note updated in all pages.
   2. Checking for Update added in About page.
   3. Login page UI updated and added recommendation for google login.
   4. Added Shopping, Bill, Rent options in Expense Types.
@@ -199,7 +200,7 @@
   1. Updated Site Map
   2. Updated Index for SEO
   3. Renamed Expense to Expense from all locations.
-  4. Optimised logo, replaced png with webp.
+  4. Optimized logo, replaced png with .webp.
   5. Added Cache control in firebase.json to do caching of svg.
   6. Removed Unused css and made data grid global.
   7. Fixed Expense Collection name.
@@ -236,9 +237,9 @@
   1. Time error due to missing '0' before date. Reported by Vinayak.
   2. Allow colon and other required special characters. Reported by Charan
 - `p.2.5` : 20-05-2023 : Multiple patches
-  1. Validaion issue in personal care is fixed.
+  1. Validation issue in personal care is fixed.
   2. Next line ability added for time and studies.
-  3. Time format made compatible with all system perference.
+  3. Time format made compatible with all system preference.
   4. Pre formatting added in expense, studies and time UI. It now supports next line and pre formatting.
   5. Update details.
 - `p.2.6` : 26-05-2023 : Multiple patches
@@ -247,6 +248,6 @@
   3. Update Details
 - `p.2.7` : 29-05-2023 : Modified options in expense type. Added Donate
 - `p.2.8` : 06-06-2023 : Fixed dropdown feature of ion-select due to Chrome changes. 
-- `p.2.9` : 21-06-2023 : Disabled update budget button if ammount or date is invalid.
+- `p.2.9` : 21-06-2023 : Disabled update budget button if amount or date is invalid.
 - `p.3.0` : 08-07-2023 : '==' converted to '==='. 
 - `p.x.x`
