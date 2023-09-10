@@ -121,7 +121,7 @@
   3. Created Static data source & interface for Goal page and info component.
   4. Goal page form and ts configs for it.
   5. Goal info page with routing.
-  6. Goal Service initalization.
+  6. Goal Service initialization.
 - `d.3.4` : 08-07-2023 :
   1. Goal Info page.
   2. Goal page and Module.
@@ -141,6 +141,7 @@
 - `d.3.9` : 03-09-2023 : 4 hours
   1. Study Data
   2. Raw data in documentation
+  3. Added study interface and static data for Intermediate : 06-09-2023
 - `d.x.x` : 01-01-2023
 
 ## Release Versions

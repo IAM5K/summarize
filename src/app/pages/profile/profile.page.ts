@@ -16,22 +16,59 @@ export class ProfilePage implements OnInit {
     },
     {
       name:'keyword',
-      content:'Summarize, Summarize, arise, arize, money managemnet, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
+      content:'Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
     },
     {
       name:'author',
       content:'Sandeep Kumar'
     }
   ];
-  userProfile:any
+  userProfile: any;
+  educationDetails:string[]=[];
+  educationPhase: string="";
+  subjects: string="";
+  updateDisabled: boolean=true;
+
   constructor(
     private seoService: SeoService,
-    private fbService: ProfileService
-    ) { }
-
+    private profileService: ProfileService
+  ) {}
+  
   ngOnInit() {
-    this.seoService.seo(this.pageTitle,this.pageMetaTags)
-    this.userProfile= this.fbService.getUserProfile()
+    this.seoService.seo(this.pageTitle, this.pageMetaTags);
+    this.userProfile = this.profileService.getUserProfile();
+    const apiData = {
+      // educationPhase: 'Intermediate',
+      // subjects: 'PCM',
+      educationPhase: '',
+      subjects: ''
+    };
+
+    // Check if data is available from the API
+    if (apiData && apiData.educationPhase && apiData.subjects) {
+      // Data is available, populate the form
+      this.educationPhase = apiData.educationPhase;
+      this.subjects = apiData.subjects;
+      this.updateDisabled = false; 
+    }
+    else{
+      this.updateDisabled = true; 
+    }
   }
 
+  onSubmit() {
+    console.log('Education Phase:', this.educationPhase);
+    console.log('Subjects:', this.subjects);
+  }
+
+  addEducationalDetail(){
+    console.log('Education Phase:', this.educationPhase);
+    console.log('Subjects:', this.subjects);
+    const data={
+      educationDetails:{
+      educationPhase: this.educationPhase,
+      subjects: this.subjects}
+    }
+    this.profileService.addEducationalDetail(data)
+  }
 }

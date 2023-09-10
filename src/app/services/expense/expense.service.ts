@@ -14,8 +14,8 @@ export class ExpenseService {
   ) { }
   analyseExpense:any;
   userId = this.profileService.getUserProfile()?.uid
-  successMessage = "Expence Added Successfully!"
-  deletedMessage = "Expence Deleted Successfully!"
+  successMessage = "Expense Added Successfully!"
+  deletedMessage = "Expense Deleted Successfully!"
   expenseCollection = this.afs.collection('userData')
 
   addExpense(data: any) {
