@@ -72,9 +72,9 @@
 
     <div class="data-table card ion-margin ion-padding">
       <div class="table-title">
-        <h2 class="mt-0 h2" *ngIf="worksCount == 0">No Work found</h2>
+        <h2 class="mt-0 h2" *ngIf="worksCount === 0">No Work found</h2>
         <h2 class="mt-0 h2" *ngIf="worksCount !==0">My Work</h2>
-        <ion-button *ngIf="worksCount == 5" color="primary" (click)="getAllWork()" size="medium">All Works</ion-button>
+        <ion-button *ngIf="worksCount === 5" color="primary" (click)="getAllWork()" size="medium">All Works</ion-button>
         <ion-button *ngIf="worksCount > 5" color="primary" (click)="getWork()" size="medium">Latest Only</ion-button>
       </div>
       <div class="filters"></div>

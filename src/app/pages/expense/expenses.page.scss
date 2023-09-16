@@ -81,3 +81,13 @@ ion-grid {
     }
   }
 }
+.expense-data{
+  min-height: 450px;
+  height: auto;
+  overflow: hidden;
+}
+
+.data-grid{
+  resize: vertical;
+  overflow: auto;
+}
