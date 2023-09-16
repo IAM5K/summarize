@@ -263,6 +263,7 @@
   1. Time format in studies page
   2. Table headers in study data table
   3. Update Details
+- `p.2.6` : 26-05-2023 : Comparison operator and expense table resizing added. 
 - `p.2.7` : 29-05-2023 : Modified options in expense type. Added Donate
 - `p.2.8` : 06-06-2023 : Fixed dropdown feature of ion-select due to Chrome changes. 
 - `p.2.9` : 21-06-2023 : Disabled update budget button if amount or date is invalid.
