@@ -189,19 +189,20 @@
   4. SEO update for bing
 - `p.2.2` : 27-01-2023 : Removed Screen tracking code to prevent error and double tracking of screen.
 - `p.2.3` : 05-02-2023 : Multiple patches
-  1. Date bug Reported By Vinayak. (Date format for initaial days were d-m-yyyy.) Fixed by using date pipe after values from custom date class.
+  1. Date bug Reported By Vinayak. (Date format for initial days were d-m-yyyy.) Fixed by using date pipe after values from custom date class.
   2. Redirect after login using google. 
 - `p.2.4` : 11-02-2023 : Multiple patches
   1. Time error due to missing '0' before date. Reported by Vinayak.
   2. Allow colon and other required special characters. Reported by Charan
 - `p.2.5` : 20-05-2023 : Multiple patches
-  1. Validaion issue in personal care is fixed.
+  1. Validation issue in personal care is fixed.
   2. Next line ability added for time and studies.
-  3. Time format made compatible with all system perference.
+  3. Time format made compatible with all system preference.
   4. Pre formatting added in expense, studies and time UI. It now supports next line and pre formatting.
   5. Update details.
 - `p.2.6` : 26-05-2023 : Multiple patches
   1. Time format in studies page
   2. Table headers in study data table
   3. Update Details
+- `p.2.6` : 26-05-2023 : Comparison operator and expense table resizing added. 
 - `p.x.x`
