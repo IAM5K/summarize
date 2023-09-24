@@ -7,6 +7,7 @@ import { StudiesPage } from './studies.page';
 import { TwelveHourFormatPipeModule } from 'src/app/models/pipe/time/twelve-hour-format.module';
 import { EditStudiesComponent } from './components/edit-studies/edit-studies.component';
 import { FreeResourceComponent } from './components/free-resource/free-resource.component';
+import { AdvancedStudiesComponent } from './components/advanced-studies/advanced-studies.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { FreeResourceComponent } from './components/free-resource/free-resource.
   declarations: [
     StudiesPage,
     EditStudiesComponent,
-    FreeResourceComponent
+    FreeResourceComponent,
+    AdvancedStudiesComponent
   ]
 })
 export class StudiesPageModule {}
