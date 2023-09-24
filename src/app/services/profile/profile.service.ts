@@ -23,19 +23,33 @@ export class ProfileService {
     let user = this.auth.currentUser;
     return user;
   }
- 
 
-  async getEducationalDetail() {
-    const db = getFirestore();
-    // const docRef =  doc(db,"userData",this.userId)
+  async getProfileData() {
+    let localData: string | null = localStorage.getItem('profileData');
+    if (localData !== null) {
+      console.log('Found in local if case');
+
+      let profileData: any = JSON.parse(localData);
+      return profileData;
+    } else {
+      console.log('Not Found in local if case');
+      let profileData = await this.afs
+        .collection(`userData`)
+        .doc(this.userId)
+        .get()
+        .subscribe((snap: any) => {
+          let data = snap.data().profileData;
+          console.log(data);
+          localStorage.setItem('profileData', JSON.stringify(data));
+          return data;
+        });
+      return profileData;
+    }
   }
+
   addEducationalDetail(data: any) {
     const userDoc = this.profileCollection.doc(this.userId);
-    // Create the data structure for the profile
-    const profileData = {
-      educationalData: data,
-    };
-    // Use .set() to update the profileData field within the user document
+    const profileData = data;
     userDoc
       .set({ profileData }, { merge: true })
       .then(() => {
