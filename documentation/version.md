@@ -143,6 +143,11 @@
   2. Raw data in documentation
   3. Added study interface and static data for Intermediate : 06-09-2023
   4. Education detail Form in profile 
+- `d.4.0` : 03-09-2023 : Profile based options 
+  1. Profile service setup to get profile data
+  2. Advanced Studies component created
+  3. Advanced mode switch tab,if user opts to have advanced mode after fetching educational details.
+  4. Education detail Form in profile 
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
@@ -250,4 +255,5 @@
 - `p.2.8` : 06-06-2023 : Fixed dropdown feature of ion-select due to Chrome changes. 
 - `p.2.9` : 21-06-2023 : Disabled update budget button if amount or date is invalid.
 - `p.3.0` : 08-07-2023 : '==' converted to '==='. 
+- `p.3.1` : 24-09-2023 : Prettier and settings updated. 
 - `p.x.x`
