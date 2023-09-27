@@ -148,6 +148,7 @@
   2. Advanced Studies component created
   3. Advanced mode switch tab,if user opts to have advanced mode after fetching educational details.
   4. Education detail Form in profile 
+  5. cicd
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
