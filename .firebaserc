@@ -5,11 +5,14 @@
   "targets": {
     "summarize-ng": {
       "hosting": {
-        "target":"summarize-ng",
+        "target": "summarize-ng",
         "app": [
           "sumarize"
         ]
       }
     }
+  },
+  "hosting": {
+    "target": "summarize-ng"
   }
 }
