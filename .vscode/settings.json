@@ -1,0 +1,12 @@
+{
+    "editor.defaultFormatter": "vscode.html-language-features",
+    "cSpell.words": [
+        "arize",
+        "maxlength"
+    ],
+    "prettier.htmlWhitespaceSensitivity": "ignore",
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+
+}

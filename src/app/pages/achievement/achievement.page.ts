@@ -16,7 +16,7 @@ export class AchievementPage implements OnInit {
   pageMetaTags = [
     {
       name: 'description',
-      content: "Summarize all your achievements here. Summarize will help you to list them immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expences in better way."
+      content: "Summarize all your achievements here. Summarize will help you to list them immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way."
     },
     {
       name: 'keyword',

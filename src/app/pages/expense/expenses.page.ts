@@ -8,6 +8,9 @@ import { Options } from 'src/app/models/interface/masterData.model';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
+import { Analyze } from './modules/analyze';
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.page.html',
@@ -61,6 +64,7 @@ export class ExpensesPage implements OnInit {
     { title: "Shopping", value: "shopping" },
     { title: "Transportation", value: "transportation" },
     { title: "Travel", value: "travel" },
+    { title: "Donate", value: "donated" },
     { title: "Miscellaneous", value: "miscellaneous" }
   ]
   spentOn = [
@@ -135,7 +139,7 @@ export class ExpensesPage implements OnInit {
   }
   async deleteExpense(idField: string) {
     const response = await this.alertService.deleteAlert()
-    if (response == "confirm") {
+    if (response === "confirm") {
       this.expenseService.deleteExpense(idField);
     }
   }
@@ -213,7 +217,7 @@ export class ExpensesPage implements OnInit {
         alert("There was some error in adding budget. Try later or report via help section.")
       }
       monthExists = savedBudget.find((item: any) =>
-        item.month == month
+        item.month === month
       )
     })
     if (monthExists) {
@@ -229,7 +233,7 @@ export class ExpensesPage implements OnInit {
   async updateBudget() {
     const month = this.budgetForm.value.month;
     const updatedBudget = this.Budget.filter((item: any) =>
-      item.month == this.budgetForm.value.month
+      item.month === this.budgetForm.value.month
     )
     if (updatedBudget !== undefined && updatedBudget.length > 0) {
       const newBudget = updatedBudget[0]
@@ -248,5 +252,32 @@ export class ExpensesPage implements OnInit {
     this.getAllExpenses();
     await this.getBudget();
     this.router.navigateByUrl('expenses/analyze');
+  }
+
+  // Export data
+  async exportData() {
+    const data: any[] = this.Expenses.map((item:any) => ({
+      Date: item.date,
+      Cost: item.amount,
+      Description: item.description.replace(/\n/g, '\n '),
+      Type:item.type,
+      SpentOn: item.spendedOn
+    }));
+    let categoryWiseData =  await new Analyze().getCategoryWiseData(this.Expenses);
+    console.log(categoryWiseData);
+
+    const filename= "ExpenseData"+ new Date().getTime() +".xlsx"
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+    const categoryData: XLSX.WorkSheet = XLSX.utils.json_to_sheet(categoryWiseData);
+    const workbook: XLSX.WorkBook = {
+      Sheets: {
+        'Expense Data': worksheet,
+        'Category wise' : categoryData
+      },
+      SheetNames: ['Expense Data', 'Category wise']
+    };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const excelBlob: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    FileSaver.saveAs(excelBlob, filename);
   }
 }

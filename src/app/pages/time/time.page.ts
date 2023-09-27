@@ -19,7 +19,7 @@ export class TimePage implements OnInit {
   pageMetaTags = [
     {
       name: 'description',
-      content: "Summarize all your expences here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expences in better way. Soon we will also give finance tips that will help you better."
+      content: "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better."
     },
     {
       name: 'keyword',
@@ -86,7 +86,7 @@ export class TimePage implements OnInit {
 
   async deleteWork(idField: string) {
     const response = await this.alertService.deleteAlert()
-    if (response == "confirm") {
+    if (response === "confirm") {
       this.officeService.deleteWork(idField)
     }
   }

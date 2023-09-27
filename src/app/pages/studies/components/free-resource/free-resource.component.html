@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+    <ion-button slot="end" class="mr-10" [routerLink]="['../']" routerLinkActive="router-link-active"><ion-icon
+        name="arrow-back-outline"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+
+    <section class="free-resource ion-margin">
+      <h1 class="h1 ion-margin">Limited coupons only!</h1>
+      <ion-card class="ion-padding">
+        <ion-card-header>
+          <ion-card-title class="h2">MongoDB, Express, React, Node, Angular (MEAN/MERN) - 5 in 1</ion-card-title>
+          <ion-card-subtitle>Created by: Prince Patni</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <h2 class="h2">What you'll learn</h2>
+          <ul>
+            <li>MongoDB: It is a document-oriented No-SQL data store used to store back-end applications.</li>
+            <li>ExpressJS: It is a layered framework built on top of NodeJS that takes care of the website's back-end
+              functionality and structure.</li>
+            <li>ReactJS: It is a library that facilitates creating the user interface components of single-page web
+              applications.</li>
+            <li>NodeJS: It is a runtime environment capable of running JavaScript on a machine</li>
+            <li>AngularJS: It is the front-end framework that runs the code in the browser.</li>
+          </ul>
+        </ion-card-content>
+
+        <ion-button color="success"
+          href="https://www.udemy.com/course/mongodb-express-react-node-angular-mean-mern-stack-5-in-1-course/?couponCode=CHATGPT"
+          target="blank">Get Now</ion-button>
+      </ion-card>
+    </section>
+  </div>
+</ion-content>

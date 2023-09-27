@@ -17,24 +17,87 @@
   <div id="container">
     <div class="card ion-padding">
       <div class="profile-photo">
-        <img *ngIf="userProfile.photoURL" [src]="userProfile.photoURL" [alt]="(userProfile.displayName)" referrerpolicy="no-referrer">
+        <img *ngIf="userProfile.photoURL" [src]="userProfile.photoURL" [alt]="(userProfile.displayName)" referrerpolicy="no-referrer" />
       </div>
-      <h1 class="h2">Hello {{userProfile.displayName}},</h1>
+      <h1 class="h2">{{userProfile.displayName}}</h1>
       <ion-note color="tertiary" class="h4">Welcome to Summarize, Profile page is under development. It will be
         available soon with some exciting features.</ion-note>
 
       <p class="">
         <span class="ion-text-bold"> Email :</span>
-        <span class="text-success ion-text-bold"> {{userProfile?.email | titlecase}}</span>
+        <span class="text-success ion-text-bold">
+          {{userProfile?.email | titlecase}}</span>
       </p>
       <p class="">
         <span class="ion-text-bold"> Email Verified :</span>
-        <span class="text-success ion-text-bold"> {{userProfile?.emailVerified.toString() | titlecase }}</span>
+        <span class="text-success ion-text-bold">
+          {{userProfile?.emailVerified.toString() | titlecase }}</span>
       </p>
       <p class="">
         <span class="ion-text-bold"> Phone Number :</span>
-        <span class="text-success ion-text-bold"> {{userProfile.phoneNumber }}</span>
+        <span class="text-success ion-text-bold">
+          {{userProfile.phoneNumber }}</span>
       </p>
+    </div>
+    <div class="card ion-padding">
+      <h2 class="h2">About Me</h2>
+      <ion-accordion-group [multiple]="true" [value]="['']">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <ion-label>Studies</ion-label>
+          </ion-item>
+          <div slot="content" class="mb-15px">
+            <form #educationForm="ngForm" (ngSubmit)="addEducationalDetail()">
+              <ion-list>
+                <ion-item lines="none">
+                  <ion-select label="Education phase" label-placement="floating" name="educationPhase" [(ngModel)]="educationPhase">
+                    <ion-select-option value="Intermediate">Intermediate</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-select label="Subjects" label-placement="floating" name="subjects" [(ngModel)]="subjects" [disabled]="!educationPhase">
+                    <ion-select-option value="PCM">PCM</ion-select-option>
+                    <ion-select-option value="PCB">PCB</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-button size="medium" slot="end" type="submit" color="primary" *ngIf="updateDisabled">Submit</ion-button>
+                  <ion-button size="medium" slot="end" type="submit" color="tertiary" *ngIf="!updateDisabled">Update</ion-button>
+                </ion-item>
+              </ion-list>
+            </form>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>Projects</ion-label>
+          </ion-item>
+          <div slot="content" class="mb-15px">
+            <ion-list>
+              <ion-item *ngFor="let item of projects">
+                <ion-toggle [checked]="item.isActive" (ionChange)="item.isActive=!item.isActive;updateProjectStatus(item)">{{item.name}}</ion-toggle>
+              </ion-item>
+            </ion-list>
+            <ion-button id="present-alert">Add project</ion-button>
+            <ion-alert trigger="present-alert" header="Fill project details" [buttons]="alertButtons" [inputs]="alertInputs"></ion-alert>
+            <form #projectForm="ngForm" (ngSubmit)="addEducationalDetail()">
+
+            </form>
+          </div>
+        </ion-accordion>
+        <!-- <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>Second Accordion</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">Second Content</div>
+        </ion-accordion>
+        <ion-accordion value="third">
+          <ion-item slot="header" color="light">
+            <ion-label>Third Accordion</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">Third Content</div>
+        </ion-accordion> -->
+      </ion-accordion-group>
     </div>
   </div>
 </ion-content>

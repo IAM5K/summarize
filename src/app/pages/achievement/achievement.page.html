@@ -73,9 +73,9 @@
 
     <div class="card ion-margin ion-padding event-container">
       <div class="table-title">
-        <h2 class="mt-0 h2" *ngIf="achievementsCount == 0">No Achievements found</h2>
+        <h2 class="mt-0 h2" *ngIf="achievementsCount === 0">No Achievements found</h2>
         <h2 class="h2" *ngIf="achievementsCount !== 0">My Achievements</h2>
-        <ion-button *ngIf="achievementsCount == 5" color="primary" (click)="getAllAchievement()" size="medium">Show All</ion-button>
+        <ion-button *ngIf="achievementsCount === 5" color="primary" (click)="getAllAchievement()" size="medium">Show All</ion-button>
         <ion-button *ngIf="achievementsCount > 5" color="primary" (click)="getAchievement()" size="medium">Latest
           Only</ion-button>
       </div>

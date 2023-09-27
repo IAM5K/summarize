@@ -5,7 +5,7 @@ export class Budget {
     let currentBudget: number = 0;
     if (retrievedBudget) {
       let budget = JSON.parse(retrievedBudget)
-      const budgetForThisMonth = budget.find((item: any) => item.month == currentMonth);
+      const budgetForThisMonth = budget.find((item: any) => item.month === currentMonth);
       console.log(budgetForThisMonth);
 
       if(budgetForThisMonth){

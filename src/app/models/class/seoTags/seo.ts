@@ -3,9 +3,10 @@ import { seoMetaTag } from "../../interface/masterData.model";
 export class SeoTags {
   public static pageTitle:any={
     homePage:"Summarize : Record, Analyse and Rise | Dashboard",
-    loginPage:"Login | Sign up now and stay optimized with Summarize",
+    loginPage:"Login | Sign up now and stay organized with Summarize",
     aboutPage:"About Summarize : What it is? Why and How to use?",
-    helpPage:"Need Help to install Summarize | Reach out to us | FAQ"
+    helpPage:"Need Help to install Summarize | Reach out to us | FAQ",
+    goalPage:"Create Goals, manage and acheive them with consistency"
   }
   public static homePageTags: seoMetaTag[] = [
     {

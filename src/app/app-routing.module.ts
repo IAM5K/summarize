@@ -55,6 +55,21 @@ const routes: Routes = [
     loadChildren: () => import('./pages/time/time.module').then(m => m.TimePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
+  {
+    path: 'goal',
+    loadChildren: () => import('./pages/goal/goal.module').then(m => m.GoalPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'goal',
+    loadChildren: () => import('./pages/goal/goal.module').then( m => m.GoalPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  // {
+  //   path: 'admin',
+  //   loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule),
+  //   ...canActivate(redirectUnauthorizedToLogin)
+  // },
   // {
   //   path: 'folder/:id',
   //   loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule),

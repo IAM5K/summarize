@@ -80,7 +80,7 @@ export class AnalyzeComponent implements OnInit {
   async ngOnInit() {
     this.setGraphHeight();
     this.setGraphWidth();
-    const currentMonth = "2023-05"
+    const currentMonth = "2023-06"
     await this.getExpense(currentMonth);
     let total_expense: any = sessionStorage.getItem("total_expense")
     let total_budget: any = sessionStorage.getItem("budget")
@@ -278,7 +278,7 @@ export class AnalyzeComponent implements OnInit {
     let currentBudget: number = 0;
     if (retrievedBudget) {
       let budget = JSON.parse(retrievedBudget)
-      const budgetForThisMonth = budget.find((item: any) => item.month == currentMonth);
+      const budgetForThisMonth = budget.find((item: any) => item.month === currentMonth);
       if(budgetForThisMonth){
         currentBudget = budgetForThisMonth.amount
       }

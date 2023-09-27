@@ -3,21 +3,21 @@ import { Features } from "../../interface/masterData.model";
 export class MasterData {
   public static features:Features[] =[
     {
-      title:"Achievements",
-      icon:"trophy",
-      color:"warning",
-      path:"achievement"
-    },
-    {
       title:"Expenses",
       icon:"cash",
       color:"success",
       path:"expenses"
     },
     {
+      title:"Goal",
+      icon:"bulb",
+      color:"secondary",
+      path:"goal"
+    },
+    {
       title:"Studies",
       icon:"book",
-      color:"medium",
+      color:"tertiary",
       path:"studies"
     },
     {
@@ -25,6 +25,12 @@ export class MasterData {
       icon:"hourglass",
       color:"danger",
       path:"time"
+    },
+    {
+      title:"Achievements",
+      icon:"trophy",
+      color:"warning",
+      path:"achievement"
     }
   ]
 }

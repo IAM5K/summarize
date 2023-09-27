@@ -19,12 +19,10 @@ log.txt
 
 # Ionic
 /.ionic
-/www
 /platforms
 /plugins
 
 # Compiled output
-/dist
 /tmp
 /out-tsc
 /bazel-out
@@ -62,20 +60,12 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
-/environments
-src/environments
+
 
 # System files
 .DS_Store
 Thumbs.db
-src/environments/environment.ts
-src/environments/environment.prod.ts
-src/environments/environment.prod.ts
-src/environments/environment.ts
-
 # Firebase
 .firebase
 *-debug.log
 .runtimeconfig.json
-src/environments/environment.ts
-src/environments/environment.prod.ts

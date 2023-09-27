@@ -49,7 +49,7 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Type</ion-label>
-              <ion-select formControlName="type" interface="popover" placeholder="Category of Expense">
+              <ion-select formControlName="type" placeholder="Category of Expense">
                 <ion-select-option value="coding">Coding</ion-select-option>
                 <ion-select-option value="documentation">Documentation</ion-select-option>
                 <ion-select-option value="support">Support</ion-select-option>
@@ -70,9 +70,9 @@
 
     <div class="data-table card ion-margin ion-padding">
       <div class="table-title">
-        <h2 class="mt-0 h2" *ngIf="worksCount == 0">No Work found</h2>
+        <h2 class="mt-0 h2" *ngIf="worksCount === 0">No Work found</h2>
         <h3 class="h2" *ngIf="worksCount !==0">My Work</h3>
-        <ion-button *ngIf="worksCount == 5" color="primary" (click)="getAllWork()" size="medium">All Works</ion-button>
+        <ion-button *ngIf="worksCount === 5" color="primary" (click)="getAllWork()" size="medium">All Works</ion-button>
         <ion-button *ngIf="worksCount > 5" color="primary" (click)="getWork()" size="medium">Latest Only</ion-button>
       </div>
       <div class="filters"></div>

@@ -10,6 +10,25 @@ export class UpdateComponent implements OnInit {
   constructor() { }
   updates=[
     {
+      version:"r.1.7",
+      date:"21-06-2023",
+      details:[
+        "Export expense data to Excel",
+        "Update budget button disabled for default",
+        "Update and details"
+      ]
+    },
+    {
+      version:"r.1.6",
+      date:"27-05-2023",
+      details:[
+        "Edit Studies feature added",
+        "Study table changed to card",
+        "Options added in Expense type",
+        "Update and details"
+      ]
+    },
+    {
       version:"r.1.5",
       date:"27-05-2023",
       details:[
@@ -66,7 +85,7 @@ export class UpdateComponent implements OnInit {
       version:"r.1.0",
       date:"07-01-2023",
       details:[
-        "Expence Module: Add and View ",
+        "Expense Module: Add and View ",
         "Time / Work Module: Add and View",
         "Studies Module : Add and View."
       ]

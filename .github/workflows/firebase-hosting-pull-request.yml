@@ -8,10 +8,25 @@ jobs:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: npm run build --prod --vendor-chunk 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUMMARIZE_NG }}'
-          projectId: summarize-ng
+          node-version: 18
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      # - name: Apply Firebase Patch
+      #   run: cat src/patch/firebasepatch.txt > node_modules/@angular/fire/compat/firestore/interfaces.d.ts
+
+      - name: Test linting
+        run: npm i && npm run lint
+
+      # - run: npm run build --prod --vendor-chunk 
+      # - uses: FirebaseExtended/action-hosting-deploy@v0
+      #   with:
+      #     repoToken: '${{ secrets.GITHUB_TOKEN }}'
+      #     firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUMMARIZE_NG }}'
+      #     projectId: summarize-ng
