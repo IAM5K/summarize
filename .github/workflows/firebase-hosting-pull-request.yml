@@ -21,12 +21,12 @@ jobs:
       # - name: Apply Firebase Patch
       #   run: cat src/patch/firebasepatch.txt > node_modules/@angular/fire/compat/firestore/interfaces.d.ts
 
-      - name: Build Angular App
-        run: npm ci && npm run build && firebase experiments:enable webframeworks
+      - name: Test linting
+        run: npm ci && ng lint
 
-      - run: npm run build --prod --vendor-chunk 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUMMARIZE_NG }}'
-          projectId: summarize-ng
+      # - run: npm run build --prod --vendor-chunk 
+      # - uses: FirebaseExtended/action-hosting-deploy@v0
+      #   with:
+      #     repoToken: '${{ secrets.GITHUB_TOKEN }}'
+      #     firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUMMARIZE_NG }}'
+      #     projectId: summarize-ng
