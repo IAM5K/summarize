@@ -47,6 +47,10 @@ export class ProfileService {
     }
   }
 
+  async refreshProfileData() {
+    await localStorage.removeItem('profileData');
+    this.getProfileData();
+  }
   addEducationalDetail(data: any) {
     const userDoc = this.profileCollection.doc(this.userId);
     const profileData = data;
@@ -62,6 +66,25 @@ export class ProfileService {
         );
         console.warn(err);
       });
+    this.refreshProfileData();
+  }
+
+  addProjectDetail(data: any) {
+    const userDoc = this.profileCollection.doc(this.userId);
+    const profileData = [data];
+    userDoc
+      .set({ profileData }, { merge: true })
+      .then(() => {
+        this.successAlert(this.successMessage);
+        console.log('Project detail added successfully.');
+      })
+      .catch((err) => {
+        alert(
+          'There was an error in posting. \n Please try again later. Check console for detail.'
+        );
+        console.warn(err);
+      });
+    this.refreshProfileData();
   }
 
   async successAlert(message: string) {
