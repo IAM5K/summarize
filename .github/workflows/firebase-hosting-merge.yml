@@ -30,10 +30,16 @@ jobs:
         run: firebase experiments:enable webframeworks
 
       - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+        uses: w9jds/firebase-action@master
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUMMARIZE_NG }}'
-          channelId: live
-          projectId: summarize-ng
+          args: deploy --only hosting summarize-ng.web.app
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        # uses: FirebaseExtended/action-hosting-deploy@v0
+        # with:
+        #   repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        #   firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUMMARIZE_NG }}'
+        #   channelId: live
+        #   projectId: summarize-ng
+        #   target: summarize-ng.web.app
 
