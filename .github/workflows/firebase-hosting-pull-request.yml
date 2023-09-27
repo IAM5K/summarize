@@ -22,7 +22,7 @@ jobs:
       #   run: cat src/patch/firebasepatch.txt > node_modules/@angular/fire/compat/firestore/interfaces.d.ts
 
       - name: Test linting
-        run: npm i && ng lint
+        run: npm i && npm run lint
 
       # - run: npm run build --prod --vendor-chunk 
       # - uses: FirebaseExtended/action-hosting-deploy@v0
