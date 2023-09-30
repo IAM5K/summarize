@@ -14,5 +14,7 @@
   },
   "hosting": {
     "target": "summarize-ng"
-  }
+  },
+  "etags": {}
 }
+
