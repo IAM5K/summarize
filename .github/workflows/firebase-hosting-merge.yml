@@ -24,6 +24,6 @@ jobs:
           channelId: live
           projectId: summarize-ng
           target: summarize-ng
-      - run: firebase deploy --only hosting:summarize-ng
+      # - run: firebase deploy --only hosting:summarize-ng
       
 
