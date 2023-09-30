@@ -12,18 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # - uses: w9jds/firebase-action@master
-      #   with:
-      #     args: deploy --only hosting summarize-ng
-      #   env:
-      #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: w9jds/firebase-action@master
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUMMARIZE_NG }}'
-          channelId: live
-          projectId: summarize-ng
-          target: summarize-ng
+          args: deploy --only hosting:summarize-ng
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      # - uses: FirebaseExtended/action-hosting-deploy@v0
+      #   with:
+      #     repoToken: '${{ secrets.GITHUB_TOKEN }}'
+      #     firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUMMARIZE_NG }}'
+      #     channelId: live
+      #     projectId: summarize-ng
+      #     target: summarize-ng
       # - run: firebase deploy --only hosting:summarize-ng
       
 
