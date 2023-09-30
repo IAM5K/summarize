@@ -21,6 +21,7 @@
   ],
   "hosting": [
     {
+      "target": "summarize-ng",
       "public": "www",
       "ignore": [
         "firebase.json",
