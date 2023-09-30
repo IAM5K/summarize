@@ -8,8 +8,12 @@
         "target": "summarize-ng",
         "app": [
           "summarize-ng"
+        ],
+        "summarize-ng": [
+          "www"
         ]
       }
     }
-  }
+  },
+  "etags": {}
 }
