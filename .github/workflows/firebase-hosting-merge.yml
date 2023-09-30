@@ -23,4 +23,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUMMARIZE_NG }}'
           channelId: live
           projectId: summarize-ng
-          target: summarize-ng.web.app
+          target: summarize-ng
