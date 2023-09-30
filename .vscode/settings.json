@@ -2,6 +2,7 @@
     "editor.defaultFormatter": "vscode.html-language-features",
     "cSpell.words": [
         "arize",
+        "etags",
         "maxlength"
     ],
     "prettier.htmlWhitespaceSensitivity": "ignore",

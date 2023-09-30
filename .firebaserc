@@ -10,7 +10,7 @@
           "summarize-ng"
         ],
         "summarize-ng": [
-          "www"
+          "summarize-ng.web.app"
         ]
       }
     }
