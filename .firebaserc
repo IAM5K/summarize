@@ -8,8 +8,7 @@
         "target": "summarize-ng",
         "app": [
           "summarize-ng"
-        ],
-        "site": "summarize-ng.web.app"
+        ]
       }
     }
   }

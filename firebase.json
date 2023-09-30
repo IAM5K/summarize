@@ -22,7 +22,6 @@
   "hosting": [
     {
       "target": "summarize-ng",
-      "site": "summarize-ng.web.app",
       "public": "www",
       "ignore": [
         "firebase.json",
