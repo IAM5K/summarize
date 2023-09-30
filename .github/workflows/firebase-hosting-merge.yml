@@ -14,7 +14,7 @@ jobs:
 
       # - uses: w9jds/firebase-action@master
       #   with:
-      #     args: deploy --only hosting summarize-ng.web.app
+      #     args: deploy --only hosting summarize-ng
       #   env:
       #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
