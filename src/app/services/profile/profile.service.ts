@@ -52,7 +52,7 @@ export class ProfileService {
     this.getProfileData();
   }
   addEducationalDetail(data: any) {
-    const userDoc = this.profileCollection.doc(this.userId);
+    let userDoc = this.profileCollection.doc(this.userId);
     const profileData = data;
     userDoc
       .set({ profileData }, { merge: true })

@@ -1,5 +1,6 @@
 export interface ProfileData {
-    educationalData:string[]
+    educationDetails?:string[],
+    projects?:Project[]
 }
 
 export interface Project {

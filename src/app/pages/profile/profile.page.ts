@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from 'src/app/models/interface/profile.interface';
+import { ProfileData, Project } from 'src/app/models/interface/profile.interface';
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
 
@@ -10,6 +10,7 @@ import { SeoService } from 'src/app/services/seo/seo.service';
 })
 export class ProfilePage implements OnInit {
   pageTitle = 'Profile';
+  profileData:ProfileData;
   pageMetaTags = [
     {
       name: 'description',
@@ -43,6 +44,7 @@ export class ProfilePage implements OnInit {
       isActive:false
     }
   ];
+  friendsGroup = [];
   subjects: string = '';
   updateDisabled: boolean = true;
   public alertButtons = [{
@@ -68,9 +70,9 @@ export class ProfilePage implements OnInit {
   async ngOnInit() {
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.userProfile = this.profileService.getUserProfile();
-    const profileData = await this.profileService.getProfileData();
-    if (profileData.educationDetails) {
-      this.populateProfileData(profileData);
+    this.profileData = await this.profileService.getProfileData();
+    if (this.profileData.educationDetails) {
+      this.populateProfileData(this.profileData);
     }
   }
 
