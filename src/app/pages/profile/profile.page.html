@@ -73,12 +73,20 @@
             <ion-label>Projects</ion-label>
           </ion-item>
           <div slot="content">
-            <ion-list>
-              <ion-item *ngFor="let item of projects">
-                <ion-toggle [checked]="item.isActive" (ionChange)="item.isActive=!item.isActive;updateProjectStatus(item)">{{item.name}}</ion-toggle>
+            <ion-list class="padding-zero mb-15px">
+              <ion-item class="ion-align-items-center" *ngFor="let item of projects">
+                <ion-button color="danger" class="mr-10">
+                  <ion-icon name="trash" class=""></ion-icon>
+                </ion-button>
+                <ion-toggle [checked]="item.isActive" (ionChange)="item.isActive=!item.isActive;updateProjectStatus(item)">
+                  {{item.name}}
+                </ion-toggle>
               </ion-item>
             </ion-list>
-            <ion-button id="present-alert">Add project</ion-button>
+            <ion-button id="present-alert">
+              <ion-icon slot="start" name="add"></ion-icon>
+              Add project
+            </ion-button>
             <ion-alert trigger="present-alert" header="Fill project details" [buttons]="alertButtons" [inputs]="alertInputs"></ion-alert>
             <form #projectForm="ngForm" (ngSubmit)="addEducationalDetail()">
 
