@@ -149,8 +149,12 @@
   3. Advanced mode switch tab,if user opts to have advanced mode after fetching educational details.
   4. Education detail Form in profile 
   5. cicd
-- `d.4.1` : 03-09-2023 : Profile based options 
+- `d.4.1` : 01-10-2023 : Profile based options 
   1. Projects friends group, layout fixes
+- `d.4.2` : 13-10-2023 : Projects 
+  1. Projects interface with idField
+  2. Delete button to project toggle list
+  3. Add, get update projects.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions

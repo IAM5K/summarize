@@ -19,6 +19,14 @@ export class ProfileService {
   successMessage = 'Profile data updated successfully!';
   deletedMessage = 'Profile data Deleted successfully!';
   profileCollection = this.afs.collection('userData');
+  projectsCollection = this.afs
+    .collection('userData')
+    .doc(this.userId)
+    .collection('myProjects');
+  addProjectMessage = 'Projects added successfully.';
+  updateProjectMessage = 'Projects updated successfully.';
+  deletedProjectMessage = 'Projects has been successfully deleted.';
+
   getUserProfile() {
     let user = this.auth.currentUser;
     return user;
@@ -51,6 +59,7 @@ export class ProfileService {
     await localStorage.removeItem('profileData');
     this.getProfileData();
   }
+
   addEducationalDetail(data: any) {
     let userDoc = this.profileCollection.doc(this.userId);
     const profileData = data;
@@ -69,14 +78,12 @@ export class ProfileService {
     this.refreshProfileData();
   }
 
-  addProjectDetail(data: any) {
-    const userDoc = this.profileCollection.doc(this.userId);
-    const profileData = [data];
-    userDoc
-      .set({ profileData }, { merge: true })
-      .then(() => {
-        this.successAlert(this.successMessage);
-        console.log('Project detail added successfully.');
+  addProjects(data: any) {
+    this.projectsCollection
+      .add(data)
+      .then((res) => {
+        console.log(res);
+        this.successAlert(this.addProjectMessage);
       })
       .catch((err) => {
         alert(
@@ -84,7 +91,36 @@ export class ProfileService {
         );
         console.warn(err);
       });
-    this.refreshProfileData();
+  }
+
+  updateProjects(data: any, idField: string) {
+    this.projectsCollection
+      .doc(idField)
+      .update(data)
+      .then((res) => {
+        this.successAlert(this.updateProjectMessage);
+      })
+      .catch((err: Error) => {
+        alert(
+          'There was an error in posting. \n Please try again later. Check console for detail.'
+        );
+        console.warn(err);
+      });
+  }
+  getProjects() {
+    return this.projectsCollection.valueChanges({ idField: 'idField' });
+  }
+
+  deleteProjects(idField: string) {
+    this.projectsCollection
+      .doc(idField)
+      .delete()
+      .then(() => {
+        this.successAlert(this.deletedProjectMessage);
+      })
+      .catch((err: Error) => {
+        alert(err);
+      });
   }
 
   async successAlert(message: string) {
