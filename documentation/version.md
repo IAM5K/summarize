@@ -264,4 +264,5 @@
 - `p.3.0` : 08-07-2023 : '==' converted to '==='. 
 - `p.3.1` : 24-09-2023 : Prettier and settings updated. 
 - `p.3.2` : 12-10-2023 : Spelling corrections. 
+  1. Monthly analysis current month error fixed.
 - `p.x.x`

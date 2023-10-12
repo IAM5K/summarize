@@ -12,6 +12,7 @@ import { MonthlyExpense } from '../../modules/monthly-expense';
   templateUrl: './analyze.component.html',
   styleUrls: ['./analyze.component.scss'],
 })
+
 export class AnalyzeComponent implements OnInit {
   @ViewChild(BaseChartDirective) chartA!: BaseChartDirective;
   @ViewChild(BaseChartDirective) chartB!: BaseChartDirective;
@@ -80,7 +81,7 @@ export class AnalyzeComponent implements OnInit {
   async ngOnInit() {
     this.setGraphHeight();
     this.setGraphWidth();
-    const currentMonth = "2023-06"
+    const currentMonth = new CustomDate().getCurrentMonth()
     await this.getExpense(currentMonth);
     let total_expense: any = sessionStorage.getItem("total_expense")
     let total_budget: any = sessionStorage.getItem("budget")
@@ -231,7 +232,7 @@ export class AnalyzeComponent implements OnInit {
   //       label: 'Expenses',
   //       backgroundColor: 'aqua'
   //     },
-  //     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Budget', backgroundColor: 'orangered' }
+  //     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Budget', backgroundColor: 'orange' }
   //   ]
   // };
 
