@@ -91,9 +91,11 @@
 
 /* Data Table */
 .data-table {
-  height: 450px;
+  min-height: 450px;
   margin: auto;
   box-sizing: border-box;
+  height: auto;
+  overflow: hidden;
 }
 
 .table-title {
@@ -116,6 +118,7 @@
   overflow-x: auto;
   white-space: nowrap;
   box-shadow:0 1px 1px grey;
+  resize: vertical;
 
   ion-grid {
     border-radius: 6px !important;
