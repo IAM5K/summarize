@@ -5,5 +5,6 @@ export interface ProfileData {
 
 export interface Project {
     name:string,
-    isActive?:boolean
+    isActive?:boolean,
+    idField?:string
 }
