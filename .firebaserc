@@ -6,7 +6,7 @@
     "summarize-ng": {
       "hosting": {
         "app": [
-          "summarize-ng"
+          "sumarize"
         ]
       }
     }
