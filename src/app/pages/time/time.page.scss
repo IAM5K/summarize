@@ -1,5 +1,6 @@
 ion-grid {
-  --ion-grid-columns: 12;
+  min-width: 768px;
+  --ion-grid-columns: 13;
 }
 .form-container{
   min-height: 410px;
