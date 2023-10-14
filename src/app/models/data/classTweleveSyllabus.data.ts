@@ -1,6 +1,6 @@
 import { Syllabus } from '../interface/masterData.model';
 
-export class ClassTweleveSyllabusData {
+export class ClassTwelveSyllabusData {
   public static biologyUnits: Syllabus[] = [
     {
       unit_id: 1,
@@ -41,7 +41,7 @@ export class ClassTweleveSyllabusData {
     },
     {
       unit_id: 2,
-      unit_name: 'structural Organisation in Animals and Plants',
+      unit_name: 'structural Organization in Animals and Plants',
       topics: [
         { name: 'Tissues in Animals and Plants' },
         {
@@ -91,7 +91,7 @@ export class ClassTweleveSyllabusData {
           ],
         },
         {
-          name: 'study of Vertebrate and Invertebrate Morphology and Internal Organisation',
+          name: 'study of Vertebrate and Invertebrate Morphology and Internal Organization',
           sub_topics: [
             'One Vertebrate',
             'One Invertebrate (Charts and Models)',
@@ -109,7 +109,7 @@ export class ClassTweleveSyllabusData {
             'Cell Wall',
             'Cell Membrane',
             'Cell Organelles',
-            'Nuclear Organisation',
+            'Nuclear Organization',
           ],
         },
         {
@@ -222,7 +222,7 @@ export class ClassTweleveSyllabusData {
       unit_name: 'sexual Reproduction',
       topics: [
         {
-          name: 'Pollination and Fertilisation in Flowering Plants',
+          name: 'Pollination and Fertilization in Flowering Plants',
           sub_topics: [
             'Reproductive methods in plants',
             'Types of reproduction: vegetative, asexual, and sexual',
@@ -230,14 +230,14 @@ export class ClassTweleveSyllabusData {
             'Types of flowers: unisexual and bisexual',
             'Mechanisms of pollination',
             'Barriers to successful pollination',
-            'The fertilisation process in flowering plants',
+            'The fertilization process in flowering plants',
           ],
         },
         {
           name: 'Development of Seeds and Fruits',
           sub_topics: [
             'Transformation of ovules into seeds',
-            'Conversion of ovaries into fruits after fertilisation',
+            'Conversion of ovaries into fruits after fertilization',
           ],
         },
         {
@@ -246,7 +246,7 @@ export class ClassTweleveSyllabusData {
             'Reproductive systems in males and females',
             'Menstrual cycle in females',
             'Gamete production in males and females',
-            'Fertilisation process',
+            'Fertilization process',
             'Implantation of the embryo',
             'Embryo development',
             'Pregnancy and parturition in humans',
@@ -1366,7 +1366,7 @@ export class ClassTweleveSyllabusData {
           name: 'Haloarenes',
           sub_topics: [
             'Nature of C-X Bond',
-            'substitution Reactions (Directive Influence of Halogen for Monosubstituted Compounds Only)',
+            'substitution Reactions (Directive Influence of Halogen for Mono substituted Compounds Only)',
           ],
         },
         {

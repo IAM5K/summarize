@@ -109,7 +109,7 @@ export class GoalData {
     },
     {
       title: 'Organization',
-      description: 'Bring order and structure to your life, declutter your surroundings, and develop efficient systems for increased productivity.'
+      description: 'Bring order and structure to your life, de-clutter your surroundings, and develop efficient systems for increased productivity.'
     },
     {
       title: 'Personal Development',
