@@ -5,6 +5,7 @@ import { getFirestore, getDoc } from 'firebase/firestore';
 import { AlertController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
 import { doc } from '@angular/fire/firestore/firebase';
+import { ToasterService } from '../toaster/toaster.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class ProfileService {
   constructor(
     private auth: Auth,
     private afs: AngularFirestore,
+    private toasterService: ToasterService,
     private alertCtrl: AlertController
   ) {}
   userId = this.getUserProfile()?.uid;
@@ -40,7 +42,7 @@ export class ProfileService {
       let profileData: any = JSON.parse(localData);
       return profileData;
     } else {
-      console.log('Not Found in local if case');
+      this.toasterService.showToast("Loading Profile data", "secondary")
       let profileData = await this.afs
         .collection(`userData`)
         .doc(this.userId)
@@ -66,7 +68,7 @@ export class ProfileService {
     userDoc
       .set({ profileData }, { merge: true })
       .then(() => {
-        this.successAlert(this.successMessage);
+        this.toasterService.showToast(this.successMessage,"success");
         console.log('Educational detail added successfully.');
       })
       .catch((err) => {
@@ -83,7 +85,7 @@ export class ProfileService {
       .add(data)
       .then((res) => {
         console.log(res);
-        this.successAlert(this.addProjectMessage);
+        this.toasterService.showToast(this.addProjectMessage,"success");
       })
       .catch((err) => {
         alert(
@@ -98,7 +100,7 @@ export class ProfileService {
       .doc(idField)
       .update(data)
       .then((res) => {
-        this.successAlert(this.updateProjectMessage);
+        this.toasterService.showToast(this.updateProjectMessage, "primary");
       })
       .catch((err: Error) => {
         alert(
@@ -116,22 +118,22 @@ export class ProfileService {
       .doc(idField)
       .delete()
       .then(() => {
-        this.successAlert(this.deletedProjectMessage);
+        this.toasterService.showToast(this.deletedProjectMessage,"warning");
       })
       .catch((err: Error) => {
         alert(err);
       });
   }
 
-  async successAlert(message: string) {
-    const alert = await this.alertCtrl.create({
-      header: 'Success',
-      subHeader: message,
-      cssClass: 'success-alert',
-      // message: 'This is an alert!',
-      buttons: ['OK'],
-    });
+  // async successAlert(message: string) {
+  //   const alert = await this.alertCtrl.create({
+  //     header: 'Success',
+  //     subHeader: message,
+  //     cssClass: 'success-alert',
+  //     // message: 'This is an alert!',
+  //     buttons: ['OK'],
+  //   });
 
-    await alert.present();
-  }
+  //   await alert.present();
+  // }
 }
