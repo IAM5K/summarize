@@ -75,7 +75,7 @@ export class LoginPage implements OnInit {
   }
   async loginWithGoogle() {
     let user = await this.authService.googleSignin()
-    if (user !== null || undefined) {
+    if (user !== (null || undefined)) {
       this.showAlert('Login Success', 'Welcome to Summarize...\nNavigate Manually in case of delay.');
       this.router.navigateByUrl('/home', { replaceUrl: true });
     } else {
