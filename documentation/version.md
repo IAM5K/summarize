@@ -155,6 +155,9 @@
   1. Projects interface with idField
   2. Delete button to project toggle list
   3. Add, get update projects.
+  4. Toaster service created.
+  5. Delete Project added to profile page
+  6. Toaster service integrated to profile and expense page.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
@@ -266,4 +269,7 @@
 - `p.3.2` : 12-10-2023 : Spelling corrections. 
   1. Monthly analysis current month error fixed.
   2. Linting to auth service
+- `p.3.3` : 01-11-2023 : Upgrades and patch. 
+  1. Inputs upgraded.
+  2. Login logic modified, issues fixed.
 - `p.x.x`
