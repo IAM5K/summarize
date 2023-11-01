@@ -3,6 +3,7 @@ import {
   ProfileData,
   Project,
 } from 'src/app/models/interface/profile.interface';
+import { AlertService } from 'src/app/services/alert/alert.service';
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
 
@@ -54,6 +55,7 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private seoService: SeoService,
+    private alertService: AlertService,
     private profileService: ProfileService
   ) {}
 
@@ -113,5 +115,12 @@ export class ProfilePage implements OnInit {
       isActive: item.isActive,
     };
     this.profileService.updateProjects(data, item.idField);
+  }
+  async deleteProject(item:Project){
+    const response = await this.alertService.deleteAlert();
+    if (response === "confirm") {
+      this.profileService.deleteProjects(item.idField);
+    }
+    
   }
 }

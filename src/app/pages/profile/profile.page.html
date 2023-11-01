@@ -75,7 +75,7 @@
           <div slot="content">
             <ion-list class="padding-zero mb-15px">
               <ion-item class="ion-align-items-center" *ngFor="let item of projects">
-                <ion-button color="danger" class="mr-10">
+                <ion-button color="danger" class="mr-10" (click)="deleteProject(item)">
                   <ion-icon name="trash" class=""></ion-icon>
                 </ion-button>
                 <ion-toggle [checked]="item.isActive" (ionChange)="item.isActive=!item.isActive;updateProjectStatus(item)">
