@@ -158,6 +158,8 @@
   4. Toaster service created.
   5. Delete Project added to profile page
   6. Toaster service integrated to profile and expense page.
+  7. firebase package update to 7.6.1.
+  8. Added policy for cors in Firebase.json.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
