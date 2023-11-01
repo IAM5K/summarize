@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  GoogleAuthProvider,
 } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
@@ -26,7 +27,7 @@ export class AuthService {
   constructor(
     private auth: Auth,
     private afs: AngularFirestore,
-    private firebaseAuth: AngularFireAuth,
+    private afAuth: AngularFireAuth,
     private router: Router
   ) {}
 
@@ -61,11 +62,35 @@ export class AuthService {
     localStorage.clear();
     return signOut(this.auth);
   }
-  async googleSignin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const credential = await this.firebaseAuth.signInWithPopup(provider);
+  GoogleAuth() {
+    return this.AuthLogin(new GoogleAuthProvider());
+  }
+
+  // Auth logic to run auth providers
+  AuthLogin(provider) {
+    return this.afAuth
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log('You have been successfully logged in!');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  
+  async googleSignin():Promise<any> {
+    // this.GoogleAuth()
+    let provider = new GoogleAuthProvider();
+    console.log(typeof( provider));
+    const credential = await this.afAuth.signInWithPopup(provider);
+    if (credential) {  
     this.isLogin = true;
-    return this.updateUserData(credential.user);
+    this.updateUserData(credential.user);
+    return credential.user
+    }
+    else{
+      return null
+    }
   }
   async getEmailBasedUser(user: any) {
     const userRef: AngularFirestoreDocument = this.afs.doc(`user/${user.uid}`);
