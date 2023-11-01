@@ -1,8 +1,10 @@
 export interface ProfileData {
-    educationalData:string[]
+    educationDetails?:string[],
+    projects?:Project[]
 }
 
 export interface Project {
     name:string,
-    isActive?:boolean
+    isActive?:boolean,
+    idField?:string
 }

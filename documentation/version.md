@@ -4,7 +4,7 @@
 ## Development Version : Date (dd-mm-yyyy) : Comments 
 
 - `d.0.1` : 26-11-2022 : Initialized project with Ionic Angular and Angular/Fire.    
-- `d.0.2` : 27-11-2022 : Google Login Working, Login with Email and Password working. User collection > Document created with all data in Firestore. Files Un-cleaned. Sanitisation Required. 
+- `d.0.2` : 27-11-2022 : Google Login Working, Login with Email and Password working. User collection > Document created with all data in Firestore. Files Un-cleaned. Sanitization Required. 
 - `d.0.3` : 28-11-2022 : Side Nav requires user to login to display options.
 - `d.0.4` : 26-12-2022 : Profile page added and updated in menu.
 - `d.0.5` : 26-12-2022 : Expense page working. Add and Get Expense feature added.    
@@ -22,7 +22,7 @@
 - `d.1.7` : 10-01-2023 : Multiple Functionality
   1. CSS : Increased Size of data-table and content vertical align middle 
   2. Ion color success updated to qualify contrast ratio.
-  3. Marigin class, text success color class, Mobile font size reduced to 14px.
+  3. Margin class, text success color class, Mobile font size reduced to 14px.
   4. SEO Service Added for Page Title and Meta tags. 
   5. Profile Module: Completed. Display Name, Email, and  
   6. Achievement Module Added.
@@ -37,7 +37,7 @@
      7. Show all Button before table. 
      8. Added Copy to clipboard.
   9.  Studies Page : Auto fill today's Date, Seo update for Title and Meta Tag. Removed Clear Input from Start Time and End Time Input.
-  10. Expense Module: Success alert modified. Deleate feature added to service. Count added to limit response size. Auto fill today's Date, Seo update for Title and Meta Tag. Removed Clear Input from Start Time and End Time Input. Show all Button before table
+  10. Expense Module: Success alert modified. Delete feature added to service. Count added to limit response size. Auto fill today's Date, Seo update for Title and Meta Tag. Removed Clear Input from Start Time and End Time Input. Show all Button before table
   11. SEO service integrated to Login Help and About Page.
   12. Extra Analytics  function Removed. Analytics URL changed to Url After Redirects. 
   13. Formatted / Rearranged tags for Index, Role listitem added for Lighthouse accessibility score. SEO keywords added from Chat GPT.
@@ -47,11 +47,11 @@
 - `d.1.9` : 20-01-2023 : Achievement Module Added.
   1. Features button in home page
   2. Help content updated and Contact component live.
-  3. Remved login mandate for home, support, about page for better SEO. 
+  3. Removed login mandate for home, support, about page for better SEO. 
   4. Instructions added to login page and Dynamic SEO done.
-  5. Ahievement page css update and Auto time filling. Bug: not getting auto filled when time < 10.
+  5. Achievement page css update and Auto time filling. Bug: not getting auto filled when time < 10.
   6. Work component replaced with time component.
-  7. Css cntrast ratio with success, overflow auto, custom-margin and error class added.
+  7. Css contrast ratio with success, overflow auto, custom-margin and error class added.
   8. Auto time fill in study page.
   9. About page content modified, Dynamic SEO, Auto time filling, Auto update function and update button.
   10. How to component added to About page.
@@ -61,7 +61,7 @@
   2. Confirmation for delete.
   3. Removed last week transaction form default to last 5 transaction.
   4. Custom date class to get different dates for filter
-  5. Alert Serice for delete confirmation for multi use.
+  5. Alert Service for delete confirmation for multi use.
 - `d.2.1` : 29-01-2023 : Multiple Features.
   1. Delete toggle added to time management 
   2. Login with google, redirection fixed.  
@@ -70,7 +70,7 @@
   1. Header page removed
   2. How to component location changed
   3. Added Hall of frame component
-  4. Added Time format to 12 hours using custom pipe. Requested by Vaishnavi
+  4. Added Time format to 12 hours using custom pipe.
   5. Added Update details component for details on Updates.
   6. Transform time to 12hr and textarea instead of input.
   7. Formatting of time for auto fill using date pipe.
@@ -84,7 +84,7 @@
   2. Update and details
   3. Top contributors
   4. Current month without date.
-  5. Adjusted grid coulmn size in studies.
+  5. Adjusted grid column size in studies.
   6. Filter by type bug fixed. (Created Index in firestore).
 - `d.2.5` : 24-02-2023 : 
   1. Analyze expense component created and routes defined with back button from Analyze component.
@@ -110,7 +110,7 @@
   4. Supported Browser details updated.
 - `d.3.1` : 18-06-2023 :
   1. Upgraded Ionic to version 7 and NPM to 9.7.1.
-  2. Expence spelling correction.
+  2. Expense spelling correction.
 - `d.3.2` : 19-06-2023 :
   1. Upgraded Home page content.
   2. Export Expense data to excel in two sheets, expense-data and Category data.
@@ -148,7 +148,18 @@
   2. Advanced Studies component created
   3. Advanced mode switch tab,if user opts to have advanced mode after fetching educational details.
   4. Education detail Form in profile 
-  5. cicd
+  5. CI/CD
+- `d.4.1` : 01-10-2023 : Profile based options 
+  1. Projects friends group, layout fixes
+- `d.4.2` : 13-10-2023 : Projects 
+  1. Projects interface with idField
+  2. Delete button to project toggle list
+  3. Add, get update projects.
+  4. Toaster service created.
+  5. Delete Project added to profile page
+  6. Toaster service integrated to profile and expense page.
+  7. firebase package update to 7.6.1.
+  8. Added policy for cors in Firebase.json.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
@@ -170,6 +181,7 @@
 - `r.1.5` : 27-05-2023 : Dev version `d.2.9`
 - `r.1.6` : 29-05-2023 : Dev version `d.3.0`, `p.2.7`
 - `r.1.7` : 21-06-2023 : Dev version `d.3.2`, `p.2.9`
+- `r.1.8` : 01-11-2023 : Dev version `d.4.2`, `p.3.3`
 - `r.x.x` :
 
 ## Patches
@@ -196,7 +208,7 @@
   3. Expense type comes from ts.
   4. Keywords added to index page.
 - `p.1.4` : 05-01-2023 :**(Major Patch)**: Fixed Email based User register issue. 
-- `p.1.5` : 05-01-2023 : Summarise spelling changed globally to Summarize.
+- `p.1.5` : 05-01-2023 : app name incorrect spelling changed globally to Summarize.
 - `p.1.6` : 05-01-2023 : Multiple Patches:
   1. Edit / Delete availability note updated in all pages.
   2. Checking for Update added in About page.
@@ -220,8 +232,8 @@
   2. Date Auto-fill in Expenses.
   3. Removed Dependencies from Local Storage. Taking user data from auth State. 
   4. Placeholder for Description in Office Page
-  5. Limitted Corrected to Limited in Dashboard.
-  6. Excieting corrected to exciting in Profile Page. 
+  5. Limited spelling corrected in Dashboard.
+  6. Exciting spelling corrected in Profile Page. 
 - `p.1.9` : 20-01-2023 : Multiple Patches
   1. Updated keywords and Description in Index.
   2. Added class for Seo data to get data dynamically from one place.
@@ -237,7 +249,7 @@
   4. SEO update for bing
 - `p.2.2` : 27-01-2023 : Removed Screen tracking code to prevent error and double tracking of screen.
 - `p.2.3` : 05-02-2023 : Multiple patches
-  1. Date bug Reported By Vinayak. (Date format for initaial days were d-m-yyyy.) Fixed by using date pipe after values from custom date class.
+  1. Date bug Reported By Vinayak. (Date format for initial days were d-m-yyyy.) Fixed by using date pipe after values from custom date class.
   2. Redirect after login using google. 
 - `p.2.4` : 11-02-2023 : Multiple patches
   1. Time error due to missing '0' before date. Reported by Vinayak.
@@ -252,9 +264,16 @@
   1. Time format in studies page
   2. Table headers in study data table
   3. Update Details
+- `p.2.6` : 26-05-2023 : Comparison operator and expense table resizing added. 
 - `p.2.7` : 29-05-2023 : Modified options in expense type. Added Donate
 - `p.2.8` : 06-06-2023 : Fixed dropdown feature of ion-select due to Chrome changes. 
 - `p.2.9` : 21-06-2023 : Disabled update budget button if amount or date is invalid.
 - `p.3.0` : 08-07-2023 : '==' converted to '==='. 
 - `p.3.1` : 24-09-2023 : Prettier and settings updated. 
+- `p.3.2` : 12-10-2023 : Spelling corrections. 
+  1. Monthly analysis current month error fixed.
+  2. Linting to auth service
+- `p.3.3` : 01-11-2023 : Upgrades and patch. 
+  1. Inputs upgraded.
+  2. Login logic modified, issues fixed.
 - `p.x.x`

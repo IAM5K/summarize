@@ -42,11 +42,11 @@
     <div class="card ion-padding">
       <h2 class="h2">About Me</h2>
       <ion-accordion-group [multiple]="true" [value]="['']">
-        <ion-accordion value="first">
+        <ion-accordion value="first" class="mb-10px">
           <ion-item slot="header" color="light">
             <ion-label>Studies</ion-label>
           </ion-item>
-          <div slot="content" class="mb-15px">
+          <div slot="content">
             <form #educationForm="ngForm" (ngSubmit)="addEducationalDetail()">
               <ion-list>
                 <ion-item lines="none">
@@ -62,41 +62,55 @@
                 </ion-item>
                 <ion-item lines="none">
                   <ion-button size="medium" slot="end" type="submit" color="primary" *ngIf="updateDisabled">Submit</ion-button>
-                  <ion-button size="medium" slot="end" type="submit" color="tertiary" *ngIf="!updateDisabled">Update</ion-button>
+                  <ion-button size="medium" slot="end" type="submit" color="tertiary" *ngIf="!updateDisabled" [disabled]="!educationForm.dirty">Update</ion-button>
                 </ion-item>
               </ion-list>
             </form>
           </div>
         </ion-accordion>
-        <ion-accordion value="second">
+        <ion-accordion value="second" class="mb-10px">
           <ion-item slot="header" color="light">
             <ion-label>Projects</ion-label>
           </ion-item>
-          <div slot="content" class="mb-15px">
-            <ion-list>
-              <ion-item *ngFor="let item of projects">
-                <ion-toggle [checked]="item.isActive" (ionChange)="item.isActive=!item.isActive;updateProjectStatus(item)">{{item.name}}</ion-toggle>
+          <div slot="content">
+            <ion-list class="padding-zero mb-15px">
+              <ion-item class="ion-align-items-center" *ngFor="let item of projects">
+                <ion-button color="danger" class="mr-10" (click)="deleteProject(item)">
+                  <ion-icon name="trash" class=""></ion-icon>
+                </ion-button>
+                <ion-toggle [checked]="item.isActive" (ionChange)="item.isActive=!item.isActive;updateProjectStatus(item)">
+                  {{item.name}}
+                </ion-toggle>
               </ion-item>
             </ion-list>
-            <ion-button id="present-alert">Add project</ion-button>
+            <ion-button id="present-alert">
+              <ion-icon slot="start" name="add"></ion-icon>
+              Add project
+            </ion-button>
             <ion-alert trigger="present-alert" header="Fill project details" [buttons]="alertButtons" [inputs]="alertInputs"></ion-alert>
             <form #projectForm="ngForm" (ngSubmit)="addEducationalDetail()">
 
             </form>
           </div>
         </ion-accordion>
-        <!-- <ion-accordion value="second">
+        <ion-accordion value="third" class="mb-10px">
           <ion-item slot="header" color="light">
-            <ion-label>Second Accordion</ion-label>
+            <ion-label>Friend groups</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content">Second Content</div>
+          <div slot="content">
+            <div class="m-15px ion-text-center" *ngIf="friendsGroup.length < 1">
+              <ion-note class="h3 ion-margin ion-padding" color="danger">No groups found.</ion-note>
+              <ion-note color="secondary">Feature coming soon.</ion-note>
+            </div>
+
+            <ion-list *ngIf="friendsGroup.length > 0">
+              <ion-item *ngFor="let item of projects">
+                <ion-toggle [checked]="item.isActive" (ionChange)="item.isActive=!item.isActive;updateProjectStatus(item)">{{item.name}}</ion-toggle>
+              </ion-item>
+            </ion-list>
+            <!-- <ion-button id="present-alert">Create friends group</ion-button> -->
+          </div>
         </ion-accordion>
-        <ion-accordion value="third">
-          <ion-item slot="header" color="light">
-            <ion-label>Third Accordion</ion-label>
-          </ion-item>
-          <div class="ion-padding" slot="content">Third Content</div>
-        </ion-accordion> -->
       </ion-accordion-group>
     </div>
   </div>

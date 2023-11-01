@@ -7,6 +7,9 @@ import { SeoService } from 'src/app/services/seo/seo.service';
 import { CustomDate } from 'src/app/models/class/date/custom-date';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { DatePipe } from '@angular/common';
+import { Project } from 'src/app/models/interface/profile.interface';
+import { ProfileService } from 'src/app/services/profile/profile.service';
+import { WorkInterface } from 'src/app/models/interface/work.interface';
 
 @Component({
   selector: 'app-time',
@@ -14,6 +17,15 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./time.page.scss'],
 })
 export class TimePage implements OnInit {
+  
+  constructor(
+    private fb: FormBuilder,
+    private seoService: SeoService,
+    private officeService: OfficeService,
+    private alertService: AlertService,
+    private datePipe: DatePipe,
+    private profileService: ProfileService
+  ) { }
 
   pageTitle = "Time";
   pageMetaTags = [
@@ -23,26 +35,24 @@ export class TimePage implements OnInit {
     },
     {
       name: 'keyword',
-      content: 'Summarize, Summarize, arise, arize, money managemnet, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
+      content: 'Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
     },
     {
       name: 'author',
       content: 'Sandeep Kumar'
     }
   ];
+  projectSubscription:any;
   Works: any = [];
   worksCount: number = 0;
   getCount: number = 0;
   currentDate = new Date()
   currentTime = this.datePipe.transform(this.currentDate, 'hh:mm');
   workByDate:any = []
-  constructor(
-    private fb: FormBuilder,
-    private seoService: SeoService,
-    private officeService: OfficeService,
-    private alertService: AlertService,
-    private datePipe: DatePipe
-  ) { }
+  projects: Project[] = [];
+  editMode:Boolean = false;
+  editWorkData:WorkInterface;
+  updateSubmitted:Boolean = false;
   dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   workOf = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   workForm: FormGroup = this.fb.group({
@@ -50,14 +60,16 @@ export class TimePage implements OnInit {
     date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     startTime: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 :-]*$')]],
     endTime: [this.currentTime, [Validators.required, Validators.pattern('^[a-zA-Z0-9 :-]*$')]],
+    project: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
     type: ['coding', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')]],
     description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n .,-:\']*$')]],
-    // spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]
   })
+
   ngOnInit() {
     this.getWork();
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
+    this.getProjects();
   }
 
   async getWork() {
@@ -68,6 +80,7 @@ export class TimePage implements OnInit {
     })
 
   }
+
   async getAllWork() {
     this.getCount = 0;
     this.officeService.getWork(this.getCount).subscribe(res => {
@@ -76,14 +89,73 @@ export class TimePage implements OnInit {
     })
 
   }
-  addWork() {
-    this.officeService.addWork(this.workForm.value)
-    this.workForm.patchValue({
-      startTime: "",
-      description: ""
-    })
+
+  async getProjects() {
+    this.projectSubscription = await this.profileService.getProjects().subscribe((res: any) => {
+      console.log("getProjects",res);
+      this.projects = res;
+      this.workForm.patchValue({
+        project : this.projects[0].name
+      }) 
+    });
   }
 
+  async addWork() {
+    const response = await this.officeService.addWork(this.workForm.value);
+    if (response) {
+      // Reset the form on successful addition
+      this.workForm.patchValue({
+        startTime: '',
+        description: '',
+      });
+    }
+  }
+
+  editWork(work){
+    this.editMode = true;
+    this.editWorkData = work;
+    console.log(this.editWorkData);
+    
+    this.workForm.patchValue({
+      createdAt: work.createdAt,
+      date: work.date,
+      startTime: work.startTime,
+      endTime: work.endTime,
+      project: work.project?work.project:this.projects[0].name,
+      type: work.type,
+      description: work.description,
+      updatedAt: serverTimestamp(),
+    });
+  }
+
+  async updateWork(){
+    this.updateSubmitted = true;
+    const response = await this.officeService.updateWork(this.workForm.value, this.editWorkData.idField);
+    if (response) {
+      this.cancelUpdate();
+      this.backToDefault();
+    }
+    else{
+      this.updateSubmitted = false;
+    }
+  }
+
+  cancelUpdate(){
+    this.editMode=false;
+  }
+
+  backToDefault(){
+        
+    this.workForm.patchValue({
+      date: this.dateToday,
+      startTime: '',
+      endTime: this.currentTime,
+      project: this.projects[0].name,
+      type: "coding",
+      description: "",
+      updatedAt: '',
+    });
+  }
   async deleteWork(idField: string) {
     const response = await this.alertService.deleteAlert()
     if (response === "confirm") {
@@ -113,5 +185,10 @@ export class TimePage implements OnInit {
     await Clipboard.write({
       string: dataString
     });
+  }
+
+  ngOnDestroy(){
+    console.log("Time page destroyed");
+    this.projectSubscription.unsubscribe();
   }
 }

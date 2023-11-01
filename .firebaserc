@@ -7,13 +7,14 @@
       "hosting": {
         "target": "summarize-ng",
         "app": [
-          "summarize-ng"
-        ],
-        "summarize-ng": [
-          "summarize-ng.web.app"
+          "sumarize"
         ]
       }
     }
   },
+  "hosting": {
+    "target": "summarize-ng"
+  },
   "etags": {}
 }
+

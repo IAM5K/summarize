@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, QuerySnapshot } from '@angular/fire/compat/firestore';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { ProfileService } from '../profile/profile.service';
 
 @Injectable({
@@ -12,7 +12,8 @@ export class OfficeService {
   constructor(
     private afs: AngularFirestore,
     private alertCtrl: AlertController,
-    private profileService : ProfileService
+    private profileService : ProfileService,
+    private toastController: ToastController
   ) { }
 
   userId = this.profileService.getUserProfile()?.uid
@@ -29,20 +30,27 @@ export class OfficeService {
       return this.workCollection.doc(this.userId).collection('myWork', ref => ref.orderBy('date', 'desc')).valueChanges({ idField: 'idField' })
     }
   }
-  addWork(data: any) {
-    let userId = ""
-    if (this.userData) {
-      userId = JSON.parse(this.userData).uid
+  async addWork(data: any) : Promise<boolean> {
+    try {
+      await this.workCollection.doc(this.userId).collection('myWork').add(data);
+      this.successAlert('Work added successfully');
+      return true;
+    } catch (error) {
+      this.errorAlert('Error adding work. Please try again.');
+      console.warn(error);
+      return false;
     }
-    this.workCollection.doc(userId).collection('myWork').add(data).then(res => {
-      this.successAlert(this.successMessage);
-    }).catch(err => {
-      alert("There was an error in posting. \n Please try again later. Check console for detail.");
-      console.warn(err);
-    })
   }
-  updateWork(data: any) {
-
+  async updateWork(data: any,idField) {
+    try {
+      await this.workCollection.doc(this.userId).collection('myWork').doc(idField).update(data);
+      this.successAlert('Work updated successfully');
+      return true;
+    } catch (error) {
+      this.errorAlert('Error adding work. Please try again.');
+      console.warn(error);
+      return false;
+    }
   }
 
   async getWorkByDate(date:string) {
@@ -58,15 +66,33 @@ export class OfficeService {
     })
   }
 
-  async successAlert(message: string) {
-    const alert = await this.alertCtrl.create({
-      header: 'Success',
-      subHeader: message,
-      cssClass: 'success-alert',
-      // message: 'This is an alert!',
-      buttons: ['OK'],
-    });
+  // async successAlert(message: string) {
+  //   const alert = await this.alertCtrl.create({
+  //     header: 'Success',
+  //     subHeader: message,
+  //     cssClass: 'success-alert',
+  //     // message: 'This is an alert!',
+  //     buttons: ['OK'],
+  //   });
 
-    await alert.present();
+  //   await alert.present();
+  // }
+
+  private async successAlert(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: 'success',
+    });
+    toast.present();
+  }
+
+  private async errorAlert(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: 'danger',
+    });
+    toast.present();
   }
 }

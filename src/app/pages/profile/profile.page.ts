@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from 'src/app/models/interface/profile.interface';
+import {
+  ProfileData,
+  Project,
+} from 'src/app/models/interface/profile.interface';
+import { AlertService } from 'src/app/services/alert/alert.service';
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
 
@@ -10,6 +14,7 @@ import { SeoService } from 'src/app/services/seo/seo.service';
 })
 export class ProfilePage implements OnInit {
   pageTitle = 'Profile';
+  profileData: ProfileData;
   pageMetaTags = [
     {
       name: 'description',
@@ -29,49 +34,39 @@ export class ProfilePage implements OnInit {
   userProfile: any;
   educationDetails: string[] = [];
   educationPhase: string = '';
-  projects: Project[] = [
-    {
-      name:'Project 1',
-      isActive:true
-    },
-    {
-      name:'Project 2',
-      isActive:false
-    },
-    {
-      name:'Project 3',
-      isActive:false
-    }
-  ];
+  projects: Project[] = [];
+  friendsGroup = [];
   subjects: string = '';
   updateDisabled: boolean = true;
-  public alertButtons = [{
-    text: 'Submit',
-    role: 'confirm',
-    handler: (value:object) => {
-      this.addProjectDetail(value)
+  public alertButtons = [
+    {
+      text: 'Submit',
+      role: 'confirm',
+      handler: (value: object) => {
+        this.addProjectDetail(value);
+      },
     },
-  },];
+  ];
   public alertInputs = [
     {
       placeholder: 'Active project name',
     },
   ];
 
-  
-
   constructor(
     private seoService: SeoService,
+    private alertService: AlertService,
     private profileService: ProfileService
   ) {}
 
   async ngOnInit() {
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.userProfile = this.profileService.getUserProfile();
-    const profileData = await this.profileService.getProfileData();
-    if (profileData.educationDetails) {
-      this.populateProfileData(profileData);
+    this.profileData = await this.profileService.getProfileData();
+    if (this.profileData.educationDetails) {
+      this.populateProfileData(this.profileData);
     }
+    this.getProjects();
   }
 
   onSubmit() {
@@ -81,7 +76,6 @@ export class ProfilePage implements OnInit {
 
   populateProfileData(data: any) {
     console.log(data);
-    
     if (data.educationDetails) {
       this.educationPhase = data.educationDetails.educationPhase;
       this.subjects = data.educationDetails.subjects;
@@ -89,9 +83,12 @@ export class ProfilePage implements OnInit {
     } else {
       this.updateDisabled = true;
     }
-    if (data.projects) {
-      this.projects = data.projects;
-    }
+  }
+  async getProjects() {
+    await this.profileService.getProjects().subscribe((res: any) => {
+      console.log(res);
+      this.projects = res;
+    });
   }
   addEducationalDetail() {
     console.log('Education Phase:', this.educationPhase);
@@ -106,16 +103,24 @@ export class ProfilePage implements OnInit {
   }
   addProjectDetail(value: object) {
     const data = {
-      projects: {
-        name: Object.values(value)[0].toString(),
-        isActive: true,
-      },
+      name: Object.values(value)[0].toString(),
+      isActive: true,
     };
-    console.log('Education Phase:', data);
-    this.profileService.addProjectDetail(data);
+    console.log('Project:', data);
+    this.profileService.addProjects(data);
   }
-  updateProjectStatus(item: any){
-    console.log(item);
+  updateProjectStatus(item: Project) {
+    const data = {
+      name: item.name,
+      isActive: item.isActive,
+    };
+    this.profileService.updateProjects(data, item.idField);
+  }
+  async deleteProject(item:Project){
+    const response = await this.alertService.deleteAlert();
+    if (response === "confirm") {
+      this.profileService.deleteProjects(item.idField);
+    }
     
   }
 }

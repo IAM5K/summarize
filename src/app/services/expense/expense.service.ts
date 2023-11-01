@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { AlertController } from '@ionic/angular';
 import { ProfileService } from '../profile/profile.service';
+import { ToasterService } from '../toaster/toaster.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +11,8 @@ export class ExpenseService {
   constructor(
     private afs: AngularFirestore,
     private alertCtrl: AlertController,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private toasterService: ToasterService
   ) { }
   analyseExpense:any;
   userId = this.profileService.getUserProfile()?.uid
@@ -63,15 +65,16 @@ export class ExpenseService {
     })
   }
   async successAlert(message: string) {
-    const alert = await this.alertCtrl.create({
-      header: 'Success',
-      subHeader: message,
-      cssClass: 'success-alert',
-      // message: 'This is an alert!',
-      buttons: ['OK'],
-    });
+    this.toasterService.showToast(message,"success")
+    // const alert = await this.alertCtrl.create({
+    //   header: 'Success',
+    //   subHeader: message,
+    //   cssClass: 'success-alert',
+    //   // message: 'This is an alert!',
+    //   buttons: ['OK'],
+    // });
 
-    await alert.present();
+    // await alert.present();
   }
 
   getBudget(){

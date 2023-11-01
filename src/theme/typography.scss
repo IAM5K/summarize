@@ -1,4 +1,4 @@
-/* Difine all custom typography here */
+/* Define all custom typography here */
 :root,html,body{
   font-size: 16px;
   @media screen and (max-width:992px) {
@@ -44,7 +44,7 @@ pre{
   word-break: break-word;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-.text-elipsis{
+.text-ellipsis{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis !important;
@@ -66,10 +66,15 @@ pre{
   display: block;
   margin-top:15px;
 }
+.mb-10px{
+  display: block;
+  margin-bottom:10px;
+}
 .mb-15px{
   display: block;
   margin-bottom:15px;
 }
+
 .ml-5{
   margin-left: 5px;
 }

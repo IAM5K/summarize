@@ -91,9 +91,11 @@
 
 /* Data Table */
 .data-table {
-  height: 450px;
+  min-height: 450px;
   margin: auto;
   box-sizing: border-box;
+  height: auto;
+  overflow: hidden;
 }
 
 .table-title {
@@ -116,6 +118,7 @@
   overflow-x: auto;
   white-space: nowrap;
   box-shadow:0 1px 1px grey;
+  resize: vertical;
 
   ion-grid {
     border-radius: 6px !important;
@@ -179,4 +182,26 @@
 
 .tab-active{
   color: var(--ion-color-success) !important;
+}
+.padding-zero{
+  padding: 0;
+}
+
+.form-ion-list{
+  padding: 0;
+  background-color: transparent;
+  ion-item{
+    margin-bottom: 8px;
+    border: 1px solid var(--ion-color-light-tint);
+    border-radius: 4px;
+  }
+}
+
+.action-button-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.action-button{
+  display: inline-block;
+  width: fit-content;
 }
