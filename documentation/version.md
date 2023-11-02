@@ -276,4 +276,7 @@
 - `p.3.3` : 01-11-2023 : Upgrades and patch. 
   1. Inputs upgraded.
   2. Login logic modified, issues fixed.
+- `p.3.4` : 02-11-2023 : Upgrades and patch. 
+  1. Firebase config patch from old project in laptop.
+  2. Github actions workflow reverted.
 - `p.x.x`
