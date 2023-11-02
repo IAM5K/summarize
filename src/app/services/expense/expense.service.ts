@@ -55,6 +55,11 @@ export class ExpenseService {
     }
     return query;
   }
+
+  getExpenseByDate(date: string) {
+    return this.expenseCollection.doc(this.userId).collection('myExpence',(ref)=> ref.where('date','==',date).orderBy('amount','asc')).valueChanges({ idField: 'idField' })
+  }
+  
   deleteExpense(idField: string) {
     this.expenseCollection.doc(this.userId).collection('myExpence').doc(idField).delete().then(
       () => {

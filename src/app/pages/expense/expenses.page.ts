@@ -26,10 +26,13 @@ export class ExpensesPage implements OnInit {
     },
     {
       name: 'keyword',
-      content: 'Summarize, Summarize, arise, arize, money managemnet, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
+      content: 'Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
     }
   ];
+  editMode:boolean = false;
   dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  expenseOf: null;
+  expenseByDate: any;
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
@@ -149,6 +152,15 @@ export class ExpensesPage implements OnInit {
       this.totalExpense += expense.amount
     });
   }
+
+  async getAllExpenseOf() {
+    if (this.expenseOf !== null) {
+       (await this.expenseService.getExpenseByDate(this.expenseOf)).subscribe((res:any) => {
+        this.expenseByDate = res;
+      })
+    }
+  }
+
   filterBy() {
     switch (this.filterType) {
       case "duration":
