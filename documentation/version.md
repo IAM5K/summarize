@@ -160,6 +160,9 @@
   6. Toaster service integrated to profile and expense page.
   7. firebase package update to 7.6.1.
   8. Added policy for cors in Firebase.json.
+- `d.4.3` : 01-11-2023 : Expense Module 
+  1. Migrated input to version 7 input structure.
+  2. Added get expense by date
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
