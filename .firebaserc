@@ -5,16 +5,10 @@
   "targets": {
     "summarize-ng": {
       "hosting": {
-        "target": "summarize-ng",
         "app": [
           "sumarize"
         ]
       }
     }
-  },
-  "hosting": {
-    "target": "summarize-ng"
-  },
-  "etags": {}
+  }
 }
-
