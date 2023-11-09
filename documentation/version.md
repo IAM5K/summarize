@@ -163,6 +163,8 @@
 - `d.4.3` : 01-11-2023 : Expense Module 
   1. Migrated input to version 7 input structure.
   2. Added get expense by date
+- `d.4.4` : 01-11-2023 : Expense Module 
+  1. Edit expense.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions

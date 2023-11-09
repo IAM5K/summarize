@@ -30,8 +30,10 @@ export class ExpensesPage implements OnInit {
     }
   ];
   editMode:boolean = false;
+  updateSubmitted= false;
+  editExpenseData:any;
   dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-  expenseOf: null;
+  expenseOf:string = this.dateToday;
   expenseByDate: any;
   constructor(
     private fb: FormBuilder,
@@ -111,6 +113,7 @@ export class ExpensesPage implements OnInit {
   ngOnInit() {
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.getExpenses();
+    console.log("Init form",this.expenseForm.value);
   }
 
   async getExpenses() {
@@ -139,6 +142,48 @@ export class ExpensesPage implements OnInit {
       description: ''
     });
     this.seoService.eventTrigger("form", this.pageTitle);
+  }
+
+  editExpense(expense){
+    this.editExpenseData = expense;
+    this.expenseForm.patchValue({
+      createdAt : expense.createdAt,
+      date: expense.date,
+      amount: expense.amount,
+      type: expense.type,
+      description: expense.description,
+      spendedOn: expense.spendedOn
+    })
+  }
+
+  async updateExpense(){
+    this.updateSubmitted = true;
+    const response = await this.expenseService.updateExpense(this.expenseForm.value, this.editExpenseData.idField);
+    if (response) {
+      this.cancelUpdate();
+    }
+    else{
+      this.updateSubmitted = false;
+    }
+  }
+
+  cancelUpdate(){
+    this.editMode=false
+    console.log("cancel update",this.expenseForm.value);
+    setTimeout(() => {
+      this.backToDefault();      
+    }, 100);
+  }
+  async backToDefault(){
+    await this.expenseForm.patchValue({
+      createdAt: serverTimestamp(),
+      date: this.dateToday.toString(),
+      spendedOn: "self",
+      amount:0,
+      type:"",
+      description:"",
+    })
+    console.log("back to default",this.expenseForm.value);
   }
   async deleteExpense(idField: string) {
     const response = await this.alertService.deleteAlert()

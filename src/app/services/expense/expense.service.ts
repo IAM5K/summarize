@@ -60,6 +60,17 @@ export class ExpenseService {
     return this.expenseCollection.doc(this.userId).collection('myExpence',(ref)=> ref.where('date','==',date).orderBy('amount','asc')).valueChanges({ idField: 'idField' })
   }
   
+  async updateExpense(data,idField){
+    try {
+      await this.expenseCollection.doc(this.userId).collection('myExpence').doc(idField).update(data);
+      this.successAlert('Expense updated successfully');
+      return true;
+    } catch (error) {
+      this.toasterService.showToast("Error updating expense. Please try again.","danger");
+      console.warn(error);
+      return false;
+    }
+  }
   deleteExpense(idField: string) {
     this.expenseCollection.doc(this.userId).collection('myExpence').doc(idField).delete().then(
       () => {
