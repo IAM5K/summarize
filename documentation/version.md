@@ -155,7 +155,7 @@
   1. Projects interface with idField
   2. Delete button to project toggle list
   3. Add, get update projects.
-  4. Toaster service created.
+  4. Toaster service created.                   
   5. Delete Project added to profile page
   6. Toaster service integrated to profile and expense page.
   7. firebase package update to 7.6.1.
@@ -165,6 +165,7 @@
   2. Added get expense by date
 - `d.4.4` : 01-11-2023 : Expense Module 
   1. Edit expense.
+  2. Get all expense by date with edit and delete feature
 - `d.x.x` : 01-01-2023
 
 ## Release Versions

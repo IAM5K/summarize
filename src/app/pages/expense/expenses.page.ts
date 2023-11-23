@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { Analyze } from './modules/analyze';
+import { PopoverController } from '@ionic/angular';
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.page.html',
@@ -41,6 +42,7 @@ export class ExpensesPage implements OnInit {
     private expenseService: ExpenseService,
     private alertService: AlertService,
     private datePipe: DatePipe,
+    public popoverController: PopoverController,
     private router: Router
   ) {
   }
