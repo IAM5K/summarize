@@ -94,9 +94,11 @@ export class TimePage implements OnInit {
     this.projectSubscription = await this.profileService.getProjects().subscribe((res: any) => {
       console.log("getProjects",res);
       this.projects = res;
-      this.workForm.patchValue({
-        project : this.projects[0].name
-      }) 
+      if (this.projects.length>0) {
+        this.workForm.patchValue({
+          project : this.projects[0].name
+        })       
+      }
     });
   }
 

@@ -31,6 +31,7 @@ export class ProfileService {
 
   getUserProfile() {
     let user = this.auth.currentUser;
+    // this.userId = user.uid;
     return user;
   }
 
@@ -110,7 +111,8 @@ export class ProfileService {
       });
   }
   getProjects() {
-    return this.projectsCollection.valueChanges({ idField: 'idField' });
+    const userId = this.getUserProfile()?.uid;    
+    return this.afs.collection('userData').doc(userId).collection('myProjects').valueChanges({ idField: 'idField' });
   }
 
   deleteProjects(idField: string) {
