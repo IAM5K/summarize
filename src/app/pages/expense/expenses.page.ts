@@ -58,6 +58,7 @@ export class ExpensesPage implements OnInit {
     { title: "Bills", value: "bill" },
     { title: "Emi", value: "emi" },
     { title: "Education", value: "education" },
+    { title: "Entertainment", value: "entertainment" },
     { title: "Food", value: "food" },
     { title: "Groceries", value: "grocery" },
     { title: "Health", value: "health" },
@@ -170,7 +171,8 @@ export class ExpensesPage implements OnInit {
   }
 
   cancelUpdate(){
-    this.editMode=false
+    this.editMode=false;
+    this.updateSubmitted = false;
     console.log("cancel update",this.expenseForm.value);
     setTimeout(() => {
       this.backToDefault();      
