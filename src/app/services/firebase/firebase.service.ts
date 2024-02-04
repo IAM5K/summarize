@@ -31,6 +31,7 @@ export class FirebaseService {
       this.authStateSubscription = this.firebaseAuth.authState.subscribe((user) => {
         if (user) {
           console.log(user.uid);
+          this.userData = user;
           resolve(user);
         } else {
           resolve(null);

@@ -6,6 +6,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { isPlatform } from '@ionic/angular';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
 import { FirebaseService } from './services/firebase/firebase.service';
+import { ProfileService } from './services/profile/profile.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -30,7 +31,9 @@ export class AppComponent {
     private authService: AuthService,
     private router: Router,
     private gtmService: GoogleTagManagerService,
+    private profileService:ProfileService,
     private firebaseService: FirebaseService
+
   ) {}
 
   ngOnInit() {
@@ -59,6 +62,7 @@ export class AppComponent {
     let userProfile;
     try {
       userProfile = await this.firebaseService.getUserProfile();
+      this.profileService.userData = userProfile
       console.log(userProfile);
     } catch (error) {
       console.error('Error fetching user profile:', error);
