@@ -166,6 +166,9 @@
 - `d.4.4` : 01-11-2023 : Expense Module 
   1. Edit expense.
   2. Get all expense by date with edit and delete feature.
+- `d.4.5` : 01-11-2023 : Goal management 
+  1. Dashboard goal component creation. 
+  2. Get all expense by date with edit and delete feature.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
