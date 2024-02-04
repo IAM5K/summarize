@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, doc, docData, addDoc, deleteDoc, updateDoc, setDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import firebase from 'firebase/compat/app';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+import { Subscription } from 'rxjs';
 import { getDownloadURL, ref, Storage, uploadString } from '@angular/fire/storage';
 import { Auth } from '@angular/fire/auth';
 import { Photo } from '@capacitor/camera';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 export interface Note {
   id?: string;
@@ -18,22 +17,27 @@ export interface Note {
 })
 export class FirebaseService {
 
+  private authStateSubscription: Subscription;
+  userData;
   constructor(
     private auth: Auth,
     private firestore: Firestore,
+    private firebaseAuth: AngularFireAuth,
     private storage: Storage
   ) {}
 
-  getUserProfile() {
-		const user = this.auth.currentUser;
-    if(user){
-		  const userDocRef = doc(this.firestore, `users/${user.uid}`);
-		  return docData(userDocRef, { idField: 'id' });
-    }
-    else{
-      return false
-    }
-	}
+  getUserProfile(): Promise<any> {
+    return new Promise((resolve) => {
+      this.authStateSubscription = this.firebaseAuth.authState.subscribe((user) => {
+        if (user) {
+          console.log(user.uid);
+          resolve(user);
+        } else {
+          resolve(null);
+        }
+      });
+    });
+  }
 
   async uploadImage(cameraFile: Photo) {
 		const user = this.auth.currentUser;
@@ -59,4 +63,10 @@ export class FirebaseService {
     }
 
 	}
+
+  ngOnDestroy() {
+    if (this.authStateSubscription) {
+      this.authStateSubscription.unsubscribe();
+    }
+  }
 }
