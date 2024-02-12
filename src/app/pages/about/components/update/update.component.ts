@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.scss'],
 })
-export class UpdateComponent implements OnInit {
+export class UpdateComponent {
   pageTitle="Updates"
   constructor() { }
   updates=[
@@ -95,6 +95,5 @@ export class UpdateComponent implements OnInit {
     //   details:""
     // },
   ]
-  ngOnInit() {}
 
 }

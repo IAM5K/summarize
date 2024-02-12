@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Clipboard } from '@capacitor/clipboard';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +16,7 @@ import { WorkInterface } from 'src/app/models/interface/work.interface';
   templateUrl: './time.page.html',
   styleUrls: ['./time.page.scss'],
 })
-export class TimePage implements OnInit {
+export class TimePage implements OnInit,OnDestroy {
   
   constructor(
     private fb: FormBuilder,

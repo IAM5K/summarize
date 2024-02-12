@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartOptions, } from 'chart.js';
 import { CustomDate } from 'src/app/models/class/date/custom-date';
 import { ExpenseService } from 'src/app/services/expense/expense.service';
@@ -13,7 +13,7 @@ import { MonthlyExpense } from '../../modules/monthly-expense';
   styleUrls: ['./analyze.component.scss'],
 })
 
-export class AnalyzeComponent implements OnInit {
+export class AnalyzeComponent implements OnInit, AfterViewInit {
   @ViewChild(BaseChartDirective) chartA!: BaseChartDirective;
   @ViewChild(BaseChartDirective) chartB!: BaseChartDirective;
   // @ViewChild('monthlyChart') monthlyChart!: BaseChartDirective;
@@ -111,9 +111,6 @@ export class AnalyzeComponent implements OnInit {
       this.getTypeWiseExpense(this.Expense)
     }, 3000);
 
-  }
-  ngOnDestroy() {
-    // sessionStorage.removeItem('budget')
   }
 
 

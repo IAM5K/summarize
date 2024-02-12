@@ -71,8 +71,4 @@ export class AboutPage implements OnInit {
     })
   }
 
-  ngOnDestroy(){
-
-  }
-
 }

@@ -65,9 +65,4 @@ export class FirebaseService {
 
 	}
 
-  ngOnDestroy() {
-    if (this.authStateSubscription) {
-      this.authStateSubscription.unsubscribe();
-    }
-  }
 }
