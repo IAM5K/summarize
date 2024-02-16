@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
@@ -12,7 +12,7 @@ import { ProfileService } from './services/profile/profile.service';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit,AfterViewInit {
   isLoggedIn: any = false;
   appPages: any = [
     { title: 'Dashboard', color: 'primary', url: 'home', icon: 'grid' },
@@ -42,9 +42,11 @@ export class AppComponent {
     }
     this.getUser();
   }
-  ngAfterViewInit(): void {
+
+  ngAfterViewInit() {
     if (this.isLoggedIn) {
       this.getSidebar();
+      console.log("Updating sidebar");
     }
     this.router.events.forEach((item) => {
       if (item instanceof NavigationEnd) {
@@ -56,7 +58,6 @@ export class AppComponent {
       }
     });
   }
-  afterViewInit(): void {}
 
   async getUser() {
     let userProfile;

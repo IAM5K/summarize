@@ -5,10 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './create-goal.component.html',
   styleUrls: ['./create-goal.component.scss'],
 })
-export class CreateGoalComponent implements OnInit {
+export class CreateGoalComponent {
 
   constructor() { }
 
-  ngOnInit() {}
 
 }

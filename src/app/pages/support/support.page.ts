@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './support.page.html',
   styleUrls: ['./support.page.scss'],
 })
-export class SupportPage implements OnInit {
+export class SupportPage {
   pageTitle = "Support"
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
