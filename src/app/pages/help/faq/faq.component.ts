@@ -10,7 +10,7 @@ import { SupportService } from 'src/app/services/support/support.service';
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.scss'],
 })
-export class FaqComponent implements OnInit {
+export class FaqComponent {
   title = "Contact";
   isSubmitted=false;
   constructor(
@@ -23,7 +23,6 @@ export class FaqComponent implements OnInit {
     sub: ['', [Validators.required, Validators.minLength(5), Validators.pattern('^[a-zA-Z 0-9 ]*$')]],
     msg: ['', [Validators.required, Validators.minLength(5), Validators.pattern('^[a-zA-Z 0-9 ., \n]*$')]]
   })
-  ngOnInit() { }
 
   submitForm(){
     this.supportService.postSupport(this.supportForm.value).then(res=>{

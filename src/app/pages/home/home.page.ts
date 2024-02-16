@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { MasterData } from 'src/app/models/class/masterData/master-data';
 import { SeoTags } from 'src/app/models/class/seoTags/seo';
 import { Goal } from 'src/app/models/interface/masterData.model';
+import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 import { GoalService } from 'src/app/services/goal/goal.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
 
@@ -26,6 +27,7 @@ export class HomePage implements OnInit, AfterViewInit,OnDestroy {
   ]
   constructor(
     private seoService: SeoService,
+    private firebaseService: FirebaseService,
     private goalService: GoalService
   ) { }
 
@@ -33,11 +35,13 @@ export class HomePage implements OnInit, AfterViewInit,OnDestroy {
     this.seoService.seo(this.title, this.pageMetaTags);
     // this.getGoal()
   }
-  ngAfterViewInit() {
-    // this.getGoal()
+  async ngAfterViewInit() {
+    await this.firebaseService.getUserProfile();
+    this.getGoal()
   }
 
   async getGoal() {
+    
     this.goalSubscription= await this.goalService.getGoal().subscribe((res:any) => {
       console.log(res);
       this.dailyGoals = res

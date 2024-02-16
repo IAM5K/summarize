@@ -7,13 +7,12 @@ import { DataDescription } from 'src/app/models/interface/masterData.model';
   templateUrl: './goal-info.component.html',
   styleUrls: ['./goal-info.component.scss'],
 })
-export class GoalInfoComponent implements OnInit {
-  title:string = "Goal Settng";
+export class GoalInfoComponent {
+  title:string = "Goal Setting";
   goalSetting:DataDescription[] = GoalData.goalSetting;
   goalDetails:DataDescription[] = GoalData.goalDetails;
 
   constructor() { }
 
-  ngOnInit() {}
 
 }

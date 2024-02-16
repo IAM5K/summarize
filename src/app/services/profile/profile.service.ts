@@ -17,6 +17,7 @@ export class ProfileService {
     private toasterService: ToasterService,
     private alertCtrl: AlertController
   ) {}
+  userData;
   userId = this.getUserProfile()?.uid;
   successMessage = 'Profile data updated successfully!';
   deletedMessage = 'Profile data Deleted successfully!';

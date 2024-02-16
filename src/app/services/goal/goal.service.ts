@@ -2,56 +2,81 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
 import { ProfileService } from '../profile/profile.service';
+import { FirebaseService } from '../firebase/firebase.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GoalService {
-
   constructor(
     private afs: AngularFirestore,
     private alertCtrl: AlertController,
+    private fs: FirebaseService,
     private profileService: ProfileService
-  ) { }
+  ) {}
 
-  addMessage = "Goal added successfully."
-  updateMessage = "Goal updated successfully."
-  deletedMessage = "Goal has been successfully deleted."
-  userId = this.profileService.getUserProfile()?.uid
-  goalCollection = this.afs.collection('userData')
+  addMessage = 'Goal added successfully.';
+  updateMessage = 'Goal updated successfully.';
+  deletedMessage = 'Goal has been successfully deleted.';
+  userId = this.profileService.getUserProfile()?.uid;
+  goalCollection = this.afs.collection('userData');
   addGoal(data: any) {
-    this.goalCollection.doc(this.userId).collection('myGoal').add(data).then(res => {
-      console.log(res)
-      this.successAlert( this.addMessage );
-    }).catch(err => {
-      alert("There was an error in posting. \n Please try again later. Check console for detail.");
-      console.warn(err);
-    })
+    this.goalCollection
+      .doc(this.userId)
+      .collection('myGoal')
+      .add(data)
+      .then((res) => {
+        console.log(res);
+        this.successAlert(this.addMessage);
+      })
+      .catch((err) => {
+        alert(
+          'There was an error in posting. \n Please try again later. Check console for detail.'
+        );
+        console.warn(err);
+      });
   }
 
-  updateGoal(data: any,idField:string) {
-    this.goalCollection.doc(this.userId).collection('myGoal').doc(idField).update(data).then(res => {
-      this.successAlert( this.updateMessage );
-    }).catch((err:Error) => {
-      alert("There was an error in posting. \n Please try again later. Check console for detail.");
-      console.warn(err);
-    })
+  updateGoal(data: any, idField: string) {
+    this.goalCollection
+      .doc(this.userId)
+      .collection('myGoal')
+      .doc(idField)
+      .update(data)
+      .then((res) => {
+        this.successAlert(this.updateMessage);
+      })
+      .catch((err: Error) => {
+        alert(
+          'There was an error in posting. \n Please try again later. Check console for detail.'
+        );
+        console.warn(err);
+      });
   }
   getGoal() {
-    return this.goalCollection.doc(this.userId).collection("myGoal").valueChanges({ idField: "idField" })
+    const userId = this.fs.userData.uid;
+    console.log(userId);
+    return this.goalCollection
+      .doc(userId)
+      .collection('myGoal')
+      .valueChanges({ idField: 'idField' });
   }
 
   deleteGoal(idField: string) {
-    this.goalCollection.doc(this.userId).collection('myGoal').doc(idField).delete().then(
-      () => {
-        this.successAlert(this.deletedMessage)
-      }
-    ).catch((err:Error) => {
-      alert(err)
-    })
+    this.goalCollection
+      .doc(this.userId)
+      .collection('myGoal')
+      .doc(idField)
+      .delete()
+      .then(() => {
+        this.successAlert(this.deletedMessage);
+      })
+      .catch((err: Error) => {
+        alert(err);
+      });
   }
 
-  async successAlert(message:string) {
+  async successAlert(message: string) {
     const alert = await this.alertCtrl.create({
       header: 'Success',
       subHeader: message,
