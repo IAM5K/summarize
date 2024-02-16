@@ -1,3 +1,44 @@
-<p>
-  goal-on-dashboard works!
-</p>
+<section class="goal-dashboard feature-card-container">
+  <div class="daily-goal card">
+    <h2 class="ion-text-center bold h3">Daily Goals (16-07-2023)</h2>
+    <ng-container *ngIf="dailyGoals">
+      <ion-list [inset]="true">
+        <ion-item *ngFor="let item of dailyGoals; let i = index">
+          <ion-checkbox [ngClass]="{ 'strike-through': item.progress === 100 }" justify="start" labelPlacement="end" color="success" 
+          [ngModel]="item.progress === 100" (ngModelChange)="updateDailyTask($event, item)">
+            {{item.title}}
+          </ion-checkbox>
+          <ion-icon name="reader-outline" aria-label="Favorite"></ion-icon>
+          <!-- <ion-reorder></ion-reorder> -->
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    <ng-container *ngIf="!dailyGoals">
+      <div class="ion-text-center ion-padding">
+        <p>No goals found.</p>
+        <ion-button color="tertiary" size="small" class="ion-text-bold" routerLink="/goal">Add daily goal</ion-button>
+      </div>
+    </ng-container>
+  </div>
+  <div class="daily-goal card">
+    <h2 class="ion-text-center bold h4">Priority Goals</h2>
+    <ng-container *ngIf="dailyGoals">
+      <ion-list [inset]="true">
+        <ion-item *ngFor="let item of dailyGoals; let i = index">
+          <ion-checkbox [ngClass]="{ 'strike-through': item.progress === 100 }" justify="start" labelPlacement="end" color="success" 
+          [ngModel]="item.progress === 100" (ngModelChange)="updateDailyTask($event, item)">
+            {{item.title}}
+          </ion-checkbox>
+          <ion-icon name="reader-outline" aria-label="Favorite"></ion-icon>
+          <!-- <ion-reorder></ion-reorder> -->
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    <ng-container *ngIf="!dailyGoals">
+      <div class="ion-text-center ion-padding">
+        <p>No goals found.</p>
+        <ion-button color="tertiary" size="small" class="ion-text-bold">Add Goals</ion-button>
+      </div>
+    </ng-container>
+  </div>
+</section>

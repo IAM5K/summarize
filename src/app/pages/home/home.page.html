@@ -18,36 +18,7 @@
     <h1 class="ion-text-center ion-padding">What gets measured, Gets managed
       <br><ion-note color="tertiary" class="h4">- Peter F. Drucker</ion-note>
     </h1>
-    <section class="goal-dashboard feature-card-container">
-      <div class="daily-goal card">
-        <h2 class="ion-text-center bold h3">Daily Goals (16-07-2023)</h2>
-        <ng-container *ngIf="dailyGoals">
-          <div class="goal-strip" *ngFor="let item of dailyGoals">
-            <p>{{item.title}}</p>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="!dailyGoals">
-          <div class="ion-text-center ion-padding">
-            <p>No goals found.</p>
-            <ion-button color="tertiary" size="small"class="ion-text-bold" routerLink="/goal">Add daily goal</ion-button>
-          </div>
-        </ng-container>
-      </div>
-      <div class="daily-goal card">
-        <h2 class="ion-text-center bold h4">Priority Goals</h2>
-        <ng-container *ngIf="dailyGoals">
-          <div class="goal-strip" *ngFor="let item of dailyGoals">
-            <p>{{item.title}}</p>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="!dailyGoals">
-          <div class="ion-text-center ion-padding">
-            <p>No goals found.</p>
-            <ion-button color="tertiary" size="small" class="ion-text-bold">Add Goals</ion-button>
-          </div>
-        </ng-container>
-      </div>
-    </section>
+    <app-goal-on-dashboard></app-goal-on-dashboard>
     <section class="features ion-padding ion-justify-content-around ion-margin ion-align-items-stretch ion-wrap">
       <h2 class="ion-text-center h2 mt0">Available Features</h2>
       <div class="feature-card-container">

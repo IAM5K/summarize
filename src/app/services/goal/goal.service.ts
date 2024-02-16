@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
 import { ProfileService } from '../profile/profile.service';
 import { FirebaseService } from '../firebase/firebase.service';
+import { ToasterService } from '../toaster/toaster.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,22 +13,37 @@ export class GoalService {
     private afs: AngularFirestore,
     private alertCtrl: AlertController,
     private fs: FirebaseService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private toasterService: ToasterService
   ) {}
 
   addMessage = 'Goal added successfully.';
   updateMessage = 'Goal updated successfully.';
   deletedMessage = 'Goal has been successfully deleted.';
-  userId = this.profileService.getUserProfile()?.uid;
+  // userId = this.profileService.getUserProfile()?.uid;
   goalCollection = this.afs.collection('userData');
+  
+  getGoal() {
+    const userId = this.fs.userData.uid;
+    console.log(userId);
+    return this.goalCollection
+      .doc(userId)
+      .collection('myGoal')
+      .valueChanges({ idField: 'idField' });
+  }
+  
   addGoal(data: any) {
+    console.log(data);
+
+    const userId = this.fs.userData.uid;
     this.goalCollection
-      .doc(this.userId)
+      .doc(userId)
       .collection('myGoal')
       .add(data)
       .then((res) => {
         console.log(res);
-        this.successAlert(this.addMessage);
+        this.toasterService.showToast(this.addMessage,"success")
+        // this.successAlert(this.addMessage);
       })
       .catch((err) => {
         alert(
@@ -38,8 +54,10 @@ export class GoalService {
   }
 
   updateGoal(data: any, idField: string) {
+    const userId = this.fs.userData.uid;
+
     this.goalCollection
-      .doc(this.userId)
+      .doc(userId)
       .collection('myGoal')
       .doc(idField)
       .update(data)
@@ -53,18 +71,13 @@ export class GoalService {
         console.warn(err);
       });
   }
-  getGoal() {
-    const userId = this.fs.userData.uid;
-    console.log(userId);
-    return this.goalCollection
-      .doc(userId)
-      .collection('myGoal')
-      .valueChanges({ idField: 'idField' });
-  }
+
 
   deleteGoal(idField: string) {
+    const userId = this.fs.userData.uid;
+
     this.goalCollection
-      .doc(this.userId)
+      .doc(userId)
       .collection('myGoal')
       .doc(idField)
       .delete()

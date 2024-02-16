@@ -12,7 +12,7 @@ import { SeoService } from 'src/app/services/seo/seo.service';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit, AfterViewInit,OnDestroy {
+export class HomePage implements OnInit, OnDestroy {
   pageTitle = "Home"
   title = SeoTags.pageTitle.homePage
   pageMetaTags = SeoTags.homePageTags;
@@ -27,26 +27,13 @@ export class HomePage implements OnInit, AfterViewInit,OnDestroy {
   ]
   constructor(
     private seoService: SeoService,
-    private firebaseService: FirebaseService,
-    private goalService: GoalService
   ) { }
 
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags);
-    // this.getGoal()
-  }
-  async ngAfterViewInit() {
-    await this.firebaseService.getUserProfile();
-    this.getGoal()
+
   }
 
-  async getGoal() {
-    
-    this.goalSubscription= await this.goalService.getGoal().subscribe((res:any) => {
-      console.log(res);
-      this.dailyGoals = res
-    })
-  }
   ngOnDestroy(){
     console.log("Home page Destroyed")
     // this.goalSubscription.unsubscribe();

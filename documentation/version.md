@@ -288,7 +288,8 @@
 - `p.3.4` : 02-11-2023 : Upgrades and patch. 
   1. Firebase config patch from old project in laptop.
   2. Github actions workflow reverted.
-- `p.3.5` : 13-12-2023 : Big fix :
+- `p.3.5` : 13-12-2023 : Major fix :
   1. Update button disabled in case on 2nd edit expense.
   2. Project fetch failing for the first load. 
+- `p.3.6` : 16-02-2024 : Major fix :Profile service update to fix missing uid in goal and other page
 - `p.x.x`

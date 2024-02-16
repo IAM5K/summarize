@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AchievementsService } from 'src/app/services/achievements/achievements.service';
+import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 import { GoalService } from 'src/app/services/goal/goal.service';
 
 @Component({
@@ -9,27 +10,28 @@ import { GoalService } from 'src/app/services/goal/goal.service';
 })
 export class GoalOnDashboardComponent implements OnInit {
   dailyGoals: any;
-
   constructor(
-    private goalService: GoalService,
-    private achievementService: AchievementsService
+    private firebaseService: FirebaseService,
+    private goalService: GoalService
   ) {}
 
   ngOnInit() {
     this.getGoal();
-    this.getAchievement();
   }
-
-  async getAchievement() {
-    await this.achievementService.getAchievement(4).subscribe((res) => {
-      console.log(res);
-    });
-  }
-
   async getGoal() {
+    await this.firebaseService.getUserProfile();
     await this.goalService.getGoal().subscribe((res: any) => {
       console.log(res);
       this.dailyGoals = res;
     });
   }
+
+updateDailyTask(checked: boolean, item) {
+  console.log(item);
+  
+  item.progress = checked ? 100 : 0;
+  // Optionally, you might want to update the item in your backend or localStorage
+}
+
+  
 }
