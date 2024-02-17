@@ -169,6 +169,12 @@
 - `d.4.5` : 01-11-2023 : Goal management 
   1. Dashboard goal component creation. 
   2. Get all expense by date with edit and delete feature.
+- `d.4.6` : 17-02-2024 : Goal management 
+  1. Goal Interface
+  2. Goal on dashboard with Daily and priority goals with mark completed checkbox and goal info button to show details in alert.  
+  3. Handled issue with UID, updated DB architecture from `user/myGoal/**` to `userGoals/userId/goals **`. Update queries.
+  4. Add fab action to avail add option for all.
+  5. Formatted Expenses and goal page. removed redundant code.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
