@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GoalData } from 'src/app/models/interface/goals.interface';
 import { AchievementsService } from 'src/app/services/achievements/achievements.service';
 import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 import { GoalService } from 'src/app/services/goal/goal.service';
@@ -9,7 +10,9 @@ import { GoalService } from 'src/app/services/goal/goal.service';
   styleUrls: ['./goal-on-dashboard.component.scss'],
 })
 export class GoalOnDashboardComponent implements OnInit {
-  dailyGoals: any;
+  dailyGoals: GoalData[];
+  priorityGoals:GoalData[];
+  alertButtons = ['Close'];
   constructor(
     private firebaseService: FirebaseService,
     private goalService: GoalService
@@ -20,18 +23,19 @@ export class GoalOnDashboardComponent implements OnInit {
   }
   async getGoal() {
     await this.firebaseService.getUserProfile();
-    await this.goalService.getGoal().subscribe((res: any) => {
+    this.goalService.getDailyGoal().subscribe((res: any) => {
       console.log(res);
       this.dailyGoals = res;
     });
+    this.goalService.getPriorityGoal().subscribe((res: any) => {
+      console.log(res);
+      this.priorityGoals = res;
+    });
   }
 
-updateDailyTask(checked: boolean, item) {
-  console.log(item);
-  
-  item.progress = checked ? 100 : 0;
-  // Optionally, you might want to update the item in your backend or localStorage
-}
-
-  
+  updateDailyTask(checked: boolean, item) {
+    // console.log(item);
+    item.progress = checked ? 100 : 0;
+    this.goalService.updateGoal(item, item.idField);
+  }
 }
