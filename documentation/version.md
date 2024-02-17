@@ -177,6 +177,7 @@
   5. Formatted Expenses and goal page. removed redundant code.
   6. Add completion date or updated on.
   7. Add function to handle completion and back to incomplete.
+  8. Comment console logs
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
