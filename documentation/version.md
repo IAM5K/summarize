@@ -175,6 +175,8 @@
   3. Handled issue with UID, updated DB architecture from `user/myGoal/**` to `userGoals/userId/goals **`. Update queries.
   4. Add fab action to avail add option for all.
   5. Formatted Expenses and goal page. removed redundant code.
+  6. Add completion date or updated on.
+  7. Add function to handle completion and back to incomplete.
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
