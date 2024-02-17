@@ -81,7 +81,7 @@ export class StudiesPage implements OnInit {
   }
   manageStudies(idField?:string){
     if (this.editMode) {
-      console.log();
+      // console.log();
 
       this.updateStudies(this.studiesForm.value)
     } else {
@@ -102,7 +102,7 @@ export class StudiesPage implements OnInit {
   }
 
   updateStudies(value:any) {
-    console.log(value);
+    // console.log(value);
     this.studiesService.updateStudies(value,this.updateDataId)
     this.updateDataId=""
 
@@ -137,7 +137,7 @@ export class StudiesPage implements OnInit {
     if(profileData.educationDetails){
       this.advancedModeAvailable = true
       this.advancedMode = true;
-      console.log(profileData);      
+      // console.log(profileData);      
     } 
   }
 }

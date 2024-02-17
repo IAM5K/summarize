@@ -46,7 +46,7 @@ export class AppComponent implements OnInit,AfterViewInit {
   ngAfterViewInit() {
     if (this.isLoggedIn) {
       this.getSidebar();
-      console.log("Updating sidebar");
+      // console.log("Updating sidebar");
     }
     this.router.events.forEach((item) => {
       if (item instanceof NavigationEnd) {
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit,AfterViewInit {
     try {
       userProfile = await this.firebaseService.getUserProfile();
       this.profileService.userData = userProfile
-      console.log(userProfile);
+      // console.log(userProfile);
     } catch (error) {
       console.error('Error fetching user profile:', error);
     }

@@ -42,7 +42,7 @@ export class ProfileService {
     const user = await this.fs.getUserProfile();
     let localData: string | null = localStorage.getItem('profileData');
     if (localData !== null) {
-      console.log('Found in local if case');
+      // console.log('Found in local if case');
 
       let profileData: any = JSON.parse(localData);
       return profileData;

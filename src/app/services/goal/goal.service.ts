@@ -27,7 +27,7 @@ export class GoalService {
 
   getGoal() {
     const userId = this.fs.userData.uid;
-    console.log(userId);
+    // console.log(userId);
     return this.goalCollection
       .doc(userId)
       .collection('myGoal')
@@ -35,7 +35,7 @@ export class GoalService {
   }
   getDailyGoal() {
     const userId = this.fs.userData.uid;
-    console.log('getting priority goals for: ', userId);
+    // console.log('getting priority goals for: ', userId);
     return this.goalCollection
       .doc(userId)
       .collection('dailyGoals', (ref) =>
@@ -48,7 +48,7 @@ export class GoalService {
   }
   getPriorityGoal() {
     const userId = this.fs.userData.uid;
-    console.log('getting priority goals for: ', userId);
+    // console.log('getting priority goals for: ', userId);
     return this.goalCollection
       .doc(userId)
       .collection('priorityGoals', (ref) =>
@@ -61,7 +61,7 @@ export class GoalService {
   }
 
   addGoal(data: GoalData) {
-    console.log(data);
+    // console.log(data);
     const goalTerm = data.gTerm === 'Daily' ? 'dailyGoals' : 'priorityGoals';
     const userId = this.fs.userData.uid;
     this.goalCollection
@@ -69,7 +69,7 @@ export class GoalService {
       .collection(goalTerm)
       .add(data)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         this.toasterService.showToast(this.addMessage, 'success');
 
       })
@@ -86,7 +86,7 @@ export class GoalService {
       const userId = this.fs.userData.uid;
       const goalTerm = data.gTerm === 'Daily' ? 'dailyGoals' : 'priorityGoals';
       delete data.idField;
-      console.log(data);
+      // console.log(data);
       await this.goalCollection
         .doc(userId)
         .collection(goalTerm)
@@ -104,7 +104,7 @@ export class GoalService {
       const userId = this.fs.userData.uid;
       const goalTerm = data.gTerm === 'Daily' ? 'completedGoals' : 'priorityGoals';
       delete data.idField;
-      console.log(data);
+      // console.log(data);
       await this.goalCollection
         .doc(userId)
         .collection(goalTerm)

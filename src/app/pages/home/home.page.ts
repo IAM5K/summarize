@@ -36,7 +36,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('Home page Destroyed');
+    // console.log('Home page Destroyed');
     // this.goalSubscription.unsubscribe();
   }
 }

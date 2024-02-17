@@ -31,11 +31,11 @@ export class GoalOnDashboardComponent implements OnInit {
   async getGoal() {
     await this.firebaseService.getUserProfile();
     this.goalService.getDailyGoal().subscribe((res: any) => {
-      console.log(res);
+      // console.log(res);
       this.dailyGoals = res;
     });
     this.goalService.getPriorityGoal().subscribe((res: any) => {
-      console.log(res);
+      // console.log(res);
       this.priorityGoals = res;
     });
   }
@@ -43,14 +43,14 @@ export class GoalOnDashboardComponent implements OnInit {
   updateDailyTask(checked: boolean, item: GoalData) {
     item.progress = checked ? 100 : 0;
     item.updatedAt = this.goalForm.value.updatedAt
-    console.log(item);
+    // console.log(item);
     this.goalService.updateDailyGoal(item, item.idField);
   }
 
   updatePriorityTask(checked: boolean, item: GoalData) {
     item.progress = checked ? 100 : 0;
     item.updatedAt = this.goalForm.value.updatedAt
-    console.log(item);
+    // console.log(item);
     this.goalService.updateGoal(item, item.idField);
   }
 }

@@ -172,7 +172,7 @@ export class ExpensesPage implements OnInit {
   cancelUpdate(){
     this.editMode=false;
     this.updateSubmitted = false;
-    console.log("cancel update",this.expenseForm.value);
+    // console.log("cancel update",this.expenseForm.value);
     setTimeout(() => {
       this.backToDefault();      
     }, 100);
@@ -186,7 +186,7 @@ export class ExpensesPage implements OnInit {
       type:"",
       description:"",
     })
-    console.log("back to default",this.expenseForm.value);
+    // console.log("back to default",this.expenseForm.value);
   }
   async deleteExpense(idField: string) {
     const response = await this.alertService.deleteAlert()
@@ -324,7 +324,7 @@ export class ExpensesPage implements OnInit {
       SpentOn: item.spendedOn
     }));
     let categoryWiseData =  await new Analyze().getCategoryWiseData(this.Expenses);
-    console.log(categoryWiseData);
+    // console.log(categoryWiseData);
 
     const filename= "ExpenseData"+ new Date().getTime() +".xlsx"
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);

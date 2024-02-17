@@ -70,12 +70,12 @@ export class ProfilePage implements OnInit {
   }
 
   onSubmit() {
-    console.log('Education Phase:', this.educationPhase);
-    console.log('Subjects:', this.subjects);
+    // console.log('Education Phase:', this.educationPhase);
+    // console.log('Subjects:', this.subjects);
   }
 
   populateProfileData(data: any) {
-    console.log(data);
+    // console.log(data);
     if (data.educationDetails) {
       this.educationPhase = data.educationDetails.educationPhase;
       this.subjects = data.educationDetails.subjects;
@@ -86,13 +86,13 @@ export class ProfilePage implements OnInit {
   }
   async getProjects() {
     await this.profileService.getProjects().subscribe((res: any) => {
-      console.log(res);
+      // console.log(res);
       this.projects = res;
     });
   }
   addEducationalDetail() {
-    console.log('Education Phase:', this.educationPhase);
-    console.log('Subjects:', this.subjects);
+    // console.log('Education Phase:', this.educationPhase);
+    // console.log('Subjects:', this.subjects);
     const data = {
       educationDetails: {
         educationPhase: this.educationPhase,
@@ -106,7 +106,7 @@ export class ProfilePage implements OnInit {
       name: Object.values(value)[0].toString(),
       isActive: true,
     };
-    console.log('Project:', data);
+    // console.log('Project:', data);
     this.profileService.addProjects(data);
   }
   updateProjectStatus(item: Project) {
