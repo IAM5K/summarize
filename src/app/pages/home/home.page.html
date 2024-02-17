@@ -18,7 +18,10 @@
     <h1 class="ion-text-center ion-padding">What gets measured, Gets managed
       <br><ion-note color="tertiary" class="h4">- Peter F. Drucker</ion-note>
     </h1>
-    <app-goal-on-dashboard></app-goal-on-dashboard>
+    <section class="">
+
+      <app-goal-on-dashboard ></app-goal-on-dashboard>
+    </section>
     <section class="features ion-padding ion-justify-content-around ion-margin ion-align-items-stretch ion-wrap">
       <h2 class="ion-text-center h2 mt0">Available Features</h2>
       <div class="feature-card-container">
@@ -46,4 +49,14 @@
       </ol>
     </div>
   </div>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngFor="let item of fabActionButtons">
+        <ion-icon [color]="item.color" [name]="item.icon" [routerLink]="item.url"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>
