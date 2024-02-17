@@ -116,7 +116,6 @@ export class ExpensesPage implements OnInit {
   ngOnInit() {
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.getExpenses();
-    console.log("Init form",this.expenseForm.value);
   }
 
   async getExpenses() {
