@@ -6,6 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
 import { doc } from '@angular/fire/firestore/firebase';
 import { ToasterService } from '../toaster/toaster.service';
+import { FirebaseService } from '../firebase/firebase.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class ProfileService {
     private auth: Auth,
     private afs: AngularFirestore,
     private toasterService: ToasterService,
+    private fs: FirebaseService,
     private alertCtrl: AlertController
   ) {}
   userData;
@@ -37,25 +39,33 @@ export class ProfileService {
   }
 
   async getProfileData() {
+    const user = await this.fs.getUserProfile();
     let localData: string | null = localStorage.getItem('profileData');
     if (localData !== null) {
-      console.log('Found in local if case');
+      // console.log('Found in local if case');
 
       let profileData: any = JSON.parse(localData);
       return profileData;
     } else {
-      this.toasterService.showToast("Loading Profile data", "secondary")
-      let profileData = await this.afs
-        .collection(`userData`)
-        .doc(this.userId)
-        .get()
-        .subscribe((snap: any) => {
-          let data = snap.data().profileData;
-          console.log(data);
-          localStorage.setItem('profileData', JSON.stringify(data));
-          return data;
-        });
-      return profileData;
+      try {
+        this.toasterService.showToast('Loading Profile data', 'secondary');
+        let profileData = await this.afs
+          .collection(`userData`)
+          .doc(user.uid)
+          .get()
+          .subscribe((snap: any) => {
+            let data = snap.data().profileData;
+            console.log(data);
+            localStorage.setItem('profileData', JSON.stringify(data));
+            this.toasterService.showToast('Profile data fetched.', 'success');
+            return data;
+          });
+        return profileData;
+      } catch (error) {
+        console.error('Error fetching profile data:', error);
+        this.toasterService.showToast('Error loading profile data', 'danger');
+        throw error;
+      }
     }
   }
 
@@ -70,7 +80,7 @@ export class ProfileService {
     userDoc
       .set({ profileData }, { merge: true })
       .then(() => {
-        this.toasterService.showToast(this.successMessage,"success");
+        this.toasterService.showToast(this.successMessage, 'success');
         console.log('Educational detail added successfully.');
       })
       .catch((err) => {
@@ -87,7 +97,7 @@ export class ProfileService {
       .add(data)
       .then((res) => {
         console.log(res);
-        this.toasterService.showToast(this.addProjectMessage,"success");
+        this.toasterService.showToast(this.addProjectMessage, 'success');
       })
       .catch((err) => {
         alert(
@@ -102,7 +112,7 @@ export class ProfileService {
       .doc(idField)
       .update(data)
       .then((res) => {
-        this.toasterService.showToast(this.updateProjectMessage, "primary");
+        this.toasterService.showToast(this.updateProjectMessage, 'primary');
       })
       .catch((err: Error) => {
         alert(
@@ -112,8 +122,12 @@ export class ProfileService {
       });
   }
   getProjects() {
-    const userId = this.getUserProfile()?.uid;    
-    return this.afs.collection('userData').doc(userId).collection('myProjects').valueChanges({ idField: 'idField' });
+    const userId = this.getUserProfile()?.uid;
+    return this.afs
+      .collection('userData')
+      .doc(userId)
+      .collection('myProjects')
+      .valueChanges({ idField: 'idField' });
   }
 
   deleteProjects(idField: string) {
@@ -121,7 +135,7 @@ export class ProfileService {
       .doc(idField)
       .delete()
       .then(() => {
-        this.toasterService.showToast(this.deletedProjectMessage,"warning");
+        this.toasterService.showToast(this.deletedProjectMessage, 'warning');
       })
       .catch((err: Error) => {
         alert(err);

@@ -32,7 +32,7 @@ export class FaqComponent {
       this.isSubmitted=false
       }, 15000);
     }).catch(err=>{
-      console.log(err);
+      // console.log(err);
     })
   }
 

@@ -90,14 +90,14 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
       this.dailyExpense = await this.getDailyExpenses(this.totalExpense);
     }
     else {
-      console.log("Total budget: " + total_budget);
-      console.log("Total expense: " + total_expense);
+      // console.log("Total budget: " + total_budget);
+      // console.log("Total expense: " + total_expense);
       this.router.navigateByUrl("expense")
     }
     this.currentBudget = await this.getCurrentBudget(currentMonth,total_budget)
   }
   async ngAfterViewInit() {
-    console.log("After Init called"+ new Date().getTime());
+    // console.log("After Init called"+ new Date().getTime());
     // let currentMonth = await new CustomDate().getCurrentMonth()
     this.totalBudget = await new Budget().getTotalBudget()
     this.currentExpense = await new MonthlyExpense().getCurrentExpense()
@@ -270,7 +270,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
   /**External Functions */
   async getCurrentBudget(currentMonth:string,budget:any):Promise<number> {
 
-    console.log(currentMonth+"After called"+ new Date().getTime());
+    // console.log(currentMonth+"After called"+ new Date().getTime());
     let retrievedBudget :any  = 0
     retrievedBudget = budget;
     let currentBudget: number = 0;

@@ -6,19 +6,8 @@ h1{
   color: var(--ion-color-primary);
   font-size: 2rem;
 }
-.daily-goal{
-  position: relative;
-  min-height: 100px;
-  height: auto;
-  width: 100%;
-  @media screen and (min-width:992px) {
-    width: 48%;
-    margin: 5px auto;
-  }
-}
 
-
-.features{
+.features,.goal-dashboard{
   position: relative;
   height: auto;
   padding: 1rem 0;

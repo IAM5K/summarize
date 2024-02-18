@@ -169,6 +169,15 @@
 - `d.4.5` : 01-11-2023 : Goal management 
   1. Dashboard goal component creation. 
   2. Get all expense by date with edit and delete feature.
+- `d.4.6` : 17-02-2024 : Goal management 
+  1. Goal Interface
+  2. Goal on dashboard with Daily and priority goals with mark completed checkbox and goal info button to show details in alert.  
+  3. Handled issue with UID, updated DB architecture from `user/myGoal/**` to `userGoals/userId/goals **`. Update queries.
+  4. Add fab action to avail add option for all.
+  5. Formatted Expenses and goal page. removed redundant code.
+  6. Add completion date or updated on.
+  7. Add function to handle completion and back to incomplete.
+  8. Comment console logs
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
@@ -288,7 +297,8 @@
 - `p.3.4` : 02-11-2023 : Upgrades and patch. 
   1. Firebase config patch from old project in laptop.
   2. Github actions workflow reverted.
-- `p.3.5` : 13-12-2023 : Big fix :
+- `p.3.5` : 13-12-2023 : Major fix :
   1. Update button disabled in case on 2nd edit expense.
   2. Project fetch failing for the first load. 
+- `p.3.6` : 16-02-2024 : Major fix :Profile service update to fix missing uid in goal and other page
 - `p.x.x`

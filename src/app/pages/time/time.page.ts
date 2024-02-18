@@ -92,7 +92,7 @@ export class TimePage implements OnInit,OnDestroy {
 
   async getProjects() {
     this.projectSubscription = await this.profileService.getProjects().subscribe((res: any) => {
-      console.log("getProjects",res);
+      // console.log("getProjects",res);
       this.projects = res;
       if (this.projects.length>0) {
         this.workForm.patchValue({
@@ -116,7 +116,7 @@ export class TimePage implements OnInit,OnDestroy {
   editWork(work){
     this.editMode = true;
     this.editWorkData = work;
-    console.log(this.editWorkData);
+    // console.log(this.editWorkData);
     
     this.workForm.patchValue({
       createdAt: work.createdAt,
@@ -183,14 +183,14 @@ export class TimePage implements OnInit,OnDestroy {
     this.workByDate.forEach((element:any) => {
       dataString += `${element.startTime} - ${element.endTime} (${element.type}) : ${element.description} \n`
     });
-    console.log(dataString);
+    // console.log(dataString);
     await Clipboard.write({
       string: dataString
     });
   }
 
   ngOnDestroy(){
-    console.log("Time page destroyed");
+    // console.log("Time page destroyed");
     this.projectSubscription.unsubscribe();
   }
 }

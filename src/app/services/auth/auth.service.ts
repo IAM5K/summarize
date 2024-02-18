@@ -71,17 +71,17 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        console.log('You have been successfully logged in!');
+        // console.log('You have been successfully logged in!');
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }
   
   async googleSignin():Promise<any> {
     // this.GoogleAuth()
     let provider = new GoogleAuthProvider();
-    console.log(typeof( provider));
+    // console.log(typeof( provider));
     const credential = await this.afAuth.signInWithPopup(provider);
     if (credential) {  
     this.isLogin = true;

@@ -30,7 +30,7 @@ export class FirebaseService {
     return new Promise((resolve) => {
       this.authStateSubscription = this.firebaseAuth.authState.subscribe((user) => {
         if (user) {
-          console.log(user.uid);
+          // console.log(user.uid);
           this.userData = user;
           resolve(user);
         } else {
