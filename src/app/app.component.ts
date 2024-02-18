@@ -34,12 +34,15 @@ export class AppComponent implements OnInit,AfterViewInit {
     private profileService:ProfileService,
     private firebaseService: FirebaseService
 
-  ) {}
+  ) {
+    this.initGoogleTagManager()
+  }
 
   ngOnInit() {
     if (isPlatform('mobile')) {
-      StatusBar.setBackgroundColor({ color: '#8020A0' }).catch(() => {});
+      StatusBar.setBackgroundColor({ color: '#3880ff' }).catch(() => {});
     }
+    this.firebaseService.getUserProfile();
     this.getUser();
   }
 
@@ -48,13 +51,20 @@ export class AppComponent implements OnInit,AfterViewInit {
       this.getSidebar();
       // console.log("Updating sidebar");
     }
-    this.router.events.forEach((item) => {
-      if (item instanceof NavigationEnd) {
-        const gtmTag = {
-          event: 'page',
-          pageName: item.urlAfterRedirects,
-        };
-        this.gtmService.pushTag(gtmTag);
+  }
+
+  private initGoogleTagManager(): void {
+    this.router.events.subscribe((event) => {
+      try {
+        if (event instanceof NavigationEnd) {
+          const gtmTag = {
+            event: 'page',
+            pageName: event.urlAfterRedirects
+          };
+          this.gtmService.pushTag(gtmTag);
+        }
+      } catch (error) {
+        console.error('Error occurred in Google Tag Manager:', error);
       }
     });
   }
