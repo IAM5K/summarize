@@ -301,5 +301,9 @@
   1. Update button disabled in case on 2nd edit expense.
   2. Project fetch failing for the first load. 
 - `p.3.6` : 16-02-2024 : Major fix :Profile service update to fix missing uid in goal and other page
-- `p.3.7` : 21-02-2024 : Major fix :Profile service update to fix add project not working
+- `p.3.7` : 21-02-2024 : Major fix :Profile service update to fix 
+  1. Add project not working.
+  2. Add education fix.
+  3. Delete project fix.
+  4. Update project fix.
 - `p.x.x`
