@@ -42,11 +42,10 @@ export class ProfileService {
     const user = await this.fs.getUserProfile();
     let localData: string | null = localStorage.getItem('profileData');
     if (localData !== null) {
-      console.log('Found in local if case');
-
       let profileData: any = JSON.parse(localData);
       return profileData;
-    } else {
+    } 
+    else {
       try {
         this.toasterService.showToast('Loading Profile data', 'secondary');
         let profileData = await this.afs
@@ -55,7 +54,6 @@ export class ProfileService {
           .get()
           .subscribe((snap: any) => {
             let data = snap.data().profileData;
-            console.log(data);
             localStorage.setItem('profileData', JSON.stringify(data));
             this.toasterService.showToast('Profile data fetched.', 'success');
             return data;
@@ -77,8 +75,6 @@ export class ProfileService {
   async addEducationalDetail(data: any) {
     try {
       const user = await this.fs.getUserProfile();
-      console.log(user);
-
       const profileCollection = this.afs.collection('userData').doc(user.uid);
       const userDoc = profileCollection
         .collection('myProjects')
@@ -89,8 +85,6 @@ export class ProfileService {
       await userDoc.set({ profileData }, { merge: true });
 
       this.toasterService.showToast(this.successMessage, 'success');
-      console.log('Educational detail added successfully.');
-
       this.refreshProfileData();
     } catch (error) {
       console.error('Error adding educational detail:', error);
@@ -103,7 +97,6 @@ export class ProfileService {
 
   async addProjects(data: any) {
     const user = await this.fs.getUserProfile();
-    console.log(user);
     try {
       const projectsCollection = this.afs
         .collection('userData')
@@ -111,8 +104,6 @@ export class ProfileService {
         .collection('myProjects');
 
       const res = await projectsCollection.add(data);
-      console.log(res);
-
       this.toasterService.showToast(this.addProjectMessage, 'success');
     } catch (error) {
       console.error('Error adding project:', error);
@@ -122,7 +113,6 @@ export class ProfileService {
 
   async updateProjects(data: any, idField: string) {
     const user = await this.fs.getUserProfile();
-    console.log(user);
     const projectsCollection = this.afs
       .collection('userData')
       .doc(user.uid)
@@ -148,7 +138,6 @@ export class ProfileService {
   async deleteProjects(idField: string) {
     try {
       const user = await this.fs.getUserProfile();
-      console.log(user);
       const projectsCollection = this.afs
         .collection('userData')
         .doc(user.uid)
