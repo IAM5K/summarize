@@ -74,59 +74,68 @@ export class ProfileService {
     this.getProfileData();
   }
 
-  addEducationalDetail(data: any) {
-    let userDoc = this.profileCollection.doc(this.userId);
-    const profileData = data;
-    userDoc
-      .set({ profileData }, { merge: true })
-      .then(() => {
-        this.toasterService.showToast(this.successMessage, 'success');
-        console.log('Educational detail added successfully.');
-      })
-      .catch((err) => {
-        alert(
-          'There was an error in posting. \n Please try again later. Check console for detail.'
-        );
-        console.warn(err);
-      });
-    this.refreshProfileData();
+  async addEducationalDetail(data: any) {
+    try {
+      const user = await this.fs.getUserProfile();
+      console.log(user);
+
+      const profileCollection = this.afs.collection('userData').doc(user.uid);
+      const userDoc = profileCollection
+        .collection('myProjects')
+        .doc(this.userId);
+
+      const profileData = data;
+
+      await userDoc.set({ profileData }, { merge: true });
+
+      this.toasterService.showToast(this.successMessage, 'success');
+      console.log('Educational detail added successfully.');
+
+      this.refreshProfileData();
+    } catch (error) {
+      console.error('Error adding educational detail:', error);
+      this.toasterService.showToast(
+        'Failed to add educational detail',
+        'danger'
+      );
+    }
   }
 
   async addProjects(data: any) {
     const user = await this.fs.getUserProfile();
     console.log(user);
     try {
-  
       const projectsCollection = this.afs
         .collection('userData')
         .doc(user.uid)
         .collection('myProjects');
-        
+
       const res = await projectsCollection.add(data);
       console.log(res);
-  
+
       this.toasterService.showToast(this.addProjectMessage, 'success');
     } catch (error) {
       console.error('Error adding project:', error);
       this.toasterService.showToast('Failed to add project', 'danger');
     }
   }
-  
 
-  updateProjects(data: any, idField: string) {
-    this.projectsCollection
-      .doc(idField)
-      .update(data)
-      .then((res) => {
-        this.toasterService.showToast(this.updateProjectMessage, 'primary');
-      })
-      .catch((err: Error) => {
-        alert(
-          'There was an error in posting. \n Please try again later. Check console for detail.'
-        );
-        console.warn(err);
-      });
+  async updateProjects(data: any, idField: string) {
+    const user = await this.fs.getUserProfile();
+    console.log(user);
+    const projectsCollection = this.afs
+      .collection('userData')
+      .doc(user.uid)
+      .collection('myProjects');
+    try {
+      await projectsCollection.doc(idField).update(data);
+      this.toasterService.showToast(this.updateProjectMessage, 'primary');
+    } catch (error) {
+      console.error('Error updating project:', error);
+      this.toasterService.showToast('Failed to update project', 'danger');
+    }
   }
+
   getProjects() {
     const userId = this.getUserProfile()?.uid;
     return this.afs
@@ -136,27 +145,20 @@ export class ProfileService {
       .valueChanges({ idField: 'idField' });
   }
 
-  deleteProjects(idField: string) {
-    this.projectsCollection
-      .doc(idField)
-      .delete()
-      .then(() => {
-        this.toasterService.showToast(this.deletedProjectMessage, 'warning');
-      })
-      .catch((err: Error) => {
-        alert(err);
-      });
+  async deleteProjects(idField: string) {
+    try {
+      const user = await this.fs.getUserProfile();
+      console.log(user);
+      const projectsCollection = this.afs
+        .collection('userData')
+        .doc(user.uid)
+        .collection('myProjects');
+
+      await projectsCollection.doc(idField).delete();
+      this.toasterService.showToast(this.deletedProjectMessage, 'warning');
+    } catch (error) {
+      console.error('Error deleting project:', error);
+      this.toasterService.showToast('Failed to delete project', 'danger');
+    }
   }
-
-  // async successAlert(message: string) {
-  //   const alert = await this.alertCtrl.create({
-  //     header: 'Success',
-  //     subHeader: message,
-  //     cssClass: 'success-alert',
-  //     // message: 'This is an alert!',
-  //     buttons: ['OK'],
-  //   });
-
-  //   await alert.present();
-  // }
 }
