@@ -36,8 +36,8 @@ export class AboutPage implements OnInit {
     },
     {
       type:"Latest Patch",
-      date:"16-02-2024",
-      version:"p.3.6"
+      date:"21-02-2024",
+      version:"p.3.7"
     }
   ]
   constructor(

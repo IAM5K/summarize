@@ -42,7 +42,7 @@ export class ProfileService {
     const user = await this.fs.getUserProfile();
     let localData: string | null = localStorage.getItem('profileData');
     if (localData !== null) {
-      // console.log('Found in local if case');
+      console.log('Found in local if case');
 
       let profileData: any = JSON.parse(localData);
       return profileData;
@@ -92,20 +92,26 @@ export class ProfileService {
     this.refreshProfileData();
   }
 
-  addProjects(data: any) {
-    this.projectsCollection
-      .add(data)
-      .then((res) => {
-        console.log(res);
-        this.toasterService.showToast(this.addProjectMessage, 'success');
-      })
-      .catch((err) => {
-        alert(
-          'There was an error in posting. \n Please try again later. Check console for detail.'
-        );
-        console.warn(err);
-      });
+  async addProjects(data: any) {
+    const user = await this.fs.getUserProfile();
+    console.log(user);
+    try {
+  
+      const projectsCollection = this.afs
+        .collection('userData')
+        .doc(user.uid)
+        .collection('myProjects');
+        
+      const res = await projectsCollection.add(data);
+      console.log(res);
+  
+      this.toasterService.showToast(this.addProjectMessage, 'success');
+    } catch (error) {
+      console.error('Error adding project:', error);
+      this.toasterService.showToast('Failed to add project', 'danger');
+    }
   }
+  
 
   updateProjects(data: any, idField: string) {
     this.projectsCollection
