@@ -70,8 +70,11 @@
         </ion-accordion>
         <ion-accordion value="second" class="mb-10px">
           <ion-item slot="header" color="light">
-            <ion-label>Projects</ion-label>
-          </ion-item>
+            <ion-label>Projects 
+              <ion-icon color="secondary" (click)="showProjectInfo()" name="information-circle-outline"></ion-icon>
+              
+            </ion-label>
+          </ion-item>          
           <div slot="content">
             <ion-list class="padding-zero mb-15px">
               <ion-item class="ion-align-items-center" *ngFor="let item of projects">
