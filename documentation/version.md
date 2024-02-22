@@ -177,7 +177,19 @@
   5. Formatted Expenses and goal page. removed redundant code.
   6. Add completion date or updated on.
   7. Add function to handle completion and back to incomplete.
-  8. Comment console logs
+  8. Comment console logs.
+- `d.4.7` : 23-02-2024 : Git configuration 
+  1. Changelog
+  2. Release
+  3. Contribution
+  4. License
+  5. Readme
+  6. CodeOfConduct
+  7. BugReportTemplate
+  8. FeatureRequestTemplate
+  9. PullRequestTemplate
+  10. PR Workflow
+  11. Documentation of versions
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
