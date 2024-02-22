@@ -179,17 +179,19 @@
   7. Add function to handle completion and back to incomplete.
   8. Comment console logs.
 - `d.4.7` : 23-02-2024 : Git configuration 
-  1. Changelog
-  2. Release
-  3. Contribution
-  4. License
-  5. Readme
-  6. CodeOfConduct
-  7. BugReportTemplate
-  8. FeatureRequestTemplate
-  9. PullRequestTemplate
+  1. Add Changelog.md
+  2. Add Release.md
+  3. Add Contribution.md
+  4. Add License.md
+  5. Add Readme.md
+  6. Add CodeOfConduct.md
+  7. Add BugReportTemplate.md
+  8. Add FeatureRequestTemplate.md
+  9. Add PullRequestTemplate.md
   10. PR Workflow
   11. Documentation of versions
+  12. Abort deployment on PR
+  13. Add linting check on PR
 - `d.x.x` : 01-01-2023
 
 ## Release Versions
