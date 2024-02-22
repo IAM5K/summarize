@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import {
   ProfileData,
   Project,
@@ -56,7 +57,8 @@ export class ProfilePage implements OnInit {
   constructor(
     private seoService: SeoService,
     private alertService: AlertService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private alertController: AlertController,
   ) {}
 
   async ngOnInit() {
@@ -122,5 +124,14 @@ export class ProfilePage implements OnInit {
       this.profileService.deleteProjects(item.idField);
     }
     
+  }
+  async showProjectInfo() {
+    const alert = await this.alertController.create({
+      header: 'Projects List',
+      message: 'Here you can add, view and manage your projects. When a project is added it is considered as active, you can make it inactive by using the toggle and it will not be visible in Time section.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 }
