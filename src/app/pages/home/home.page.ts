@@ -1,10 +1,6 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { MasterData } from 'src/app/models/class/masterData/master-data';
 import { SeoTags } from 'src/app/models/class/seoTags/seo';
-import { Goal } from 'src/app/models/interface/masterData.model';
-import { FirebaseService } from 'src/app/services/firebase/firebase.service';
-import { GoalService } from 'src/app/services/goal/goal.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
 
 @Component({
@@ -12,7 +8,7 @@ import { SeoService } from 'src/app/services/seo/seo.service';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit, OnDestroy {
+export class HomePage implements OnInit {
   pageTitle = 'Home';
   title = SeoTags.pageTitle.homePage;
   pageMetaTags = SeoTags.homePageTags;
@@ -35,8 +31,4 @@ export class HomePage implements OnInit, OnDestroy {
     this.seoService.seo(this.title, this.pageMetaTags);
   }
 
-  ngOnDestroy() {
-    // console.log('Home page Destroyed');
-    // this.goalSubscription.unsubscribe();
-  }
 }
