@@ -10,8 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm run build --prod --vendor-chunk 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUMMARIZE_NG }}'
-          projectId: summarize-ng
+      # - uses: FirebaseExtended/action-hosting-deploy@v0
+      #   with:
+      #     repoToken: '${{ secrets.GITHUB_TOKEN }}'
+      #     firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUMMARIZE_NG }}'
+      #     projectId: summarize-ng
