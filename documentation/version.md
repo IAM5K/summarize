@@ -313,8 +313,8 @@
   4. updated type of icon
   5. Added screenshot for mobile desktop and wide.
   6. Resized icons to required size.
-- `p.3.9` : 22-02-2024 : Major fix : Multiple fix related to Profile and associated details 
-  1. Add info icon with alert to understand about the features of project in profile page.
-  2. Update studies page and add feature coming soon with brief of feature.
-  3. In Time page add button to navigate to profile page if no project found.
+- `p.3.9` : 22-02-2024: Major fix: Multiple fixes related to Profile and associated details 
+  1. Add an info icon with an alert to understand the features of the project on the profile page.
+  2. Update the studies page and add a feature coming soon with a brief of the feature.
+  3. In the Time page add a link to navigate to the profile page if no project is found.
 - `p.x.x`
