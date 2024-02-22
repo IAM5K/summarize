@@ -41,7 +41,7 @@ export class StudiesPage implements OnInit {
   Studies: any = [];
   studiesCount: number = 0;
   currentTime = this.datePipe.transform(new Date(), 'hh:mm');
-  advancedMode:boolean = true;
+  advancedMode:boolean = false;
   advancedModeAvailable:boolean = false;
   editMode:boolean = false;
   dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -136,8 +136,7 @@ export class StudiesPage implements OnInit {
     const profileData = await this.profileService.getProfileData();
     if(profileData.educationDetails){
       this.advancedModeAvailable = true
-      this.advancedMode = true;
-      // console.log(profileData);      
+      this.advancedMode = true;    
     } 
   }
 }
