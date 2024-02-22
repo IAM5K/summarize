@@ -1,4 +1,67 @@
+# Changelog
+
+## [Unreleased] <Template>
+
+### Added
+- Feature A.
+- Feature B.
+
+### Changed
+- Updated dependency X to version 2.0.0.
+
+### Fixed
+- Bug causing issue Y.
+
+## [1.0.0] - 2023-01-01
+
+### Added
+- Initial release of the project.
+
+### Changed
+- Updated README.md file.
+
+### Fixed
+- Bug preventing user login.
+
+[Unreleased]: https://github.com/example/project/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/example/project/releases/tag/1.0.0
+
+
 # Package and Dependency Changelog
+## Upgrade on 20 Feb 2024
+  $`npm -v` : 9.8.1
+  $`node -v`: v18.17.1
+  $`ng v`
+
+      _                      _                 ____ _     ___
+     / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
+    /△ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+   / ___ \| | | | (_| \ \_| | | (_| | |      | |___| |___ | |
+  /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
+                  |___/
+      
+
+  Angular CLI: 16.2.12
+  Node: 18.17.1
+  Package Manager: npm 9.8.1
+  OS: linux x64
+
+  Angular: 16.2.12
+  ... cli, common, compiler, compiler-cli, core, forms
+  ... language-service, platform-browser, platform-browser-dynamic
+  ... router, service-worker
+
+  Package                         Version
+  ---------------------------------------------------------
+  @angular-devkit/architect       0.1602.12
+  @angular-devkit/build-angular   16.2.12
+  @angular-devkit/core            16.2.12
+  @angular-devkit/schematics      16.2.12
+  @angular/fire                   7.6.1
+  @schematics/angular             16.2.12
+  rxjs                            7.5.7
+  typescript                      4.9.5
+  zone.js                         0.13.1
 
 ## Initialization Packages
 
@@ -11,7 +74,7 @@
   ```
       _                      _                 ____ _     ___
      / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
-    / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+    /△ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
    / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
   /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
                   |___/
