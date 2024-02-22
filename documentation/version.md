@@ -306,4 +306,12 @@
   2. Add education fix.
   3. Delete project fix.
   4. Update project fix.
+
+- `p.3.8` : 22-02-2024 : Major fix : Manifest errors from `Application>serviceWorker` and installation issue as PWA 
+  1. Theme and background color update.
+  2. Id added to manifest
+  3. removed purpose of icons.
+  4. updated type of icon
+  5. Added screenshot for mobile desktop and wide.
+  6. Resized icons to required size.
 - `p.x.x`
