@@ -22,7 +22,7 @@
         <form [formGroup]="achievementForm" (ngSubmit)="addAchievement()" novalidate>
           <div class="input-item">
             <ion-item fill="outline">
-              <ion-label position="stacked">Woking Since</ion-label>
+              <ion-label position="stacked">Working Since</ion-label>
               <ion-input formControlName="workingSince" type="date"></ion-input>
             </ion-item>
           </div>
@@ -64,7 +64,7 @@
           <div class="input-item">
             <ion-button color="primary" type="submit" size="medium"
               [disabled]="achievementForm.invalid">Submit</ion-button>
-            <ion-button color="primary" type="reset" size="medium">Reset</ion-button>
+            <ion-button color="warning" type="reset" size="medium">Reset</ion-button>
           </div>
 
         </form>
