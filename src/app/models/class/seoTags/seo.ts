@@ -7,6 +7,7 @@ export class SeoTags {
     aboutPage:"About Summarize : What it is? Why and How to use?",
     helpPage:"Need Help to install Summarize | Reach out to us | FAQ",
     goalPage:"Create Goals, manage and achieve them with consistency",
+    studiesPage:"",
     timePage:"Log, Analyze and Manage your time effectively"
   }
   public static homePageTags: seoMetaTag[] = [
@@ -40,6 +41,16 @@ export class SeoTags {
     }
   ];
   public static loginPageTags: seoMetaTag[] = [
+    {
+      name:'description',
+      content:"Login or Sign up now to Summarize (summarize-ng.web.app) now. With its user-friendly interface and secure login, Simplify time, money, achievement, and study management. Easily track progress, set goals, and stay organized. "
+    },
+    {
+      name:'keywords',
+      content:'Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
+    }
+  ];
+  public static studiesPageTags: seoMetaTag[] = [
     {
       name:'description',
       content:"Login or Sign up now to Summarize (summarize-ng.web.app) now. With its user-friendly interface and secure login, Simplify time, money, achievement, and study management. Easily track progress, set goals, and stay organized. "
