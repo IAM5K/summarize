@@ -331,4 +331,9 @@
   1. Add an info icon with an alert to understand the features of the project on the profile page.
   2. Update the studies page and add a feature coming soon with a brief of the feature.
   3. In the Time page add a link to navigate to the profile page if no project is found.
+
+- `p.3.10` : 22-02-2024: Fixed bug raised for button color. 
+  1. Updated button colors.
+  2. Updated the spelling corrections.
+  3. Migrated static code from studies component to static data source.
 - `p.x.x`

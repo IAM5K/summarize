@@ -2,6 +2,8 @@ import { DatePipe, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SeoTags } from 'src/app/models/class/seoTags/seo';
+import { StudyOptionsData } from 'src/app/models/data/studyOptions.data';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
@@ -24,20 +26,8 @@ export class StudiesPage implements OnInit {
   ) { }
 
   pageTitle = "Studies";
-  pageMetaTags = [
-    {
-      name: 'description',
-      content: "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better."
-    },
-    {
-      name: 'keyword',
-      content: 'Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
-    },
-    {
-      name: 'author',
-      content: 'Sandeep Kumar'
-    }
-  ];
+  pageMetaTags = SeoTags.studiesPageTags
+  studyMode = StudyOptionsData.studyMode
   Studies: any = [];
   studiesCount: number = 0;
   currentTime = this.datePipe.transform(new Date(), 'hh:mm');
@@ -57,13 +47,7 @@ export class StudiesPage implements OnInit {
     studyMode: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
     updatedAt: [serverTimestamp()]
   })
-  studiesTypes = [
-    { title: "Learn", value: "learn" },
-    { title: "Practice", value: "practice" },
-    { title: "Read", value: "read" },
-    { title: "Write", value: "write" },
-    { title: "Test", value: "test" }
-  ]
+  studiesTypes = StudyOptionsData.studiesTypes
   updateDataId:string ="";
   ngOnInit() {
     this.getStudies()
@@ -81,8 +65,6 @@ export class StudiesPage implements OnInit {
   }
   manageStudies(idField?:string){
     if (this.editMode) {
-      // console.log();
-
       this.updateStudies(this.studiesForm.value)
     } else {
       this.addStudies(this.studiesForm.value)
@@ -97,6 +79,15 @@ export class StudiesPage implements OnInit {
     })
   }
 
+  cancelUpdate(){
+    this.editMode = false
+    this.studiesForm.get('date')?.enable();
+    this.studiesForm.patchValue({
+      subject: '',
+      topic: '',
+      description: ''
+    })
+  }
   addStudies(value: any) {
     this.studiesService.addStudies(value)
   }
