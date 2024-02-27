@@ -4,6 +4,7 @@
 
 
 export const environment = {
+    useEmulators: false,
     firebase: {
     apiKey: "AIzaSyCEUct-6PLpWQu363_O97ukGfAhDpTo9dc",
     authDomain: "summarize-ng.firebaseapp.com",

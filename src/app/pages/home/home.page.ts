@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { AngularFireFunctions } from '@angular/fire/compat/functions';
+import { Observable } from 'rxjs';
 import { MasterData } from 'src/app/models/class/masterData/master-data';
 import { SeoTags } from 'src/app/models/class/seoTags/seo';
 import { SeoService } from 'src/app/services/seo/seo.service';
@@ -23,12 +25,33 @@ export class HomePage implements OnInit {
     "Summarize is an app that helps you to manage your Time, Money, and work which includes but is not limited to subject-wise studies, notes, to-do's, or office works.",
     'Thinking when to use Summarize? To live better and managed, one should recall what they have done throughout the day daily before sleep . Also listing tasks for the next day and setting priorities increases the chances to get them done.',
     'Currently, Summarize is under development, we will keep on adding features one by one. Till then, please feel free to manage Achievements of day, Expenses, Studies, and Time. It is a web-app that can be easily installed on all devices ( Mobile & PC ). Install the app on your devices  to keep in sync and to check how to install visit our Help page.',
-    'Note: Your data will not be used for any advertisement or offering any deal/scheme. Also our app donot need any permission to work on your device. Your privacy is important to us. For more queries, you can contact us through the support page. We are also open to feature requests and suggestions.',
+    "Note: Your data will not be used for any advertisement or offering any deal/scheme. Also our app don't need any permission to work on your device. Your privacy is important to us. For more queries, you can contact us through the support page. We are also open to feature requests and suggestions.",
   ];
-  constructor(private seoService: SeoService) {}
+  constructor(
+    private seoService: SeoService,
+    private functions:AngularFireFunctions
+    ) {}
 
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags);
+    // this.callHelloFirebase()
+  }
+
+  async callHelloFirebase() {
+    try {
+      const helloFirebaseCallable = this.functions.httpsCallable('helloWorld');
+      const result$: Observable<any> = helloFirebaseCallable({});
+      result$.subscribe({
+        next: result => {
+          console.log('Result from helloFirebase function:', result);
+        },
+        error: error => {
+          console.error('Error calling helloFirebase function:', error);
+        }
+      });
+    } catch (error) {
+      console.error('Error calling helloFirebase function:', error);
+    }
   }
 
 }

@@ -12,10 +12,11 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 import { DatePipe } from '@angular/common';
-
+import {AngularFireFunctions, USE_EMULATOR as USE_FUNCTIONS_EMULATOR} from '@angular/fire/compat/functions';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -32,6 +33,7 @@ import { DatePipe } from '@angular/common';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    provideFunctions(() => getFunctions()),
     GoogleTagManagerModule.forRoot({
       id: environment.GTM_ID,
     })
@@ -39,6 +41,7 @@ import { DatePipe } from '@angular/common';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+    { provide: USE_FUNCTIONS_EMULATOR, useValue: environment.useEmulators ? ['localhost', 5001] : undefined },
     DatePipe
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],

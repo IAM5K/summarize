@@ -4,6 +4,7 @@
 
 
 export const environment = {
+    useEmulators: true,
     firebase: {
     apiKey: "AIzaSyCEUct-6PLpWQu363_O97ukGfAhDpTo9dc",
     authDomain: "summarize-ng.firebaseapp.com",
@@ -16,7 +17,9 @@ export const environment = {
     },
     GTM_ID:"GTM-TT56N59",
     production: false,
-    apiUrl:"https://summarize-ng-default-rtdb.firebaseio.com"
+    apiUrl:"https://summarize-ng-default-rtdb.firebaseio.com",
+    functionUrl:"",
+    functionDomain:""
     };
     
     
