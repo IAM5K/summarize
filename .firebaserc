@@ -5,10 +5,14 @@
   "targets": {
     "summarize-ng": {
       "hosting": {
-        "app": [
+        "staging": [
           "sumarize"
+        ],
+        "default": [
+          "summarize-ng"
         ]
       }
     }
-  }
+  },
+  "etags": {}
 }

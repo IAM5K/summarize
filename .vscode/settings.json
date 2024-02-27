@@ -4,11 +4,16 @@
         "arize",
         "Drucker",
         "etags",
-        "maxlength"
+        "maxlength",
+        "sumarize",
+        "summarise"
     ],
     "prettier.htmlWhitespaceSensitivity": "ignore",
     "[github-actions-workflow]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
     }
 
 }
