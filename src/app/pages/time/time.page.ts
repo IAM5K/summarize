@@ -130,32 +130,32 @@ export class TimePage implements OnInit,OnDestroy {
     });
   }
 
-  async updateWork(){
+  async updateWork() {
     this.updateSubmitted = true;
     const response = await this.officeService.updateWork(this.workForm.value, this.editWorkData.idField);
     if (response) {
       this.cancelUpdate();
       this.backToDefault();
-    }
-    else{
+    } else {
       this.updateSubmitted = false;
     }
   }
-
-  cancelUpdate(){
-    this.editMode=false;
+  
+  cancelUpdate() {
+    this.editMode = false;
+    this.workForm.markAsUntouched();
+    this.updateSubmitted = false;
   }
-
-  backToDefault(){
-        
-    this.workForm.patchValue({
+  
+  backToDefault() {
+    this.workForm.reset({
       date: this.dateToday,
       startTime: '',
       endTime: this.currentTime,
       project: this.projects[0].name,
       type: "coding",
       description: "",
-      updatedAt: '',
+      updatedAt: ''
     });
   }
   async deleteWork(idField: string) {
