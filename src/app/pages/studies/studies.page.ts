@@ -34,6 +34,7 @@ export class StudiesPage implements OnInit {
   advancedMode:boolean = false;
   advancedModeAvailable:boolean = false;
   editMode:boolean = false;
+  updateSubmitted:Boolean = false;
   dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   studiesForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
@@ -80,23 +81,25 @@ export class StudiesPage implements OnInit {
   }
 
   cancelUpdate(){
-    this.editMode = false
+    this.editMode = false;
+    this.studiesForm.markAsUntouched();
     this.studiesForm.get('date')?.enable();
-    this.studiesForm.patchValue({
+    this.studiesForm.reset({
+      date: this.dateToday,
       subject: '',
       topic: '',
       description: ''
     })
+    this.updateSubmitted=false;
   }
   addStudies(value: any) {
     this.studiesService.addStudies(value)
   }
 
   updateStudies(value:any) {
-    // console.log(value);
+    this.updateSubmitted = true;
     this.studiesService.updateStudies(value,this.updateDataId)
-    this.updateDataId=""
-
+    this.cancelUpdate();
   }
 
   async deleteStudies(idField:string){

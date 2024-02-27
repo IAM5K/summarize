@@ -171,14 +171,14 @@ export class ExpensesPage implements OnInit {
 
   cancelUpdate(){
     this.editMode=false;
+    this.expenseForm.markAsUntouched();
     this.updateSubmitted = false;
-    // console.log("cancel update",this.expenseForm.value);
     setTimeout(() => {
       this.backToDefault();      
     }, 100);
   }
   async backToDefault(){
-    await this.expenseForm.patchValue({
+    this.expenseForm.reset({
       createdAt: serverTimestamp(),
       date: this.dateToday.toString(),
       spendedOn: "self",
@@ -186,7 +186,6 @@ export class ExpensesPage implements OnInit {
       type:"",
       description:"",
     })
-    // console.log("back to default",this.expenseForm.value);
   }
   async deleteExpense(idField: string) {
     const response = await this.alertService.deleteAlert()

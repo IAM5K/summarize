@@ -18,7 +18,7 @@ import { TimeFunctions } from 'src/app/models/functions/time.function';
   templateUrl: './time.page.html',
   styleUrls: ['./time.page.scss'],
 })
-export class TimePage implements OnInit, OnDestroy {
+export class TimePage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
@@ -144,24 +144,27 @@ export class TimePage implements OnInit, OnDestroy {
     if (response) {
       this.cancelUpdate();
       this.backToDefault();
-    } else {
+    }
+    else{
       this.updateSubmitted = false;
     }
   }
-
+  
   cancelUpdate() {
     this.editMode = false;
+    this.workForm.markAsUntouched();
+    this.updateSubmitted = false;
   }
-
+  
   backToDefault() {
-    this.workForm.patchValue({
+    this.workForm.reset({
       date: this.dateToday,
       startTime: '',
       endTime: this.currentTime,
       project: this.projects[0].name,
       type: 'coding',
       description: '',
-      updatedAt: '',
+      updatedAt: ''
     });
   }
   async deleteWork(idField: string) {

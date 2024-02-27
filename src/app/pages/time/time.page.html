@@ -61,7 +61,7 @@
               <ion-button color="warning" type="reset" size="medium">Reset</ion-button>
             </ng-container>
             <ng-container *ngIf="editMode">
-              <ion-button color="tertiary" (click)="updateWork()" size="medium" [disabled]="!workForm.touched || updateSubmitted">Update</ion-button>
+              <ion-button color="tertiary" (click)="updateWork()" size="medium" [disabled]="workForm.untouched || updateSubmitted">Update</ion-button>
               <ion-button color="danger" type="reset" size="medium" (click)="cancelUpdate()">Cancel</ion-button>
             </ng-container>
           </div>
