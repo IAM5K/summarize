@@ -126,13 +126,11 @@ export class TimePage implements OnInit, OnDestroy {
       this.updateSubmitted = false;
     }
   }
-
   cancelUpdate() {
     this.editMode = false;
     this.workForm.markAsUntouched();
     this.updateSubmitted = false;
   }
-
   backToDefault() {
     this.workForm.reset({
       date: this.dateToday,
