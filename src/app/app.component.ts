@@ -7,35 +7,39 @@ import { isPlatform } from '@ionic/angular';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
 import { FirebaseService } from './services/firebase/firebase.service';
 import { ProfileService } from './services/profile/profile.service';
+import { SidenavService } from './services/sidenav/sidenav.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements OnInit,AfterViewInit {
+export class AppComponent implements OnInit {
   isLoggedIn: any = false;
-  appPages: any = [
-    { title: 'Dashboard', color: 'primary', url: 'home', icon: 'grid' },
-    { title: 'About', color: 'medium', url: 'about', icon: 'reader' },
-    {
-      title: 'Help & Support',
-      color: 'tertiary',
-      url: 'help',
-      icon: 'help-circle',
-    },
-    { title: 'Login', color: 'success', url: 'login', icon: 'log-in' },
-  ];
+  public appPages: any = []
   public labels: any = [];
   versionNumber: number = 2.0;
+  private loginStateSubscription: Subscription;
   constructor(
     private authService: AuthService,
     private router: Router,
     private gtmService: GoogleTagManagerService,
     private profileService:ProfileService,
+    private sidenavService:SidenavService,
     private firebaseService: FirebaseService
 
   ) {
-    this.initGoogleTagManager()
+    this.initGoogleTagManager();
+    this.loginStateSubscription = this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+      if (isLoggedIn) {
+        this.appPages= sidenavService.loggedInPages;
+        this.sidenavService.setLoggedInPages(); // Update appPages with logged-in pages
+      } else {
+        this.appPages=sidenavService.defaultPages;
+        this.sidenavService.setDefaultPages(); // Update appPages with default pages
+      }
+    });
   }
 
   ngOnInit() {
@@ -46,12 +50,6 @@ export class AppComponent implements OnInit,AfterViewInit {
     this.getUser();
   }
 
-  ngAfterViewInit() {
-    if (this.isLoggedIn) {
-      this.getSidebar();
-      // console.log("Updating sidebar");
-    }
-  }
 
   private initGoogleTagManager(): void {
     this.router.events.subscribe((event) => {
@@ -79,7 +77,7 @@ export class AppComponent implements OnInit,AfterViewInit {
       console.error('Error fetching user profile:', error);
     }
 
-    if (userProfile.uid) {
+    if (userProfile?.uid) {
       this.isLoggedIn = true;
       this.getSidebar();
     } else {
@@ -88,33 +86,13 @@ export class AppComponent implements OnInit,AfterViewInit {
   }
 
   getSidebar() {
-    this.appPages = [
-      { title: 'Dashboard', color: 'primary', url: 'home', icon: 'grid' },
-      { title: 'About', color: 'medium', url: 'about', icon: 'reader' },
-      { title: 'Goal', color: 'secondary', url: 'goal', icon: 'bulb' },
-      { title: 'Expenses', color: 'success', url: 'expenses', icon: 'cash' },
-      { title: 'Studies', color: 'primary', url: 'studies', icon: 'book' },
-      { title: 'Time', color: 'danger', url: 'time', icon: 'hourglass' },
-      {
-        title: 'Achievements',
-        color: 'warning',
-        url: 'achievement',
-        icon: 'trophy',
-      },
-      // { title: 'Analytics', color: 'success', url: 'analytics', icon: 'analytics' },
-      // { title: 'Setup', color: 'warning', url: 'setup', icon: 'settings' },
-      { title: 'Profile', color: 'secondary', url: 'profile', icon: 'person' },
-      {
-        title: 'Need help',
-        color: 'tertiary',
-        url: 'help',
-        icon: 'help-circle',
-      },
-    ];
+    this.appPages = this.sidenavService.loggedInPages;
   }
 
   async logout() {
     await this.authService.logout();
+    this.appPages = this.sidenavService.defaultPages;
+    this.isLoggedIn=false;
     this.router.navigateByUrl('login', { replaceUrl: true });
   }
 }
