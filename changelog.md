@@ -12,6 +12,19 @@
 ### Fixed
 - Bug causing issue Y.
 
+## [2.0.2] - 2023-03-01
+
+### Added
+- Goal on Dashboard
+
+### Changed
+- Toaster for goal not found if user not logged in.
+
+### Fixed
+- Error on dashboard goal loading in case of user not logged in.
+- Date in goal on dashboard card
+- Side menu not updating on login and logout.
+
 ## [1.0.0] - 2023-01-01
 
 ### Added
