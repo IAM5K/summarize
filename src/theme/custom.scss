@@ -6,13 +6,15 @@
 //   /* or add it to the track */
 // }
 
-.card {
+.card,.transparent-card {
   box-sizing: border-box;
-  box-shadow: 0 0 5px var(--ion-color-medium-tint);
   border-radius: 6px;
   width: min(96%, calc(100% - 2rem));
   margin: max(2%, 1rem);
   margin-bottom: 1.6rem !important;
+}
+.card{
+  box-shadow: 0 0 5px var(--ion-color-medium-tint);
 }
 
 .split-container {

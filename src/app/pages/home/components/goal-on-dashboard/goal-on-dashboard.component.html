@@ -1,6 +1,6 @@
 <section class="goal-dashboard feature-card-container">
   <ion-card class="daily-goal card">
-    <h2 class="ion-text-center bold h3">Daily Goals (16-07-2023)</h2>
+    <h2 class="ion-text-center bold h3">Goals for {{dateToday}} </h2>
     <ng-container *ngIf="dailyGoals?.length>0">
       <ion-list [inset]="true">
         <ion-item *ngFor="let item of dailyGoals; let i = index">

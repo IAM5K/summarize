@@ -14,6 +14,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
+import { Observable, map } from 'rxjs';
 import { User } from 'src/app/models/interface/user.model';
 
 @Injectable({
@@ -23,13 +24,19 @@ export class AuthService {
   isLogin: boolean = true;
   userDoc: AngularFirestoreDocument | undefined;
   user!: firebase.User | null;
+  isLoggedIn$: Observable<boolean>;
   // userRef = this.afs.collection(`user`)
   constructor(
     private auth: Auth,
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
     private router: Router
-  ) {}
+  ) {
+      // Subscribe to authentication state changes
+      this.isLoggedIn$ = this.afAuth.authState.pipe(
+        map(user => !!user) // Convert user object to boolean (true if logged in, false if not)
+      );
+  }
 
   async register(email: any, password: any) {
     try {
