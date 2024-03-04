@@ -52,12 +52,24 @@ export class SeoTags {
   ];
   public static studiesPageTags: seoMetaTag[] = [
     {
-      name:'description',
-      content:"Login or Sign up now to Summarize (summarize-ng.web.app) now. With its user-friendly interface and secure login, Simplify time, money, achievement, and study management. Easily track progress, set goals, and stay organized. "
+      name: 'description',
+      content: "Summarize (summarize-ng web app) helps users manage their studies efficiently. Stay organized, track progress, and boost productivity with our study management tools."
     },
     {
-      name:'keywords',
-      content:'Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
+      name: 'keywords',
+      content: 'Summarize, summarize-ng, Study management, Study planner, Study materials, Study schedule, Study progress, Study tracker, Productivity, Educational tools, Time management, Organization, Learning app'
     }
   ];
+  
+  public static timePageTags: seoMetaTag[] = [
+    {
+      name: 'description',
+      content: "Efficient time management is crucial for success. With Summarize (summarize-ng web app), prioritize tasks, track time usage, and enhance productivity across all your endeavors."
+    },
+    {
+      name: 'keywords',
+      content: 'Summarize, summarize-ng, Time management, Task prioritization, Productivity tools, Time tracking, Schedule optimization, Efficiency, Organizational tools, Goal setting, Study management, Study planner, Study progress'
+    }
+  ];
+  
 }
