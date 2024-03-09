@@ -21,7 +21,7 @@ export class AchievementPage implements OnInit {
     {
       name: "keyword",
       content:
-        "summarize-ng, Summarize, arise, arize, achievement managemnet, achievements, achievement analysis,summarize-ng, summarize-ng, digital dairy, motivation from Achievement",
+        "summarize-ng, Summarize, arise, arize, achievement management, achievements, achievement analysis,summarize-ng, summarize-ng, digital dairy, motivation from Achievement",
     },
     {
       name: "author",
@@ -34,7 +34,7 @@ export class AchievementPage implements OnInit {
   currentTime = new Date().getHours() + ":" + new Date().getMinutes();
   achievementTypes = [
     { title: "Adventure", value: "Adventure" },
-    { title: "Bussiness", value: "Bussiness" },
+    { title: "Business", value: "Business" },
     { title: "Career", value: "Career" },
     { title: "Enjoyment", value: "Enjoyment" },
     { title: "Family", value: "Family" },
