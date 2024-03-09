@@ -18,7 +18,7 @@ import { TimeFunctions } from 'src/app/models/functions/time.function';
   templateUrl: './time.page.html',
   styleUrls: ['./time.page.scss'],
 })
-export class TimePage implements OnInit {
+export class TimePage implements OnInit,OnDestroy {
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
