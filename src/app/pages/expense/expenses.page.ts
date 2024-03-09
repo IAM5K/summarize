@@ -1,39 +1,39 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { CustomDate } from 'src/app/models/class/date/custom-date';
-import { serverTimestamp } from '@angular/fire/firestore';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ExpenseService } from 'src/app/services/expense/expense.service';
-import { SeoService } from 'src/app/services/seo/seo.service';
-import { Options } from 'src/app/models/interface/masterData.model';
-import { AlertService } from 'src/app/services/alert/alert.service';
-import { DatePipe } from '@angular/common';
-import { Router } from '@angular/router';
-import * as XLSX from 'xlsx';
-import * as FileSaver from 'file-saver';
-import { Analyze } from './modules/analyze';
-import { PopoverController } from '@ionic/angular';
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { CustomDate } from "src/app/models/class/date/custom-date";
+import { serverTimestamp } from "@angular/fire/firestore";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ExpenseService } from "src/app/services/expense/expense.service";
+import { SeoService } from "src/app/services/seo/seo.service";
+import { Options } from "src/app/models/interface/masterData.model";
+import { AlertService } from "src/app/services/alert/alert.service";
+import { DatePipe } from "@angular/common";
+import { Router } from "@angular/router";
+import * as XLSX from "xlsx";
+import * as FileSaver from "file-saver";
+import { Analyze } from "./modules/analyze";
+import { PopoverController } from "@ionic/angular";
 @Component({
-  selector: 'app-expenses',
-  templateUrl: './expenses.page.html',
-  styleUrls: ['./expenses.page.scss'],
+  selector: "app-expenses",
+  templateUrl: "./expenses.page.html",
+  styleUrls: ["./expenses.page.scss"],
 })
 export class ExpensesPage implements OnInit {
   @Output() expenseData = new EventEmitter<any>();
   pageTitle = "Expenses"
   pageMetaTags = [
     {
-      name: 'description',
+      name: "description",
       content: "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better."
     },
     {
-      name: 'keyword',
-      content: 'Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis'
+      name: "keyword",
+      content: "Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis"
     }
   ];
   editMode:boolean = false;
   updateSubmitted= false;
   editExpenseData:any;
-  dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   expenseOf:string = this.dateToday;
   expenseByDate: any;
   constructor(
@@ -53,7 +53,7 @@ export class ExpensesPage implements OnInit {
   expensesCount: number = 0;
   totalExpense = 0;
   dataSize = 5;
-  weekBackDate: string | null = this.datePipe.transform(new CustomDate().getWeekBackDate(), 'yyyy-MM-dd');
+  weekBackDate: string | null = this.datePipe.transform(new CustomDate().getWeekBackDate(), "yyyy-MM-dd");
   expenseTypes = [
     { title: "Bills", value: "bill" },
     { title: "Emi", value: "emi" },
@@ -87,29 +87,29 @@ export class ExpensesPage implements OnInit {
     // { title: "5 Recent", value: "recent" },
     { title: "Today", value: this.dateToday },
     { title: "7 Days", value: this.weekBackDate },
-    { title: "30 Days", value: this.datePipe.transform(new CustomDate().getLastMonthDate(), 'yyyy-MM-dd') },
-    { title: "365 Days", value: this.datePipe.transform(new CustomDate().getLastYearDate(), 'yyyy-MM-dd') },
+    { title: "30 Days", value: this.datePipe.transform(new CustomDate().getLastMonthDate(), "yyyy-MM-dd") },
+    { title: "365 Days", value: this.datePipe.transform(new CustomDate().getLastYearDate(), "yyyy-MM-dd") },
     { title: "This Month", value: new CustomDate().getThisMonth() },
     { title: "This Year", value: new CustomDate().getThisYear() }
   ]
   expenseMessage: string = "Getting Last 5 Expenses :"
   expenseCurrency: string = "₹"
   showFilter: boolean = false;
-  handlerMessage = '';
-  roleMessage = '';
+  handlerMessage = "";
+  roleMessage = "";
   expenseForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
-    date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    amount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-    type: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]*$')]],
-    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9\n, -.]*$')]],
-    spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
+    date: [this.dateToday, [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
+    amount: ["", [Validators.required, Validators.pattern("^[0-9]*$")]],
+    type: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")]],
+    description: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
+    spendedOn: ["self", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
     updatedAt: [serverTimestamp()]
   })
   budgetForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
-    month: [new CustomDate().getCurrentMonth(), [Validators.required, Validators.pattern('^[0-9-]*$')]],
-    amount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+    month: [new CustomDate().getCurrentMonth(), [Validators.required, Validators.pattern("^[0-9-]*$")]],
+    amount: ["", [Validators.required, Validators.pattern("^[0-9]*$")]],
     updatedAt: [serverTimestamp()]
   })
 
@@ -140,8 +140,8 @@ export class ExpensesPage implements OnInit {
   addExpense() {
     this.expenseService.addExpense(this.expenseForm.value);
     this.expenseForm.patchValue({
-      amount: '',
-      description: ''
+      amount: "",
+      description: ""
     });
     this.seoService.eventTrigger("form", this.pageTitle);
   }
@@ -268,7 +268,7 @@ export class ExpensesPage implements OnInit {
     let savedBudget: any;
     let monthExists: any;
     await this.getBudget().then(res => {
-      let tempBudget = sessionStorage.getItem('budget')
+      let tempBudget = sessionStorage.getItem("budget")
       if (tempBudget) {
         savedBudget = JSON.parse(tempBudget)
       }
@@ -310,7 +310,7 @@ export class ExpensesPage implements OnInit {
   async analyzeExpense() {
     this.getAllExpenses();
     await this.getBudget();
-    this.router.navigateByUrl('expenses/analyze');
+    this.router.navigateByUrl("expenses/analyze");
   }
 
   // Export data
@@ -318,7 +318,7 @@ export class ExpensesPage implements OnInit {
     const data: any[] = this.Expenses.map((item:any) => ({
       Date: item.date,
       Cost: item.amount,
-      Description: item.description.replace(/\n/g, '\n '),
+      Description: item.description.replace(/\n/g, "\n "),
       Type:item.type,
       SpentOn: item.spendedOn
     }));
@@ -330,13 +330,13 @@ export class ExpensesPage implements OnInit {
     const categoryData: XLSX.WorkSheet = XLSX.utils.json_to_sheet(categoryWiseData);
     const workbook: XLSX.WorkBook = {
       Sheets: {
-        'Expense Data': worksheet,
-        'Category wise' : categoryData
+        "Expense Data": worksheet,
+        "Category wise" : categoryData
       },
-      SheetNames: ['Expense Data', 'Category wise']
+      SheetNames: ["Expense Data", "Category wise"]
     };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    const excelBlob: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const excelBuffer: any = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const excelBlob: Blob = new Blob([excelBuffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
     FileSaver.saveAs(excelBlob, filename);
   }
 }

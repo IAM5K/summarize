@@ -1,18 +1,18 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { NavigationEnd, Router } from '@angular/router';
-import { AuthService } from './services/auth/auth.service';
-import { StatusBar, Style } from '@capacitor/status-bar';
-import { isPlatform } from '@ionic/angular';
-import { GoogleTagManagerService } from 'angular-google-tag-manager';
-import { FirebaseService } from './services/firebase/firebase.service';
-import { ProfileService } from './services/profile/profile.service';
-import { SidenavService } from './services/sidenav/sidenav.service';
-import { Subscription } from 'rxjs';
+import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { NavigationEnd, Router } from "@angular/router";
+import { AuthService } from "./services/auth/auth.service";
+import { StatusBar, Style } from "@capacitor/status-bar";
+import { isPlatform } from "@ionic/angular";
+import { GoogleTagManagerService } from "angular-google-tag-manager";
+import { FirebaseService } from "./services/firebase/firebase.service";
+import { ProfileService } from "./services/profile/profile.service";
+import { SidenavService } from "./services/sidenav/sidenav.service";
+import { Subscription } from "rxjs";
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  selector: "app-root",
+  templateUrl: "app.component.html",
+  styleUrls: ["app.component.scss"],
 })
 export class AppComponent implements OnInit {
   isLoggedIn: any = false;
@@ -43,8 +43,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (isPlatform('mobile')) {
-      StatusBar.setBackgroundColor({ color: '#3880ff' }).catch(() => {});
+    if (isPlatform("mobile")) {
+      StatusBar.setBackgroundColor({ color: "#3880ff" }).catch(() => {});
     }
     this.firebaseService.getUserProfile();
     this.getUser();
@@ -56,13 +56,13 @@ export class AppComponent implements OnInit {
       try {
         if (event instanceof NavigationEnd) {
           const gtmTag = {
-            event: 'page',
+            event: "page",
             pageName: event.urlAfterRedirects
           };
           this.gtmService.pushTag(gtmTag);
         }
       } catch (error) {
-        console.error('Error occurred in Google Tag Manager:', error);
+        console.error("Error occurred in Google Tag Manager:", error);
       }
     });
   }
@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
       this.profileService.userData = userProfile
       // console.log(userProfile);
     } catch (error) {
-      console.error('Error fetching user profile:', error);
+      console.error("Error fetching user profile:", error);
     }
 
     if (userProfile?.uid) {
@@ -93,6 +93,6 @@ export class AppComponent implements OnInit {
     await this.authService.logout();
     this.appPages = this.sidenavService.defaultPages;
     this.isLoggedIn=false;
-    this.router.navigateByUrl('login', { replaceUrl: true });
+    this.router.navigateByUrl("login", { replaceUrl: true });
   }
 }

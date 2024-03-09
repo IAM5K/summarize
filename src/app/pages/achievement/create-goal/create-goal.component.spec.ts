@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { IonicModule } from "@ionic/angular";
 
-import { CreateGoalComponent } from './create-goal.component';
+import { CreateGoalComponent } from "./create-goal.component";
 
-describe('CreateGoalComponent', () => {
+describe("CreateGoalComponent", () => {
   let component: CreateGoalComponent;
   let fixture: ComponentFixture<CreateGoalComponent>;
 
@@ -18,7 +18,7 @@ describe('CreateGoalComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth/auth.service';
+import { Injectable } from "@angular/core";
+import { ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from "@angular/router";
+import { Observable } from "rxjs";
+import { AuthService } from "../services/auth/auth.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AuthGuard  {
   constructor(private auth:AuthService, private router:Router){}
@@ -15,7 +15,7 @@ export class AuthGuard  {
         return true
       }
       else{
-        this.router.navigate(['login'])
+        this.router.navigate(["login"])
         return false;
       }
   }

@@ -1,26 +1,26 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { StudiesPage } from './studies.page';
-import { EditStudiesComponent } from './components/edit-studies/edit-studies.component';
-import { FreeResourceComponent } from './components/free-resource/free-resource.component';
-import { AdvancedStudiesComponent } from './components/advanced-studies/advanced-studies.component';
+import { StudiesPage } from "./studies.page";
+import { EditStudiesComponent } from "./components/edit-studies/edit-studies.component";
+import { FreeResourceComponent } from "./components/free-resource/free-resource.component";
+import { AdvancedStudiesComponent } from "./components/advanced-studies/advanced-studies.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: StudiesPage
   },
   {
-    path:'edit-studies',
+    path:"edit-studies",
     component:EditStudiesComponent
   },
   {
-    path:'free-resource',
+    path:"free-resource",
     component:FreeResourceComponent
   },
   {
-    path:'advanced-studies',
+    path:"advanced-studies",
     component:AdvancedStudiesComponent
   }
 ];

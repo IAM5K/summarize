@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
-import { Subscription } from 'rxjs';
-import { getDownloadURL, ref, Storage, uploadString } from '@angular/fire/storage';
-import { Auth } from '@angular/fire/auth';
-import { Photo } from '@capacitor/camera';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Injectable } from "@angular/core";
+import { Firestore, doc, setDoc } from "@angular/fire/firestore";
+import { Subscription } from "rxjs";
+import { getDownloadURL, ref, Storage, uploadString } from "@angular/fire/storage";
+import { Auth } from "@angular/fire/auth";
+import { Photo } from "@capacitor/camera";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 
 export interface Note {
   id?: string;
@@ -13,7 +13,7 @@ export interface Note {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class FirebaseService {
 
@@ -46,7 +46,7 @@ export class FirebaseService {
 		const path = `uploads/${user.uid}/profile.webp`;
 		const storageRef = ref(this.storage, path);
 		try {
-			await uploadString(storageRef, cameraFile.base64String?cameraFile.base64String:"failed", 'base64');
+			await uploadString(storageRef, cameraFile.base64String?cameraFile.base64String:"failed", "base64");
 
 			const imageUrl = await getDownloadURL(storageRef);
 

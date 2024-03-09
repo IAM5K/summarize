@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { RouterModule } from "@angular/router";
+import { IonicModule } from "@ionic/angular";
 
-import { FolderPage } from './folder.page';
+import { FolderPage } from "./folder.page";
 
-describe('FolderPage', () => {
+describe("FolderPage", () => {
   let component: FolderPage;
   let fixture: ComponentFixture<FolderPage>;
 
@@ -19,7 +19,7 @@ describe('FolderPage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

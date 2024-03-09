@@ -1,26 +1,26 @@
-import { AfterViewInit, Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ChartConfiguration, ChartOptions, } from 'chart.js';
-import { CustomDate } from 'src/app/models/class/date/custom-date';
-import { ExpenseService } from 'src/app/services/expense/expense.service';
-import { BaseChartDirective, } from 'ng2-charts';
-import { Router } from '@angular/router';
-import { Budget } from '../../modules/budget';
-import { MonthlyExpense } from '../../modules/monthly-expense';
+import { AfterViewInit, Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { ChartConfiguration, ChartOptions, } from "chart.js";
+import { CustomDate } from "src/app/models/class/date/custom-date";
+import { ExpenseService } from "src/app/services/expense/expense.service";
+import { BaseChartDirective, } from "ng2-charts";
+import { Router } from "@angular/router";
+import { Budget } from "../../modules/budget";
+import { MonthlyExpense } from "../../modules/monthly-expense";
 
 @Component({
-  selector: 'app-analyze',
-  templateUrl: './analyze.component.html',
-  styleUrls: ['./analyze.component.scss'],
+  selector: "app-analyze",
+  templateUrl: "./analyze.component.html",
+  styleUrls: ["./analyze.component.scss"],
 })
 
 export class AnalyzeComponent implements OnInit, AfterViewInit {
   @ViewChild(BaseChartDirective) chartA!: BaseChartDirective;
   @ViewChild(BaseChartDirective) chartB!: BaseChartDirective;
   // @ViewChild('monthlyChart') monthlyChart!: BaseChartDirective;
-  @ViewChild('totalChart') totalChart!: BaseChartDirective;
+  @ViewChild("totalChart") totalChart!: BaseChartDirective;
 
   @Input() expenseData: any = [];
-  @HostListener('window:resize')
+  @HostListener("window:resize")
   onResize(): void {
     this.setGraphHeight();
     this.setGraphWidth();
@@ -48,22 +48,22 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
     private expenseService: ExpenseService,
     private router: Router) {
   }
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
+  public lineChartData: ChartConfiguration<"line">["data"] = {
     labels: Array(this.daysInMonth).fill(this.daysInMonth).map((x, i) => x = `${i + 1}-${this.month}-${this.year}`),
     datasets: []
   };
-  public totalExpenseData: ChartConfiguration<'line'>['data'] = {
+  public totalExpenseData: ChartConfiguration<"line">["data"] = {
     labels: [],
     datasets: [{
       data: [],
-      label: 'Total Expense',
+      label: "Total Expense",
       fill: false,
       tension: .5,
-      borderColor: 'lime',
-      backgroundColor: '#00ff00'
+      borderColor: "lime",
+      backgroundColor: "#00ff00"
     }]
   };
-  public currentMonthExpenseData: ChartConfiguration<'line'>['data'] = {
+  public currentMonthExpenseData: ChartConfiguration<"line">["data"] = {
     labels: [],
     datasets: []
   };
@@ -103,7 +103,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
     this.currentExpense = await new MonthlyExpense().getCurrentExpense()
   }
   async getExpense(month: string) {
-    await this.expenseService.getCustomExpenses('duration', month).subscribe(async (res: any) => {
+    await this.expenseService.getCustomExpenses("duration", month).subscribe(async (res: any) => {
       this.Expense = await res
     })
     setTimeout(() => {
@@ -152,27 +152,27 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
     this.currentMonthExpenseData.datasets = [
       {
         data: monthlyData.dailyAmount,
-        label: 'Expense today',
+        label: "Expense today",
         fill: false,
         tension: .5,
-        borderColor: 'blue',
-        backgroundColor: 'blue',
+        borderColor: "blue",
+        backgroundColor: "blue",
       },
       {
         data: monthlyData.amount,
-        label: 'Expense till now',
+        label: "Expense till now",
         fill: false,
         tension: .5,
-        borderColor: 'purple',
-        backgroundColor: 'purple'
+        borderColor: "purple",
+        backgroundColor: "purple"
       },
       {
         data: monthlyData.budgetData,
-        label: 'Monthly Budget',
+        label: "Monthly Budget",
         fill: false,
         tension: .5,
-        borderColor: 'red',
-        backgroundColor: 'red'
+        borderColor: "red",
+        backgroundColor: "red"
       }
     ]
     this.currentExpense = monthlyData.incrementAmount
@@ -207,10 +207,10 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
   }
 
   /* Pie */
-  public pieChartOptions: ChartOptions<'pie'> = {
+  public pieChartOptions: ChartOptions<"pie"> = {
     responsive: true,
   };
-  public pieChartLabels = ['All'];
+  public pieChartLabels = ["All"];
   public pieChartDatasets = [{
     data: [100]
   }];

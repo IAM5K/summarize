@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Title, Meta } from '@angular/platform-browser';
-import { GoogleTagManagerService } from 'angular-google-tag-manager';
+import { Injectable } from "@angular/core";
+import { Title, Meta } from "@angular/platform-browser";
+import { GoogleTagManagerService } from "angular-google-tag-manager";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class SeoService {
 

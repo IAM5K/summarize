@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { GoalPage } from './goal.page';
-import { GoalInfoComponent } from './components/goal-info/goal-info.component';
+import { GoalPage } from "./goal.page";
+import { GoalInfoComponent } from "./components/goal-info/goal-info.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: GoalPage
   },
   {
-    path: 'info',
+    path: "info",
     component: GoalInfoComponent
   }
 ];

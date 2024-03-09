@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import { AboutPageRoutingModule } from './about-routing.module';
+import { AboutPageRoutingModule } from "./about-routing.module";
 
-import { AboutPage } from './about.page';
-import { HowtoComponent } from './components/howto/howto.component';
-import { UpdateComponent } from './components/update/update.component';
-import { HofComponent } from './components/hof/hof.component';
+import { AboutPage } from "./about.page";
+import { HowtoComponent } from "./components/howto/howto.component";
+import { UpdateComponent } from "./components/update/update.component";
+import { HofComponent } from "./components/hof/hof.component";
 
 @NgModule({
   imports: [

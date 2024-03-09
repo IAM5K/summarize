@@ -1,24 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   Auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
   GoogleAuthProvider,
-} from '@angular/fire/auth';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+} from "@angular/fire/auth";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
-import { Router } from '@angular/router';
-import firebase from 'firebase/compat/app';
-import { Observable, map } from 'rxjs';
-import { User } from 'src/app/models/interface/user.model';
+} from "@angular/fire/compat/firestore";
+import { Router } from "@angular/router";
+import firebase from "firebase/compat/app";
+import { Observable, map } from "rxjs";
+import { User } from "src/app/models/interface/user.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   isLogin: boolean = true;
@@ -56,7 +56,7 @@ export class AuthService {
     try {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
       await this.getEmailBasedUser(user.user);
-      localStorage.setItem('user', JSON.stringify(user.user));
+      localStorage.setItem("user", JSON.stringify(user.user));
       this.isLogin = true;
       return user;
     } catch (e) {
@@ -108,7 +108,7 @@ export class AuthService {
           const data = JSON.parse(JSON.stringify(user));
           userRef.set(data, { merge: true });
         }
-        localStorage.setItem('UserData', JSON.stringify(user));
+        localStorage.setItem("UserData", JSON.stringify(user));
       });
     } else if (userRef.get() === undefined) {
       userRef.set(user, { merge: true });
@@ -127,8 +127,8 @@ export class AuthService {
           const data = JSON.parse(JSON.stringify(user));
           userRef.set(data, { merge: true });
         }
-        localStorage.setItem('UserData', JSON.stringify(user));
-        this.router.navigateByUrl('/home', { replaceUrl: true });
+        localStorage.setItem("UserData", JSON.stringify(user));
+        this.router.navigateByUrl("/home", { replaceUrl: true });
       });
     } else {
       userRef.set(data, { merge: true });

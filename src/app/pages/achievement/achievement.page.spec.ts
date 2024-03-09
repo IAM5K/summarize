@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { IonicModule } from "@ionic/angular";
 
-import { AchievementPage } from './achievement.page';
+import { AchievementPage } from "./achievement.page";
 
-describe('AchievementPage', () => {
+describe("AchievementPage", () => {
   let component: AchievementPage;
   let fixture: ComponentFixture<AchievementPage>;
 
@@ -18,7 +18,7 @@ describe('AchievementPage', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

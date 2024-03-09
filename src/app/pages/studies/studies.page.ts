@@ -1,18 +1,18 @@
-import { DatePipe, ViewportScroller } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { serverTimestamp } from '@angular/fire/firestore';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SeoTags } from 'src/app/models/class/seoTags/seo';
-import { StudyOptionsData } from 'src/app/models/data/studyOptions.data';
-import { AlertService } from 'src/app/services/alert/alert.service';
-import { ProfileService } from 'src/app/services/profile/profile.service';
-import { SeoService } from 'src/app/services/seo/seo.service';
-import { StudiesService } from 'src/app/services/studies/studies.service';
+import { DatePipe, ViewportScroller } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { serverTimestamp } from "@angular/fire/firestore";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { SeoTags } from "src/app/models/class/seoTags/seo";
+import { StudyOptionsData } from "src/app/models/data/studyOptions.data";
+import { AlertService } from "src/app/services/alert/alert.service";
+import { ProfileService } from "src/app/services/profile/profile.service";
+import { SeoService } from "src/app/services/seo/seo.service";
+import { StudiesService } from "src/app/services/studies/studies.service";
 
 @Component({
-  selector: 'app-studies',
-  templateUrl: './studies.page.html',
-  styleUrls: ['./studies.page.scss']
+  selector: "app-studies",
+  templateUrl: "./studies.page.html",
+  styleUrls: ["./studies.page.scss"]
 })
 export class StudiesPage implements OnInit {
   constructor(
@@ -30,22 +30,22 @@ export class StudiesPage implements OnInit {
   studyMode = StudyOptionsData.studyMode
   Studies: any = [];
   studiesCount: number = 0;
-  currentTime = this.datePipe.transform(new Date(), 'hh:mm');
+  currentTime = this.datePipe.transform(new Date(), "hh:mm");
   advancedMode:boolean = false;
   advancedModeAvailable:boolean = false;
   editMode:boolean = false;
   updateSubmitted:Boolean = false;
-  dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   studiesForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
-    date: [this.dateToday, [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    startTime: ['', [Validators.required, Validators.pattern('^[0-9:]*$')]],
-    endTime: [this.currentTime, [Validators.required, Validators.pattern('^[0-9:]*$')]],
-    type: ['read', [Validators.required, Validators.pattern('^[a-z]*$')]],
-    subject: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    topic: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9\n .,-]*$')]],
-    description: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9\n .,-]*$')]],
-    studyMode: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
+    date: [this.dateToday, [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
+    startTime: ["", [Validators.required, Validators.pattern("^[0-9:]*$")]],
+    endTime: [this.currentTime, [Validators.required, Validators.pattern("^[0-9:]*$")]],
+    type: ["read", [Validators.required, Validators.pattern("^[a-z]*$")]],
+    subject: ["", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
+    topic: ["", [Validators.required, Validators.pattern("^[a-zA-Z 0-9\n .,-]*$")]],
+    description: ["", [Validators.required, Validators.pattern("^[a-zA-Z 0-9\n .,-]*$")]],
+    studyMode: ["self", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
     updatedAt: [serverTimestamp()]
   })
   studiesTypes = StudyOptionsData.studiesTypes
@@ -72,23 +72,23 @@ export class StudiesPage implements OnInit {
     }
 
     this.editMode = false
-    this.studiesForm.get('date')?.enable();
+    this.studiesForm.get("date")?.enable();
     this.studiesForm.patchValue({
-      subject: '',
-      topic: '',
-      description: ''
+      subject: "",
+      topic: "",
+      description: ""
     })
   }
 
   cancelUpdate(){
     this.editMode = false;
     this.studiesForm.markAsUntouched();
-    this.studiesForm.get('date')?.enable();
+    this.studiesForm.get("date")?.enable();
     this.studiesForm.reset({
       date: this.dateToday,
-      subject: '',
-      topic: '',
-      description: ''
+      subject: "",
+      topic: "",
+      description: ""
     })
     this.updateSubmitted=false;
   }
@@ -122,7 +122,7 @@ export class StudiesPage implements OnInit {
       updatedAt: serverTimestamp()
     })
     this.updateDataId= data.idField;
-    this.studiesForm.get('date')?.disable();
+    this.studiesForm.get("date")?.disable();
     this.editMode = true;
   }
 

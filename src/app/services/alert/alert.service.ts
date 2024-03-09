@@ -1,30 +1,30 @@
-import { Injectable } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { Injectable } from "@angular/core";
+import { AlertController } from "@ionic/angular";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AlertService {
-  handlerMessage = '';
-  roleMessage = '';
+  handlerMessage = "";
+  roleMessage = "";
   constructor(private alertController: AlertController) { }
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Alert!',
+      header: "Alert!",
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel',
+          text: "Cancel",
+          role: "cancel",
           handler: () => {
-            this.handlerMessage = 'Alert canceled';
+            this.handlerMessage = "Alert canceled";
           },
         },
         {
-          text: 'OK',
-          role: 'confirm',
+          text: "OK",
+          role: "confirm",
           handler: () => {
-            this.handlerMessage = 'Alert confirmed';
+            this.handlerMessage = "Alert confirmed";
           },
         },
       ],
@@ -37,20 +37,20 @@ export class AlertService {
   }
   async deleteAlert() {
     const alert = await this.alertController.create({
-      header: 'Delete permanently?',
+      header: "Delete permanently?",
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel',
+          text: "Cancel",
+          role: "cancel",
           handler: () => {
-            this.handlerMessage = 'Delete canceled';
+            this.handlerMessage = "Delete canceled";
           },
         },
         {
-          text: 'OK',
-          role: 'confirm',
+          text: "OK",
+          role: "confirm",
           handler: () => {
-            this.handlerMessage = 'Delete confirmed';
+            this.handlerMessage = "Delete confirmed";
           },
         },
       ],

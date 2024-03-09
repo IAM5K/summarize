@@ -1,48 +1,48 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { Component, OnInit } from "@angular/core";
+import { AlertController } from "@ionic/angular";
 import {
   ProfileData,
   Project,
-} from 'src/app/models/interface/profile.interface';
-import { AlertService } from 'src/app/services/alert/alert.service';
-import { ProfileService } from 'src/app/services/profile/profile.service';
-import { SeoService } from 'src/app/services/seo/seo.service';
+} from "src/app/models/interface/profile.interface";
+import { AlertService } from "src/app/services/alert/alert.service";
+import { ProfileService } from "src/app/services/profile/profile.service";
+import { SeoService } from "src/app/services/seo/seo.service";
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: "app-profile",
+  templateUrl: "./profile.page.html",
+  styleUrls: ["./profile.page.scss"],
 })
 export class ProfilePage implements OnInit {
-  pageTitle = 'Profile';
+  pageTitle = "Profile";
   profileData: ProfileData;
   pageMetaTags = [
     {
-      name: 'description',
+      name: "description",
       content:
-        'Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better.',
+        "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better.",
     },
     {
-      name: 'keyword',
+      name: "keyword",
       content:
-        'Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis',
+        "Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis",
     },
     {
-      name: 'author',
-      content: 'Sandeep Kumar',
+      name: "author",
+      content: "Sandeep Kumar",
     },
   ];
   userProfile: any;
   educationDetails: string[] = [];
-  educationPhase: string = '';
+  educationPhase: string = "";
   projects: Project[] = [];
   friendsGroup = [];
-  subjects: string = '';
+  subjects: string = "";
   updateDisabled: boolean = true;
   public alertButtons = [
     {
-      text: 'Submit',
-      role: 'confirm',
+      text: "Submit",
+      role: "confirm",
       handler: (value: object) => {
         this.addProjectDetail(value);
       },
@@ -50,7 +50,7 @@ export class ProfilePage implements OnInit {
   ];
   public alertInputs = [
     {
-      placeholder: 'Active project name',
+      placeholder: "Active project name",
     },
   ];
 
@@ -127,9 +127,9 @@ export class ProfilePage implements OnInit {
   }
   async showProjectInfo() {
     const alert = await this.alertController.create({
-      header: 'Projects List',
-      message: 'Here you can add, view and manage your projects. When a project is added it is considered as active, you can make it inactive by using the toggle and it will not be visible in Time section.',
-      buttons: ['OK']
+      header: "Projects List",
+      message: "Here you can add, view and manage your projects. When a project is added it is considered as active, you can make it inactive by using the toggle and it will not be visible in Time section.",
+      buttons: ["OK"]
     });
 
     await alert.present();

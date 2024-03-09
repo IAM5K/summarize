@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { IonicModule } from "@ionic/angular";
 
-import { EditStudiesComponent } from './edit-studies.component';
+import { EditStudiesComponent } from "./edit-studies.component";
 
-describe('EditStudiesComponent', () => {
+describe("EditStudiesComponent", () => {
   let component: EditStudiesComponent;
   let fixture: ComponentFixture<EditStudiesComponent>;
 
@@ -18,7 +18,7 @@ describe('EditStudiesComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

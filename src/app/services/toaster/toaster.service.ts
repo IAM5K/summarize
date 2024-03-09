@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { Injectable } from "@angular/core";
+import { ToastController } from "@ionic/angular";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ToasterService {
   constructor(private toastController: ToastController) {}

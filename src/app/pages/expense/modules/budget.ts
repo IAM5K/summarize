@@ -1,7 +1,7 @@
 export class Budget {
   async getCurrentBudget(currentMonth:string) {
     let retrievedBudget :any  = 0
-    retrievedBudget = await sessionStorage.getItem('budget');
+    retrievedBudget = await sessionStorage.getItem("budget");
     let currentBudget: number = 0;
     if (retrievedBudget) {
       let budget = JSON.parse(retrievedBudget)
@@ -22,7 +22,7 @@ export class Budget {
     return currentBudget;
   }
   getTotalBudget(): number {
-    let retrievedBudget = sessionStorage.getItem('budget');
+    let retrievedBudget = sessionStorage.getItem("budget");
     let currentBudget: number = 0;
     if (retrievedBudget) {
       let budget = JSON.parse(retrievedBudget)

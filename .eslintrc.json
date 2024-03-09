@@ -34,7 +34,9 @@
             "prefix": "app",
             "style": "camelCase"
           }
-        ]
+        ],
+        "quotes": ["error", "double"],
+        "import/no-unresolved": 0
       }
     },
     {

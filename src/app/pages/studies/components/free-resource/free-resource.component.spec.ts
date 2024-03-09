@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { IonicModule } from "@ionic/angular";
 
-import { FreeResourceComponent } from './free-resource.component';
+import { FreeResourceComponent } from "./free-resource.component";
 
-describe('FreeResourceComponent', () => {
+describe("FreeResourceComponent", () => {
   let component: FreeResourceComponent;
   let fixture: ComponentFixture<FreeResourceComponent>;
 
@@ -18,7 +18,7 @@ describe('FreeResourceComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

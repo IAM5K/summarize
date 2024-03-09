@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { IonicModule } from "@ionic/angular";
 
-import { HofComponent } from './hof.component';
+import { HofComponent } from "./hof.component";
 
-describe('HofComponent', () => {
+describe("HofComponent", () => {
   let component: HofComponent;
   let fixture: ComponentFixture<HofComponent>;
 
@@ -18,7 +18,7 @@ describe('HofComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

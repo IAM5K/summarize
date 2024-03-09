@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
-import { CustomDate } from 'src/app/models/class/date/custom-date';
-import { SeoTags } from 'src/app/models/class/seoTags/seo';
-import { SeoService } from 'src/app/services/seo/seo.service';
+import { Component, OnInit } from "@angular/core";
+import { SwUpdate } from "@angular/service-worker";
+import { CustomDate } from "src/app/models/class/date/custom-date";
+import { SeoTags } from "src/app/models/class/seoTags/seo";
+import { SeoService } from "src/app/services/seo/seo.service";
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.page.html',
-  styleUrls: ['./about.page.scss'],
+  selector: "app-about",
+  templateUrl: "./about.page.html",
+  styleUrls: ["./about.page.scss"],
 })
 export class AboutPage implements OnInit {
   pageTitle="About Summarize"
@@ -47,10 +47,10 @@ export class AboutPage implements OnInit {
 
   ngOnInit() {
     this.seoService.seo(this.title,this.pageMetaTags)
-    this.lastUpdateOn=localStorage.getItem('lastUpdateOn')
+    this.lastUpdateOn=localStorage.getItem("lastUpdateOn")
     this.swUpdate.versionUpdates.subscribe(()=>{
       this.infoNote ="Checking for update..."
-      if(confirm('Update Available, do you want to install it?') && this.lastUpdateOn !== this.dateToday){
+      if(confirm("Update Available, do you want to install it?") && this.lastUpdateOn !== this.dateToday){
         window.location.reload();
         this.infoNote="Updated."
       }
@@ -59,11 +59,11 @@ export class AboutPage implements OnInit {
 
   checkForUpdate(){
     this.lastUpdateOn = (new Date().getFullYear()) + "-0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
-    localStorage.setItem('lastUpdateOn',this.lastUpdateOn)
+    localStorage.setItem("lastUpdateOn",this.lastUpdateOn)
     let updateCount=0
     this.swUpdate.versionUpdates.subscribe(()=>{
       this.infoNote ="Checking for update..."
-      if(confirm('Update Available, do you want to install it?') && updateCount<3){
+      if(confirm("Update Available, do you want to install it?") && updateCount<3){
         updateCount = updateCount+1;
         window.location.reload();
         this.infoNote="Updated."

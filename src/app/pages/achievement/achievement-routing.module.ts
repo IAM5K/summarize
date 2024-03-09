@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { AchievementPage } from './achievement.page';
-import { CreateGoalComponent } from './create-goal/create-goal.component';
+import { AchievementPage } from "./achievement.page";
+import { CreateGoalComponent } from "./create-goal/create-goal.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: AchievementPage
   },
   {
-    path: 'create-goal',
+    path: "create-goal",
     component: CreateGoalComponent
   }
 ];

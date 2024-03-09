@@ -1,23 +1,23 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { serverTimestamp } from '@angular/fire/firestore';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { GoalData } from 'src/app/models/interface/goals.interface';
-import { FirebaseService } from 'src/app/services/firebase/firebase.service';
-import { GoalService } from 'src/app/services/goal/goal.service';
-import { ToasterService } from 'src/app/services/toaster/toaster.service';
+import { DatePipe } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { serverTimestamp } from "@angular/fire/firestore";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { GoalData } from "src/app/models/interface/goals.interface";
+import { FirebaseService } from "src/app/services/firebase/firebase.service";
+import { GoalService } from "src/app/services/goal/goal.service";
+import { ToasterService } from "src/app/services/toaster/toaster.service";
 
 @Component({
-  selector: 'app-goal-on-dashboard',
-  templateUrl: './goal-on-dashboard.component.html',
-  styleUrls: ['./goal-on-dashboard.component.scss'],
+  selector: "app-goal-on-dashboard",
+  templateUrl: "./goal-on-dashboard.component.html",
+  styleUrls: ["./goal-on-dashboard.component.scss"],
 })
 export class GoalOnDashboardComponent implements OnInit {
   dailyGoals: GoalData[];
   priorityGoals: GoalData[];
-  alertButtons = ['Close'];
+  alertButtons = ["Close"];
   goalForm: FormGroup;
-  dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   constructor(
     private firebaseService: FirebaseService,
     private fb: FormBuilder,

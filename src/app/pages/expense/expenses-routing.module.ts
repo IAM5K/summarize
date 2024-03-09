@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AnalyzeComponent } from './components/analyze/analyze.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { AnalyzeComponent } from "./components/analyze/analyze.component";
 
-import { ExpensesPage } from './expenses.page';
+import { ExpensesPage } from "./expenses.page";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: ExpensesPage
   },
   {
-    path: 'analyze',
+    path: "analyze",
     component: AnalyzeComponent
   }
 ];
