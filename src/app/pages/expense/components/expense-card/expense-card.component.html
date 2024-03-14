@@ -1,0 +1,16 @@
+<ion-card class="container-70-30 ">
+  <ion-card-header class="left-70">
+    <ion-note color="primary">{{expenseItem.date}} : {{expenseItem.type| uppercase }}</ion-note>
+    <ion-card-title>{{expenseItem.amount}} </ion-card-title>
+    <ion-card-subtitle><ion-note>{{expenseItem.spendedOn}}</ion-note> : {{expenseItem.description}}</ion-card-subtitle>
+  </ion-card-header>
+
+  <div class="expense-action-container">
+    <ion-button class="" color="secondary" (click)="onEditClick()">
+      <ion-icon color="light" [ios]="'pencil-outline'" [md]="'pencil-sharp'"></ion-icon>
+    </ion-button>
+    <ion-button class="" color="danger" (click)="onDeleteClick()">
+      <ion-icon color="light" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+    </ion-button>
+  </div>
+</ion-card>
