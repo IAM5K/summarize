@@ -1,4 +1,5 @@
 .options-container {
+.options-container {
   height: 50px;
 }
 .expense-data {
@@ -7,19 +8,24 @@
   box-sizing: border-box;
 
   @media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     height: 800px;
   }
 }
 
 .form-container {
+.form-container {
   height: fit-content;
 }
 
+.budget-container {
 .budget-container {
   min-height: 180px;
   height: fit-content;
 }
 
+.disclaimer {
+  p {
 .disclaimer {
   p {
     color: var(--ion-color-dark-tint);
@@ -56,14 +62,17 @@ ion-grid {
     margin: 0;
     padding: 5px;
     font-family: "Times New Roman", Times, serif;
+    font-family: "Times New Roman", Times, serif;
   }
 
+  @media screen and (min-width: 1024px) {
   @media screen and (min-width: 1024px) {
     .input-item {
       width: 200px;
     }
   }
 
+  @media screen and (max-width: 768px) and (min-width: 560px) {
   @media screen and (max-width: 768px) and (min-width: 560px) {
     height: 200px;
 
@@ -73,6 +82,7 @@ ion-grid {
   }
 
   @media screen and (max-width: 560px) {
+  @media screen and (max-width: 560px) {
     height: 270px;
 
     .input-item {
@@ -80,9 +90,10 @@ ion-grid {
     }
   }
   .data-grid {
-    box-shadow: 0 0 1px white;
+    // box-shadow: 0 0 1px white;
   }
 }
+.expense-data {
 .expense-data {
   min-height: 360px;
   height: auto;
@@ -90,8 +101,10 @@ ion-grid {
 }
 
 .data-grid {
+.data-grid {
   resize: vertical;
   overflow: auto;
+  min-height: 500px;
 }
 
 .spent-on {
