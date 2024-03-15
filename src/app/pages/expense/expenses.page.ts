@@ -4,7 +4,7 @@ import { serverTimestamp } from "@angular/fire/firestore";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ExpenseService } from "src/app/services/expense/expense.service";
 import { SeoService } from "src/app/services/seo/seo.service";
-import { Options } from "src/app/models/interface/masterData.model";
+import { Expense, Options } from "src/app/models/interface/masterData.model";
 import { AlertService } from "src/app/services/alert/alert.service";
 import { DatePipe } from "@angular/common";
 import { Router } from "@angular/router";
@@ -12,6 +12,8 @@ import * as XLSX from "xlsx";
 import * as FileSaver from "file-saver";
 import { Analyze } from "./modules/analyze";
 import { PopoverController } from "@ionic/angular";
+import { SeoTags } from "src/app/models/class/seoTags/seo";
+import { ExpenseData } from "src/app/models/interface/expense.interface";
 @Component({
   selector: "app-expenses",
   templateUrl: "./expenses.page.html",
@@ -20,18 +22,7 @@ import { PopoverController } from "@ionic/angular";
 export class ExpensesPage implements OnInit {
   @Output() expenseData = new EventEmitter<any>();
   pageTitle = "Expenses";
-  pageMetaTags = [
-    {
-      name: "description",
-      content:
-        "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better.",
-    },
-    {
-      name: "keyword",
-      content:
-        "Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis",
-    },
-  ];
+  pageMetaTags = SeoTags.expensePageTags;
   editMode: boolean = false;
   updateSubmitted = false;
   editExpenseData: any;
@@ -45,7 +36,7 @@ export class ExpensesPage implements OnInit {
     private alertService: AlertService,
     private datePipe: DatePipe,
     public popoverController: PopoverController,
-    private router: Router,
+    private router: Router
   ) {}
   Expenses: any = [];
   Budget: any = [];
@@ -56,7 +47,7 @@ export class ExpensesPage implements OnInit {
   dataSize = 5;
   weekBackDate: string | null = this.datePipe.transform(
     new CustomDate().getWeekBackDate(),
-    "yyyy-MM-dd",
+    "yyyy-MM-dd"
   );
   expenseTypes = [
     { title: "Bills", value: "bill" },
@@ -158,7 +149,10 @@ export class ExpensesPage implements OnInit {
     this.seoService.eventTrigger("form", this.pageTitle);
   }
 
-  editExpense(expense) {
+  editExpense(expense: ExpenseData) {
+    console.log("Edit expense called");
+
+    this.editMode = true;
     this.editExpenseData = expense;
     this.expenseForm.patchValue({
       createdAt: expense.createdAt,
@@ -174,7 +168,7 @@ export class ExpensesPage implements OnInit {
     this.updateSubmitted = true;
     const response = await this.expenseService.updateExpense(
       this.expenseForm.value,
-      this.editExpenseData.idField,
+      this.editExpenseData.idField
     );
     if (response) {
       this.cancelUpdate();
@@ -203,7 +197,14 @@ export class ExpensesPage implements OnInit {
     });
 
   }
+
+  onDeleteExpense(expenseItem: any) {
+    console.log("Delete expense:", expenseItem);
+    // Your delete expense logic here
+  }
   async deleteExpense(idField: string) {
+    console.log("Delete function called");
+
     const response = await this.alertService.deleteAlert();
     if (response === "confirm") {
       this.expenseService.deleteExpense(idField);
@@ -284,8 +285,8 @@ export class ExpensesPage implements OnInit {
     const month = this.budgetForm.value.month;
     let savedBudget: any;
     let monthExists: any;
-    await this.getBudget().then((_res) => {
-      const tempBudget = sessionStorage.getItem("budget");
+    await this.getBudget().then((res) => {
+      let tempBudget = sessionStorage.getItem("budget");
       if (tempBudget) {
         savedBudget = JSON.parse(tempBudget);
       } else {
@@ -303,7 +304,7 @@ export class ExpensesPage implements OnInit {
   async updateBudget() {
     const month = this.budgetForm.value.month;
     const updatedBudget = this.Budget.filter(
-      (item: any) => item.month === this.budgetForm.value.month,
+      (item: any) => item.month === this.budgetForm.value.month
     );
     if (updatedBudget !== undefined && updatedBudget.length > 0) {
       const newBudget = updatedBudget[0];
