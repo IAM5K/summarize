@@ -21,7 +21,7 @@
     <ion-card color="primary">
       <ion-card-header>
         <ion-card-title>₹ {{totalBudget}}</ion-card-title>
-        <ion-card-subtitle>Total Budget</ion-card-subtitle>
+        <ion-card-subtitle>Budget</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
     <ion-card color="secondary">
@@ -30,31 +30,29 @@
           ₹ <span *ngIf="currentExpense === 0">Calculating</span>
           <span *ngIf="currentExpense !== 0">{{currentExpense}}</span>
         </ion-card-title>
-        <ion-card-subtitle>This Month Expenses</ion-card-subtitle>
+        <ion-card-subtitle>Remaining Balance</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
     <ion-card color="danger">
       <ion-card-header>
         <ion-card-title>₹ {{currentBudget}}</ion-card-title>
-        <ion-card-subtitle>This Month Budget</ion-card-subtitle>
+        <ion-card-subtitle>Exceeding Amount</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
   </div>
-  <div class="card ion-padding line-graph">
+  <h2 class="ion-text-center">Under migration for new UI <br> Will be available soon!</h2>
+  <!-- <div class="card ion-padding line-graph">
     <div class="linechart">
       <h1>Current month total expenses</h1>
-      <canvas #chartA baseChart [width]="graphWidth" [height]="graphHeight" [type]="'line'"
-        [data]="currentMonthExpenseData" [options]="monthlyChartOptions" [legend]="monthlyChartLegend">
+      <canvas #chartA baseChart [width]="graphWidth" [height]="graphHeight" [type]="'line'" [data]="currentMonthExpenseData" [options]="monthlyChartOptions" [legend]="monthlyChartLegend">
       </canvas>
     </div>
   </div>
   <div class="card ion-padding ">
     <div class="pie-chart">
       <h2>Current month category wise expenses</h2>
-      <canvas #chartP baseChart [type]="'pie'" [width]="graphWidth" [height]="graphHeight" [datasets]="pieChartDatasets"
-        [labels]="pieChartLabels" [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+      <canvas #chartP baseChart [type]="'pie'" [width]="graphWidth" [height]="graphHeight" [datasets]="pieChartDatasets" [labels]="pieChartLabels" [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
       </canvas>
     </div>
-
-  </div>
+  </div> -->
 </ion-content>
