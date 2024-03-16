@@ -319,8 +319,9 @@ export class ExpensesPage implements OnInit {
   }
 
   async analyzeExpense() {
-    this.getAllExpenses();
-    await this.getBudget();
+    this.expenseService.analyzeExpense = this.Expenses;
+    // this.getAllExpenses();
+    // await this.getBudget();
     this.router.navigateByUrl("expenses/analyze");
   }
 
