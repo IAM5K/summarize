@@ -1,19 +1,18 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { AlertController } from "@ionic/angular";
 import { ProfileService } from "../profile/profile.service";
 import { ToasterService } from "../toaster/toaster.service";
+import { Expense } from "src/app/models/interface/masterData.model";
 @Injectable({
   providedIn: "root",
 })
 export class ExpenseService {
   constructor(
     private afs: AngularFirestore,
-    private alertCtrl: AlertController,
     private profileService: ProfileService,
-    private toasterService: ToasterService,
+    private toasterService: ToasterService
   ) {}
-  analyzeExpense: any;
+  analyzeExpense: Expense[];
   userId = this.profileService.getUserProfile()?.uid;
   successMessage = "Expense Added Successfully!";
   deletedMessage = "Expense Deleted Successfully!";
@@ -24,12 +23,12 @@ export class ExpenseService {
       .doc(this.userId)
       .collection("myExpence")
       .add(data)
-      .then((_res) => {
+      .then((res) => {
         this.successAlert(this.successMessage);
       })
       .catch((err) => {
         alert(
-          "There was an error in posting. \n Please try again later. Check console for detail.",
+          "There was an error in posting. \n Please try again later. Check console for detail."
         );
         console.warn(err);
       });
@@ -61,7 +60,7 @@ export class ExpenseService {
         query = this.expenseCollection
           .doc(this.userId)
           .collection("myExpence", (ref) =>
-            ref.where("spendedOn", "==", data).orderBy("date").startAt(duration),
+            ref.where("spendedOn", "==", data).orderBy("date").startAt(duration)
           )
           .valueChanges({ idField: "idField" });
         break;
@@ -69,7 +68,7 @@ export class ExpenseService {
         query = this.expenseCollection
           .doc(this.userId)
           .collection("myExpence", (ref) =>
-            ref.where("type", "==", data).orderBy("date").startAt(duration),
+            ref.where("type", "==", data).orderBy("date").startAt(duration)
           )
           .valueChanges({ idField: "idField" });
         break;
@@ -101,7 +100,6 @@ export class ExpenseService {
       return true;
     } catch (error) {
       this.toasterService.showToast("Error updating expense. Please try again.", "danger");
-      console.warn(error);
       return false;
     }
   }
@@ -120,15 +118,6 @@ export class ExpenseService {
   }
   async successAlert(message: string) {
     this.toasterService.showToast(message, "success");
-    // const alert = await this.alertCtrl.create({
-    //   header: 'Success',
-    //   subHeader: message,
-    //   cssClass: 'success-alert',
-    //   // message: 'This is an alert!',
-    //   buttons: ['OK'],
-    // });
-
-    // await alert.present();
   }
 
   getBudget() {
@@ -142,14 +131,14 @@ export class ExpenseService {
       .doc(this.userId)
       .collection("myBudget")
       .add(data)
-      .then((_res) => {
+      .then((res) => {
         const msg = "Budget Added Successfully!";
         this.successAlert(msg);
       })
       .catch((err) => {
-        alert(
-          "There was an error in posting.\n Please try again later. Check console for detail. \nContact /report us in case of no success ",
-        );
+        const message =
+          "There was an error in posting.\n Please try again later. Check console for detail. \nContact /report us in case of no success ";
+        this.toasterService.showToast(message, "warning");
         console.warn(err);
       });
   }
@@ -160,14 +149,15 @@ export class ExpenseService {
       .collection("myBudget")
       .doc(data.idField)
       .update(data)
-      .then((_res) => {
+      .then((res) => {
         const msg = "Budget updated successfully!";
         this.successAlert(msg);
       })
       .catch((err) => {
-        alert(
-          "There was an error in updating budget. \n Please try again later. Check console for detail. \nContact /report us in case of no success ",
-        );
+        const message =
+          "There was an error in updating budget. \n Please try again later. Check console for detail. \nContact /report us in case of no success ";
+        this.toasterService.showToast(message, "warning");
+        alert();
         console.warn(err);
       });
   }
