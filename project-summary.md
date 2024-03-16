@@ -81,7 +81,7 @@ The following files and folders do not follow the standard naming convention:
 - /app/models/class/masterData/master-data.ts
 - /app/models/class/seoTags/seo.spec.ts
 - /app/models/class/seoTags/seo.ts
-- /app/models/data/classTweleveSyllabus.data.ts
+- /app/models/data/classTwelveSyllabus.data.ts
 - /app/models/data/studyOptions.data.ts
 - /app/models/interface/masterData.model.ts
 - /app/models/interface/userProfile.interface.ts
