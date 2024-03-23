@@ -66,7 +66,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private expenseService: ExpenseService,
     private router: Router,
-    private toaster: ToasterService
+    private toaster: ToasterService,
   ) {}
 
   ngOnInit() {
@@ -318,7 +318,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       currentBudget = 0;
       alert(
-        "There was some error getting your budget. Make sure you have added budget for this month."
+        "There was some error getting your budget. Make sure you have added budget for this month.",
       );
     }
     return currentBudget;
