@@ -157,6 +157,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
         tension: .5,
         borderColor: 'blue',
         backgroundColor: 'blue',
+        pointRadius: 1, 
       },
       {
         data: monthlyData.amount,
@@ -164,7 +165,8 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
         fill: false,
         tension: .5,
         borderColor: 'purple',
-        backgroundColor: 'purple'
+        backgroundColor: 'purple',
+        pointRadius: 1,
       },
       {
         data: monthlyData.budgetData,
@@ -172,7 +174,9 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
         fill: false,
         tension: .5,
         borderColor: 'red',
-        backgroundColor: 'red'
+        backgroundColor: 'red',
+        pointRadius: 0, 
+        pointStyle: false,
       }
     ]
     this.currentExpense = monthlyData.incrementAmount
@@ -192,18 +196,19 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
   }
   setGraphWidth(): void {
     let screenWidth = window.innerWidth;
-    if (screenWidth < 680) {
-      this.graphWidth = 500;
-    }
-    else if (680 < screenWidth && screenWidth > 780) {
-      this.graphWidth = screenWidth * 2 / 3;
-    }
-    else if (780 < screenWidth && screenWidth < 1080) {
-      this.graphWidth = 1200;
-    }
-    else {
-      this.graphWidth = screenWidth / 2;
-    }
+    // if (screenWidth < 680) {
+    //   this.graphWidth = 500;
+    // }
+    // else if (680 < screenWidth && screenWidth > 780) {
+    //   this.graphWidth = screenWidth * 2 / 3;
+    // }
+    // else if (780 < screenWidth && screenWidth < 1080) {
+    //   this.graphWidth = 1200;
+    // }
+    // else {
+    //   this.graphWidth = screenWidth / 2;
+    // }
+    this.graphWidth = screenWidth - 50;
   }
 
   /* Pie */
