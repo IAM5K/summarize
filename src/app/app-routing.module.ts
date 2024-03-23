@@ -65,6 +65,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/goal/goal.module').then( m => m.GoalPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
+  {
+    path: 'privacy-policy',
+    loadChildren: () => import('./pages/privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
+  },
   // {
   //   path: 'admin',
   //   loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule),
