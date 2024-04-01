@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { AuthService } from './services/auth/auth.service';
+import { AuthService } from './auth/service/auth.service';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { isPlatform } from '@ionic/angular';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
