@@ -9,30 +9,24 @@
     "@typescript-eslint/restrict-plus-operands": "error",
     "prettier/prettier": "error"
   },
-  // Eslint for HTML files
   "overrides": [
     {
       "files": ["*.html", "*.component.html"],
-      // We set parserOptions.project for the project to allow TypeScript to create the type-checker behind the scenes when we run linting
       "parserOptions": {
         "project": ["tsconfig.(app|spec).json"]
       },
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-        // "plugin:@angular-eslint/template/accessibility" //TODO: Look for a possible solution to add this option.
-      ],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {
         "max-len": ["warn", { "code": 100 }]
       }
     },
-    // Custom rules for TypeScript
     {
       "files": ["*.ts"],
       "extends": [
-        // Added base
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
         "airbnb-base",
         "airbnb-typescript/base",
-        // Added modern prettier
         "prettier"
       ],
       "parser": "@typescript-eslint/parser",
@@ -42,7 +36,6 @@
         "project": ["./tsconfig.eslint.json", "./tsconfig.json"]
       },
       "rules": {
-        // Custom rules for typescript by Osmosys
         "@typescript-eslint/no-explicit-any": "error",
         "padding-line-between-statements": [
           "error",
@@ -260,8 +253,6 @@
           }
         ],
 
-        // Additional Custom Rules
-
         "camelcase": [
           "error",
           {
@@ -325,7 +316,7 @@
             "conditionalAssign": true,
             "nestedBinaryExpressions": false,
             "returnAssign": false,
-            "ignoreJSX": "all", // delegate to eslint-plugin-react
+            "ignoreJSX": "all",
             "enforceForArrowConditionals": false
           }
         ],
@@ -380,17 +371,13 @@
         "import/prefer-default-export": "off"
       }
     },
-    // Configuration for unit and e2e spec files
     {
       "files": ["*.spec.ts"],
       "rules": {
         "@typescript-eslint/no-unused-vars": "off"
       }
     },
-    /**
-     * This extra piece of configuration is only necessary if you make use of inline
-     * templates within Component metadata, e.g.:
-     */
+
     {
       "files": ["*.component.ts"],
       "parser": "@typescript-eslint/parser",
