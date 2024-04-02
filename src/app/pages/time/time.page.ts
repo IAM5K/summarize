@@ -1,76 +1,58 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Clipboard } from '@capacitor/clipboard';
-import { serverTimestamp } from '@angular/fire/firestore';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OfficeService } from 'src/app/services/office/office.service';
-import { SeoService } from 'src/app/services/seo/seo.service';
-import { CustomDate } from 'src/app/models/class/date/custom-date';
-import { AlertService } from 'src/app/services/alert/alert.service';
-import { DatePipe } from '@angular/common';
-import { Project } from 'src/app/models/interface/profile.interface';
-import { ProfileService } from 'src/app/services/profile/profile.service';
-import { WorkInterface } from 'src/app/models/interface/work.interface';
-import { SeoTags } from 'src/app/models/class/seoTags/seo';
-import { TimeFunctions } from 'src/app/models/functions/time.function';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Clipboard } from "@capacitor/clipboard";
+import { serverTimestamp } from "@angular/fire/firestore";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { OfficeService } from "src/app/services/office/office.service";
+import { SeoService } from "src/app/services/seo/seo.service";
+import { CustomDate } from "src/app/models/class/date/custom-date";
+import { AlertService } from "src/app/services/alert/alert.service";
+import { DatePipe } from "@angular/common";
+import { Project } from "src/app/models/interface/profile.interface";
+import { ProfileService } from "src/app/services/profile/profile.service";
+import { WorkInterface } from "src/app/models/interface/work.interface";
+import { SeoTags } from "src/app/models/class/seoTags/seo";
+import { TimeFunctions } from "src/app/models/functions/time.function";
 
 @Component({
-  selector: 'app-time',
-  templateUrl: './time.page.html',
-  styleUrls: ['./time.page.scss'],
+  selector: "app-time",
+  templateUrl: "./time.page.html",
+  styleUrls: ["./time.page.scss"],
 })
-export class TimePage implements OnInit {
+export class TimePage implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
     private officeService: OfficeService,
     private alertService: AlertService,
     private datePipe: DatePipe,
-    private profileService: ProfileService
+    private profileService: ProfileService,
   ) {}
 
-  pageTitle = 'Time';
+  pageTitle = "Time";
   pageMetaTags = SeoTags.timePageTags;
   projectSubscription: any;
   Works: any = [];
   worksCount: number = 0;
   getCount: number = 0;
   currentDate = new Date();
-  currentTime = this.datePipe.transform(this.currentDate, 'hh:mm');
+  currentTime = this.datePipe.transform(this.currentDate, "hh:mm");
   workByDate: any = [];
   projects: Project[] = [];
   editMode: Boolean = false;
   editWorkData: WorkInterface;
   updateSubmitted: Boolean = false;
-  dateToday: string | null = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-  workOf = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
+  workOf = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   // workSummaryOf = '';
   totalWorkingHours: any;
   workForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
-    date: [
-      this.dateToday,
-      [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')],
-    ],
-    startTime: [
-      '',
-      [Validators.required, Validators.pattern('^[a-zA-Z0-9 :-]*$')],
-    ],
-    endTime: [
-      this.currentTime,
-      [Validators.required, Validators.pattern('^[a-zA-Z0-9 :-]*$')],
-    ],
-    project: [
-      '',
-      [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')],
-    ],
-    type: [
-      'coding',
-      [Validators.required, Validators.pattern('^[a-zA-Z 0-9 :/.,-]*$')],
-    ],
-    description: [
-      '',
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9\n .,-:']*$")],
-    ],
+    date: [this.dateToday, [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
+    startTime: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9 :-]*$")]],
+    endTime: [this.currentTime, [Validators.required, Validators.pattern("^[a-zA-Z0-9 :-]*$")]],
+    project: ["", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 :/.,-]*$")]],
+    type: ["coding", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 :/.,-]*$")]],
+    description: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n .,-:']*$")]],
     updatedAt: [serverTimestamp()],
   });
 
@@ -97,24 +79,22 @@ export class TimePage implements OnInit {
   }
 
   async getProjects() {
-    this.projectSubscription = await this.profileService
-      .getProjects()
-      .subscribe((res: any) => {
-        this.projects = res;
-        if (this.projects.length > 0) {
-          this.workForm.patchValue({
-            project: this.projects[0].name,
-          });
-        }
-      });
+    this.projectSubscription = await this.profileService.getProjects().subscribe((res: any) => {
+      this.projects = res;
+      if (this.projects.length > 0) {
+        this.workForm.patchValue({
+          project: this.projects[0].name,
+        });
+      }
+    });
   }
 
   async addWork() {
     const response = await this.officeService.addWork(this.workForm.value);
     if (response) {
       this.workForm.patchValue({
-        startTime: '',
-        description: '',
+        startTime: "",
+        description: "",
       });
     }
   }
@@ -139,37 +119,36 @@ export class TimePage implements OnInit {
     this.updateSubmitted = true;
     const response = await this.officeService.updateWork(
       this.workForm.value,
-      this.editWorkData.idField
+      this.editWorkData.idField,
     );
     if (response) {
       this.cancelUpdate();
       this.backToDefault();
-    }
-    else{
+    } else {
       this.updateSubmitted = false;
     }
   }
-  
+
   cancelUpdate() {
     this.editMode = false;
     this.workForm.markAsUntouched();
     this.updateSubmitted = false;
   }
-  
+
   backToDefault() {
     this.workForm.reset({
       date: this.dateToday,
-      startTime: '',
+      startTime: "",
       endTime: this.currentTime,
       project: this.projects[0].name,
-      type: 'coding',
-      description: '',
-      updatedAt: ''
+      type: "coding",
+      description: "",
+      updatedAt: "",
     });
   }
   async deleteWork(idField: string) {
     const response = await this.alertService.deleteAlert();
-    if (response === 'confirm') {
+    if (response === "confirm") {
       this.officeService.deleteWork(idField);
     }
   }
@@ -181,13 +160,11 @@ export class TimePage implements OnInit {
   }
   async getAllWorkOf() {
     if (this.workOf !== null) {
-      (await this.officeService.getWorkByDate(this.workOf)).subscribe(
-        (res: any) => {
-          // this.workSummaryOf = this.workOf;
-          this.workByDate = res;
-          this.calculateTotalHours(this.workByDate);
-        }
-      );
+      (await this.officeService.getWorkByDate(this.workOf)).subscribe((res: any) => {
+        // this.workSummaryOf = this.workOf;
+        this.workByDate = res;
+        this.calculateTotalHours(this.workByDate);
+      });
     }
   }
 
@@ -196,7 +173,7 @@ export class TimePage implements OnInit {
   }
 
   async copyAllOfDay() {
-    let dataString: string = '';
+    let dataString: string = "";
     this.workByDate.forEach((element: any) => {
       dataString += `${element.startTime} - ${element.endTime} (${element.type}) : ${element.description} \n`;
     });

@@ -13,9 +13,11 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { error } from 'console';
 import firebase from 'firebase/compat/app';
 import { Observable, map } from 'rxjs';
 import { User } from 'src/app/models/interface/user.model';
+import { ToasterService } from 'src/app/services/toaster/toaster.service';
 
 @Injectable({
   providedIn: 'root',
@@ -30,12 +32,13 @@ export class AuthService {
     private auth: Auth,
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private toaster:ToasterService
   ) {
-      // Subscribe to authentication state changes
-      this.isLoggedIn$ = this.afAuth.authState.pipe(
-        map(user => !!user) // Convert user object to boolean (true if logged in, false if not)
-      );
+    // Subscribe to authentication state changes
+    this.isLoggedIn$ = this.afAuth.authState.pipe(
+      map((user) => !!user) // Convert user object to boolean (true if logged in, false if not)
+    );
   }
 
   async register(email: any, password: any) {
@@ -52,18 +55,45 @@ export class AuthService {
     }
   }
 
-  async login(email: any, password: any) {
+  async login(email: string, password: string) {
     try {
-      const user = await signInWithEmailAndPassword(this.auth, email, password);
-      await this.getEmailBasedUser(user.user);
-      localStorage.setItem('user', JSON.stringify(user.user));
+      const userCredential = await signInWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await this.getEmailBasedUser(user);
+      localStorage.setItem('user', JSON.stringify(user));
       this.isLogin = true;
+      this.toaster.showToast("Login Success!","success")
       return user;
-    } catch (e) {
+    } catch (error) {
+      const errorCode = error.code;
+      let errorMessage = 'An error occurred. Please try again.';
+
+      switch (errorCode) {
+        case "auth/invalid-login-credentials":
+          errorMessage = "Invalid credentials"
+          break;
+        case 'auth/user-not-found':
+          errorMessage = 'User not found. Please check your email.';
+          break;
+        case 'auth/wrong-password':
+          errorMessage = 'Invalid password. Please try again.';
+          break;
+        case 'auth/invalid-email':
+          errorMessage = 'Invalid email address. Please enter a valid email.';
+          break;
+
+        default:
+          errorMessage =" Unknown error occurred"
+          break;
+      }
+      this.toaster.showToast(errorMessage,"danger")
       return null;
     }
   }
-
   logout() {
     this.isLogin = false;
     localStorage.clear();
@@ -84,19 +114,18 @@ export class AuthService {
         // console.log(error);
       });
   }
-  
-  async googleSignin():Promise<any> {
+
+  async googleSignin(): Promise<any> {
     // this.GoogleAuth()
     let provider = new GoogleAuthProvider();
     // console.log(typeof( provider));
     const credential = await this.afAuth.signInWithPopup(provider);
-    if (credential) {  
-    this.isLogin = true;
-    this.updateUserData(credential.user);
-    return credential.user
-    }
-    else{
-      return null
+    if (credential) {
+      this.isLogin = true;
+      this.updateUserData(credential.user);
+      return credential.user;
+    } else {
+      return null;
     }
   }
   async getEmailBasedUser(user: any) {
@@ -133,5 +162,9 @@ export class AuthService {
     } else {
       userRef.set(data, { merge: true });
     }
+  }
+
+  async resetPassword(email: string): Promise<void> {
+    return this.afAuth.sendPasswordResetEmail(email);
   }
 }

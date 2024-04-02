@@ -12,6 +12,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 import { DatePipe } from '@angular/common';
@@ -32,6 +33,7 @@ import { DatePipe } from '@angular/common';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    provideDatabase(() => getDatabase()),
     GoogleTagManagerModule.forRoot({
       id: environment.GTM_ID,
     })

@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { SeoTags } from 'src/app/models/class/seoTags/seo';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,9 @@ export class LoginPage implements OnInit {
   pageTitle: string = "Login Page";
   pageMetaTags = SeoTags.loginPageTags;
   title = SeoTags.pageTitle.loginPage
-
+  loginMode: boolean = true; // Indicates whether the user is in login or registration mode
+  loginForm: FormGroup;
+  registerForm: FormGroup;
   constructor(
     private fb: FormBuilder,
     private loadingController: LoadingController,
@@ -40,12 +42,42 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags)
-    this.credentials = this.fb.group({
+    // this.credentials = this.fb.group({
+    //   email: ['', [Validators.required, Validators.email]],
+    //   password: ['', [Validators.required, Validators.minLength(6)]]
+    // });
+    this.initForms();
+  }
+  initForms() {
+    this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+
+    this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      verifyPassword: ['', Validators.required],
     });
   }
+  toggleMode() {
+    this.loginMode = !this.loginMode;
+    this.clearForms();
+  }
 
+  clearForms() {
+    this.loginForm.reset();
+    this.registerForm.reset();
+  }
+
+  passwordsMatch(): boolean {
+    const password = this.registerForm.get('password').value;
+    const verifyPassword = this.registerForm.get('verifyPassword').value;
+    return password === verifyPassword;
+  }
+  forgotPassword() {
+    // Logic to handle forgot password
+  }
   async register() {
     const loading = await this.loadingController.create();
     await loading.present();
@@ -64,7 +96,7 @@ export class LoginPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    const user = await this.authService.login(this.credentials.value.email, this.credentials.value.password);
+    const user = await this.authService.login(this.loginForm.value.email, this.loginForm.value.password);
     await loading.dismiss();
 
     if (user) {
