@@ -18,14 +18,14 @@ import { TimeFunctions } from "src/app/models/functions/time.function";
   templateUrl: "./time.page.html",
   styleUrls: ["./time.page.scss"],
 })
-export class TimePage implements OnInit,OnDestroy {
+export class TimePage implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
     private officeService: OfficeService,
     private alertService: AlertService,
     private datePipe: DatePipe,
-    private profileService: ProfileService
+    private profileService: ProfileService,
   ) {}
 
   pageTitle = "Time";
@@ -47,30 +47,12 @@ export class TimePage implements OnInit,OnDestroy {
   totalWorkingHours: any;
   workForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
-    date: [
-      this.dateToday,
-      [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")],
-    ],
-    startTime: [
-      "",
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9 :-]*$")],
-    ],
-    endTime: [
-      this.currentTime,
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9 :-]*$")],
-    ],
-    project: [
-      "",
-      [Validators.required, Validators.pattern("^[a-zA-Z 0-9 :/.,-]*$")],
-    ],
-    type: [
-      "coding",
-      [Validators.required, Validators.pattern("^[a-zA-Z 0-9 :/.,-]*$")],
-    ],
-    description: [
-      "",
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9\n .,-:']*$")],
-    ],
+    date: [this.dateToday, [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
+    startTime: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9 :-]*$")]],
+    endTime: [this.currentTime, [Validators.required, Validators.pattern("^[a-zA-Z0-9 :-]*$")]],
+    project: ["", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 :/.,-]*$")]],
+    type: ["coding", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 :/.,-]*$")]],
+    description: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n .,-:']*$")]],
     updatedAt: [serverTimestamp()],
   });
 
@@ -97,16 +79,14 @@ export class TimePage implements OnInit,OnDestroy {
   }
 
   async getProjects() {
-    this.projectSubscription = await this.profileService
-      .getProjects()
-      .subscribe((res: any) => {
-        this.projects = res;
-        if (this.projects.length > 0) {
-          this.workForm.patchValue({
-            project: this.projects[0].name,
-          });
-        }
-      });
+    this.projectSubscription = await this.profileService.getProjects().subscribe((res: any) => {
+      this.projects = res;
+      if (this.projects.length > 0) {
+        this.workForm.patchValue({
+          project: this.projects[0].name,
+        });
+      }
+    });
   }
 
   async addWork() {
@@ -139,23 +119,22 @@ export class TimePage implements OnInit,OnDestroy {
     this.updateSubmitted = true;
     const response = await this.officeService.updateWork(
       this.workForm.value,
-      this.editWorkData.idField
+      this.editWorkData.idField,
     );
     if (response) {
       this.cancelUpdate();
       this.backToDefault();
-    }
-    else{
+    } else {
       this.updateSubmitted = false;
     }
   }
-  
+
   cancelUpdate() {
     this.editMode = false;
     this.workForm.markAsUntouched();
     this.updateSubmitted = false;
   }
-  
+
   backToDefault() {
     this.workForm.reset({
       date: this.dateToday,
@@ -164,7 +143,7 @@ export class TimePage implements OnInit,OnDestroy {
       project: this.projects[0].name,
       type: "coding",
       description: "",
-      updatedAt: ""
+      updatedAt: "",
     });
   }
   async deleteWork(idField: string) {
@@ -181,13 +160,11 @@ export class TimePage implements OnInit,OnDestroy {
   }
   async getAllWorkOf() {
     if (this.workOf !== null) {
-      (await this.officeService.getWorkByDate(this.workOf)).subscribe(
-        (res: any) => {
-          // this.workSummaryOf = this.workOf;
-          this.workByDate = res;
-          this.calculateTotalHours(this.workByDate);
-        }
-      );
+      (await this.officeService.getWorkByDate(this.workOf)).subscribe((res: any) => {
+        // this.workSummaryOf = this.workOf;
+        this.workByDate = res;
+        this.calculateTotalHours(this.workByDate);
+      });
     }
   }
 
