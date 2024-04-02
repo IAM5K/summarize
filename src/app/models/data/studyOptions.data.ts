@@ -1,37 +1,37 @@
-import { EducationLevel, Options } from '../interface/masterData.model';
+import { EducationLevel, Options } from "../interface/masterData.model";
 
 export class StudyOptionsData {
   public static matriculationSubjects = [
-    'Physics',
-    'Chemistry',
-    'Mathematics',
-    'Biology',
-    'English',
-    'Computer',
-    'Hindi',
-    'Sanskrit',
-    'Telugu',
-    'Malayalam',
+    "Physics",
+    "Chemistry",
+    "Mathematics",
+    "Biology",
+    "English",
+    "Computer",
+    "Hindi",
+    "Sanskrit",
+    "Telugu",
+    "Malayalam",
   ];
   public static intermediateSubjects = [
-    'Physics',
-    'Chemistry',
-    'Mathematics',
-    'Biology',
-    'English',
-    'Computer',
-    'Hindi',
-    'Sanskrit',
-    'Telugu',
-    'Malayalam',
+    "Physics",
+    "Chemistry",
+    "Mathematics",
+    "Biology",
+    "English",
+    "Computer",
+    "Hindi",
+    "Sanskrit",
+    "Telugu",
+    "Malayalam",
   ];
   public static educationLevel: EducationLevel[] = [
     {
-      level: 'Matriculation',
+      level: "Matriculation",
       subjects: this.matriculationSubjects,
     },
     {
-      level: 'Intermediate',
+      level: "Intermediate",
       subjects: this.intermediateSubjects,
     },
   ];
@@ -42,12 +42,12 @@ export class StudyOptionsData {
     { title: "Practice", value: "practice" },
     { title: "Read", value: "read" },
     { title: "Write", value: "write" },
-    { title: "Test", value: "test" }
+    { title: "Test", value: "test" },
   ];
   public static studyMode: Options[] = [
     { title: "Self", value: "self" },
     { title: "Group", value: "group" },
     { title: "Teacher", value: "teacher" },
-    { title: "Online", value: "online" }
+    { title: "Online", value: "online" },
   ];
 }

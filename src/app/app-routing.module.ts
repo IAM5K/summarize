@@ -1,72 +1,74 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 
-import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/auth-guard';
+import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from "@angular/fire/auth-guard";
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(["login"]);
+const redirectLoggedInToHome = () => redirectLoggedInTo(["home"]);
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: "",
+    redirectTo: "home",
+    pathMatch: "full",
   },
   {
-    path: 'login',
-    loadChildren: () => import('./auth/pages/login/login.module').then(m => m.LoginPageModule),
-    ...canActivate(redirectLoggedInToHome)
+    path: "login",
+    loadChildren: () => import("./auth/pages/login/login.module").then((m) => m.LoginPageModule),
+    ...canActivate(redirectLoggedInToHome),
   },
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+    path: "home",
+    loadChildren: () => import("./pages/home/home.module").then((m) => m.HomePageModule),
   },
   {
-    path: 'help',
-    loadChildren: () => import('./pages/help/help.module').then(m => m.HelpPageModule)
+    path: "help",
+    loadChildren: () => import("./pages/help/help.module").then((m) => m.HelpPageModule),
   },
   {
-    path: 'about',
-    loadChildren: () => import('./pages/about/about.module').then(m => m.AboutPageModule)
+    path: "about",
+    loadChildren: () => import("./pages/about/about.module").then((m) => m.AboutPageModule),
   },
   {
-    path: 'expenses',
-    loadChildren: () => import('./pages/expense/expenses.module').then(m => m.ExpensesPageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    path: "expenses",
+    loadChildren: () => import("./pages/expense/expenses.module").then((m) => m.ExpensesPageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    path: "profile",
+    loadChildren: () => import("./pages/profile/profile.module").then((m) => m.ProfilePageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: 'studies',
-    loadChildren: () => import('./pages/studies/studies.module').then(m => m.StudiesPageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    path: "studies",
+    loadChildren: () => import("./pages/studies/studies.module").then((m) => m.StudiesPageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: 'achievement',
-    loadChildren: () => import('./pages/achievement/achievement.module').then(m => m.AchievementPageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    path: "achievement",
+    loadChildren: () =>
+      import("./pages/achievement/achievement.module").then((m) => m.AchievementPageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: 'time',
-    loadChildren: () => import('./pages/time/time.module').then(m => m.TimePageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    path: "time",
+    loadChildren: () => import("./pages/time/time.module").then((m) => m.TimePageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: 'goal',
-    loadChildren: () => import('./pages/goal/goal.module').then(m => m.GoalPageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    path: "goal",
+    loadChildren: () => import("./pages/goal/goal.module").then((m) => m.GoalPageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: 'goal',
-    loadChildren: () => import('./pages/goal/goal.module').then( m => m.GoalPageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    path: "goal",
+    loadChildren: () => import("./pages/goal/goal.module").then((m) => m.GoalPageModule),
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: 'privacy-policy',
-    loadChildren: () => import('./pages/privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
+    path: "privacy-policy",
+    loadChildren: () =>
+      import("./pages/privacy-policy/privacy-policy.module").then((m) => m.PrivacyPolicyPageModule),
   },
   // {
   //   path: 'admin',
@@ -94,16 +96,14 @@ const routes: Routes = [
   //   ...canActivate(redirectUnauthorizedToLogin)
   // },
   {
-    path: '**',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  }
+    path: "**",
+    redirectTo: "home",
+    pathMatch: "full",
+  },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,14 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-edit-studies',
-  templateUrl: './edit-studies.component.html',
-  styleUrls: ['./edit-studies.component.scss'],
+  selector: "app-edit-studies",
+  templateUrl: "./edit-studies.component.html",
+  styleUrls: ["./edit-studies.component.scss"],
 })
-export class EditStudiesComponent  {
-
-  constructor() { }
-
-  
-
+export class EditStudiesComponent {
+  constructor() {}
 }

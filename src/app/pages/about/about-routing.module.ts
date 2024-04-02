@@ -1,27 +1,27 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { AboutPage } from './about.page';
-import { HofComponent } from './components/hof/hof.component';
-import { HowtoComponent } from './components/howto/howto.component';
-import { UpdateComponent } from './components/update/update.component';
+import { AboutPage } from "./about.page";
+import { HofComponent } from "./components/hof/hof.component";
+import { HowtoComponent } from "./components/howto/howto.component";
+import { UpdateComponent } from "./components/update/update.component";
 
 const routes: Routes = [
   {
-    path: '',
-    component: AboutPage
+    path: "",
+    component: AboutPage,
   },
   {
-    path: 'howto',
-    component: HowtoComponent
+    path: "howto",
+    component: HowtoComponent,
   },
   {
-    path: 'hof',
-    component: HofComponent
+    path: "hof",
+    component: HofComponent,
   },
   {
-    path: 'update',
-    component: UpdateComponent
+    path: "update",
+    component: UpdateComponent,
   },
 ];
 

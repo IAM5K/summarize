@@ -15,8 +15,7 @@
   </ion-header>
 
   <div id="container">
-
-    <div class="card ion-margin ion-padding ">
+    <div class="card ion-margin ion-padding">
       <h1 class="mt-0 h2">Add Work</h1>
       <div class="form-container">
         <form [formGroup]="workForm" (ngSubmit)="addWork()" novalidate>
@@ -42,8 +41,12 @@
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Description</ion-label>
-              <ion-input formControlName="description" type="text"
-                placeholder="Description about work done." clear-input></ion-input>
+              <ion-input
+                formControlName="description"
+                type="text"
+                placeholder="Description about work done."
+                clear-input
+              ></ion-input>
             </ion-item>
           </div>
           <div class="input-item">
@@ -60,10 +63,11 @@
             </ion-item>
           </div>
           <div class="input-item">
-            <ion-button color="primary" type="submit" size="medium" [disabled]="workForm.invalid">Submit</ion-button>
+            <ion-button color="primary" type="submit" size="medium" [disabled]="workForm.invalid">
+              Submit
+            </ion-button>
             <ion-button color="warning" type="reset" size="medium">Reset</ion-button>
           </div>
-
         </form>
       </div>
     </div>
@@ -72,8 +76,12 @@
       <div class="table-title">
         <h2 class="mt-0 h2" *ngIf="worksCount === 0">No Work found</h2>
         <h3 class="h2" *ngIf="worksCount !==0">My Work</h3>
-        <ion-button *ngIf="worksCount === 5" color="primary" (click)="getAllWork()" size="medium">All Works</ion-button>
-        <ion-button *ngIf="worksCount > 5" color="primary" (click)="getWork()" size="medium">Latest Only</ion-button>
+        <ion-button *ngIf="worksCount === 5" color="primary" (click)="getAllWork()" size="medium">
+          All Works
+        </ion-button>
+        <ion-button *ngIf="worksCount > 5" color="primary" (click)="getWork()" size="medium">
+          Latest Only
+        </ion-button>
       </div>
       <div class="filters"></div>
       <div class="data-grid" *ngIf="worksCount > 0">
@@ -93,10 +101,16 @@
             <ion-col size="1">{{ work?.startTime }}</ion-col>
             <ion-col size="1">{{ work?.endTime }}</ion-col>
             <ion-col size="2">{{ work?.type | titlecase }}</ion-col>
-            <ion-col size="4" class="ion-text-wrap ion-text-left">{{ work?.description | titlecase}}</ion-col>
+            <ion-col size="4" class="ion-text-wrap ion-text-left">
+              {{ work?.description | titlecase}}
+            </ion-col>
             <ion-col size="2">
               <ion-button class="action-button" color="secondary" (click)="copyToClipboard(work)">
-                <ion-icon color="light" [ios]="'clipboard-outline'" [md]="'clipboard-sharp'"></ion-icon>
+                <ion-icon
+                  color="light"
+                  [ios]="'clipboard-outline'"
+                  [md]="'clipboard-sharp'"
+                ></ion-icon>
               </ion-button>
               <ion-button class="action-button" color="danger" (click)="deleteWork(work.idField)">
                 <ion-icon color="light" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
@@ -105,7 +119,9 @@
           </ion-row>
         </ion-grid>
       </div>
-      <ion-note class="mt-15px" color="tertiary" *ngIf="worksCount !== 0">* Edit and copy features coming soon.</ion-note>
+      <ion-note class="mt-15px" color="tertiary" *ngIf="worksCount !== 0">
+        * Edit and copy features coming soon.
+      </ion-note>
     </div>
   </div>
 </ion-content>

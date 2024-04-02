@@ -5,62 +5,126 @@
 </ion-header>
 
 <ion-content>
-  <div class="card ion-margin ion-padding ">
+  <div class="card ion-margin ion-padding">
     <h1 class="mt-0 h2">Set Resource</h1>
     <div class="form-container">
       <form [formGroup]="resourceForm" (ngSubmit)="addResource()" novalidate>
         <div class="input-item">
-          <ion-select aria-label="Resource Term" label="Resource Term" formControlName="gTerm" placeholder="Select resource term"
-            helperText="Enter a valid email" errorText="Invalid email" fill="outline" (ionChange)="dateUpdate()">
+          <ion-select
+            aria-label="Resource Term"
+            label="Resource Term"
+            formControlName="gTerm"
+            placeholder="Select resource term"
+            helperText="Enter a valid email"
+            errorText="Invalid email"
+            fill="outline"
+            (ionChange)="dateUpdate()"
+          >
             <!-- <ion-select-option *ngFor="let item of resourceType" [value]="item.value" aria-label="Resource Type option">{{item.title}}</ion-select-option> -->
           </ion-select>
         </div>
         <div class="input-item">
-          <ion-input label="Target Date" formControlName="date" type="date" labelPlacement="floating" fill="outline"
-            placeholder="Target Date"></ion-input>
+          <ion-input
+            label="Target Date"
+            formControlName="date"
+            type="date"
+            labelPlacement="floating"
+            fill="outline"
+            placeholder="Target Date"
+          ></ion-input>
         </div>
         <div class="input-item">
-          <ion-select aria-label="Category of Resource" label="Category of Resource" formControlName="type" helperText
-            placeholder="Category of Resource" fill="outline">
+          <ion-select
+            aria-label="Category of Resource"
+            label="Category of Resource"
+            formControlName="type"
+            helperText
+            placeholder="Category of Resource"
+            fill="outline"
+          >
             <!-- <ion-select-option *ngFor="let type of resourceFor" [value]="type.value">{{type.title}}</ion-select-option> -->
           </ion-select>
         </div>
         <div class="input-item">
-          <ion-input label="Title" formControlName="title" labelPlacement="floating" fill="outline" placeholder="Short title of the resource">
-          </ion-input>
+          <ion-input
+            label="Title"
+            formControlName="title"
+            labelPlacement="floating"
+            fill="outline"
+            placeholder="Short title of the resource"
+          ></ion-input>
         </div>
         <div class="input-item">
-          <ion-textarea label="Description" formControlName="description" labelPlacement="floating" fill="outline"
-            placeholder="Enter text" autoGrow="true"></ion-textarea>
+          <ion-textarea
+            label="Description"
+            formControlName="description"
+            labelPlacement="floating"
+            fill="outline"
+            placeholder="Enter text"
+            autoGrow="true"
+          ></ion-textarea>
         </div>
         <div class="input-item">
-          <ion-textarea label="Resouce Required" formControlName="resource" labelPlacement="floating" fill="outline"
-            placeholder="List of resources needed /involved" autoGrow="true"></ion-textarea>
+          <ion-textarea
+            label="Resouce Required"
+            formControlName="resource"
+            labelPlacement="floating"
+            fill="outline"
+            placeholder="List of resources needed /involved"
+            autoGrow="true"
+          ></ion-textarea>
         </div>
         <div class="input-item">
-          <ion-textarea label="Action Steps" formControlName="actionSteps" labelPlacement="floating" fill="outline"
-            placeholder="Enter text" autoGrow="true"></ion-textarea>
+          <ion-textarea
+            label="Action Steps"
+            formControlName="actionSteps"
+            labelPlacement="floating"
+            fill="outline"
+            placeholder="Enter text"
+            autoGrow="true"
+          ></ion-textarea>
         </div>
         <div class="input-item">
-          <ion-input label="Current Progress" formControlName="progress" labelPlacement="floating" fill="outline"
-            type="number" min="0" max="100" errorText="Progress can be between 0 - 100 only" placeholder="Enter text">
-          </ion-input>
+          <ion-input
+            label="Current Progress"
+            formControlName="progress"
+            labelPlacement="floating"
+            fill="outline"
+            type="number"
+            min="0"
+            max="100"
+            errorText="Progress can be between 0 - 100 only"
+            placeholder="Enter text"
+          ></ion-input>
         </div>
         <div class="input-item">
-          <ion-input label="Reward" formControlName="reward" labelPlacement="floating" fill="outline"
-            placeholder="Reward on completion" helperText="" [errorText]="rewardError"></ion-input>
+          <ion-input
+            label="Reward"
+            formControlName="reward"
+            labelPlacement="floating"
+            fill="outline"
+            placeholder="Reward on completion"
+            helperText=""
+            [errorText]="rewardError"
+          ></ion-input>
         </div>
         <div class="input-item">
-          <ion-input label="Penalty" formControlName="penalty" labelPlacement="floating" fill="outline"
-            placeholder="Penalty for not completing resource" helperText=""></ion-input>
+          <ion-input
+            label="Penalty"
+            formControlName="penalty"
+            labelPlacement="floating"
+            fill="outline"
+            placeholder="Penalty for not completing resource"
+            helperText=""
+          ></ion-input>
         </div>
         <div class="input-item">
-          <ion-button color="primary" type="submit" size="medium" [disabled]="resourceForm.invalid">Submit</ion-button>
+          <ion-button color="primary" type="submit" size="medium" [disabled]="resourceForm.invalid">
+            Submit
+          </ion-button>
           <ion-button color="primary" type="reset" size="medium">Reset</ion-button>
         </div>
-
       </form>
     </div>
   </div>
-
 </ion-content>
