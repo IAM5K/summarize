@@ -1,6 +1,11 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": ["projects/**/*", "functions/**/**"],
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
+  "rules": {
+    "object-curly-spacing": ["error", "always"], // Ensure no space around `{`
+    "quotes": ["error", "double"] // Example ESLint rule for quotes, adjust as needed
+  },
   "overrides": [
     {
       "files": ["*.ts"],
