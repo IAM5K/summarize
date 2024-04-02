@@ -1,36 +1,36 @@
 import { Features } from "../../interface/masterData.model";
 
 export class MasterData {
-  public static features:Features[] =[
+  public static features: Features[] = [
     {
-      title:"Expenses",
-      icon:"cash",
-      color:"success",
-      path:"expenses"
+      title: "Expenses",
+      icon: "cash",
+      color: "success",
+      path: "expenses",
     },
     {
-      title:"Goal",
-      icon:"bulb",
-      color:"secondary",
-      path:"goal"
+      title: "Goal",
+      icon: "bulb",
+      color: "secondary",
+      path: "goal",
     },
     {
-      title:"Studies",
-      icon:"book",
-      color:"tertiary",
-      path:"studies"
+      title: "Studies",
+      icon: "book",
+      color: "tertiary",
+      path: "studies",
     },
     {
-      title:"Time",
-      icon:"hourglass",
-      color:"danger",
-      path:"time"
+      title: "Time",
+      icon: "hourglass",
+      color: "danger",
+      path: "time",
     },
     {
-      title:"Achievements",
-      icon:"trophy",
-      color:"warning",
-      path:"achievement"
-    }
-  ]
+      title: "Achievements",
+      icon: "trophy",
+      color: "warning",
+      path: "achievement",
+    },
+  ];
 }

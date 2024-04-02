@@ -15,7 +15,7 @@ export class SupportService {
 
   constructor(private afs: AngularFirestore) {
     this.supportCollection = this.afs.collection("support", (ref) =>
-      ref.orderBy("createdAt", "desc")
+      ref.orderBy("createdAt", "desc"),
     );
   }
 

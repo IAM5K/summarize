@@ -9,19 +9,19 @@ import { UpdateComponent } from "./components/update/update.component";
 const routes: Routes = [
   {
     path: "",
-    component: AboutPage
+    component: AboutPage,
   },
   {
     path: "howto",
-    component: HowtoComponent
+    component: HowtoComponent,
   },
   {
     path: "hof",
-    component: HofComponent
+    component: HofComponent,
   },
   {
     path: "update",
-    component: UpdateComponent
+    component: UpdateComponent,
   },
 ];
 

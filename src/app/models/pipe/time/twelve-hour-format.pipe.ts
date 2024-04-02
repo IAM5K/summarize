@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: "twelveHourFormat"
+  name: "twelveHourFormat",
 })
 export class TwelveHourFormatPipe implements PipeTransform {
-
   transform(value: string): string {
     // Extract the hours and minutes from the input value
     const [hours, minutes] = value.split(":").map(Number);

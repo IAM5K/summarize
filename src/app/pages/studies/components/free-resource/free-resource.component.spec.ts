@@ -9,8 +9,8 @@ describe("FreeResourceComponent", () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FreeResourceComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [FreeResourceComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FreeResourceComponent);

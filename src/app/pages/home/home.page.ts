@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
   homeData: any;
   constructor(
     private seoService: SeoService,
-    private rtdb: RealTimeDataBaseService
+    private rtdb: RealTimeDataBaseService,
   ) {}
 
   ngOnInit() {

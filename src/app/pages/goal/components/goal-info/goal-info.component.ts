@@ -8,11 +8,9 @@ import { DataDescription } from "src/app/models/interface/masterData.model";
   styleUrls: ["./goal-info.component.scss"],
 })
 export class GoalInfoComponent {
-  title:string = "Goal Setting";
-  goalSetting:DataDescription[] = GoalData.goalSetting;
-  goalDetails:DataDescription[] = GoalData.goalDetails;
+  title: string = "Goal Setting";
+  goalSetting: DataDescription[] = GoalData.goalSetting;
+  goalDetails: DataDescription[] = GoalData.goalDetails;
 
-  constructor() { }
-
-
+  constructor() {}
 }

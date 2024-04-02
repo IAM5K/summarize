@@ -7,12 +7,12 @@ import { GoalInfoComponent } from "./components/goal-info/goal-info.component";
 const routes: Routes = [
   {
     path: "",
-    component: GoalPage
+    component: GoalPage,
   },
   {
     path: "info",
-    component: GoalInfoComponent
-  }
+    component: GoalInfoComponent,
+  },
 ];
 
 @NgModule({

@@ -9,8 +9,8 @@ describe("AchievementPage", () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AchievementPage ],
-      imports: [IonicModule.forRoot()]
+      declarations: [AchievementPage],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AchievementPage);

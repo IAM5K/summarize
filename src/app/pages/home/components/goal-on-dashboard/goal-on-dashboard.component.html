@@ -1,40 +1,76 @@
 <section class="goal-dashboard feature-card-container">
   <ion-card class="daily-goal card">
-    <h2 class="ion-text-center bold h3">Goals for {{dateToday}} </h2>
-    <ng-container *ngIf="dailyGoals?.length>0">
+    <h2 class="ion-text-center bold h3">Goals for {{ dateToday }}</h2>
+    <ng-container *ngIf="dailyGoals?.length > 0">
       <ion-list [inset]="true">
         <ion-item *ngFor="let item of dailyGoals; let i = index">
-          <ion-checkbox [ngClass]="{ 'strike-through': item.progress === 100 }" justify="start" labelPlacement="end" color="success" [ngModel]="item.progress === 100" (ngModelChange)="updateDailyTask($event, item)">
-            {{item.title}}
+          <ion-checkbox
+            [ngClass]="{ 'strike-through': item.progress === 100 }"
+            justify="start"
+            labelPlacement="end"
+            color="success"
+            [ngModel]="item.progress === 100"
+            (ngModelChange)="updateDailyTask($event, item)"
+          >
+            {{ item.title }}
           </ion-checkbox>
-          <ion-icon name="reader-outline" aria-label="Daily goal info" [id]="item.idField"></ion-icon>
-          <ion-alert [trigger]="item.idField" [header]="'Goal : '+item.title" [subHeader]="item.description" [message]="item.actionSteps" [buttons]="alertButtons"></ion-alert>
+          <ion-icon
+            name="reader-outline"
+            aria-label="Daily goal info"
+            [id]="item.idField"
+          ></ion-icon>
+          <ion-alert
+            [trigger]="item.idField"
+            [header]="'Goal : ' + item.title"
+            [subHeader]="item.description"
+            [message]="item.actionSteps"
+            [buttons]="alertButtons"
+          ></ion-alert>
           <!-- <ion-reorder></ion-reorder> -->
         </ion-item>
       </ion-list>
     </ng-container>
-    <ng-container *ngIf="dailyGoals?.length<1">
+    <ng-container *ngIf="dailyGoals?.length < 1">
       <div class="ion-text-center ion-padding">
         <p>No goals found.</p>
-        <ion-button color="tertiary" size="medium" class="ion-text-bold" routerLink="/goal">Add daily goal</ion-button>
+        <ion-button color="tertiary" size="medium" class="ion-text-bold" routerLink="/goal">
+          Add daily goal
+        </ion-button>
       </div>
     </ng-container>
   </ion-card>
   <ion-card class="daily-goal card">
     <h2 class="ion-text-center bold h4">Priority Goals</h2>
-    <ng-container *ngIf="priorityGoals?.length>0">
+    <ng-container *ngIf="priorityGoals?.length > 0">
       <ion-list [inset]="true">
         <ion-item *ngFor="let item of priorityGoals; let i = index">
-          <ion-checkbox [ngClass]="{ 'strike-through': item.progress === 100 }" justify="start" labelPlacement="end" color="success" [ngModel]="item.progress === 100" (ngModelChange)="updateDailyTask($event, item)">
-            {{item.title}}
+          <ion-checkbox
+            [ngClass]="{ 'strike-through': item.progress === 100 }"
+            justify="start"
+            labelPlacement="end"
+            color="success"
+            [ngModel]="item.progress === 100"
+            (ngModelChange)="updateDailyTask($event, item)"
+          >
+            {{ item.title }}
           </ion-checkbox>
-          <ion-icon name="reader-outline" [id]="item.idField" aria-label="priority gaol info"></ion-icon>
-          <ion-alert [trigger]="item.idField" [header]="'Goal : '+item.title" [subHeader]="item.description" [message]="item.actionSteps" [buttons]="alertButtons"></ion-alert>
+          <ion-icon
+            name="reader-outline"
+            [id]="item.idField"
+            aria-label="priority gaol info"
+          ></ion-icon>
+          <ion-alert
+            [trigger]="item.idField"
+            [header]="'Goal : ' + item.title"
+            [subHeader]="item.description"
+            [message]="item.actionSteps"
+            [buttons]="alertButtons"
+          ></ion-alert>
           <!-- <ion-reorder></ion-reorder> -->
         </ion-item>
       </ion-list>
     </ng-container>
-    <ng-container *ngIf="priorityGoals?.length<1">
+    <ng-container *ngIf="priorityGoals?.length < 1">
       <div class="ion-text-center ion-padding">
         <p>No goals found.</p>
         <ion-button color="tertiary" size="medium" class="ion-text-bold">Add Goals</ion-button>

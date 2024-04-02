@@ -9,8 +9,8 @@ describe("HowtoComponent", () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HowtoComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [HowtoComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HowtoComponent);

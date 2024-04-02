@@ -14,8 +14,8 @@ import { AchievementPage } from "./achievement.page";
     FormsModule,
     IonicModule,
     AchievementPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [AchievementPage]
+  declarations: [AchievementPage],
 })
 export class AchievementPageModule {}

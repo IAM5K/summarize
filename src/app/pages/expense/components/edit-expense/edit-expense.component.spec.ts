@@ -9,8 +9,8 @@ describe("EditExpenseComponent", () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditExpenseComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [EditExpenseComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(EditExpenseComponent);

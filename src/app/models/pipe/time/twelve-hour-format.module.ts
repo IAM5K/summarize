@@ -3,6 +3,6 @@ import { TwelveHourFormatPipe } from "./twelve-hour-format.pipe";
 
 @NgModule({
   declarations: [TwelveHourFormatPipe],
-  exports: [TwelveHourFormatPipe]
+  exports: [TwelveHourFormatPipe],
 })
-export class TwelveHourFormatPipeModule { }
+export class TwelveHourFormatPipeModule {}

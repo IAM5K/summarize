@@ -9,13 +9,7 @@ import { TimePageRoutingModule } from "./time-routing.module";
 import { TimePage } from "./time.page";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TimePageRoutingModule,
-    ReactiveFormsModule
-  ],
-  declarations: [TimePage]
+  imports: [CommonModule, FormsModule, IonicModule, TimePageRoutingModule, ReactiveFormsModule],
+  declarations: [TimePage],
 })
 export class TimePageModule {}

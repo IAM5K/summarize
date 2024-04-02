@@ -9,8 +9,8 @@ describe("TimePage", () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimePage ],
-      imports: [IonicModule.forRoot()]
+      declarations: [TimePage],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TimePage);

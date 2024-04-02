@@ -5,10 +5,6 @@ import { Component } from "@angular/core";
   templateUrl: "./edit-studies.component.html",
   styleUrls: ["./edit-studies.component.scss"],
 })
-export class EditStudiesComponent  {
-
-  constructor() { }
-
-  
-
+export class EditStudiesComponent {
+  constructor() {}
 }

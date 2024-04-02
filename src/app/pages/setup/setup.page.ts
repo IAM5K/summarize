@@ -5,10 +5,7 @@ import { Component } from "@angular/core";
   templateUrl: "./setup.page.html",
   styleUrls: ["./setup.page.scss"],
 })
-export class SetupPage  {
-  pageTitle = "Setup"
-  constructor() { }
-
-  
-
+export class SetupPage {
+  pageTitle = "Setup";
+  constructor() {}
 }

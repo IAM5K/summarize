@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { RealTimeDataBaseService } from './real-time-data-base.service';
+import { RealTimeDataBaseService } from "./real-time-data-base.service";
 
-describe('RealTimeDataBaseService', () => {
+describe("RealTimeDataBaseService", () => {
   let service: RealTimeDataBaseService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('RealTimeDataBaseService', () => {
     service = TestBed.inject(RealTimeDataBaseService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

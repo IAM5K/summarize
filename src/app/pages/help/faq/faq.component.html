@@ -4,13 +4,20 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>{{ title }}</ion-title>
-    <ion-button slot="end" class="mr-10" [routerLink]="['../']" routerLinkActive="router-link-active" ><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    <ion-button
+      slot="end"
+      class="mr-10"
+      [routerLink]="['../']"
+      routerLinkActive="router-link-active"
+    >
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div id="container">
-    <div class="card ion-margin ion-padding ">
+    <div class="card ion-margin ion-padding">
       <h1 class="mt-0 h2">Reach out to us.</h1>
       <h2 class="ml-5 h5">Share Feedback / Request Feature / Ask Quries.</h2>
       <form class="form-container" [formGroup]="supportForm" (ngSubmit)="submitForm()" novalidate>
@@ -20,9 +27,15 @@
             <ion-input formControlName="name" type="text" clear-input></ion-input>
           </ion-item>
           <div *ngIf="name?.touched" class="error">
-            <span *ngIf="name?.touched && errorControl.name.errors?.['required']">Name is required.</span>
-            <span *ngIf="errorControl.name.errors?.['minlength']">Name should be min 4 characters long.</span>
-            <span *ngIf="errorControl.name.errors?.['pattern']">Name should have alphabets only.</span>
+            <span *ngIf="name?.touched && errorControl.name.errors?.['required']">
+              Name is required.
+            </span>
+            <span *ngIf="errorControl.name.errors?.['minlength']">
+              Name should be min 4 characters long.
+            </span>
+            <span *ngIf="errorControl.name.errors?.['pattern']">
+              Name should have alphabets only.
+            </span>
           </div>
         </div>
         <div class="input-item">
@@ -31,8 +44,12 @@
             <ion-input formControlName="email" type="text" clear-input></ion-input>
           </ion-item>
           <div *ngIf="email?.touched" class="error">
-            <span *ngIf="email?.touched && errorControl.email.errors?.['required']">Email is required.</span>
-            <span *ngIf="errorControl.email.errors?.['pattern']"  >Please provide valid email id.</span>
+            <span *ngIf="email?.touched && errorControl.email.errors?.['required']">
+              Email is required.
+            </span>
+            <span *ngIf="errorControl.email.errors?.['pattern']">
+              Please provide valid email id.
+            </span>
           </div>
         </div>
         <div class="input-item">
@@ -54,15 +71,30 @@
             <ion-textarea formControlName="msg" type="text" clear-input></ion-textarea>
           </ion-item>
           <div *ngIf="errorControl.msg.errors" class="error">
-            <span *ngIf="msg?.touched && errorControl.msg.errors?.['required']">Message is required.</span>
-            <span *ngIf="errorControl.msg.errors?.['minlength']">Message should be min 5 characters long.<br></span>
-            <span *ngIf="errorControl.msg.errors?.['pattern']">Only Alphabets and Numbers are Allowed!</span>
+            <span *ngIf="msg?.touched && errorControl.msg.errors?.['required']">
+              Message is required.
+            </span>
+            <span *ngIf="errorControl.msg.errors?.['minlength']">
+              Message should be min 5 characters long.
+              <br />
+            </span>
+            <span *ngIf="errorControl.msg.errors?.['pattern']">
+              Only Alphabets and Numbers are Allowed!
+            </span>
           </div>
         </div>
 
         <div class="input-item">
-            <ion-button [disabled]="supportForm.untouched || supportForm.invalid" color="success" type="submit">Submit</ion-button>
-            <ion-button [disabled]="supportForm.untouched" color="warning" type="reset">Reset Form</ion-button>
+          <ion-button
+            [disabled]="supportForm.untouched || supportForm.invalid"
+            color="success"
+            type="submit"
+          >
+            Submit
+          </ion-button>
+          <ion-button [disabled]="supportForm.untouched" color="warning" type="reset">
+            Reset Form
+          </ion-button>
         </div>
         <div *ngIf="isSubmitted">
           <h4 class="res-success bold">Request Submitted Successfully!</h4>

@@ -9,12 +9,7 @@ import { AnalyticsPageRoutingModule } from "./analytics-routing.module";
 import { AnalyticsPage } from "./analytics.page";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AnalyticsPageRoutingModule
-  ],
-  declarations: [AnalyticsPage]
+  imports: [CommonModule, FormsModule, IonicModule, AnalyticsPageRoutingModule],
+  declarations: [AnalyticsPage],
 })
 export class AnalyticsPageModule {}

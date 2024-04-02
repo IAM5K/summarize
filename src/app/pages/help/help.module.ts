@@ -10,13 +10,7 @@ import { HelpPage } from "./help.page";
 import { FaqComponent } from "./faq/faq.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HelpPageRoutingModule,
-    ReactiveFormsModule,
-  ],
-  declarations: [HelpPage,FaqComponent]
+  imports: [CommonModule, FormsModule, IonicModule, HelpPageRoutingModule, ReactiveFormsModule],
+  declarations: [HelpPage, FaqComponent],
 })
 export class HelpPageModule {}

@@ -17,10 +17,7 @@ export class ClassTwelveSyllabusData {
         { name: "systematics and Binomial System of Nomenclature" },
         {
           name: "salient Features of Animal Classification",
-          sub_topics: [
-            "Non-chordates up to Phylum Level",
-            "Chordates up to Class Level",
-          ],
+          sub_topics: ["Non-chordates up to Phylum Level", "Chordates up to Class Level"],
         },
         {
           name: "salient Features of Plant Classification",
@@ -46,23 +43,11 @@ export class ClassTwelveSyllabusData {
         { name: "Tissues in Animals and Plants" },
         {
           name: "Morphology, Anatomy, and Functions of Flowering Plants",
-          sub_topics: [
-            "Root",
-            "stem",
-            "Leaf",
-            "Inflorescence",
-            "Flower",
-            "Fruit",
-            "seed",
-          ],
+          sub_topics: ["Root", "stem", "Leaf", "Inflorescence", "Flower", "Fruit", "seed"],
         },
         {
           name: "Morphology, Anatomy, and Functions of Different Systems",
-          sub_topics: [
-            "Annelid (Earthworm)",
-            "Insect (Cockroach)",
-            "Amphibian (Frog)",
-          ],
+          sub_topics: ["Annelid (Earthworm)", "Insect (Cockroach)", "Amphibian (Frog)"],
         },
         { name: "Practicals" },
         {
@@ -84,18 +69,11 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "study of Anatomy",
-          sub_topics: [
-            "Roots",
-            "stems (Hand Sections)",
-            "Leaves (Permanent Slides)",
-          ],
+          sub_topics: ["Roots", "stems (Hand Sections)", "Leaves (Permanent Slides)"],
         },
         {
           name: "study of Vertebrate and Invertebrate Morphology and Internal Organization",
-          sub_topics: [
-            "One Vertebrate",
-            "One Invertebrate (Charts and Models)",
-          ],
+          sub_topics: ["One Vertebrate", "One Invertebrate (Charts and Models)"],
         },
       ],
     },
@@ -105,12 +83,7 @@ export class ClassTwelveSyllabusData {
       topics: [
         {
           name: "Cell Components",
-          sub_topics: [
-            "Cell Wall",
-            "Cell Membrane",
-            "Cell Organelles",
-            "Nuclear Organization",
-          ],
+          sub_topics: ["Cell Wall", "Cell Membrane", "Cell Organelles", "Nuclear Organization"],
         },
         {
           name: "Cell Division",
@@ -171,10 +144,7 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "Breathing and Respiration",
-          sub_topics: [
-            "Exchange of gases at multiple levels",
-            "Oxidation of sugars in cells",
-          ],
+          sub_topics: ["Exchange of gases at multiple levels", "Oxidation of sugars in cells"],
         },
         {
           name: "Body Fluids and Circulation",
@@ -305,16 +275,11 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "Linkage and Crossing Over",
-          sub_topics: [
-            "Genes on the same chromosome",
-            "Inheritance with crossing over",
-          ],
+          sub_topics: ["Genes on the same chromosome", "Inheritance with crossing over"],
         },
         {
           name: "Inheritance Pattern of Haemophilia and Blood Groups in Human Beings",
-          sub_topics: [
-            "Patterns of inheritance for haemophilia and blood groups",
-          ],
+          sub_topics: ["Patterns of inheritance for haemophilia and blood groups"],
         },
         {
           name: "DNA: Replication, Transcription, Translation",
@@ -406,10 +371,7 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "Cancer and AIDS",
-          sub_topics: [
-            "Understanding the Diseases",
-            "Preventive and Control Measures",
-          ],
+          sub_topics: ["Understanding the Diseases", "Preventive and Control Measures"],
         },
         {
           name: "Adolescence and Substance Abuse",
@@ -473,18 +435,11 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "Populations and Communities",
-          sub_topics: [
-            "species",
-            "Population Dynamics",
-            "Community Interactions",
-          ],
+          sub_topics: ["species", "Population Dynamics", "Community Interactions"],
         },
         {
           name: "Ecological Adaptations",
-          sub_topics: [
-            "Adaptations in Plants and Animals",
-            "Habitat-specific Adaptations",
-          ],
+          sub_topics: ["Adaptations in Plants and Animals", "Habitat-specific Adaptations"],
         },
         {
           name: "Biodiversity Conservation",
@@ -531,20 +486,14 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "Coulomb's Law",
-          sub_topics: [
-            "Force Between Two Point Charges",
-            "Forces Between Multiple Charges",
-          ],
+          sub_topics: ["Force Between Two Point Charges", "Forces Between Multiple Charges"],
         },
         {
           name: "superposition Principle and Continuous Charge Distribution",
         },
         {
           name: "Electric Field",
-          sub_topics: [
-            "Electric Field Due to a Point Charge",
-            "Electric Field Lines",
-          ],
+          sub_topics: ["Electric Field Due to a Point Charge", "Electric Field Lines"],
         },
         {
           name: "Electric Dipole",
@@ -698,10 +647,7 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "Torque on a Magnetic Dipole (Bar Magnet) in a Uniform Magnetic Field",
-          sub_topics: [
-            "Bar Magnet as an Equivalent Solenoid",
-            "Magnetic Field Lines",
-          ],
+          sub_topics: ["Bar Magnet as an Equivalent Solenoid", "Magnetic Field Lines"],
         },
         {
           name: "Earth's Magnetic Field and Magnetic Elements",
@@ -725,12 +671,7 @@ export class ClassTwelveSyllabusData {
       topics: [
         {
           name: "Electromagnetic Induction",
-          sub_topics: [
-            "Faraday's Law",
-            "Induced emf and Current",
-            "Lenz's Law",
-            "Eddy Currents",
-          ],
+          sub_topics: ["Faraday's Law", "Induced emf and Current", "Lenz's Law", "Eddy Currents"],
         },
         {
           name: "self and Mutual Inductance",
@@ -761,10 +702,7 @@ export class ClassTwelveSyllabusData {
       topics: [
         {
           name: "Electromagnetic Waves and Their Characteristics",
-          sub_topics: [
-            "Qualitative Ideas Only",
-            "Transverse Nature of Electromagnetic Waves",
-          ],
+          sub_topics: ["Qualitative Ideas Only", "Transverse Nature of Electromagnetic Waves"],
         },
         {
           name: "Electromagnetic Spectrum",
@@ -919,10 +857,7 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "semiconductor Diode",
-          sub_topics: [
-            "I-V Characteristics in Forward and Reverse Bias",
-            "Diode as a Rectifier",
-          ],
+          sub_topics: ["I-V Characteristics in Forward and Reverse Bias", "Diode as a Rectifier"],
         },
         {
           name: "I-V Characteristics of LED, Photodiode, Solar Cell, and Zener Diode",
@@ -962,11 +897,7 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "Propagation of Electromagnetic Waves",
-          sub_topics: [
-            "In the Atmosphere",
-            "sky Wave Propagation",
-            "space Wave Propagation",
-          ],
+          sub_topics: ["In the Atmosphere", "sky Wave Propagation", "space Wave Propagation"],
         },
         {
           name: "Need for Modulation",
@@ -984,12 +915,7 @@ export class ClassTwelveSyllabusData {
       topics: [
         {
           name: "Classification of Solids Based on Different Binding Forces",
-          sub_topics: [
-            "Molecular Solids",
-            "Ionic Solids",
-            "Covalent Solids",
-            "Metallic Solids",
-          ],
+          sub_topics: ["Molecular Solids", "Ionic Solids", "Covalent Solids", "Metallic Solids"],
         },
         {
           name: "Amorphous and Crystalline Solids (Elementary Idea)",
@@ -1058,10 +984,7 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "specific and Molar Conductivity",
-          sub_topics: [
-            "Variations of conductivity with concentration",
-            "Kohlrausch’s Law",
-          ],
+          sub_topics: ["Variations of conductivity with concentration", "Kohlrausch’s Law"],
         },
         {
           name: "Electrolysis and Laws of Electrolysis",
@@ -1134,21 +1057,14 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "Colloidal State",
-          sub_topics: [
-            "Distinction between true solutions, colloids, and suspensions",
-          ],
+          sub_topics: ["Distinction between true solutions, colloids, and suspensions"],
         },
         {
           name: "Lyophilic and Lyophobic Multimolecular and Macromolecular Colloids",
         },
         {
           name: "Properties of Colloids",
-          sub_topics: [
-            "Tyndall effect",
-            "Brownian movement",
-            "Electrophoresis",
-            "Coagulation",
-          ],
+          sub_topics: ["Tyndall effect", "Brownian movement", "Electrophoresis", "Coagulation"],
         },
         {
           name: "Emulsions",
@@ -1218,11 +1134,7 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "Dioxygen",
-          sub_topics: [
-            "Preparation, Properties, and Uses",
-            "simple Oxides",
-            "Ozone",
-          ],
+          sub_topics: ["Preparation, Properties, and Uses", "simple Oxides", "Ozone"],
         },
         {
           name: "sulfur",
@@ -1529,13 +1441,7 @@ export class ClassTwelveSyllabusData {
         },
         {
           name: "Important Polymers",
-          sub_topics: [
-            "Polythene",
-            "Nylon",
-            "Polyesters",
-            "Bakelite",
-            "Rubber",
-          ],
+          sub_topics: ["Polythene", "Nylon", "Polyesters", "Bakelite", "Rubber"],
         },
       ],
     },

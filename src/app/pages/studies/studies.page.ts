@@ -12,7 +12,7 @@ import { StudiesService } from "src/app/services/studies/studies.service";
 @Component({
   selector: "app-studies",
   templateUrl: "./studies.page.html",
-  styleUrls: ["./studies.page.scss"]
+  styleUrls: ["./studies.page.scss"],
 })
 export class StudiesPage implements OnInit {
   constructor(
@@ -22,19 +22,19 @@ export class StudiesPage implements OnInit {
     private alertService: AlertService,
     private datePipe: DatePipe,
     private viewportScroller: ViewportScroller,
-    private profileService: ProfileService
-  ) { }
+    private profileService: ProfileService,
+  ) {}
 
   pageTitle = "Studies";
-  pageMetaTags = SeoTags.studiesPageTags
-  studyMode = StudyOptionsData.studyMode
+  pageMetaTags = SeoTags.studiesPageTags;
+  studyMode = StudyOptionsData.studyMode;
   Studies: any = [];
   studiesCount: number = 0;
   currentTime = this.datePipe.transform(new Date(), "hh:mm");
-  advancedMode:boolean = false;
-  advancedModeAvailable:boolean = false;
-  editMode:boolean = false;
-  updateSubmitted:Boolean = false;
+  advancedMode: boolean = false;
+  advancedModeAvailable: boolean = false;
+  editMode: boolean = false;
+  updateSubmitted: Boolean = false;
   dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   studiesForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
@@ -46,41 +46,39 @@ export class StudiesPage implements OnInit {
     topic: ["", [Validators.required, Validators.pattern("^[a-zA-Z 0-9\n .,-]*$")]],
     description: ["", [Validators.required, Validators.pattern("^[a-zA-Z 0-9\n .,-]*$")]],
     studyMode: ["self", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
-    updatedAt: [serverTimestamp()]
-  })
-  studiesTypes = StudyOptionsData.studiesTypes
-  updateDataId:string ="";
+    updatedAt: [serverTimestamp()],
+  });
+  studiesTypes = StudyOptionsData.studiesTypes;
+  updateDataId: string = "";
   ngOnInit() {
-    this.getStudies()
+    this.getStudies();
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.activateAdvancedMode();
   }
 
   async getStudies() {
-    await this.studiesService.getStudies().subscribe(res => {
-      this.Studies = res
-      this.studiesCount = this.Studies.length
-    })
-
-
+    await this.studiesService.getStudies().subscribe((res) => {
+      this.Studies = res;
+      this.studiesCount = this.Studies.length;
+    });
   }
-  manageStudies(idField?:string){
+  manageStudies(idField?: string) {
     if (this.editMode) {
-      this.updateStudies(this.studiesForm.value)
+      this.updateStudies(this.studiesForm.value);
     } else {
-      this.addStudies(this.studiesForm.value)
+      this.addStudies(this.studiesForm.value);
     }
 
-    this.editMode = false
+    this.editMode = false;
     this.studiesForm.get("date")?.enable();
     this.studiesForm.patchValue({
       subject: "",
       topic: "",
-      description: ""
-    })
+      description: "",
+    });
   }
 
-  cancelUpdate(){
+  cancelUpdate() {
     this.editMode = false;
     this.studiesForm.markAsUntouched();
     this.studiesForm.get("date")?.enable();
@@ -88,49 +86,49 @@ export class StudiesPage implements OnInit {
       date: this.dateToday,
       subject: "",
       topic: "",
-      description: ""
-    })
-    this.updateSubmitted=false;
+      description: "",
+    });
+    this.updateSubmitted = false;
   }
   addStudies(value: any) {
-    this.studiesService.addStudies(value)
+    this.studiesService.addStudies(value);
   }
 
-  updateStudies(value:any) {
+  updateStudies(value: any) {
     this.updateSubmitted = true;
-    this.studiesService.updateStudies(value,this.updateDataId)
+    this.studiesService.updateStudies(value, this.updateDataId);
     this.cancelUpdate();
   }
 
-  async deleteStudies(idField:string){
-    const response = await this.alertService.deleteAlert()
+  async deleteStudies(idField: string) {
+    const response = await this.alertService.deleteAlert();
     if (response === "confirm") {
-    this.studiesService.deleteStudies(idField)
+      this.studiesService.deleteStudies(idField);
     }
   }
-  async editStudies(data:any){
+  async editStudies(data: any) {
     this.studiesForm.patchValue({
-      createdAt:data.createdAt,
-      date:data.date,
-      startTime:data.startTime,
-      endTime:data.endTime,
-      type:data.type,
-      subject:data.subject,
-      topic:data.topic,
-      description:data.description,
-      studyMode:data.studyMode,
-      updatedAt: serverTimestamp()
-    })
-    this.updateDataId= data.idField;
+      createdAt: data.createdAt,
+      date: data.date,
+      startTime: data.startTime,
+      endTime: data.endTime,
+      type: data.type,
+      subject: data.subject,
+      topic: data.topic,
+      description: data.description,
+      studyMode: data.studyMode,
+      updatedAt: serverTimestamp(),
+    });
+    this.updateDataId = data.idField;
     this.studiesForm.get("date")?.disable();
     this.editMode = true;
   }
 
-  async activateAdvancedMode(){
+  async activateAdvancedMode() {
     const profileData = await this.profileService.getProfileData();
-    if(profileData.educationDetails){
-      this.advancedModeAvailable = true
-      this.advancedMode = true;    
-    } 
+    if (profileData.educationDetails) {
+      this.advancedModeAvailable = true;
+      this.advancedMode = true;
+    }
   }
 }

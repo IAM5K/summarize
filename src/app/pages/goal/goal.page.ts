@@ -21,58 +21,26 @@ export class GoalPage implements OnInit {
     private seoService: SeoService,
     private fb: FormBuilder,
     private goalService: GoalService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
   ) {}
   dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   goalType = GoalData.goalType;
   goalFor = GoalData.goalFor;
   goalForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
-    date: [
-      this.dateToday,
-      [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")],
-    ],
+    date: [this.dateToday, [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
     progress: [
       0,
-      [
-        Validators.required,
-        Validators.pattern("^[0-9]*$"),
-        Validators.max(100),
-        Validators.min(0),
-      ],
+      [Validators.required, Validators.pattern("^[0-9]*$"), Validators.max(100), Validators.min(0)],
     ],
-    gTerm: [
-      "Tomorrow",
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")],
-    ],
-    type: [
-      "Studies",
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")],
-    ],
-    title: [
-      "",
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9, -.]*$")],
-    ],
-    reward: [
-      "",
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")],
-    ],
-    resource: [
-      "",
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")],
-    ],
-    description: [
-      "",
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")],
-    ],
-    actionSteps: [
-      "",
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")],
-    ],
-    penalty: [
-      "",
-      [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")],
-    ],
+    gTerm: ["Tomorrow", [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")]],
+    type: ["Studies", [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")]],
+    title: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9, -.]*$")]],
+    reward: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
+    resource: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
+    description: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
+    actionSteps: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
+    penalty: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
     updatedAt: [serverTimestamp()],
   });
   rewardError = "Only alphabets and numbers allowed";

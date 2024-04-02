@@ -6,8 +6,8 @@ import { TimePage } from "./time.page";
 const routes: Routes = [
   {
     path: "",
-    component: TimePage
-  }
+    component: TimePage,
+  },
 ];
 
 @NgModule({

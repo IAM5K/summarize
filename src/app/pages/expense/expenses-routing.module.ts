@@ -7,12 +7,12 @@ import { ExpensesPage } from "./expenses.page";
 const routes: Routes = [
   {
     path: "",
-    component: ExpensesPage
+    component: ExpensesPage,
   },
   {
     path: "analyze",
-    component: AnalyzeComponent
-  }
+    component: AnalyzeComponent,
+  },
 ];
 
 @NgModule({

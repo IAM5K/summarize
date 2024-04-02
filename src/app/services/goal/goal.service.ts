@@ -16,7 +16,7 @@ export class GoalService {
     private alertCtrl: AlertController,
     private fs: FirebaseService,
     private profileService: ProfileService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
   ) {}
 
   addMessage = "Goal added successfully.";
@@ -39,10 +39,7 @@ export class GoalService {
     return this.goalCollection
       .doc(userId)
       .collection("dailyGoals", (ref) =>
-        ref
-          .orderBy("gTerm")
-          .orderBy("date", "asc")
-          .where("gTerm", "==", "Daily")
+        ref.orderBy("gTerm").orderBy("date", "asc").where("gTerm", "==", "Daily"),
       )
       .valueChanges({ idField: "idField" });
   }
@@ -52,10 +49,7 @@ export class GoalService {
     return this.goalCollection
       .doc(userId)
       .collection("priorityGoals", (ref) =>
-        ref
-          .orderBy("gTerm")
-          .orderBy("date", "asc")
-          .where("gTerm", "!=", "Daily")
+        ref.orderBy("gTerm").orderBy("date", "asc").where("gTerm", "!=", "Daily"),
       )
       .valueChanges({ idField: "idField" });
   }
@@ -71,11 +65,10 @@ export class GoalService {
       .then((res) => {
         // console.log(res);
         this.toasterService.showToast(this.addMessage, "success");
-
       })
       .catch((err) => {
         alert(
-          "There was an error in posting. \n Please try again later. Check console for detail."
+          "There was an error in posting. \n Please try again later. Check console for detail.",
         );
         console.warn(err);
       });
@@ -87,11 +80,7 @@ export class GoalService {
       const goalTerm = data.gTerm === "Daily" ? "dailyGoals" : "priorityGoals";
       delete data.idField;
       // console.log(data);
-      await this.goalCollection
-        .doc(userId)
-        .collection(goalTerm)
-        .doc(idField)
-        .update(data);
+      await this.goalCollection.doc(userId).collection(goalTerm).doc(idField).update(data);
       this.toasterService.showToast(this.updateMessage, "success");
     } catch (error) {
       console.error("Error updating goal:", error);
@@ -105,11 +94,7 @@ export class GoalService {
       const goalTerm = data.gTerm === "Daily" ? "completedGoals" : "priorityGoals";
       delete data.idField;
       // console.log(data);
-      await this.goalCollection
-        .doc(userId)
-        .collection(goalTerm)
-        .doc(idField)
-        .update(data);
+      await this.goalCollection.doc(userId).collection(goalTerm).doc(idField).update(data);
       this.toasterService.showToast(this.updateMessage, "success");
     } catch (error) {
       console.error("Error updating goal:", error);
@@ -126,7 +111,7 @@ export class GoalService {
       .doc(idField)
       .delete()
       .then(() => {
-        this.toasterService.showToast(this.deletedMessage,"danger");
+        this.toasterService.showToast(this.deletedMessage, "danger");
       })
       .catch((err: Error) => {
         alert(err);
@@ -137,14 +122,14 @@ export class GoalService {
       const userId = this.fs.userData.uid;
       const goalRef = this.goalCollection.doc(userId).collection("dailyGoals").doc(goalId);
       const goal = await goalRef.get().toPromise();
-  
+
       if (goal.exists) {
         const data = goal.data();
         const completedGoalData = {
           ...data,
           completedOn: new Date(), // Set completedOn to current date
         };
-  
+
         // Determine the collection based on gTerm
         let goalTerm: string;
         switch (data["gTerm"]) {
@@ -159,9 +144,13 @@ export class GoalService {
             // Handle default case (if any)
             break;
         }
-  
+
         // Move completed goal to the appropriate collection
-        await this.goalCollection.doc(userId).collection(goalTerm).doc(goalId).set(completedGoalData);
+        await this.goalCollection
+          .doc(userId)
+          .collection(goalTerm)
+          .doc(goalId)
+          .set(completedGoalData);
         await goalRef.delete(); // Remove goal from original collection
         this.toasterService.showToast("Goal marked as completed", "success");
       } else {
@@ -173,20 +162,23 @@ export class GoalService {
       this.toasterService.showToast("Error marking goal as completed", "danger");
     }
   }
-  
+
   async markGoalAsUncompleted(goalId: string) {
     try {
       const userId = this.fs.userData.uid;
-      const completedGoalRef = this.goalCollection.doc(userId).collection("completedGoals").doc(goalId);
+      const completedGoalRef = this.goalCollection
+        .doc(userId)
+        .collection("completedGoals")
+        .doc(goalId);
       const completedGoal = await completedGoalRef.get().toPromise();
-  
+
       if (completedGoal.exists) {
         const data = completedGoal.data();
         const uncompletedGoalData = {
           ...data,
           completedOn: null, // Reset completedOn field
         };
-  
+
         // Determine the original collection based on gTerm
         let originalGoalTerm: string;
         switch (data["gTerm"]) {
@@ -201,9 +193,13 @@ export class GoalService {
             // Handle default case (if any)
             break;
         }
-  
+
         // Move goal back to the original collection
-        await this.goalCollection.doc(userId).collection(originalGoalTerm).doc(goalId).set(uncompletedGoalData);
+        await this.goalCollection
+          .doc(userId)
+          .collection(originalGoalTerm)
+          .doc(goalId)
+          .set(uncompletedGoalData);
         await completedGoalRef.delete(); // Remove goal from completedGoals collection
         this.toasterService.showToast("Goal marked as uncompleted", "success");
       } else {

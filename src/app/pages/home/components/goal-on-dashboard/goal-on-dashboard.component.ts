@@ -22,8 +22,8 @@ export class GoalOnDashboardComponent implements OnInit {
     private firebaseService: FirebaseService,
     private fb: FormBuilder,
     private goalService: GoalService,
-    private toasterService:ToasterService,
-    private datePipe: DatePipe
+    private toasterService: ToasterService,
+    private datePipe: DatePipe,
   ) {
     this.goalForm = this.fb.group({
       updatedAt: [serverTimestamp()],
@@ -44,7 +44,7 @@ export class GoalOnDashboardComponent implements OnInit {
         this.priorityGoals = res;
       });
     } else {
-      this.toasterService.showToast("No goals found : User not logged in.","warning")
+      this.toasterService.showToast("No goals found : User not logged in.", "warning");
     }
   }
 

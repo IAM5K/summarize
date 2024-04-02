@@ -16,13 +16,13 @@ import { AdvancedStudiesComponent } from "./components/advanced-studies/advanced
     IonicModule,
     StudiesPageRoutingModule,
     ReactiveFormsModule,
-    TwelveHourFormatPipeModule
+    TwelveHourFormatPipeModule,
   ],
   declarations: [
     StudiesPage,
     EditStudiesComponent,
     FreeResourceComponent,
-    AdvancedStudiesComponent
-  ]
+    AdvancedStudiesComponent,
+  ],
 })
 export class StudiesPageModule {}

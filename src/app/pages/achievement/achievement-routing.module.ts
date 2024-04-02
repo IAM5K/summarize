@@ -7,12 +7,12 @@ import { CreateGoalComponent } from "./create-goal/create-goal.component";
 const routes: Routes = [
   {
     path: "",
-    component: AchievementPage
+    component: AchievementPage,
   },
   {
     path: "create-goal",
-    component: CreateGoalComponent
-  }
+    component: CreateGoalComponent,
+  },
 ];
 
 @NgModule({

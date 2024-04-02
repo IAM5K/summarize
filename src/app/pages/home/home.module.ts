@@ -10,12 +10,7 @@ import { HomePage } from "./home.page";
 import { GoalOnDashboardComponent } from "./components/goal-on-dashboard/goal-on-dashboard.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule
-  ],
-  declarations: [HomePage, GoalOnDashboardComponent]
+  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
+  declarations: [HomePage, GoalOnDashboardComponent],
 })
 export class HomePageModule {}

@@ -1,2 +1,1 @@
-export class DailyExpense {
-}
+export class DailyExpense {}

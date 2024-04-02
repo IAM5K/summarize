@@ -14,27 +14,30 @@ export class OfficePage implements OnInit {
   pageMetaTags = [
     {
       name: "description",
-      content: "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better."
+      content:
+        "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better.",
     },
     {
       name: "keyword",
-      content: "Summarize, Summarize, arise, arize, money managemnet, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis"
+      content:
+        "Summarize, Summarize, arise, arize, money managemnet, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis",
     },
     {
       name: "author",
-      content: "Sandeep Kumar"
-    }
+      content: "Sandeep Kumar",
+    },
   ];
   Works: any = [];
   worksCount: number = 0;
   getCount: number = 0;
-  dateToday= (new Date().getFullYear()) + "-0" + (new Date().getMonth() + 1) + "-" + (new Date().getDate());
+  dateToday =
+    new Date().getFullYear() + "-0" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
 
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
-    private officeService: OfficeService
-  ) { }
+    private officeService: OfficeService,
+  ) {}
   workForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
@@ -43,8 +46,8 @@ export class OfficePage implements OnInit {
     type: ["coding", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 :/.,-]*$")]],
     description: ["", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
     // spendedOn: ['self', [Validators.required, Validators.pattern('^[a-zA-Z 0-9 .,-]*$')]],
-    updatedAt: [serverTimestamp()]
-  })
+    updatedAt: [serverTimestamp()],
+  });
   ngOnInit() {
     this.getWork();
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
@@ -52,31 +55,29 @@ export class OfficePage implements OnInit {
 
   async getWork() {
     this.getCount = 5;
-    await this.officeService.getWork(this.getCount).subscribe(res => {
-      this.Works = res
-      this.worksCount = this.Works.length
-    })
-
+    await this.officeService.getWork(this.getCount).subscribe((res) => {
+      this.Works = res;
+      this.worksCount = this.Works.length;
+    });
   }
   async getAllWork() {
     this.getCount = 0;
-    await this.officeService.getWork(this.getCount).subscribe(res => {
-      this.Works = res
-      this.worksCount = this.Works.length
-    })
-
+    await this.officeService.getWork(this.getCount).subscribe((res) => {
+      this.Works = res;
+      this.worksCount = this.Works.length;
+    });
   }
   addWork() {
-    this.officeService.addWork(this.workForm.value)
+    this.officeService.addWork(this.workForm.value);
   }
 
   deleteWork(idField: string) {
-    this.officeService.deleteWork(idField)
+    this.officeService.deleteWork(idField);
   }
 
   async copyToClipboard(work: any) {
     await Clipboard.write({
-      string: `${work.description} : (${work.startTime} - ${work.endTime}) `
+      string: `${work.description} : (${work.startTime} - ${work.endTime}) `,
     });
   }
 }

@@ -42,12 +42,11 @@ export class SidenavService {
   ];
   appPages = this.defaultPages;
 
-  setLoggedInPages(){
-    this.appPages= this.loggedInPages;
-    
+  setLoggedInPages() {
+    this.appPages = this.loggedInPages;
   }
 
-  setDefaultPages(){
-    this.appPages= this.defaultPages
+  setDefaultPages() {
+    this.appPages = this.defaultPages;
   }
 }

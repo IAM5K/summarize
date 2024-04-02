@@ -9,8 +9,8 @@ describe("GoalOnDashboardComponent", () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GoalOnDashboardComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [GoalOnDashboardComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GoalOnDashboardComponent);

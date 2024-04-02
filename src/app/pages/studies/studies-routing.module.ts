@@ -9,20 +9,20 @@ import { AdvancedStudiesComponent } from "./components/advanced-studies/advanced
 const routes: Routes = [
   {
     path: "",
-    component: StudiesPage
+    component: StudiesPage,
   },
   {
-    path:"edit-studies",
-    component:EditStudiesComponent
+    path: "edit-studies",
+    component: EditStudiesComponent,
   },
   {
-    path:"free-resource",
-    component:FreeResourceComponent
+    path: "free-resource",
+    component: FreeResourceComponent,
   },
   {
-    path:"advanced-studies",
-    component:AdvancedStudiesComponent
-  }
+    path: "advanced-studies",
+    component: AdvancedStudiesComponent,
+  },
 ];
 
 @NgModule({

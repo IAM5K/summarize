@@ -2,12 +2,12 @@ import { Injectable } from "@angular/core";
 import { AlertController } from "@ionic/angular";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class AlertService {
   handlerMessage = "";
   roleMessage = "";
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController) {}
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -57,6 +57,6 @@ export class AlertService {
     });
     await alert.present();
     const role = await alert.onDidDismiss();
-    return role.role
+    return role.role;
   }
 }

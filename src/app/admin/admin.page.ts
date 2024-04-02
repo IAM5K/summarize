@@ -15,23 +15,25 @@ import { ResourceService } from "../services/resource/resource.service";
   styleUrls: ["./admin.page.scss"],
 })
 export class AdminPage implements OnInit {
-
-
-  pageTitle = "Resource"
-  title = SeoTags.pageTitle.resourcePage
-  pageMetaTags = SeoTags.helpPageTags
+  pageTitle = "Resource";
+  title = SeoTags.pageTitle.resourcePage;
+  pageMetaTags = SeoTags.helpPageTags;
   constructor(
     private seoService: SeoService,
     private fb: FormBuilder,
     private resourceService: ResourceService,
     private alertService: AlertService,
     private datePipe: DatePipe,
-    private router: Router) { }
+    private router: Router,
+  ) {}
   dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   resourceForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
-    progress: [0, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.max(100), Validators.min(0)]],
+    progress: [
+      0,
+      [Validators.required, Validators.pattern("^[0-9]*$"), Validators.max(100), Validators.min(0)],
+    ],
     gTerm: ["Daily", [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")]],
     type: ["Studies", [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")]],
     title: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9, -.]*$")]],
@@ -40,18 +42,18 @@ export class AdminPage implements OnInit {
     description: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
     actionSteps: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
     penalty: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
-    updatedAt: [serverTimestamp()]
-  })
-  resourceData:any;
+    updatedAt: [serverTimestamp()],
+  });
+  resourceData: any;
   ngOnInit() {
-    this.seoService.seo(this.title, this.pageMetaTags)
+    this.seoService.seo(this.title, this.pageMetaTags);
     // this.resourceService.getResource().subscribe((res:any)=>{
     //   console.log(res);
     //   this.resourceData=res
 
     // })
   }
-  rewardError = "Only alphabets and numbers allowed"
+  rewardError = "Only alphabets and numbers allowed";
 
   addResource() {
     // this.resourceService.addResource(this.resourceForm.value);
@@ -60,23 +62,23 @@ export class AdminPage implements OnInit {
     let targetDate = this.dateToday;
     switch (this.resourceForm.value.gTerm) {
       case "Daily":
-        targetDate = this.dateToday
+        targetDate = this.dateToday;
         break;
       case "Tomorrow":
-        targetDate = new CustomDate().getDateTomorrow() ;
+        targetDate = new CustomDate().getDateTomorrow();
         break;
       case "Short Term":
-        targetDate = ""
+        targetDate = "";
         break;
       case "Long Term":
-        targetDate = ""
+        targetDate = "";
         break;
       default:
         break;
     }
 
     this.resourceForm.patchValue({
-      date: targetDate
-    })
+      date: targetDate,
+    });
   }
 }

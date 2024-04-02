@@ -6,7 +6,6 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./support.page.scss"],
 })
 export class SupportPage {
-  pageTitle = "Support"
-  constructor() { }
-
+  pageTitle = "Support";
+  constructor() {}
 }

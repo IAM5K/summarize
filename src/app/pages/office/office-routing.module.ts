@@ -6,8 +6,8 @@ import { OfficePage } from "./office.page";
 const routes: Routes = [
   {
     path: "",
-    component: OfficePage
-  }
+    component: OfficePage,
+  },
 ];
 
 @NgModule({

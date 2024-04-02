@@ -6,8 +6,8 @@ import { SupportPage } from "./support.page";
 const routes: Routes = [
   {
     path: "",
-    component: SupportPage
-  }
+    component: SupportPage,
+  },
 ];
 
 @NgModule({

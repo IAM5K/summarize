@@ -6,8 +6,5 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./create-goal.component.scss"],
 })
 export class CreateGoalComponent {
-
-  constructor() { }
-
-
+  constructor() {}
 }

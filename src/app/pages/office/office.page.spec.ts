@@ -9,8 +9,8 @@ describe("OfficePage", () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OfficePage ],
-      imports: [IonicModule.forRoot()]
+      declarations: [OfficePage],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(OfficePage);

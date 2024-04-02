@@ -6,8 +6,6 @@ import { Component } from "@angular/core";
   styleUrls: ["./free-resource.component.scss"],
 })
 export class FreeResourceComponent {
-
-  constructor() { }
-  title = "Free Resource"
-
+  constructor() {}
+  title = "Free Resource";
 }

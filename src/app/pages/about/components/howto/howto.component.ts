@@ -5,8 +5,6 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./howto.component.html",
   styleUrls: ["./howto.component.scss"],
 })
-export class HowtoComponent  {
-
-  constructor() { }
-
+export class HowtoComponent {
+  constructor() {}
 }

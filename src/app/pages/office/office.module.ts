@@ -9,13 +9,7 @@ import { OfficePageRoutingModule } from "./office-routing.module";
 import { OfficePage } from "./office.page";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    OfficePageRoutingModule,
-    ReactiveFormsModule
-  ],
-  declarations: [OfficePage]
+  imports: [CommonModule, FormsModule, IonicModule, OfficePageRoutingModule, ReactiveFormsModule],
+  declarations: [OfficePage],
 })
 export class OfficePageModule {}

@@ -14,19 +14,28 @@
     </ion-toolbar>
   </ion-header>
   <div class="ion-padding">
-    <h1 class="ion-text-center m-15px h2">Welcome to Summarize!<br>
-      <ion-note color="danger h5">*Please Install before login. For installation guide (<a class="color-secondary bold" routerLink="/help">check here</a>)</ion-note>
+    <h1 class="ion-text-center m-15px h2">
+      Welcome to Summarize!
+      <br />
+      <ion-note color="danger h5">
+        *Please Install before login. For installation guide (
+        <a class="color-secondary bold" routerLink="/help">check here</a>
+        )
+      </ion-note>
     </h1>
     <div class="login-form">
       <!-- Note: Login form -->
       <form *ngIf="loginMode" (ngSubmit)="login()" [formGroup]="loginForm">
-
         <ion-list class="form-ion-list">
           <ion-item class="ion-margin-bottom">
             <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
           </ion-item>
           <ion-item class="ion-margin-bottom">
-            <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+            <ion-input
+              type="password"
+              placeholder="Password"
+              formControlName="password"
+            ></ion-input>
           </ion-item>
         </ion-list>
         <div class="ion-align-items-end ion-margin-bottom">
@@ -34,7 +43,9 @@
         </div>
         <div class="ion-align-items-end">
           <ion-button type="submit" [disabled]="!loginForm.valid">Log in</ion-button>
-          <ion-button color="secondary" [disabled]="loginForm.valid" (click)="toggleMode()">Create account</ion-button>
+          <ion-button color="secondary" [disabled]="loginForm.valid" (click)="toggleMode()">
+            Create account
+          </ion-button>
         </div>
       </form>
 
@@ -45,28 +56,36 @@
             <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
           </ion-item>
           <ion-item class="ion-margin-bottom">
-            <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+            <ion-input
+              type="password"
+              placeholder="Password"
+              formControlName="password"
+            ></ion-input>
           </ion-item>
           <ion-item class="ion-margin-bottom">
-            <ion-input type="password" placeholder="Verify Password" formControlName="verifyPassword"></ion-input>
+            <ion-input
+              type="password"
+              placeholder="Verify Password"
+              formControlName="verifyPassword"
+            ></ion-input>
           </ion-item>
         </ion-list>
         <div class="ion-align-items-end">
-          <ion-button type="submit" [disabled]="!registerForm.valid || !passwordsMatch()">Register</ion-button>
+          <ion-button type="submit" [disabled]="!registerForm.valid || !passwordsMatch()">
+            Register
+          </ion-button>
           <ion-button color="secondary" (click)="toggleMode()">Back to login</ion-button>
         </div>
       </form>
-
     </div>
     <div class="mt-10">
       <h2><ion-note color="success" class="h3 ml-5">Login with Google (Recommended)</ion-note></h2>
-      <ion-button type="button" expand="block" color="success" (click)="loginWithGoogle()">Login with Google</ion-button>
-
+      <ion-button type="button" expand="block" color="success" (click)="loginWithGoogle()">
+        Login with Google
+      </ion-button>
     </div>
-
   </div>
   <div class="card ion-padding">
-
     <h2><ion-note color="success" class="h3 ml-5">Why use Google Login?</ion-note></h2>
     <ol>
       <li>More Secure</li>
@@ -79,12 +98,17 @@
       <li>If there is no specific reason to use email, Try Login with Google.</li>
       <li>For Email based, if you already have an account, Create account will not work.</li>
       <li>If you don't have an account, Login will not work for you. Create an account first.</li>
-      <li>Verification of email is required in next step. Please use valid email, else account will be deleted in next 7 days.</li>
+      <li>
+        Verification of email is required in next step. Please use valid email, else account will be
+        deleted in next 7 days.
+      </li>
     </ol>
-    <h4><ion-note color="success" class="h3 ml-5">Have doubts / questions about Summarize?</ion-note></h4>
+    <h4>
+      <ion-note color="success" class="h3 ml-5">Have doubts / questions about Summarize?</ion-note>
+    </h4>
     <ol>
       <li>How to install Summarize? : Visit our Help page.</li>
-      <li>Why should I use Summarize? : Visit About page </li>
+      <li>Why should I use Summarize? : Visit About page</li>
       <li>What is the purpose of this tool? : Check our pages and for details read About Page.</li>
     </ol>
   </div>

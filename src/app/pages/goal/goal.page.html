@@ -14,72 +14,152 @@
     </ion-toolbar>
   </ion-header>
   <div id="container">
-    <div class="ion-margin options-container ">
+    <div class="ion-margin options-container">
       <ion-button routerLink="./info" color="success" class="ion-float-right">
-        <ion-icon class="mr-10" name="analytics-outline"></ion-icon>How to set Goal</ion-button>
+        <ion-icon class="mr-10" name="analytics-outline"></ion-icon>
+        How to set Goal
+      </ion-button>
     </div>
-    <div class="card ion-margin ion-padding ">
+    <div class="card ion-margin ion-padding">
       <h1 class="mt-0 h2">Set Goal</h1>
       <div class="form-container">
         <form [formGroup]="goalForm" (ngSubmit)="addGoal()" novalidate>
           <div class="input-item">
-            <ion-select aria-label="Goal Term" label="Goal Term" formControlName="gTerm" placeholder="Select goal term"
-              helperText="Enter a valid email" errorText="Invalid email" fill="outline" (ionChange)="dateUpdate()">
-              <ion-select-option *ngFor="let item of goalType" [value]="item.value"
-                aria-label="Goal Type option">{{item.title}}</ion-select-option>
+            <ion-select
+              aria-label="Goal Term"
+              label="Goal Term"
+              formControlName="gTerm"
+              placeholder="Select goal term"
+              helperText="Enter a valid email"
+              errorText="Invalid email"
+              fill="outline"
+              (ionChange)="dateUpdate()"
+            >
+              <ion-select-option
+                *ngFor="let item of goalType"
+                [value]="item.value"
+                aria-label="Goal Type option"
+              >
+                {{item.title}}
+              </ion-select-option>
             </ion-select>
           </div>
           <div class="input-item">
-            <ion-input label="Target Date" formControlName="date" type="date" labelPlacement="floating" fill="outline"
-              placeholder="Target Date"></ion-input>
+            <ion-input
+              label="Target Date"
+              formControlName="date"
+              type="date"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Target Date"
+            ></ion-input>
           </div>
           <div class="input-item">
-            <ion-select aria-label="Category of Goal" label="Category of Goal" formControlName="type" helperText
-              placeholder="Category of Goal" fill="outline">
-              <ion-select-option *ngFor="let type of goalFor" [value]="type.value">{{type.title}}</ion-select-option>
+            <ion-select
+              aria-label="Category of Goal"
+              label="Category of Goal"
+              formControlName="type"
+              helperText
+              placeholder="Category of Goal"
+              fill="outline"
+            >
+              <ion-select-option *ngFor="let type of goalFor" [value]="type.value">
+                {{type.title}}
+              </ion-select-option>
             </ion-select>
           </div>
           <div class="input-item">
-            <ion-input label="Title" formControlName="title" labelPlacement="floating" fill="outline" placeholder="Short title of the goal">
-            </ion-input>
+            <ion-input
+              label="Title"
+              formControlName="title"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Short title of the goal"
+            ></ion-input>
           </div>
           <div class="input-item">
-            <ion-textarea label="Description" formControlName="description" labelPlacement="floating" fill="outline"
-              placeholder="Enter text" autoGrow="true"></ion-textarea>
+            <ion-textarea
+              label="Description"
+              formControlName="description"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Enter text"
+              autoGrow="true"
+            ></ion-textarea>
           </div>
           <div class="input-item">
-            <ion-textarea label="Resource Required" formControlName="resource" labelPlacement="floating" fill="outline"
-              placeholder="List of resources needed /involved" autoGrow="true"></ion-textarea>
+            <ion-textarea
+              label="Resource Required"
+              formControlName="resource"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="List of resources needed /involved"
+              autoGrow="true"
+            ></ion-textarea>
           </div>
           <div class="input-item">
-            <ion-textarea label="Action Steps" formControlName="actionSteps" labelPlacement="floating" fill="outline"
-              placeholder="Enter text" autoGrow="true"></ion-textarea>
+            <ion-textarea
+              label="Action Steps"
+              formControlName="actionSteps"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Enter text"
+              autoGrow="true"
+            ></ion-textarea>
           </div>
           <div class="input-item">
-            <ion-input label="Current Progress" formControlName="progress" labelPlacement="floating" fill="outline"
-              type="number" min="0" max="100" errorText="Progress can be between 0 - 100 only" placeholder="Enter text">
-            </ion-input>
+            <ion-input
+              label="Current Progress"
+              formControlName="progress"
+              labelPlacement="floating"
+              fill="outline"
+              type="number"
+              min="0"
+              max="100"
+              errorText="Progress can be between 0 - 100 only"
+              placeholder="Enter text"
+            ></ion-input>
           </div>
           <div class="input-item">
-            <ion-input label="Reward" formControlName="reward" labelPlacement="floating" fill="outline"
-              placeholder="Reward on completion" helperText="" [errorText]="rewardError"></ion-input>
+            <ion-input
+              label="Reward"
+              formControlName="reward"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Reward on completion"
+              helperText=""
+              [errorText]="rewardError"
+            ></ion-input>
           </div>
           <div class="input-item">
-            <ion-input label="Penalty" formControlName="penalty" labelPlacement="floating" fill="outline"
-              placeholder="Penalty for not completing goal" helperText=""></ion-input>
+            <ion-input
+              label="Penalty"
+              formControlName="penalty"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Penalty for not completing goal"
+              helperText=""
+            ></ion-input>
           </div>
           <div class="input-item">
-            <ion-button color="primary" type="submit" size="medium" [disabled]="goalForm.invalid">Submit</ion-button>
+            <ion-button color="primary" type="submit" size="medium" [disabled]="goalForm.invalid">
+              Submit
+            </ion-button>
             <ion-button color="warning" type="reset" size="medium">Reset</ion-button>
           </div>
-
         </form>
       </div>
     </div>
 
-
-    <div class="goals-list ion-margin ">
-      <ion-note color="secondary">Note: This Feature is under development. Please give us some time to complete it. Till then feel free to add goals. Manage goals will be available soon. If you feel you have already waited for long, ping me on <a href="https://www.linkedin.com/in/iam5k/" target="_blank" rel="noopener noreferrer">LinkedIn</a></ion-note>
+    <div class="goals-list ion-margin">
+      <ion-note color="secondary">
+        Note: This Feature is under development. Please give us some time to complete it. Till then
+        feel free to add goals. Manage goals will be available soon. If you feel you have already
+        waited for long, ping me on
+        <a href="https://www.linkedin.com/in/iam5k/" target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
+      </ion-note>
 
       <!-- <p *ngFor="let item of goalData">{{item.title}}</p> -->
     </div>

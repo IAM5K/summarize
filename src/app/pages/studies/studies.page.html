@@ -17,20 +17,20 @@
   <div id="container">
     <div class="floating-tab" *ngIf="advancedModeAvailable">
       <ion-tabs class="stay-topmost">
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button [ngClass]="!advancedMode? 'tab-active':'' " (click)="advancedMode=false">
-          <ion-icon name="play-circle"></ion-icon>
-          Normal Mode
-        </ion-tab-button>
-        <ion-tab-button [ngClass]="advancedMode? 'tab-active':'' " (click)="advancedMode=true">
-          <ion-icon name="sparkles"></ion-icon>
-          Advanced Mode
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button [ngClass]="!advancedMode? 'tab-active':'' " (click)="advancedMode=false">
+            <ion-icon name="play-circle"></ion-icon>
+            Normal Mode
+          </ion-tab-button>
+          <ion-tab-button [ngClass]="advancedMode? 'tab-active':'' " (click)="advancedMode=true">
+            <ion-icon name="sparkles"></ion-icon>
+            Advanced Mode
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
     </div>
     <ng-container *ngIf="!advancedMode; else advancedContent">
-      <div class="card ion-margin ion-padding ">
+      <div class="card ion-margin ion-padding">
         <h1 class="mt-0 h2">{{editMode?"Update":"Add"}} Studies</h1>
         <div class="form-container">
           <form [formGroup]="studiesForm" (ngSubmit)="manageStudies()" novalidate>
@@ -56,42 +56,80 @@
             <div class="input-item">
               <ion-item fill="outline">
                 <ion-label position="floating">Subject</ion-label>
-                <ion-input formControlName="subject" type="text" placeholder="Subject studied / Book Name" clear-input></ion-input>
+                <ion-input
+                  formControlName="subject"
+                  type="text"
+                  placeholder="Subject studied / Book Name"
+                  clear-input
+                ></ion-input>
               </ion-item>
             </div>
             <div class="input-item">
               <ion-item fill="outline">
                 <ion-label position="floating">Topic</ion-label>
-                <ion-input formControlName="topic" type="text" placeholder="Chapter/Topic/Sub-topic studied" clear-input></ion-input>
+                <ion-input
+                  formControlName="topic"
+                  type="text"
+                  placeholder="Chapter/Topic/Sub-topic studied"
+                  clear-input
+                ></ion-input>
               </ion-item>
             </div>
             <div class="input-item">
               <ion-item fill="outline">
                 <ion-label position="floating">Description</ion-label>
-                <ion-textarea formControlName="description" type="text" autoGrow="true" placeholder="Description/ Sub-topic / comments about topic." clear-input>
-                </ion-textarea>
+                <ion-textarea
+                  formControlName="description"
+                  type="text"
+                  autoGrow="true"
+                  placeholder="Description/ Sub-topic / comments about topic."
+                  clear-input
+                ></ion-textarea>
               </ion-item>
             </div>
             <div class="input-item">
               <ion-item fill="outline">
                 <ion-label position="floating">Type</ion-label>
-                <ion-select formControlName="type" interface="popover" placeholder="Category of Studies">
-                  <ion-select-option *ngFor="let type of studiesTypes" [value]="type.value">{{type.title}}</ion-select-option>
+                <ion-select
+                  formControlName="type"
+                  interface="popover"
+                  placeholder="Category of Studies"
+                >
+                  <ion-select-option *ngFor="let type of studiesTypes" [value]="type.value">
+                    {{type.title}}
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
             </div>
             <div class="input-item">
               <ion-item fill="outline">
                 <ion-label position="floating">Study Mode</ion-label>
-                <ion-select formControlName="studyMode" interface="popover" placeholder="On whom it is Spent">
-                  <ion-select-option *ngFor="let item of studyMode" [value]="item.value">{{item.title}}</ion-select-option>
+                <ion-select
+                  formControlName="studyMode"
+                  interface="popover"
+                  placeholder="On whom it is Spent"
+                >
+                  <ion-select-option *ngFor="let item of studyMode" [value]="item.value">
+                    {{item.title}}
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
             </div>
             <div class="input-item">
-              <ion-button color="primary" type="submit" size="medium" [disabled]="studiesForm.invalid || studiesForm.untouched">{{editMode?"Update":"Submit"}}</ion-button>
-              <ion-button color="warning" type="reset" size="medium" *ngIf="!editMode">Reset</ion-button>
-              <ion-button color="danger" size="medium" *ngIf="editMode" (click)="cancelUpdate()">Cancel</ion-button>
+              <ion-button
+                color="primary"
+                type="submit"
+                size="medium"
+                [disabled]="studiesForm.invalid || studiesForm.untouched"
+              >
+                {{editMode?"Update":"Submit"}}
+              </ion-button>
+              <ion-button color="warning" type="reset" size="medium" *ngIf="!editMode">
+                Reset
+              </ion-button>
+              <ion-button color="danger" size="medium" *ngIf="editMode" (click)="cancelUpdate()">
+                Cancel
+              </ion-button>
             </div>
           </form>
         </div>
@@ -108,9 +146,18 @@
           </ion-card-header>
 
           <ion-card-content>
-            <p><span class="bold">Description: </span> {{study?.description}}</p>
-            <p><span class="bold">Date: </span> {{study?.startTime}}</p>
-            <p><span class="bold">Answered By at</span> {{study?.endTime}}</p>
+            <p>
+              <span class="bold">Description:</span>
+              {{study?.description}}
+            </p>
+            <p>
+              <span class="bold">Date:</span>
+              {{study?.startTime}}
+            </p>
+            <p>
+              <span class="bold">Answered By at</span>
+              {{study?.endTime}}
+            </p>
             <ion-button class="action-button" color="secondary" (click)="editStudies(study)">
               <ion-icon color="light" [ios]="'pencil-outline'" [md]="'pencil-sharp'"></ion-icon>
             </ion-button>
@@ -122,13 +169,18 @@
       </div>
 
       <div class="ion-padding" *ngIf="!editMode">
-        <ion-button color="success" [routerLink]="['free-resource']" routerLinkActive="router-link-active">Get Free Resource</ion-button>
+        <ion-button
+          color="success"
+          [routerLink]="['free-resource']"
+          routerLinkActive="router-link-active"
+        >
+          Get Free Resource
+        </ion-button>
       </div>
     </ng-container>
   </div>
 
   <ng-template #advancedContent>
     <app-advanced-studies></app-advanced-studies>
-  </ng-template>  
-
+  </ng-template>
 </ion-content>

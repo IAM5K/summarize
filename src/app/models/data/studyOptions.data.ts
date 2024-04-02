@@ -42,12 +42,12 @@ export class StudyOptionsData {
     { title: "Practice", value: "practice" },
     { title: "Read", value: "read" },
     { title: "Write", value: "write" },
-    { title: "Test", value: "test" }
+    { title: "Test", value: "test" },
   ];
   public static studyMode: Options[] = [
     { title: "Self", value: "self" },
     { title: "Group", value: "group" },
     { title: "Teacher", value: "teacher" },
-    { title: "Online", value: "online" }
+    { title: "Online", value: "online" },
   ];
 }

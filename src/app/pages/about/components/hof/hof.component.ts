@@ -6,8 +6,6 @@ import { Component } from "@angular/core";
   styleUrls: ["./hof.component.scss"],
 })
 export class HofComponent {
-  pageTitle = "Hall of Frame"
-  constructor() { }
-
-
+  pageTitle = "Hall of Frame";
+  constructor() {}
 }

@@ -9,8 +9,8 @@ describe("HofComponent", () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HofComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [HofComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HofComponent);
