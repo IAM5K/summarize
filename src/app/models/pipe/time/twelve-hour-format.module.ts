@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { TwelveHourFormatPipe } from './twelve-hour-format.pipe';
+import { NgModule } from "@angular/core";
+import { TwelveHourFormatPipe } from "./twelve-hour-format.pipe";
 
 @NgModule({
   declarations: [TwelveHourFormatPipe],
-  exports: [TwelveHourFormatPipe]
+  exports: [TwelveHourFormatPipe],
 })
-export class TwelveHourFormatPipeModule { }
+export class TwelveHourFormatPipeModule {}

@@ -1,7 +1,7 @@
-import { Budget } from './budget';
+import { Budget } from "./budget";
 
-describe('Budget', () => {
-  it('should create an instance', () => {
+describe("Budget", () => {
+  it("should create an instance", () => {
     expect(new Budget()).toBeTruthy();
   });
 });

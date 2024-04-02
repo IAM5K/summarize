@@ -1,26 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   Auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
   GoogleAuthProvider,
-} from '@angular/fire/auth';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+} from "@angular/fire/auth";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
-import { Router } from '@angular/router';
-import { error } from 'console';
-import firebase from 'firebase/compat/app';
-import { Observable, map } from 'rxjs';
-import { User } from 'src/app/models/interface/user.model';
-import { ToasterService } from 'src/app/services/toaster/toaster.service';
+} from "@angular/fire/compat/firestore";
+import { Router } from "@angular/router";
+import { error } from "console";
+import firebase from "firebase/compat/app";
+import { Observable, map } from "rxjs";
+import { User } from "src/app/models/interface/user.model";
+import { ToasterService } from "src/app/services/toaster/toaster.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   isLogin: boolean = true;
@@ -33,21 +33,17 @@ export class AuthService {
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private toaster:ToasterService
+    private toaster: ToasterService,
   ) {
     // Subscribe to authentication state changes
     this.isLoggedIn$ = this.afAuth.authState.pipe(
-      map((user) => !!user) // Convert user object to boolean (true if logged in, false if not)
+      map((user) => !!user), // Convert user object to boolean (true if logged in, false if not)
     );
   }
 
   async register(email: any, password: any) {
     try {
-      const user = await createUserWithEmailAndPassword(
-        this.auth,
-        email,
-        password
-      );
+      const user = await createUserWithEmailAndPassword(this.auth, email, password);
       this.updateUserData(user.user);
       return user;
     } catch (e) {
@@ -57,40 +53,36 @@ export class AuthService {
 
   async login(email: string, password: string) {
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        this.auth,
-        email,
-        password
-      );
+      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
       const user = userCredential.user;
       await this.getEmailBasedUser(user);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
       this.isLogin = true;
-      this.toaster.showToast("Login Success!","success")
+      this.toaster.showToast("Login Success!", "success");
       return user;
     } catch (error) {
       const errorCode = error.code;
-      let errorMessage = 'An error occurred. Please try again.';
+      let errorMessage = "An error occurred. Please try again.";
 
       switch (errorCode) {
         case "auth/invalid-login-credentials":
-          errorMessage = "Invalid credentials"
+          errorMessage = "Invalid credentials";
           break;
-        case 'auth/user-not-found':
-          errorMessage = 'User not found. Please check your email.';
+        case "auth/user-not-found":
+          errorMessage = "User not found. Please check your email.";
           break;
-        case 'auth/wrong-password':
-          errorMessage = 'Invalid password. Please try again.';
+        case "auth/wrong-password":
+          errorMessage = "Invalid password. Please try again.";
           break;
-        case 'auth/invalid-email':
-          errorMessage = 'Invalid email address. Please enter a valid email.';
+        case "auth/invalid-email":
+          errorMessage = "Invalid email address. Please enter a valid email.";
           break;
 
         default:
-          errorMessage =" Unknown error occurred"
+          errorMessage = " Unknown error occurred";
           break;
       }
-      this.toaster.showToast(errorMessage,"danger")
+      this.toaster.showToast(errorMessage, "danger");
       return null;
     }
   }
@@ -137,7 +129,7 @@ export class AuthService {
           const data = JSON.parse(JSON.stringify(user));
           userRef.set(data, { merge: true });
         }
-        localStorage.setItem('UserData', JSON.stringify(user));
+        localStorage.setItem("UserData", JSON.stringify(user));
       });
     } else if (userRef.get() === undefined) {
       userRef.set(user, { merge: true });
@@ -156,8 +148,8 @@ export class AuthService {
           const data = JSON.parse(JSON.stringify(user));
           userRef.set(data, { merge: true });
         }
-        localStorage.setItem('UserData', JSON.stringify(user));
-        this.router.navigateByUrl('/home', { replaceUrl: true });
+        localStorage.setItem("UserData", JSON.stringify(user));
+        this.router.navigateByUrl("/home", { replaceUrl: true });
       });
     } else {
       userRef.set(data, { merge: true });

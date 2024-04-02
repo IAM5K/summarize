@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { IonicModule } from "@ionic/angular";
 
-import { GoalOnDashboardComponent } from './goal-on-dashboard.component';
+import { GoalOnDashboardComponent } from "./goal-on-dashboard.component";
 
-describe('GoalOnDashboardComponent', () => {
+describe("GoalOnDashboardComponent", () => {
   let component: GoalOnDashboardComponent;
   let fixture: ComponentFixture<GoalOnDashboardComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GoalOnDashboardComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [GoalOnDashboardComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GoalOnDashboardComponent);
@@ -18,7 +18,7 @@ describe('GoalOnDashboardComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

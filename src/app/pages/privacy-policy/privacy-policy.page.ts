@@ -1,13 +1,11 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-privacy-policy',
-  templateUrl: './privacy-policy.page.html',
-  styleUrls: ['./privacy-policy.page.scss'],
+  selector: "app-privacy-policy",
+  templateUrl: "./privacy-policy.page.html",
+  styleUrls: ["./privacy-policy.page.scss"],
 })
-export class PrivacyPolicyPage  {
-
-  pageTitle="Privacy Policy"
-  constructor() { }
-
+export class PrivacyPolicyPage {
+  pageTitle = "Privacy Policy";
+  constructor() {}
 }

@@ -1,7 +1,7 @@
-import { MonthlyExpense } from './monthly-expense';
+import { MonthlyExpense } from "./monthly-expense";
 
-describe('MonthlyExpense', () => {
-  it('should create an instance', () => {
+describe("MonthlyExpense", () => {
+  it("should create an instance", () => {
     expect(new MonthlyExpense()).toBeTruthy();
   });
 });

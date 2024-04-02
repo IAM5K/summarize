@@ -1,7 +1,7 @@
 {
   "editor.defaultFormatter": "vscode.html-language-features",
-  "cSpell.words": ["arize", "Drucker", "etags", "maxlength"],
-"editor.formatOnSave": true,
+  "cSpell.words": ["arize", "Drucker", "etags", "maxlength", "subdir"],
+  "editor.formatOnSave": true,
   "prettier.htmlWhitespaceSensitivity": "ignore",
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

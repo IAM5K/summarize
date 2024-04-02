@@ -1,21 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
-import { AlertController } from '@ionic/angular';
+} from "@angular/fire/compat/firestore";
+import { AlertController } from "@ionic/angular";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class SupportService {
   supportCollection: AngularFirestoreCollection;
   supportDoc!: AngularFirestoreDocument;
 
   constructor(private afs: AngularFirestore) {
-    this.supportCollection = this.afs.collection('support', (ref) =>
-      ref.orderBy('createdAt', 'desc')
+    this.supportCollection = this.afs.collection("support", (ref) =>
+      ref.orderBy("createdAt", "desc"),
     );
   }
 
@@ -23,7 +23,7 @@ export class SupportService {
     return this.supportCollection.add(value);
   }
   getSupport() {
-    return this.supportCollection.valueChanges({ idField: 'idField' });
+    return this.supportCollection.valueChanges({ idField: "idField" });
   }
   updateData(idField: string, data: any) {
     this.afs

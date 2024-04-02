@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { OfficePage } from './office.page';
+import { OfficePage } from "./office.page";
 
 const routes: Routes = [
   {
-    path: '',
-    component: OfficePage
-  }
+    path: "",
+    component: OfficePage,
+  },
 ];
 
 @NgModule({
