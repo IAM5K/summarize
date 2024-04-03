@@ -40,3 +40,17 @@ export interface EducationLevel {
   level: string;
   subjects: string[];
 }
+
+export interface AccordionItem {
+  name: string;
+  alert: string;
+  message: string;
+}
+
+export interface AlertRadioOptions {
+  label: string;
+  type: string;
+  value: string;
+  name: string;
+  id: string;
+}
