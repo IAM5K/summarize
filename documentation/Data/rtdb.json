@@ -196,7 +196,17 @@
           "answer": "For updates go to About page and there you can find the version details and update button.Currently just navigate to About page and you will receive update app popup, accept it and you will receive updates. There are few active issues with the update of app so please be patient. We are working to get it fixed soon.",
           "id": 1
         }
-      ]
+      ],
+      "freeCoursesSteps": {
+        "title": "",
+        "steps": [
+          "Login to app using Google.",
+          "Navigate to Studies page.",
+          "Click on Get Free Resource located at the bottom of page.",
+          "Check if the current available course is helpful to you.",
+          "If yes, click on 'Get Now'."
+        ]
+      }
     },
     "goal": {},
     "expenses": {},
