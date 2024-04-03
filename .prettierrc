@@ -5,25 +5,12 @@
   "semi": true,
   "singleQuote": false,
   "bracketSpacing": true,
-  "printWidth": 120,
-  "useTabs": false,
-  "quoteProps": "as-needed",
-  "jsxSingleQuote": false,
-  "bracketSameLine": false,
-  "arrowParens": "always",
-  "overrides": [
+  "printWidth": 100,
+  "prettier/prettier": [
+    "error",
     {
-      "files": "*.md",
-      "options": {
-        "parser": "mdx"
-      }
-    },
-    {
-      "files": ".prettierrc",
-      "options": {
-        "parser": "json",
-        "trailingComma": "all"
-      }
+      "singleQuote": true,
+      "parser": "flow"
     }
   ]
 }

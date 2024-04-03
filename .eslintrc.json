@@ -9,7 +9,7 @@
     "no-unused-vars": "off",
     "no-undef": "off"
   },
-  "parser": "@typescript-eslint/parser",
+  "parser": "angular",
   "parserOptions": {
     "project": "./tsconfig.json"
   },
