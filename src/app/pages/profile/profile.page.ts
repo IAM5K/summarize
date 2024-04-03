@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
+import { AccordionInfo } from "src/app/models/class/static/profile/accordion-info.model";
+import { AccordionItem, AlertRadioOptions } from "src/app/models/interface/masterData.model";
 import { ProfileData, Project } from "src/app/models/interface/profile.interface";
 import { AlertService } from "src/app/services/alert/alert.service";
 import { ProfileService } from "src/app/services/profile/profile.service";
@@ -13,6 +15,7 @@ import { SeoService } from "src/app/services/seo/seo.service";
 export class ProfilePage implements OnInit {
   pageTitle = "Profile";
   profileData: ProfileData;
+  accordionInfo = AccordionInfo.accordionInfo;
   pageMetaTags = [
     {
       name: "description",
@@ -32,6 +35,7 @@ export class ProfilePage implements OnInit {
   userProfile: any;
   educationDetails: string[] = [];
   educationPhase: string = "";
+  examAspirations: any = [];
   projects: Project[] = [];
   friendsGroup = [];
   subjects: string = "";
@@ -41,11 +45,29 @@ export class ProfilePage implements OnInit {
       text: "Submit",
       role: "confirm",
       handler: (value: object) => {
+        this.addExamDetail(value);
+      },
+    },
+  ];
+  public alertInputs: AlertRadioOptions[] = [
+    {
+      name: "option",
+      type: "radio",
+      label: "Option 1",
+      value: "option 1",
+      id: "1",
+    },
+  ];
+  public projectButtons = [
+    {
+      text: "Submit",
+      role: "confirm",
+      handler: (value: object) => {
         this.addProjectDetail(value);
       },
     },
   ];
-  public alertInputs = [
+  public projectInputs = [
     {
       placeholder: "Active project name",
     },
@@ -66,6 +88,7 @@ export class ProfilePage implements OnInit {
       this.populateProfileData(this.profileData);
     }
     this.getProjects();
+    this.getExams();
   }
 
   onSubmit() {
@@ -100,6 +123,35 @@ export class ProfilePage implements OnInit {
     };
     this.profileService.addEducationalDetail(data);
   }
+
+  async getExams() {
+    await this.profileService.getExams().subscribe((res: any) => {
+      // console.log(res);
+      this.examAspirations = res;
+    });
+  }
+  addExamDetail(value: object) {
+    const data = {
+      name: Object.values(value)[0].toString(),
+      isActive: true,
+    };
+    console.log("Exam:", data);
+    console.log("Exam:", value);
+    // this.profileService.addExams(data);
+  }
+  updateExamStatus(item: any) {
+    const data = {
+      name: item.name,
+      isActive: item.isActive,
+    };
+    this.profileService.updateExams(data, item.idField);
+  }
+  async deleteExam(item: any) {
+    const response = await this.alertService.deleteAlert();
+    if (response === "confirm") {
+      this.profileService.deleteExams(item.idField);
+    }
+  }
   addProjectDetail(value: object) {
     const data = {
       name: Object.values(value)[0].toString(),
@@ -127,6 +179,59 @@ export class ProfilePage implements OnInit {
       message:
         "Here you can add, view and manage your projects. When a project is added it is considered as active, you can make it inactive by using the toggle and it will not be visible in Time section.",
       buttons: ["OK"],
+    });
+
+    await alert.present();
+  }
+
+  async showAccordionInfo(accordion: AccordionItem) {
+    const alert = await this.alertController.create({
+      header: accordion.alert,
+      message: accordion.message,
+      buttons: ["OK"],
+    });
+    await alert.present();
+  }
+
+  async presentAlertWithOptions() {
+    const alert = await this.alertController.create({
+      header: "Select Option",
+      inputs: [
+        {
+          name: "option",
+          type: "radio",
+          label: "Option 1",
+          value: "option1",
+        },
+        {
+          name: "option",
+          type: "radio",
+          label: "Option 2",
+          value: "option2",
+        },
+        {
+          name: "option",
+          type: "radio",
+          label: "Option 3",
+          value: "option3",
+        },
+      ],
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log("Cancelled");
+          },
+        },
+        {
+          text: "OK",
+          handler: (data) => {
+            console.log("Selected option:", data.option);
+            // Handle selected option
+          },
+        },
+      ],
     });
 
     await alert.present();
