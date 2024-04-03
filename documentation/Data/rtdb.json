@@ -1,6 +1,53 @@
 {
   "dynamicContent": {
-    "home": {
+    "dashboard": {
+      "notice": [],
+      "features": [
+        {
+          "title": "Expenses",
+          "icon": "cash",
+          "color": "success",
+          "path": "expenses"
+        },
+        {
+          "title": "Goal",
+          "icon": "bulb",
+          "color": "secondary",
+          "path": "goal"
+        },
+        {
+          "title": "Studies",
+          "icon": "book",
+          "color": "tertiary",
+          "path": "studies"
+        },
+        {
+          "title": "Time",
+          "icon": "hourglass",
+          "color": "danger",
+          "path": "time"
+        },
+        {
+          "title": "Achievements",
+          "icon": "trophy",
+          "color": "warning",
+          "path": "achievement"
+        }
+      ],
+      "upcomingFeatures": [
+        "Analyze Studies",
+        "Analyze Expenses (Better analysis)",
+        "Analyze Work",
+        "Advance Studies"
+      ],
+      "quotes": [
+        {
+          "message": "What gets measured, Gets managed",
+          "quoteBy": "- Peter F. Drucker",
+          "position": "top",
+          "index": 1
+        }
+      ],
       "paragraphs": [
         {
           "content": "Summarize is an app that helps you to manage your Time, Money, and work which includes but is not limited to subject-wise studies, notes, to-do's, or office works.",
@@ -24,8 +71,133 @@
         }
       ]
     },
-    "about": {},
-    "support": {},
+    "about": {
+      "paragraphs": [
+        {
+          "content": "Summarize is an app that helps you to manage your Time, Money, and work which includes but is not limited to subject-wise studies, notes, to-do's, or office works.",
+          "orderId": 1,
+          "type": "text"
+        },
+        {
+          "content": "It will also help you to analyze your expenditure of resources and will suggest approaches to manage them in a better way. You may find many more apps on the internet that announces to help you manage resource and increase your savings but ends up increasing your expenses by using your data to show relevant ads or offering some tempting deals.",
+          "orderId": 2,
+          "type": "text"
+        },
+        {
+          "content": "Thinking when to use Summarize? To live better and managed, one should recall what they have done throughout the day daily before sleep . Also listing tasks for the next day and setting priorities increases the chances to get them done.",
+          "orderId": 3,
+          "type": "text"
+        },
+        {
+          "content": "Currently, Summarize is under development, we will keep on adding features one by one. Till then, please feel free to manage Achievements of day, Expenses, Studies, and Time. It is a web-app that can be easily installed on all devices ( Mobile & PC ). Install the app on your devices  to keep in sync and to check how to install visit our Help page.",
+          "orderId": 4,
+          "type": "text"
+        },
+        {
+          "content": "Note: Your data will not be used for any advertisement or offering any deal/scheme. Also our app don't need any permission to work on your device. Your privacy is important to us. For more queries, you can contact us through the support page. We are also open to feature requests and suggestions.",
+          "orderId": 5,
+          "type": "text"
+        }
+      ],
+      "hallOfFrame": [
+        {
+          "name": "",
+          "contributions": {
+            "suggestions": [],
+            "bugsReported": [],
+            "feedbackGiven": []
+          }
+        },
+        {
+          "name": "",
+          "contributions": {
+            "suggestions": [],
+            "bugsReported": [],
+            "feedbackGiven": []
+          }
+        },
+        {
+          "name": "",
+          "contributions": {
+            "suggestions": [],
+            "bugsReported": [],
+            "feedbackGiven": []
+          }
+        },
+        {
+          "name": "",
+          "contributions": {
+            "suggestions": [],
+            "bugsReported": [],
+            "feedbackGiven": []
+          }
+        },
+        {
+          "name": "",
+          "contributions": {
+            "suggestions": [],
+            "bugsReported": [],
+            "feedbackGiven": []
+          }
+        }
+      ],
+      "recentUpdate": [
+        {
+          "type": "Feature",
+          "date": "",
+          "version": ""
+        },
+        {
+          "type": "Latest patch",
+          "date": "",
+          "version": ""
+        },
+        {
+          "type": "Previous patch",
+          "date": "",
+          "version": ""
+        }
+      ]
+    },
+    "support": {
+      "installationGuide": [
+        {
+          "installType": "Install on PC ( Windows / MAC / Linux all-distro )",
+          "description": "",
+          "imageUri": "",
+          "redirectTo": "",
+          "videoUri": ""
+        },
+        {
+          "installType": "Install on Android",
+          "description": "",
+          "imageUri": "",
+          "redirectTo": "",
+          "videoUri": ""
+        },
+        {
+          "installType": "Install on IOS",
+          "description": "",
+          "imageUri": "",
+          "redirectTo": "",
+          "videoUri": ""
+        },
+        {
+          "installType": "Install from Play store",
+          "description": "",
+          "imageUri": "",
+          "redirectTo": "",
+          "videoUri": ""
+        }
+      ],
+      "updateInfo": [
+        {
+          "question": "How to get updates?",
+          "answer": "For updates go to About page and there you can find the version details and update button.Currently just navigate to About page and you will receive update app popup, accept it and you will receive updates. There are few active issues with the update of app so please be patient. We are working to get it fixed soon.",
+          "id": 1
+        }
+      ]
+    },
     "goal": {},
     "expenses": {},
     "updateHistory": {},
@@ -35,35 +207,41 @@
   },
   "targetExams": [
     {
-      "examName": "Union Public Service Commission Civil Services Examination",
+      "examName": "Union Public Service Commission Preliminary Examination",
       "examShortName": "UPSC Pre",
-      "stages": [
-        {
-          "stageName": "Preliminary Examination",
-          "duration": "N/A",
-          "totalMarks": 400,
-          "totalQuestions": 100,
-          "marksPerQuestion": 4,
-          "hasNegativeMarking": "Yes",
-          "negativeMarks": "-1/3rd mark for wrong answer"
-        },
-        {
-          "stageName": "Main Examination",
-          "duration": "N/A",
-          "totalMarks": 2000,
-          "totalQuestions": "Varies (Essay + Subject Specifics)",
-          "marksPerQuestion": "Varies",
-          "hasNegativeMarking": "No"
-        },
-        {
-          "stageName": "Interview",
-          "duration": "N/A",
-          "totalMarks": 275,
-          "totalQuestions": "N/A",
-          "marksPerQuestion": "N/A",
-          "hasNegativeMarking": "No"
-        }
-      ]
+      "duration": "N/A",
+      "totalMarks": 400,
+      "passMarks": "Varies depending on category and number of vacancies",
+      "totalQuestion": 100,
+      "marksPerQuestion": 4,
+      "hasNegativeMarking": "Yes",
+      "negativeMarks": "-1/3rd mark for wrong answer",
+      "subjects": ["General Studies I", "General Studies II", "CSAT (Optional)"],
+      "phases": []
+    },
+    {
+      "examName": "Union Public Service Commission Main Examination",
+      "examShortName": "UPSC Mains",
+      "duration": "N/A",
+      "totalMarks": 2000,
+      "passMarks": "Depends on the cut-off for the specific year",
+      "totalQuestion": "Varies (Essay + Subject Specifics)",
+      "marksPerQuestion": "Varies",
+      "hasNegativeMarking": "No",
+      "subjects": ["Essay", "Subject Specific - 1", "..."],
+      "phases": []
+    },
+    {
+      "examName": "Union Public Service Commission Interview",
+      "examShortName": "UPSC Interview",
+      "duration": "N/A",
+      "totalMarks": 275,
+      "passMarks": "Depends on the cut-off for the specific year",
+      "totalQuestion": "N/A",
+      "marksPerQuestion": "N/A",
+      "hasNegativeMarking": "No",
+      "subjects": ["N/A"],
+      "phases": []
     },
     {
       "examName": "Joint Entrance Examination (Main)",
@@ -71,10 +249,12 @@
       "duration": "3 Hours",
       "totalMarks": 300,
       "passMarks": "No minimum pass marks, qualifying for JEE Advanced is necessary for admission to IITs",
-      "totalQuestions": 75,
+      "totalQuestion": 75,
       "marksPerQuestion": 4,
       "hasNegativeMarking": "Yes",
-      "negativeMarks": -1
+      "negativeMarks": -1,
+      "subjects": ["Physics", "Chemistry", "Mathematics"],
+      "phases": [{ "phaseName": "JEE Mains Paper" }]
     },
     {
       "examName": "Joint Entrance Examination (Advanced)",
@@ -82,10 +262,12 @@
       "duration": "3 Hours",
       "totalMarks": 360,
       "passMarks": "Depends on the cut-off for the specific year and course",
-      "totalQuestions": 54,
+      "totalQuestion": 54,
       "marksPerQuestion": 6.67,
       "hasNegativeMarking": "Yes",
-      "negativeMarks": -1
+      "negativeMarks": -1,
+      "subjects": ["Physics", "Chemistry", "Mathematics"],
+      "phases": [{ "phaseName": "JEE Advanced Paper" }]
     },
     {
       "examName": "National Eligibility cum Entrance Test",
@@ -93,10 +275,12 @@
       "duration": "3 Hours 20 Minutes",
       "totalMarks": 720,
       "passMarks": "Varies depending on category and state",
-      "totalQuestions": 200,
+      "totalQuestion": 200,
       "marksPerQuestion": 3.6,
       "hasNegativeMarking": "Yes",
-      "negativeMarks": -1
+      "negativeMarks": -1,
+      "subjects": ["Biology (Botany & Zoology)", "Chemistry", "Physics"],
+      "phases": [{ "phaseName": "NEET Paper" }]
     },
     {
       "examName": "Indian Institutes of Management Common Admission Test",
@@ -104,10 +288,16 @@
       "duration": "3 Hours",
       "totalMarks": 300,
       "passMarks": "Depends on the cut-off for the specific IIM and program",
-      "totalQuestions": 100,
+      "totalQuestion": 100,
       "marksPerQuestion": 3,
       "hasNegativeMarking": "Yes",
-      "negativeMarks": "-1/3rd mark for wrong answer"
+      "negativeMarks": "-1/3rd mark for wrong answer",
+      "subjects": [
+        "Quantitative Ability",
+        "Verbal Ability & Logical Reasoning",
+        "Data Interpretation & Logical Reasoning"
+      ],
+      "phases": [{ "phaseName": "IIM CAT Paper" }]
     },
     {
       "examName": "Graduate Aptitude Test in Engineering",
@@ -115,10 +305,12 @@
       "duration": "3 Hours",
       "totalMarks": 100,
       "passMarks": "No minimum pass marks, qualifying score is used for admissions to M.Tech programs",
-      "totalQuestions": 65,
+      "totalQuestion": 65,
       "marksPerQuestion": 1.54,
       "hasNegativeMarking": "Yes",
-      "negativeMarking": "-1/3rd mark for wrong answer"
+      "negativeMarks": "-1/3rd mark for wrong answer",
+      "subjects": ["Choose from various Engineering disciplines"],
+      "phases": [{ "phaseName": "GATE Paper" }]
     }
   ]
 }
