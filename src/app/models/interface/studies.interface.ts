@@ -1,5 +1,6 @@
 export interface TargetExam {
-  name: string;
+  examName: string;
+  examShortName: string;
   duration: string;
   totalMarks: number;
   passMarks: number;
@@ -9,4 +10,7 @@ export interface TargetExam {
   negativeMarks: number;
   targetYear?: number;
   subjects: string[];
+  phaseCount?:number;
+  phaseName?:string;
+  phases?:[]
 }
