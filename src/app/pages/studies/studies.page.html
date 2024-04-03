@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -34,63 +35,11 @@
         <h1 class="mt-0 h2">{{editMode?"Update":"Add"}} Studies</h1>
         <div class="form-container">
           <form [formGroup]="studiesForm" (ngSubmit)="manageStudies()" novalidate>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label [position]="editMode?'stacked':'floating'">Date</ion-label>
-                <ion-input formControlName="date" type="date"></ion-input>
-              </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Start Time</ion-label>
-                <ion-input formControlName="startTime" type="time"></ion-input>
-              </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">End Time</ion-label>
-                <ion-input formControlName="endTime" type="time"></ion-input>
-              </ion-item>
-            </div>
-
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Subject</ion-label>
-                <ion-input
-                  formControlName="subject"
-                  type="text"
-                  placeholder="Subject studied / Book Name"
-                  clear-input
-                ></ion-input>
-              </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Topic</ion-label>
-                <ion-input
-                  formControlName="topic"
-                  type="text"
-                  placeholder="Chapter/Topic/Sub-topic studied"
-                  clear-input
-                ></ion-input>
-              </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Description</ion-label>
-                <ion-textarea
-                  formControlName="description"
-                  type="text"
-                  autoGrow="true"
-                  placeholder="Description/ Sub-topic / comments about topic."
-                  clear-input
-                ></ion-textarea>
-              </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Type</ion-label>
+            <ion-list class="form-ion-list">
+              <ion-item>
                 <ion-select
+                  label="Type"
+                  label-placement="floating"
                   formControlName="type"
                   interface="popover"
                   placeholder="Category of Studies"
@@ -100,11 +49,66 @@
                   </ion-select-option>
                 </ion-select>
               </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Study Mode</ion-label>
+              <ion-item>
+                <ion-input
+                  label="Date"
+                  label-placement="floating"
+                  formControlName="date"
+                  type="date"
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input
+                  label="Start Time"
+                  label-placement="floating"
+                  formControlName="startTime"
+                  type="time"
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input
+                  label="End Time"
+                  label-placement="floating"
+                  formControlName="endTime"
+                  type="time"
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input
+                  label="Subject"
+                  label-placement="floating"
+                  formControlName="subject"
+                  type="text"
+                  placeholder="Subject studied / Book Name"
+                  clearInput
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input
+                  label="Topic"
+                  label-placement="floating"
+                  formControlName="topic"
+                  type="text"
+                  placeholder="Chapter/Topic/Sub-topic studied"
+                  clearInput
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-textarea
+                  label="Description"
+                  label-placement="floating"
+                  formControlName="description"
+                  type="text"
+                  autoGrow="true"
+                  placeholder="Description/ Sub-topic / comments about topic."
+                  clearInput
+                ></ion-textarea>
+              </ion-item>
+
+              <ion-item>
                 <ion-select
+                  label="Study Mode"
+                  label-placement="floating"
                   formControlName="studyMode"
                   interface="popover"
                   placeholder="On whom it is Spent"
@@ -114,23 +118,21 @@
                   </ion-select-option>
                 </ion-select>
               </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-button
-                color="primary"
-                type="submit"
-                size="medium"
-                [disabled]="studiesForm.invalid || studiesForm.untouched"
-              >
-                {{editMode?"Update":"Submit"}}
-              </ion-button>
-              <ion-button color="warning" type="reset" size="medium" *ngIf="!editMode">
-                Reset
-              </ion-button>
-              <ion-button color="danger" size="medium" *ngIf="editMode" (click)="cancelUpdate()">
-                Cancel
-              </ion-button>
-            </div>
+            </ion-list>
+            <ion-button
+              color="primary"
+              type="submit"
+              size="medium"
+              [disabled]="studiesForm.invalid || studiesForm.untouched"
+            >
+              {{editMode ? 'Update' : 'Submit'}}
+            </ion-button>
+            <ion-button color="warning" type="reset" size="medium" *ngIf="!editMode">
+              Reset
+            </ion-button>
+            <ion-button color="danger" size="medium" *ngIf="editMode" (click)="cancelUpdate()">
+              Cancel
+            </ion-button>
           </form>
         </div>
       </div>
