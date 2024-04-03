@@ -5,5 +5,12 @@
   "semi": true,
   "singleQuote": false,
   "bracketSpacing": true,
-  "printWidth": 100
+  "printWidth": 100,
+  "prettier/prettier": [
+    "error",
+    {
+      "singleQuote": true,
+      "parser": "flow"
+    }
+  ]
 }
