@@ -12,6 +12,8 @@ import { FirebaseService } from "../firebase/firebase.service";
   providedIn: "root",
 })
 export class ProfileService {
+  updateExamMessage: string = "Exam updated successfully";
+  deletedExamMessage: string = "Exam deleted successfully";
   constructor(
     private auth: Auth,
     private afs: AngularFirestore,
@@ -45,7 +47,7 @@ export class ProfileService {
       try {
         this.toasterService.showToast("Loading Profile data", "secondary");
         let profileData = await this.afs
-          .collection(`userData`)
+          .collection("userData")
           .doc(user.uid)
           .get()
           .subscribe((snap: any) => {
@@ -83,6 +85,55 @@ export class ProfileService {
     } catch (error) {
       console.error("Error adding educational detail:", error);
       this.toasterService.showToast("Failed to add educational detail", "danger");
+    }
+  }
+
+  async addExams(data: any) {
+    const user = await this.fs.getUserProfile();
+    try {
+      const projectsCollection = this.afs
+        .collection("userData")
+        .doc(user.uid)
+        .collection("myExams");
+
+      const res = await projectsCollection.add(data);
+      this.toasterService.showToast(this.addProjectMessage, "success");
+    } catch (error) {
+      console.error("Error adding project:", error);
+      this.toasterService.showToast("Failed to add project", "danger");
+    }
+  }
+  async updateExams(data: any, idField: string) {
+    const user = await this.fs.getUserProfile();
+    const examsCollection = this.afs.collection("userData").doc(user.uid).collection("myExams");
+    try {
+      await examsCollection.doc(idField).update(data);
+      this.toasterService.showToast(this.updateExamMessage, "primary");
+    } catch (error) {
+      console.error("Error updating exam:", error);
+      this.toasterService.showToast("Failed to update exam", "danger");
+    }
+  }
+
+  getExams() {
+    const userId = this.getUserProfile()?.uid;
+    return this.afs
+      .collection("userData")
+      .doc(userId)
+      .collection("myExams")
+      .valueChanges({ idField: "idField" });
+  }
+
+  async deleteExams(idField: string) {
+    try {
+      const user = await this.fs.getUserProfile();
+      const examsCollection = this.afs.collection("userData").doc(user.uid).collection("myExams");
+
+      await examsCollection.doc(idField).delete();
+      this.toasterService.showToast(this.deletedExamMessage, "warning");
+    } catch (error) {
+      console.error("Error deleting exam:", error);
+      this.toasterService.showToast("Failed to delete exam", "danger");
     }
   }
 
