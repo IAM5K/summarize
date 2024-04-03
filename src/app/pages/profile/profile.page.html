@@ -24,27 +24,74 @@
           [alt]="(userProfile.displayName)"
           referrerpolicy="no-referrer"
         />
+        <img
+          *ngIf="!userProfile.photoURL"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+          alt="Placeholder"
+          referrerpolicy="no-referrer"
+        />
       </div>
-      <h1 class="h2">{{userProfile.displayName}}</h1>
-      <ion-note color="tertiary" class="h4">
-        Welcome to Summarize, Profile page is under development. It will be available soon with some
-        exciting features.
-      </ion-note>
-
-      <p class="">
-        <span class="ion-text-bold">Email :</span>
-        <span class="text-success ion-text-bold">{{userProfile?.email | titlecase}}</span>
-      </p>
-      <p class="">
-        <span class="ion-text-bold">Email Verified :</span>
-        <span class="text-success ion-text-bold">
-          {{userProfile?.emailVerified.toString() | titlecase }}
-        </span>
-      </p>
-      <p class="">
-        <span class="ion-text-bold">Phone Number :</span>
-        <span class="text-success ion-text-bold">{{userProfile.phoneNumber }}</span>
-      </p>
+      <h1 class="h2">
+        Hello! {{userProfile?.displayName ? userProfile?.displayName : userProfile?.email }}
+      </h1>
+      <ion-list>
+        <ion-item *ngIf="!userProfile?.displayName">
+          <ion-icon aria-hidden="true" name="person" slot="start" color="primary"></ion-icon>
+          <ion-label>Name is not available</ion-label>
+          <ion-icon
+            *ngIf="!userProfile?.displayName"
+            name="alert-circle-outline"
+            color="warning"
+            slot="end"
+            (click)="profileAlert('name')"
+          ></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-icon aria-hidden="true" name="mail" slot="start" color="primary"></ion-icon>
+          <ion-label>{{ userProfile?.email ? userProfile?.email : 'Add Email' }}</ion-label>
+          <ion-icon
+            *ngIf="userProfile?.emailVerified"
+            name="shield-checkmark-outline"
+            color="success"
+            slot="end"
+          ></ion-icon>
+          <ion-icon
+            *ngIf="!userProfile?.emailVerified"
+            name="alert-circle-outline"
+            color="warning"
+            slot="end"
+            (click)="profileAlert('email')"
+          ></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-icon aria-hidden="true" name="call" slot="start" color="primary"></ion-icon>
+          <ion-label>
+            {{ userProfile?.phoneNumber ? userProfile.phoneNumber : 'Add Phone Number' }}
+          </ion-label>
+          <ion-icon
+            *ngIf="userProfile?.phoneNumber"
+            name="shield-checkmark-outline"
+            color="success"
+            slot="end"
+          ></ion-icon>
+          <ion-icon
+            *ngIf="!userProfile?.phoneNumber"
+            name="alert-circle-outline"
+            color="warning"
+            slot="end"
+            (click)="profileAlert('phone')"
+          ></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-icon
+            aria-hidden="true"
+            name="language-outline"
+            slot="start"
+            color="primary"
+          ></ion-icon>
+          <ion-label>English (default)</ion-label>
+        </ion-item>
+      </ion-list>
     </div>
     <div class="card ion-padding">
       <h2 class="h2">About Me</h2>
@@ -202,6 +249,11 @@
           </div>
         </ion-accordion>
       </ion-accordion-group>
+    </div>
+    <div class="ion-padding">
+      <ion-note color="tertiary" class="h4">
+        Profile page is under development. It will be available soon with some exciting features.
+      </ion-note>
     </div>
   </div>
 </ion-content>
