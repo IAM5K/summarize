@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -102,6 +103,44 @@
             </form>
           </div>
         </ion-accordion>
+        <ion-accordion value="aspirant" class="mb-10px">
+          <ion-item slot="header" color="light">
+            <ion-label>
+              Aspirant
+              <ion-icon
+                color="secondary"
+                (click)="showAccordionInfo(accordionInfo['aspirant'])"
+                name="information-circle-outline"
+              ></ion-icon>
+            </ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-list class="padding-zero mb-15px">
+              <ion-item class="ion-align-items-center" *ngFor="let item of examAspirations">
+                <ion-button color="danger" class="mr-10" (click)="deleteExam(item)">
+                  <ion-icon name="trash" class=""></ion-icon>
+                </ion-button>
+                <ion-toggle
+                  [checked]="item.isActive"
+                  (ionChange)="item.isActive=!item.isActive;updateExamStatus(item)"
+                >
+                  {{item.name}}
+                </ion-toggle>
+              </ion-item>
+            </ion-list>
+            <ion-button id="exam-alert">
+              <ion-icon slot="start" name="add"></ion-icon>
+              Add Exam
+            </ion-button>
+            <ion-alert
+              trigger="exam-alert"
+              header="Fill exam details"
+              [buttons]="alertButtons"
+              [inputs]="alertInputs"
+            ></ion-alert>
+            <!-- <ion-button (click)="presentAlertWithOptions()">Add</ion-button> -->
+          </div>
+        </ion-accordion>
         <ion-accordion value="second" class="mb-10px">
           <ion-item slot="header" color="light">
             <ion-label>
@@ -127,17 +166,16 @@
                 </ion-toggle>
               </ion-item>
             </ion-list>
-            <ion-button id="present-alert">
+            <ion-button id="project-alert">
               <ion-icon slot="start" name="add"></ion-icon>
               Add project
             </ion-button>
             <ion-alert
-              trigger="present-alert"
+              trigger="project-alert"
               header="Fill project details"
-              [buttons]="alertButtons"
-              [inputs]="alertInputs"
+              [buttons]="projectButtons"
+              [inputs]="projectInputs"
             ></ion-alert>
-            <form #projectForm="ngForm" (ngSubmit)="addEducationalDetail()"></form>
           </div>
         </ion-accordion>
         <ion-accordion value="third" class="mb-10px">
