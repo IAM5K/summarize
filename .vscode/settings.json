@@ -1,6 +1,14 @@
 {
   "editor.defaultFormatter": "vscode.html-language-features",
-  "cSpell.words": ["arize", "Drucker", "etags", "maxlength", "subdir"],
+  "cSpell.words": [
+    "arize",
+    "CSAT",
+    "Drucker",
+    "etags",
+    "maxlength",
+    "NEET",
+    "subdir"
+  ],
   "editor.formatOnSave": true,
   "prettier.htmlWhitespaceSensitivity": "ignore",
   "[github-actions-workflow]": {
