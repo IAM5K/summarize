@@ -1,0 +1,124 @@
+{
+  "dynamicContent": {
+    "home": {
+      "paragraphs": [
+        {
+          "content": "Summarize is an app that helps you to manage your Time, Money, and work which includes but is not limited to subject-wise studies, notes, to-do's, or office works.",
+          "orderId": 1,
+          "type": "text"
+        },
+        {
+          "content": "Thinking when to use Summarize? To live better and managed, one should recall what they have done throughout the day daily before sleep . Also listing tasks for the next day and setting priorities increases the chances to get them done.",
+          "orderId": 2,
+          "type": "text"
+        },
+        {
+          "content": "Currently, Summarize is under development, we will keep on adding features one by one. Till then, please feel free to manage Achievements of day, Expenses, Studies, and Time. It is a web-app that can be easily installed on all devices ( Mobile & PC ). Install the app on your devices  to keep in sync and to check how to install visit our Help page.",
+          "orderId": 3,
+          "type": "text"
+        },
+        {
+          "content": "Note: Your data will not be used for any advertisement or offering any deal/scheme. Also our app don't need any permission to work on your device. Your privacy is important to us. For more queries, you can contact us through the support page. We are also open to feature requests and suggestions.",
+          "orderId": 4,
+          "type": "text"
+        }
+      ]
+    },
+    "about": {},
+    "support": {},
+    "goal": {},
+    "expenses": {},
+    "updateHistory": {},
+    "hallOfFrame": {},
+    "studies": {},
+    "time": {}
+  },
+  "targetExams": [
+    {
+      "examName": "Union Public Service Commission Civil Services Examination",
+      "examShortName": "UPSC Pre",
+      "stages": [
+        {
+          "stageName": "Preliminary Examination",
+          "duration": "N/A",
+          "totalMarks": 400,
+          "totalQuestions": 100,
+          "marksPerQuestion": 4,
+          "hasNegativeMarking": "Yes",
+          "negativeMarks": "-1/3rd mark for wrong answer"
+        },
+        {
+          "stageName": "Main Examination",
+          "duration": "N/A",
+          "totalMarks": 2000,
+          "totalQuestions": "Varies (Essay + Subject Specifics)",
+          "marksPerQuestion": "Varies",
+          "hasNegativeMarking": "No"
+        },
+        {
+          "stageName": "Interview",
+          "duration": "N/A",
+          "totalMarks": 275,
+          "totalQuestions": "N/A",
+          "marksPerQuestion": "N/A",
+          "hasNegativeMarking": "No"
+        }
+      ]
+    },
+    {
+      "examName": "Joint Entrance Examination (Main)",
+      "examShortName": "JEE Mains",
+      "duration": "3 Hours",
+      "totalMarks": 300,
+      "passMarks": "No minimum pass marks, qualifying for JEE Advanced is necessary for admission to IITs",
+      "totalQuestions": 75,
+      "marksPerQuestion": 4,
+      "hasNegativeMarking": "Yes",
+      "negativeMarks": -1
+    },
+    {
+      "examName": "Joint Entrance Examination (Advanced)",
+      "examShortName": "JEE Advanced",
+      "duration": "3 Hours",
+      "totalMarks": 360,
+      "passMarks": "Depends on the cut-off for the specific year and course",
+      "totalQuestions": 54,
+      "marksPerQuestion": 6.67,
+      "hasNegativeMarking": "Yes",
+      "negativeMarks": -1
+    },
+    {
+      "examName": "National Eligibility cum Entrance Test",
+      "examShortName": "NEET",
+      "duration": "3 Hours 20 Minutes",
+      "totalMarks": 720,
+      "passMarks": "Varies depending on category and state",
+      "totalQuestions": 200,
+      "marksPerQuestion": 3.6,
+      "hasNegativeMarking": "Yes",
+      "negativeMarks": -1
+    },
+    {
+      "examName": "Indian Institutes of Management Common Admission Test",
+      "examShortName": "IIM CAT",
+      "duration": "3 Hours",
+      "totalMarks": 300,
+      "passMarks": "Depends on the cut-off for the specific IIM and program",
+      "totalQuestions": 100,
+      "marksPerQuestion": 3,
+      "hasNegativeMarking": "Yes",
+      "negativeMarks": "-1/3rd mark for wrong answer"
+    },
+    {
+      "examName": "Graduate Aptitude Test in Engineering",
+      "examShortName": "GATE",
+      "duration": "3 Hours",
+      "totalMarks": 100,
+      "passMarks": "No minimum pass marks, qualifying score is used for admissions to M.Tech programs",
+      "totalQuestions": 65,
+      "marksPerQuestion": 1.54,
+      "hasNegativeMarking": "Yes",
+      "negativeMarking": "-1/3rd mark for wrong answer"
+    }
+  ]
+}
