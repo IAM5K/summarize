@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
+import { SeoTags } from "src/app/models/class/seoTags/seo";
 import { AccordionInfo } from "src/app/models/class/static/profile/accordion-info.model";
 import { AccordionItem, AlertRadioOptions } from "src/app/models/interface/masterData.model";
 import { ProfileData, Project } from "src/app/models/interface/profile.interface";
@@ -16,22 +17,7 @@ export class ProfilePage implements OnInit {
   pageTitle = "Profile";
   profileData: ProfileData;
   accordionInfo = AccordionInfo.accordionInfo;
-  pageMetaTags = [
-    {
-      name: "description",
-      content:
-        "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better.",
-    },
-    {
-      name: "keyword",
-      content:
-        "Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis",
-    },
-    {
-      name: "author",
-      content: "Sandeep Kumar",
-    },
-  ];
+  pageMetaTags = SeoTags.profilePageTags;
   userProfile: any;
   educationDetails: string[] = [];
   educationPhase: string = "";
@@ -232,6 +218,106 @@ export class ProfilePage implements OnInit {
           },
         },
       ],
+    });
+
+    await alert.present();
+  }
+  async presentEmailVerificationAlert() {
+    const alert = await this.alertController.create({
+      header: "Verify Email",
+      message:
+        "Verifying your email makes your account more secure and helps in easy account recovery.",
+      buttons: [
+        {
+          text: "Close",
+          role: "cancel",
+          cssClass: "secondary",
+        },
+        // {
+        //   text: "Cancel",
+        //   role: "cancel",
+        //   cssClass: "secondary",
+        // },
+        // {
+        //   text: "OK",
+        //   handler: () => {
+        //     // Handle verification process here, if needed
+        //   },
+        // },
+      ],
+    });
+
+    await alert.present();
+  }
+  async profileAlert(parameter: string) {
+    let header = "";
+    let message = "";
+    let buttons = [];
+    switch (parameter) {
+      case "email":
+        header = "Verify Email";
+        message =
+          "Verifying your email makes your account more secure and helps in easy account recovery.";
+        buttons = [
+          {
+            text: "Close",
+            role: "cancel",
+            cssClass: "secondary",
+          },
+          // {
+          //   text: "Cancel",
+          //   role: "cancel",
+          //   cssClass: "secondary",
+          // },
+          // {
+          //   text: "OK",
+          //   handler: () => {
+          //     // Handle verification process here, if needed
+          //   },
+          // },
+        ];
+        break;
+      case "name":
+        header = "Add Name";
+        message = "Having a name helps us to address you better.";
+        buttons = [
+          {
+            text: "Close",
+            role: "cancel",
+            cssClass: "secondary",
+          },
+        ];
+        break;
+      case "phone":
+        header = "Add Phone Number";
+        message =
+          "Adding your phone number can enhance your account security and provide additional account recovery options. If needed, It also allows us to communicate important updates and notifications with you more effectively.";
+        buttons = [
+          {
+            text: "Close",
+            role: "cancel",
+            cssClass: "secondary",
+          },
+          // {
+          //   text: "Cancel",
+          //   role: "cancel",
+          //   cssClass: "secondary",
+          // },
+          // {
+          //   text: "OK",
+          //   handler: () => {
+          //     // Handle verification process here, if needed
+          //   },
+          // },
+        ];
+        break;
+      default:
+        break;
+    }
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: buttons,
     });
 
     await alert.present();
