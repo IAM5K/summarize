@@ -34,24 +34,16 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags);
-    // this.getHomeData();
-    // this.addTemporaryData();
+    this.getAboutParagraphs();
   }
 
-  getHomeData(): void {
-    this.rtdb.getHomeData().subscribe((data) => {
-      this.paragraphs = data.paragraph.content;
+  getAboutParagraphs(): void {
+    this.rtdb.getHomeData("paragraphs").subscribe((data) => {
+      const paragraphsFetched = data;
+      if (paragraphsFetched.length > 0) {
+        this.paragraphs = paragraphsFetched.map((element) => element.content);
+      }
       console.log(this.paragraphs);
     });
-  }
-  addTemporaryData(): void {
-    this.rtdb
-      .addTemporaryData()
-      .then(() => {
-        console.log("Temporary data added successfully.");
-      })
-      .catch((error) => {
-        console.error("Error adding temporary data:", error);
-      });
   }
 }
