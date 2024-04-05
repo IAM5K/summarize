@@ -32,7 +32,7 @@ export class StudiesPage implements OnInit {
   studiesCount: number = 0;
   currentTime = this.datePipe.transform(new Date(), "hh:mm");
   advancedMode: boolean = false;
-  advancedModeAvailable: boolean = false;
+  advancedModeAvailable: boolean = true;
   editMode: boolean = false;
   updateSubmitted: Boolean = false;
   dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
@@ -128,7 +128,9 @@ export class StudiesPage implements OnInit {
     const profileData = await this.profileService.getProfileData();
     if (profileData.educationDetails) {
       this.advancedModeAvailable = true;
-      this.advancedMode = true;
+      this.advancedMode = false;
+    } else {
+      this.advancedModeAvailable = false;
     }
   }
 }
