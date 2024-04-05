@@ -74,26 +74,31 @@
     "about": {
       "paragraphs": [
         {
+          "id": "57d3750b-7f02-4c69-a41b-83992d073b3a",
           "content": "Summarize is an app that helps you to manage your Time, Money, and work which includes but is not limited to subject-wise studies, notes, to-do's, or office works.",
           "orderId": 1,
           "type": "text"
         },
         {
+          "id": "ac32e4e9-dc0a-4323-9e68-2c9c8e42b69c",
           "content": "It will also help you to analyze your expenditure of resources and will suggest approaches to manage them in a better way. You may find many more apps on the internet that announces to help you manage resource and increase your savings but ends up increasing your expenses by using your data to show relevant ads or offering some tempting deals.",
           "orderId": 2,
           "type": "text"
         },
         {
+          "id": "4bb25c4a-dcbf-4f51-bd7b-f5e22eeb3e7f",
           "content": "Thinking when to use Summarize? To live better and managed, one should recall what they have done throughout the day daily before sleep . Also listing tasks for the next day and setting priorities increases the chances to get them done.",
           "orderId": 3,
           "type": "text"
         },
         {
+          "id": "e07a4d07-5b33-46c3-86dc-66eddc83200b",
           "content": "Currently, Summarize is under development, we will keep on adding features one by one. Till then, please feel free to manage Achievements of day, Expenses, Studies, and Time. It is a web-app that can be easily installed on all devices ( Mobile & PC ). Install the app on your devices  to keep in sync and to check how to install visit our Help page.",
           "orderId": 4,
           "type": "text"
         },
         {
+          "id": "fa3f6b12-7804-4775-8c97-20e1ac6325ef",
           "content": "Note: Your data will not be used for any advertisement or offering any deal/scheme. Also our app don't need any permission to work on your device. Your privacy is important to us. For more queries, you can contact us through the support page. We are also open to feature requests and suggestions.",
           "orderId": 5,
           "type": "text"
@@ -102,6 +107,7 @@
       "hallOfFrame": [
         {
           "name": "Vinayak",
+          "contributionCount": 10,
           "contributions": {
             "suggestions": [],
             "bugsReported": [],
@@ -110,6 +116,7 @@
         },
         {
           "name": "Charan",
+          "contributionCount": 10,
           "contributions": {
             "suggestions": [],
             "bugsReported": [],
@@ -118,6 +125,7 @@
         },
         {
           "name": "Sofia",
+          "contributionCount": 10,
           "contributions": {
             "suggestions": [],
             "bugsReported": [],
@@ -126,6 +134,7 @@
         },
         {
           "name": "Sanyam",
+          "contributionCount": 10,
           "contributions": {
             "suggestions": [],
             "bugsReported": [],
@@ -134,6 +143,7 @@
         },
         {
           "name": "Aayushi",
+          "contributionCount": 10,
           "contributions": {
             "suggestions": [],
             "bugsReported": [],
@@ -162,24 +172,32 @@
     "support": {
       "installationGuide": [
         {
+          "id": "pc_installation_guide",
+          "orderId": 1,
           "installType": "Install on PC (Windows / MAC / Linux)",
           "description": "To install Summarize on your PC, simply open your web browser and check the URL bar. If you see an 'Install' button on the right side, click it. If there's no such button, look for the menu button on the top left, usually used for settings. From there, you'll find an option to Install Summarize. Click on it to install the app on your PC. Once installed, you can use it as a native software.",
           "videoUri": "",
           "videoAlt": ""
         },
         {
-          "installType": "Install on Android",
-          "description": "To install Summarize on your Android device, simply open the portal and you'll receive a popup to install the app. Click on 'Install' and it will be ready to use as a native application. If there's no popup, click on the menu button used for settings, and you'll find an option to Install Summarize. Click on it to install the app on your phone. Once installed, you can use it as a native application.",
-          "videoUri": "",
-          "videoAlt": ""
-        },
-        {
+          "id": "ios_installation_guide",
+          "orderId": 2,
           "installType": "Install on iOS",
           "description": "To install Summarize on your iOS device, use the share option located at the bottom center. From there, you can find an option to 'Add to Home Screen'. This will add the app to your home screen, allowing you to use it as a normal application.",
           "videoUri": "",
           "videoAlt": ""
         },
         {
+          "id": "android_installation_guide",
+          "orderId": 3,
+          "installType": "Install on Android",
+          "description": "To install Summarize on your Android device, simply open the portal and you'll receive a popup to install the app. Click on 'Install' and it will be ready to use as a native application. If there's no popup, click on the menu button used for settings, and you'll find an option to Install Summarize. Click on it to install the app on your phone. Once installed, you can use it as a native application.",
+          "videoUri": "",
+          "videoAlt": ""
+        },
+        {
+          "id": "play_store_installation_guide",
+          "orderId": 4,
           "installType": "Install from Play Store",
           "description": "To install Summarize from the Play Store, simply search for 'Summarize' and follow the installation steps.",
           "imageUri": "",
@@ -530,7 +548,42 @@
       "marksPerQuestion": 4,
       "hasNegativeMarking": "Yes",
       "negativeMarks": -1,
-      "subjects": ["Physics", "Chemistry", "Mathematics"],
+      "subjects": [
+        {
+          "name": "Physics",
+          "subcategories": [
+            "Classical Mechanics",
+            "Quantum Mechanics",
+            "Thermodynamics",
+            "Electromagnetism",
+            "Optics",
+            "Astrophysics",
+            "Atomic and Nuclear Physics"
+          ]
+        },
+        {
+          "name": "Chemistry",
+          "subcategories": [
+            "Organic Chemistry",
+            "Inorganic Chemistry",
+            "Physical Chemistry",
+            "Analytical Chemistry"
+          ]
+        },
+        {
+          "name": "Mathematics",
+          "subcategories": [
+            "Algebra",
+            "Geometry",
+            "Trigonometry",
+            "Calculus",
+            "Differential Equations",
+            "Linear Algebra",
+            "Probability and Statistics",
+            "Number Theory"
+          ]
+        }
+      ],
       "phases": [{ "phaseName": "JEE Mains Paper" }]
     },
     {
@@ -543,7 +596,42 @@
       "marksPerQuestion": 6.67,
       "hasNegativeMarking": "Yes",
       "negativeMarks": -1,
-      "subjects": ["Physics", "Chemistry", "Mathematics"],
+      "subjects": [
+        {
+          "name": "Physics",
+          "subcategories": [
+            "Classical Mechanics",
+            "Quantum Mechanics",
+            "Thermodynamics",
+            "Electromagnetism",
+            "Optics",
+            "Astrophysics",
+            "Atomic and Nuclear Physics"
+          ]
+        },
+        {
+          "name": "Chemistry",
+          "subcategories": [
+            "Organic Chemistry",
+            "Inorganic Chemistry",
+            "Physical Chemistry",
+            "Analytical Chemistry"
+          ]
+        },
+        {
+          "name": "Mathematics",
+          "subcategories": [
+            "Algebra",
+            "Geometry",
+            "Trigonometry",
+            "Calculus",
+            "Differential Equations",
+            "Linear Algebra",
+            "Probability and Statistics",
+            "Number Theory"
+          ]
+        }
+      ],
       "phases": [{ "phaseName": "JEE Advanced Paper" }]
     },
     {
@@ -552,11 +640,37 @@
       "duration": "3 Hours 20 Minutes",
       "totalMarks": 720,
       "passMarks": "Varies depending on category and state",
-      "totalQuestion": 200,
-      "marksPerQuestion": 3.6,
+      "totalQuestion": 180,
+      "marksPerQuestion": 4,
       "hasNegativeMarking": "Yes",
       "negativeMarks": -1,
-      "subjects": ["Biology (Botany & Zoology)", "Chemistry", "Physics"],
+      "subjects": [
+        {
+          "name": "Biology",
+          "subcategories": ["Botany", "Zoology"]
+        },
+        {
+          "name": "Chemistry",
+          "subcategories": [
+            "Organic Chemistry",
+            "Inorganic Chemistry",
+            "Physical Chemistry",
+            "Analytical Chemistry"
+          ]
+        },
+        {
+          "name": "Physics",
+          "subcategories": [
+            "Classical Mechanics",
+            "Quantum Mechanics",
+            "Thermodynamics",
+            "Electromagnetism",
+            "Optics",
+            "Astrophysics",
+            "Atomic and Nuclear Physics"
+          ]
+        }
+      ],
       "phases": [{ "phaseName": "NEET Paper" }]
     },
     {
