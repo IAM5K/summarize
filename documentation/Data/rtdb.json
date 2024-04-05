@@ -101,7 +101,7 @@
       ],
       "hallOfFrame": [
         {
-          "name": "",
+          "name": "Vinayak",
           "contributions": {
             "suggestions": [],
             "bugsReported": [],
@@ -109,7 +109,7 @@
           }
         },
         {
-          "name": "",
+          "name": "Charan",
           "contributions": {
             "suggestions": [],
             "bugsReported": [],
@@ -117,7 +117,7 @@
           }
         },
         {
-          "name": "",
+          "name": "Sofia",
           "contributions": {
             "suggestions": [],
             "bugsReported": [],
@@ -125,7 +125,7 @@
           }
         },
         {
-          "name": "",
+          "name": "Sanyam",
           "contributions": {
             "suggestions": [],
             "bugsReported": [],
@@ -133,7 +133,7 @@
           }
         },
         {
-          "name": "",
+          "name": "Aayushi",
           "contributions": {
             "suggestions": [],
             "bugsReported": [],
@@ -162,54 +162,53 @@
     "support": {
       "installationGuide": [
         {
-          "installType": "Install on PC ( Windows / MAC / Linux all-distro )",
-          "description": "On your browser check the url bar. On right of it there is a 'Install' button. In case of no such icon, on your top left there is menu button that is generally used to navigate to settings. There you can find an option to Install Summarize. Click on it and the app will be installed on your pc. Now you can use it as a Native Software.",
-          "imageUri": "",
-          "redirectTo": "",
-          "videoUri": ""
+          "installType": "Install on PC (Windows / MAC / Linux)",
+          "description": "To install Summarize on your PC, simply open your web browser and check the URL bar. If you see an 'Install' button on the right side, click it. If there's no such button, look for the menu button on the top left, usually used for settings. From there, you'll find an option to Install Summarize. Click on it to install the app on your PC. Once installed, you can use it as a native software.",
+          "videoUri": "",
+          "videoAlt": ""
         },
         {
           "installType": "Install on Android",
-          "description": "After opening the portal you will receive a popup to install, click on install and it will get installed and ready to be used as Native application. In case of no such icon, click on menu button that is generally used to navigate to settings. There you can find an option to Install Summarize. Click on it and the app will be installed on your phone. Now you can use it as a Native Application.",
-          "imageUri": "",
-          "redirectTo": "",
-          "videoUri": ""
+          "description": "To install Summarize on your Android device, simply open the portal and you'll receive a popup to install the app. Click on 'Install' and it will be ready to use as a native application. If there's no popup, click on the menu button used for settings, and you'll find an option to Install Summarize. Click on it to install the app on your phone. Once installed, you can use it as a native application.",
+          "videoUri": "",
+          "videoAlt": ""
         },
         {
-          "installType": "Install on IOS",
-          "description": "In the share option on bottom in center, you can find an option to add to home screen. This will add the app to your home screen and you will be able to use as normal application.",
-          "imageUri": "",
-          "redirectTo": "",
-          "videoUri": ""
+          "installType": "Install on iOS",
+          "description": "To install Summarize on your iOS device, use the share option located at the bottom center. From there, you can find an option to 'Add to Home Screen'. This will add the app to your home screen, allowing you to use it as a normal application.",
+          "videoUri": "",
+          "videoAlt": ""
         },
         {
-          "installType": "Install from Play store",
-          "description": "",
+          "installType": "Install from Play Store",
+          "description": "To install Summarize from the Play Store, simply search for 'Summarize' and follow the installation steps.",
           "imageUri": "",
-          "redirectTo": "",
-          "videoUri": ""
+          "redirectUrl": "https://play.google.com/store/apps/details?id=app.web.summarize&pcampaignid=web_share",
+          "imageAlt": "",
+          "videoUri": "",
+          "videoAlt": ""
         }
       ],
       "updateInfo": [
         {
           "question": "How to get updates?",
-          "answer": "For updates go to About page and there you can find the version details and update button.Currently just navigate to About page and you will receive update app popup, accept it and you will receive updates. There are few active issues with the update of app so please be patient. We are working to get it fixed soon.",
-          "id": 1
+          "answer": "To get updates, navigate to the About page in the app. There, you'll find version details and an update button. Simply click on the update button to receive the latest updates. If you encounter any issues with the update process, please be patient as we are actively working to resolve them."
         }
       ],
       "freeCoursesSteps": {
-        "title": "",
+        "title": "Steps to Access Free Courses",
         "steps": [
-          "Login to app using Google.",
-          "Navigate to Studies page.",
-          "Click on Get Free Resource located at the bottom of page.",
-          "Check if the current available course is helpful to you.",
-          "If yes, click on 'Get Now'."
+          "Login to the app using your Google account.",
+          "Navigate to the Studies page.",
+          "Click on 'Get Free Resource' located at the bottom of the page.",
+          "Review the available courses to see if they are helpful to you.",
+          "If yes, click on 'Get Now' to access the course."
         ]
       },
       "knownIssues": {},
       "faq": {}
     },
+
     "goal": {
       "goalFor": [
         { "title": "Adventure", "value": "Adventure" },
