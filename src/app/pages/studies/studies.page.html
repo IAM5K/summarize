@@ -1,4 +1,11 @@
-<app-header [pageTitle]="pageTitle"></app-header>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ pageTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -159,15 +166,13 @@
             <ion-card-content>
               <p>
                 <span class="bold">Description:</span>
-                {{ study?.description }}
+                {{study?.description}}
               </p>
               <p>
-                <span class="bold">Date:</span>
-                {{ study?.startTime }}
-              </p>
-              <p>
-                <span class="bold">Answered By at</span>
-                {{ study?.endTime }}
+                <span class="bold">From:</span>
+                {{study?.startTime}}
+                <span class="bold">-</span>
+                {{study?.endTime}}
               </p>
               <ion-button
                 [attr.aria-label]="'Edit item ' + i"
