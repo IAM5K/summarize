@@ -39,29 +39,30 @@ export class ProfileService {
 
   async getProfileData() {
     const user = await this.fs.getUserProfile();
-    let localData: string | null = localStorage.getItem("profileData");
-    if (localData !== null) {
-      let profileData: any = JSON.parse(localData);
-      return profileData;
-    } else {
-      try {
-        this.toasterService.showToast("Loading Profile data", "secondary");
-        let profileData = await this.afs
+    try {
+      this.toasterService.showToast("Loading Profile data", "secondary");
+      return new Promise<any>((resolve, reject) => {
+        this.afs
           .collection("userData")
           .doc(user.uid)
           .get()
-          .subscribe((snap: any) => {
-            let data = snap.data().profileData;
-            localStorage.setItem("profileData", JSON.stringify(data));
-            this.toasterService.showToast("Profile data fetched.", "success");
-            return data;
+          .subscribe({
+            next: (snap: any) => {
+              const data = snap.data()?.profileData;
+              this.toasterService.showToast("Profile data fetched.", "success");
+              resolve(data);
+            },
+            error: (error: any) => {
+              console.error("Error fetching profile data:", error);
+              this.toasterService.showToast("Error loading profile data", "danger");
+              reject(error);
+            },
           });
-        return profileData;
-      } catch (error) {
-        console.error("Error fetching profile data:", error);
-        this.toasterService.showToast("Error loading profile data", "danger");
-        throw error;
-      }
+      });
+    } catch (error) {
+      console.error("Error fetching profile data:", error);
+      this.toasterService.showToast("Error loading profile data", "danger");
+      throw error;
     }
   }
 
@@ -74,11 +75,11 @@ export class ProfileService {
     try {
       const user = await this.fs.getUserProfile();
       const profileCollection = this.afs.collection("userData").doc(user.uid);
-      const userDoc = profileCollection.collection("myProjects").doc(this.userId);
+      // const userDoc = profileCollection.collection("myProjects").doc(this.userId);
 
       const profileData = data;
 
-      await userDoc.set({ profileData }, { merge: true });
+      await profileCollection.set({ profileData }, { merge: true });
 
       this.toasterService.showToast(this.successMessage, "success");
       this.refreshProfileData();

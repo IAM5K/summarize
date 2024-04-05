@@ -15,7 +15,7 @@ import { SeoService } from "src/app/services/seo/seo.service";
 })
 export class ProfilePage implements OnInit {
   pageTitle = "Profile";
-  profileData: ProfileData;
+  profileData: any;
   accordionInfo = AccordionInfo.accordionInfo;
   pageMetaTags = SeoTags.profilePageTags;
   userProfile: any;
