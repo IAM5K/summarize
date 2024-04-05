@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -151,11 +152,9 @@
               {{study?.description}}
             </p>
             <p>
-              <span class="bold">Date:</span>
+              <span class="bold">From:</span>
               {{study?.startTime}}
-            </p>
-            <p>
-              <span class="bold">Answered By at</span>
+              <span class="bold">-</span>
               {{study?.endTime}}
             </p>
             <ion-button class="action-button" color="secondary" (click)="editStudies(study)">
