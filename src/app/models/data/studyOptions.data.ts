@@ -37,10 +37,12 @@ export class StudyOptionsData {
   ];
 
   public static studiesTypes: Options[] = [
+    { title: "Break", value: "break" },
     { title: "Learn", value: "learn" },
     { title: "Listen", value: "listen" },
     { title: "Practice", value: "practice" },
     { title: "Read", value: "read" },
+    { title: "Slept", value: "slept" },
     { title: "Write", value: "write" },
     { title: "Test", value: "test" },
   ];
