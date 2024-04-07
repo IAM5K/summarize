@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
 import { SeoTags } from "src/app/models/class/seoTags/seo";
 import { AccordionInfo } from "src/app/models/class/static/profile/accordion-info.model";
@@ -7,13 +7,23 @@ import { ProfileData, Project } from "src/app/models/interface/profile.interface
 import { AlertService } from "src/app/services/alert/alert.service";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { SeoService } from "src/app/services/seo/seo.service";
+import { ToasterService } from "src/app/services/toaster/toaster.service";
+import { RealTimeDataBaseService } from "src/app/shared/db/real-time-data-base.service";
 
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.page.html",
   styleUrls: ["./profile.page.scss"],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage implements OnInit, AfterViewInit {
+  constructor(
+    private seoService: SeoService,
+    private alertService: AlertService,
+    private profileService: ProfileService,
+    private alertController: AlertController,
+    private rtdb: RealTimeDataBaseService,
+    private toaster: ToasterService,
+  ) {}
   pageTitle = "Profile";
   profileData: any;
   accordionInfo = AccordionInfo.accordionInfo;
@@ -26,25 +36,27 @@ export class ProfilePage implements OnInit {
   friendsGroup = [];
   subjects: string = "";
   updateDisabled: boolean = true;
-  public alertButtons = [
+  examsList: any[];
+  examOptions: AlertRadioOptions[] = [];
+  alertButtons = [
+    {
+      text: "Cancel",
+      role: "cancel",
+    },
     {
       text: "Submit",
       role: "confirm",
       handler: (value: object) => {
-        this.addExamDetail(value);
+        if (value) {
+          this.addExamDetail(value);
+        } else {
+          this.toaster.showToast("Submitted without selection", "danger");
+        }
       },
     },
   ];
-  public alertInputs: AlertRadioOptions[] = [
-    {
-      name: "option",
-      type: "radio",
-      label: "Option 1",
-      value: "option 1",
-      id: "1",
-    },
-  ];
-  public projectButtons = [
+
+  projectButtons = [
     {
       text: "Submit",
       role: "confirm",
@@ -59,13 +71,6 @@ export class ProfilePage implements OnInit {
     },
   ];
 
-  constructor(
-    private seoService: SeoService,
-    private alertService: AlertService,
-    private profileService: ProfileService,
-    private alertController: AlertController,
-  ) {}
-
   async ngOnInit() {
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.userProfile = this.profileService.getUserProfile();
@@ -73,17 +78,44 @@ export class ProfilePage implements OnInit {
     if (this.profileData.educationDetails) {
       this.populateProfileData(this.profileData);
     }
-    this.getProjects();
-    this.getExams();
   }
 
-  onSubmit() {
-    // console.log('Education Phase:', this.educationPhase);
-    // console.log('Subjects:', this.subjects);
+  async ngAfterViewInit(): Promise<void> {
+    this.getProjects();
+    await this.getExams();
+    this.fetchExamList();
+  }
+  fetchExamList(): void {
+    this.rtdb.getTargetExam().subscribe((data) => {
+      this.examsList = data;
+    });
+  }
+  updateAddExamOptions(): void {
+    // Clear existing options
+    this.examOptions = [];
+
+    // Create a Set of exam names from examAspirations for efficient lookups
+    const aspirationNamesSet = new Set(this.examAspirations.map((aspiration) => aspiration.name));
+
+    // Iterate over each exam in the examsList
+    for (const exam of this.examsList) {
+      // Check if the exam is not present in examAspirations
+      if (!aspirationNamesSet.has(exam.examShortName)) {
+        // Construct AlertRadioOptions object and add it to examOptions
+        const option: AlertRadioOptions = {
+          name: "option",
+          type: "radio",
+          label: exam.examShortName,
+          value: exam,
+          id: exam.examShortName, // Using examShortName as id for uniqueness
+        };
+
+        this.examOptions.push(option);
+      }
+    }
   }
 
   populateProfileData(data: any) {
-    // console.log(data);
     if (data.educationDetails) {
       this.educationPhase = data.educationDetails.educationPhase;
       this.subjects = data.educationDetails.subjects;
@@ -94,13 +126,10 @@ export class ProfilePage implements OnInit {
   }
   async getProjects() {
     await this.profileService.getProjects().subscribe((res: any) => {
-      // console.log(res);
       this.projects = res;
     });
   }
   addEducationalDetail() {
-    // console.log('Education Phase:', this.educationPhase);
-    // console.log('Subjects:', this.subjects);
     const data = {
       educationDetails: {
         educationPhase: this.educationPhase,
@@ -110,20 +139,19 @@ export class ProfilePage implements OnInit {
     this.profileService.addEducationalDetail(data);
   }
 
-  async getExams() {
-    await this.profileService.getExams().subscribe((res: any) => {
-      // console.log(res);
+  getExams() {
+    this.profileService.getExams().subscribe((res: any) => {
       this.examAspirations = res;
+      this.updateAddExamOptions();
     });
   }
-  addExamDetail(value: object) {
+  addExamDetail(value: any) {
     const data = {
-      name: Object.values(value)[0].toString(),
+      name: value.examShortName,
       isActive: true,
     };
-    console.log("Exam:", data);
-    console.log("Exam:", value);
-    // this.profileService.addExams(data);
+    this.profileService.addExams(data);
+    this.updateAddExamOptions();
   }
   updateExamStatus(item: any) {
     const data = {
@@ -143,7 +171,6 @@ export class ProfilePage implements OnInit {
       name: Object.values(value)[0].toString(),
       isActive: true,
     };
-    // console.log('Project:', data);
     this.profileService.addProjects(data);
   }
   updateProjectStatus(item: Project) {
@@ -179,54 +206,10 @@ export class ProfilePage implements OnInit {
     await alert.present();
   }
 
-  async presentAlertWithOptions() {
-    const alert = await this.alertController.create({
-      header: "Select Option",
-      inputs: [
-        {
-          name: "option",
-          type: "radio",
-          label: "Option 1",
-          value: "option1",
-        },
-        {
-          name: "option",
-          type: "radio",
-          label: "Option 2",
-          value: "option2",
-        },
-        {
-          name: "option",
-          type: "radio",
-          label: "Option 3",
-          value: "option3",
-        },
-      ],
-      buttons: [
-        {
-          text: "Cancel",
-          role: "cancel",
-          handler: () => {
-            console.log("Cancelled");
-          },
-        },
-        {
-          text: "OK",
-          handler: (data) => {
-            console.log("Selected option:", data.option);
-            // Handle selected option
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-  }
   async presentEmailVerificationAlert() {
     const alert = await this.alertController.create({
       header: "Verify Email",
-      message:
-        "Verifying your email makes your account more secure and helps in easy account recovery.",
+      message: "Verifying your email makes your account more secure and helps in easy account recovery.",
       buttons: [
         {
           text: "Close",
@@ -256,8 +239,7 @@ export class ProfilePage implements OnInit {
     switch (parameter) {
       case "email":
         header = "Verify Email";
-        message =
-          "Verifying your email makes your account more secure and helps in easy account recovery.";
+        message = "Verifying your email makes your account more secure and helps in easy account recovery.";
         buttons = [
           {
             text: "Close",
