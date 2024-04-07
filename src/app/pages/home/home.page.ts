@@ -1,19 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { MasterData } from "src/app/models/class/masterData/master-data";
-import { SeoTags } from "src/app/models/class/seoTags/seo";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { features as MasterDataFeatures } from "src/app/models/class/masterData/master-data";
 import { SeoService } from "src/app/services/seo/seo.service";
 import { RealTimeDataBaseService } from "src/app/shared/db/real-time-data-base.service";
-
+import { homePageTags, homePageTitle } from "src/app/models/data/seo-tags";
 @Component({
   selector: "app-home",
   templateUrl: "./home.page.html",
   styleUrls: ["./home.page.scss"],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
   pageTitle = "Home";
-  title = SeoTags.pageTitle.homePage;
-  pageMetaTags = SeoTags.homePageTags;
-  features = MasterData.features;
+  title = homePageTitle;
+  pageMetaTags = homePageTags;
+  features = MasterDataFeatures;
   fabActionButtons = [
     { title: "Goal", color: "secondary", url: "/goal", icon: "bulb" },
     { title: "Expenses", color: "success", url: "/expenses", icon: "cash" },
@@ -34,7 +33,13 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags);
+    console.log("meta tag updated, moving to after init");
+  }
+
+  ngAfterViewInit(): void {
+    console.log("Executing after view init");
     this.getAboutParagraphs();
+    this.seoService.eventTrigger("page_view", this.title);
   }
 
   getAboutParagraphs(): void {

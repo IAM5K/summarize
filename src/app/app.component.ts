@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { AuthService } from "./auth/service/auth.service";
 import { StatusBar, Style } from "@capacitor/status-bar";
@@ -13,11 +13,11 @@ import { Subscription } from "rxjs";
   templateUrl: "app.component.html",
   styleUrls: ["app.component.scss"],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   isLoggedIn: any = false;
   public appPages: any = [];
   public labels: any = [];
-  versionNumber: number = 2.0;
+  versionNumber = "2.1.0";
   private loginStateSubscription: Subscription;
   constructor(
     private authService: AuthService,
@@ -26,19 +26,7 @@ export class AppComponent implements OnInit {
     private profileService: ProfileService,
     private sidenavService: SidenavService,
     private firebaseService: FirebaseService,
-  ) {
-    this.initGoogleTagManager();
-    this.loginStateSubscription = this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
-      this.isLoggedIn = isLoggedIn;
-      if (isLoggedIn) {
-        this.appPages = sidenavService.loggedInPages;
-        this.sidenavService.setLoggedInPages(); // Update appPages with logged-in pages
-      } else {
-        this.appPages = sidenavService.defaultPages;
-        this.sidenavService.setDefaultPages(); // Update appPages with default pages
-      }
-    });
-  }
+  ) {}
 
   ngOnInit() {
     if (isPlatform("mobile")) {
@@ -47,15 +35,29 @@ export class AppComponent implements OnInit {
     this.firebaseService.getUserProfile();
     this.getUser();
   }
+  ngAfterViewInit(): void {
+    this.initGoogleTagManager();
+    this.loginStateSubscription = this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+      if (isLoggedIn) {
+        this.appPages = this.sidenavService.loggedInPages;
+        this.sidenavService.setLoggedInPages(); // Update appPages with logged-in pages
+      } else {
+        this.appPages = this.sidenavService.defaultPages;
+        this.sidenavService.setDefaultPages(); // Update appPages with default pages
+      }
+    });
+  }
 
   private initGoogleTagManager(): void {
     this.router.events.subscribe((event) => {
       try {
         if (event instanceof NavigationEnd) {
           const gtmTag = {
-            event: "page",
+            event: "page_view",
             pageName: event.urlAfterRedirects,
           };
+          console.log("pushing gtm from app module", gtmTag);
           this.gtmService.pushTag(gtmTag);
         }
       } catch (error) {
