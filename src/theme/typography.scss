@@ -1,103 +1,119 @@
 /* Define all custom typography here */
-:root,html,body{
+:root,
+html,
+body {
   font-size: 16px;
-  @media screen and (max-width:992px) {
+  @media screen and (max-width: 992px) {
     font-size: 14px;
   }
 }
 
-.ion-text-bold{
+.ion-text-bold {
   font-weight: bold;
 }
 
-
-h1,h2,h3,h4,h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   display: block !important;
   position: relative;
   width: 100% !important;
 }
-.h1{
+.h1 {
   font-size: 2rem;
 }
-.h2{
+.h2 {
   font-size: 1.6rem !important;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
-.h3{
+.h3 {
   font-size: 1.4rem;
 }
-.h4{
+.h4 {
   font-size: 1.2rem;
 }
-.h5{
+.h5 {
   font-size: 1rem;
 }
-.h6{
-  font-size: .8rem;
+.h6 {
+  font-size: 0.8rem;
 }
 
-pre{
+pre {
   display: block;
   padding: 4px 1px;
   margin: 5px inherit;
   white-space: pre-line;
   word-break: break-word;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
 }
-.text-ellipsis{
+.text-ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis !important;
 }
-.mt0{
+.mt0 {
   margin-top: 0%;
 }
-.mt-5px{
+.mt-5px {
   margin-top: 5px;
 }
-.mt-0{
+.mt-0 {
   margin-top: 0%;
   margin-left: 5px;
 }
-.mt-10{
-  margin-top: min(50px , 10%);
+.mt-10 {
+  margin-top: min(50px, 10%);
 }
-.mt-15px{
+.mt-15px {
   display: block;
-  margin-top:15px;
+  margin-top: 15px;
 }
-.mb-10px{
+.mb-10px {
   display: block;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
-.mb-15px{
+.mb-15px {
   display: block;
-  margin-bottom:15px;
+  margin-bottom: 15px;
 }
 
-.ml-5{
+.ml-5 {
   margin-left: 5px;
 }
-.ml-10{
+.ml-10 {
   margin-left: 10px;
 }
-.mr-10{
+.mr-10 {
   margin-right: 10px;
 }
-.m-15px{
+.m-15px {
   margin: 15px auto;
 }
-.pdb-15px{
+.pdb-15px {
   padding-bottom: 30px;
 }
-ion-title{
+ion-title {
   color: var(--ion-color-primary);
 }
-.text-success{
+.text-success {
   color: var(--ion-color-success);
 }
 
-.error{
+.error {
   margin: 5px 0;
   color: var(--ion-color-danger);
 }
