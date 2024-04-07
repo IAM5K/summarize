@@ -31,9 +31,7 @@
           referrerpolicy="no-referrer"
         />
       </div>
-      <h1 class="h2">
-        Hello! {{userProfile?.displayName ? userProfile?.displayName : userProfile?.email }}
-      </h1>
+      <h1 class="h2">Hello! {{userProfile?.displayName ? userProfile?.displayName : userProfile?.email }}</h1>
       <ion-list>
         <ion-item *ngIf="!userProfile?.displayName">
           <ion-icon aria-hidden="true" name="person" slot="start" color="primary"></ion-icon>
@@ -65,9 +63,7 @@
         </ion-item>
         <ion-item>
           <ion-icon aria-hidden="true" name="call" slot="start" color="primary"></ion-icon>
-          <ion-label>
-            {{ userProfile?.phoneNumber ? userProfile.phoneNumber : 'Add Phone Number' }}
-          </ion-label>
+          <ion-label>{{ userProfile?.phoneNumber ? userProfile.phoneNumber : 'Add Phone Number' }}</ion-label>
           <ion-icon
             *ngIf="userProfile?.phoneNumber"
             name="shield-checkmark-outline"
@@ -83,12 +79,7 @@
           ></ion-icon>
         </ion-item>
         <ion-item>
-          <ion-icon
-            aria-hidden="true"
-            name="language-outline"
-            slot="start"
-            color="primary"
-          ></ion-icon>
+          <ion-icon aria-hidden="true" name="language-outline" slot="start" color="primary"></ion-icon>
           <ion-label>English (default)</ion-label>
         </ion-item>
       </ion-list>
@@ -126,13 +117,7 @@
                   </ion-select>
                 </ion-item>
                 <ion-item lines="none">
-                  <ion-button
-                    size="medium"
-                    slot="end"
-                    type="submit"
-                    color="primary"
-                    *ngIf="updateDisabled"
-                  >
+                  <ion-button size="medium" slot="end" type="submit" color="primary" *ngIf="updateDisabled">
                     Submit
                   </ion-button>
                   <ion-button
@@ -167,10 +152,7 @@
                 <ion-button color="danger" class="mr-10" (click)="deleteExam(item)">
                   <ion-icon name="trash" class=""></ion-icon>
                 </ion-button>
-                <ion-toggle
-                  [checked]="item.isActive"
-                  (ionChange)="item.isActive=!item.isActive;updateExamStatus(item)"
-                >
+                <ion-toggle [checked]="item.isActive" (ionChange)="item.isActive=!item.isActive;updateExamStatus(item)">
                   {{item.name}}
                 </ion-toggle>
               </ion-item>
@@ -181,9 +163,9 @@
             </ion-button>
             <ion-alert
               trigger="exam-alert"
-              header="Fill exam details"
+              header="Select target exam "
               [buttons]="alertButtons"
-              [inputs]="alertInputs"
+              [inputs]="examOptions"
             ></ion-alert>
             <!-- <ion-button (click)="presentAlertWithOptions()">Add</ion-button> -->
           </div>
@@ -192,11 +174,7 @@
           <ion-item slot="header" color="light">
             <ion-label>
               Projects
-              <ion-icon
-                color="secondary"
-                (click)="showProjectInfo()"
-                name="information-circle-outline"
-              ></ion-icon>
+              <ion-icon color="secondary" (click)="showProjectInfo()" name="information-circle-outline"></ion-icon>
             </ion-label>
           </ion-item>
           <div slot="content">
