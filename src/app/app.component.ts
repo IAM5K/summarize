@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { AuthService } from "./auth/service/auth.service";
-import { StatusBar } from "@capacitor/status-bar";
+import { StatusBar, Style } from "@capacitor/status-bar";
 import { isPlatform } from "@ionic/angular";
 import { GoogleTagManagerService } from "angular-google-tag-manager";
 import { FirebaseService } from "./services/firebase/firebase.service";
@@ -30,9 +30,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     if (isPlatform("mobile")) {
-      StatusBar.setBackgroundColor({ color: "#3880ff" }).catch((error) => {
-        console.error("error while setting background color",error)
-      });
+      StatusBar.setBackgroundColor({ color: "#3880ff" }).catch(() => {});
     }
     this.firebaseService.getUserProfile();
     this.getUser();
