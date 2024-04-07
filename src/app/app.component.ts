@@ -30,9 +30,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     if (isPlatform("mobile")) {
-      StatusBar.setBackgroundColor({ color: "#3880ff" }).catch((error) => {
-        console.error("error while setting background color",error)
-      });
+      StatusBar.setBackgroundColor({ color: "#3880ff" }).catch(() => {});
     }
     this.firebaseService.getUserProfile();
     this.getUser();
