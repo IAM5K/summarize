@@ -92,10 +92,7 @@ export class ProfileService {
   async addExams(data: any) {
     const user = await this.fs.getUserProfile();
     try {
-      const projectsCollection = this.afs
-        .collection("userData")
-        .doc(user.uid)
-        .collection("myExams");
+      const projectsCollection = this.afs.collection("userData").doc(user.uid).collection("myExams");
 
       const res = await projectsCollection.add(data);
       this.toasterService.showToast(this.addProjectMessage, "success");
@@ -118,11 +115,7 @@ export class ProfileService {
 
   getExams() {
     const userId = this.getUserProfile()?.uid;
-    return this.afs
-      .collection("userData")
-      .doc(userId)
-      .collection("myExams")
-      .valueChanges({ idField: "idField" });
+    return this.afs.collection("userData").doc(userId).collection("myExams").valueChanges({ idField: "idField" });
   }
 
   async deleteExams(idField: string) {
@@ -141,10 +134,7 @@ export class ProfileService {
   async addProjects(data: any) {
     const user = await this.fs.getUserProfile();
     try {
-      const projectsCollection = this.afs
-        .collection("userData")
-        .doc(user.uid)
-        .collection("myProjects");
+      const projectsCollection = this.afs.collection("userData").doc(user.uid).collection("myProjects");
 
       const res = await projectsCollection.add(data);
       this.toasterService.showToast(this.addProjectMessage, "success");
@@ -156,10 +146,7 @@ export class ProfileService {
 
   async updateProjects(data: any, idField: string) {
     const user = await this.fs.getUserProfile();
-    const projectsCollection = this.afs
-      .collection("userData")
-      .doc(user.uid)
-      .collection("myProjects");
+    const projectsCollection = this.afs.collection("userData").doc(user.uid).collection("myProjects");
     try {
       await projectsCollection.doc(idField).update(data);
       this.toasterService.showToast(this.updateProjectMessage, "primary");
@@ -171,20 +158,13 @@ export class ProfileService {
 
   getProjects() {
     const userId = this.getUserProfile()?.uid;
-    return this.afs
-      .collection("userData")
-      .doc(userId)
-      .collection("myProjects")
-      .valueChanges({ idField: "idField" });
+    return this.afs.collection("userData").doc(userId).collection("myProjects").valueChanges({ idField: "idField" });
   }
 
   async deleteProjects(idField: string) {
     try {
       const user = await this.fs.getUserProfile();
-      const projectsCollection = this.afs
-        .collection("userData")
-        .doc(user.uid)
-        .collection("myProjects");
+      const projectsCollection = this.afs.collection("userData").doc(user.uid).collection("myProjects");
 
       await projectsCollection.doc(idField).delete();
       this.toasterService.showToast(this.deletedProjectMessage, "warning");
