@@ -6,5 +6,4 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./howto.component.scss"],
 })
 export class HowtoComponent {
-  constructor() {}
 }
