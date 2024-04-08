@@ -24,7 +24,6 @@
       "pre-commit": "npm run lint"
     }
   },
-  "prettier": "@ionic/prettier-config",
   "dependencies": {
     "@angular/common": "^16.2.12",
     "@angular/core": "^16.2.12",
