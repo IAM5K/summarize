@@ -6,5 +6,4 @@ import { Component } from "@angular/core";
   styleUrls: ["./advanced-studies.component.scss"],
 })
 export class AdvancedStudiesComponent {
-  constructor() {}
 }
