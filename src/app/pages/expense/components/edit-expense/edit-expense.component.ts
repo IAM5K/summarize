@@ -6,5 +6,4 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./edit-expense.component.scss"],
 })
 export class EditExpenseComponent {
-  constructor() {}
 }

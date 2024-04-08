@@ -4,7 +4,6 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class SidenavService {
-  constructor() {}
   defaultPages = [
     { title: "Dashboard", color: "primary", url: "home", icon: "grid" },
     { title: "About", color: "medium", url: "about", icon: "reader" },

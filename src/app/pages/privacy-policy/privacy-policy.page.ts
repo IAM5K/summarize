@@ -7,5 +7,4 @@ import { Component } from "@angular/core";
 })
 export class PrivacyPolicyPage {
   pageTitle = "Privacy Policy";
-  constructor() {}
 }

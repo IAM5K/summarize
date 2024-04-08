@@ -7,7 +7,6 @@ import { Component, OnInit } from "@angular/core";
 })
 export class UpdateComponent {
   pageTitle = "Updates";
-  constructor() {}
   updates = [
     {
       version: "r.1.7",

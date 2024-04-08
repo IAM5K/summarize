@@ -1,6 +1,20 @@
 {
   "editor.defaultFormatter": "vscode.html-language-features",
-  "cSpell.words": ["arize", "Drucker", "etags", "maxlength", "subdir"],
+  "cSpell.words": [
+    "arize",
+    "Drucker",
+    "etags",
+    "gzipper",
+    "haptics",
+    "Howto",
+    "ionicons",
+    "Kumar",
+    "maxlength",
+    "postbuild",
+    "rxfire",
+    "Sandeep",
+    "subdir"
+  ],
   "editor.formatOnSave": true,
   "prettier.htmlWhitespaceSensitivity": "ignore",
   "[github-actions-workflow]": {

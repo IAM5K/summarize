@@ -6,5 +6,4 @@ import { Component } from "@angular/core";
   styleUrls: ["./edit-studies.component.scss"],
 })
 export class EditStudiesComponent {
-  constructor() {}
 }

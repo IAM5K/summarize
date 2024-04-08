@@ -1,5 +1,4 @@
 export class CustomDate {
-  constructor() {}
   public dateToday: any = this.getDateToday();
 
   getDateToday() {

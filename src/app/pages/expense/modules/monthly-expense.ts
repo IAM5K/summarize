@@ -1,5 +1,5 @@
 export class MonthlyExpense {
-  currentExpenseGraph() {}
+  // currentExpenseGraph() {}
   getCurrentExpense(): number {
     return 0;
   }
