@@ -6,11 +6,24 @@
   "singleQuote": false,
   "bracketSpacing": true,
   "printWidth": 120,
-  "prettier/prettier": [
-    "error",
+  "useTabs": false,
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": false,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "overrides": [
     {
-      "singleQuote": true,
-      "parser": "flow"
+      "files": "*.md",
+      "options": {
+        "parser": "mdx"
+      }
+    },
+    {
+      "files": ".prettierrc",
+      "options": {
+        "parser": "json",
+        "trailingComma": "all"
+      }
     }
   ]
 }

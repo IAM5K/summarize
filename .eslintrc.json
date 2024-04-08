@@ -1,18 +1,19 @@
 {
   "root": true,
   "ignorePatterns": ["projects/**/*", "functions/**/**"],
-  "plugins": ["prettier"],
-  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier", "prettier/@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "rules": {
+    "no-fallthrough": "off",
+    "no-constant-condition": "off",
+    "@typescript-eslint/no-this-alias": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": ["warn", { "allowArgumentsExplicitlyTypedAsAny": true }],
     "object-curly-spacing": ["error", "always"],
-    "quotes": ["error", "double"],
-    "no-unused-vars": "off",
-    "no-undef": "off"
+    "quotes": ["error", "double"]
   },
-  "parser": "angular",
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  },
+
   "overrides": [
     {
       "files": ["**.ts"],
@@ -20,10 +21,7 @@
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
-      "extends": [
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
+      "extends": ["plugin:@angular-eslint/recommended", "plugin:@angular-eslint/template/process-inline-templates"],
       "rules": {
         "@angular-eslint/component-class-suffix": [
           "error",
