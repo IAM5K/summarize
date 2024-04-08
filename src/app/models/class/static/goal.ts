@@ -191,8 +191,7 @@ export class GoalData {
     },
     {
       title: "Goal Description",
-      description:
-        "Describe your goal in detail, including what you want to achieve and why it is important to you.",
+      description: "Describe your goal in detail, including what you want to achieve and why it is important to you.",
     },
     {
       title: "Specificity",
@@ -201,8 +200,7 @@ export class GoalData {
     },
     {
       title: "Action Steps",
-      description:
-        "Outline the specific action steps or tasks you need to take to work towards your goal.",
+      description: "Outline the specific action steps or tasks you need to take to work towards your goal.",
     },
     {
       title: "Resources Needed",
@@ -211,8 +209,7 @@ export class GoalData {
     },
     {
       title: "Potential Obstacles",
-      description:
-        "Anticipate potential obstacles or challenges you might face while pursuing your goal.",
+      description: "Anticipate potential obstacles or challenges you might face while pursuing your goal.",
     },
     {
       title: "Strategies and Solutions",
@@ -226,8 +223,7 @@ export class GoalData {
     },
     {
       title: "Progress Tracking",
-      description:
-        "Track your progress towards your goal using a checklist, milestones, or a progress bar.",
+      description: "Track your progress towards your goal using a checklist, milestones, or a progress bar.",
     },
     {
       title: "Motivation and Rewards",
