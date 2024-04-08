@@ -1,11 +1,19 @@
 {
   "root": true,
   "ignorePatterns": ["projects/**/*", "functions/**/**"],
-  "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier", "prettier/@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "object-curly-spacing": ["error", "always"], // Ensure no space around `{`
-    "quotes": ["error", "double"] // Example ESLint rule for quotes, adjust as needed
+    "no-fallthrough": "off",
+    "no-constant-condition": "off",
+    "@typescript-eslint/no-this-alias": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": ["warn", { "allowArgumentsExplicitlyTypedAsAny": true }],
+    "object-curly-spacing": ["error", "always"],
+    "quotes": ["error", "double"]
   },
+
   "overrides": [
     {
       "files": ["*.ts"],
@@ -13,10 +21,7 @@
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
-      "extends": [
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
+      "extends": ["plugin:@angular-eslint/recommended", "plugin:@angular-eslint/template/process-inline-templates"],
       "rules": {
         "@angular-eslint/component-class-suffix": [
           "error",
