@@ -85,7 +85,7 @@ export class StudiesPage implements OnInit, AfterViewInit, AfterContentInit {
       this.studiesCount = this.Studies.length;
     });
   }
-  manageStudies(idField?: string) {
+  manageStudies(_idField?: string) {
     if (this.editMode) {
       this.updateStudies(this.studiesForm.value);
     } else {

@@ -1,10 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Auth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { getFirestore, getDoc } from "firebase/firestore";
 import { AlertController } from "@ionic/angular";
-import { take } from "rxjs/operators";
-import { doc } from "@angular/fire/firestore/firebase";
 import { ToasterService } from "../toaster/toaster.service";
 import { FirebaseService } from "../firebase/firebase.service";
 
@@ -32,7 +29,7 @@ export class ProfileService {
   deletedProjectMessage = "Projects has been successfully deleted.";
 
   getUserProfile() {
-    let user = this.auth.currentUser;
+    const user = this.auth.currentUser;
     // this.userId = user.uid;
     return user;
   }
@@ -94,7 +91,7 @@ export class ProfileService {
     try {
       const projectsCollection = this.afs.collection("userData").doc(user.uid).collection("myExams");
 
-      const res = await projectsCollection.add(data);
+      const _res = await projectsCollection.add(data);
       this.toasterService.showToast(this.addProjectMessage, "success");
     } catch (error) {
       console.error("Error adding project:", error);
@@ -136,7 +133,7 @@ export class ProfileService {
     try {
       const projectsCollection = this.afs.collection("userData").doc(user.uid).collection("myProjects");
 
-      const res = await projectsCollection.add(data);
+      const _res = await projectsCollection.add(data);
       this.toasterService.showToast(this.addProjectMessage, "success");
     } catch (error) {
       console.error("Error adding project:", error);
