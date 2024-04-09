@@ -58,7 +58,7 @@ export class FirebaseService {
           imageUrl,
         });
         return true;
-      } catch (e) {
+      } catch (_e) {
         return null;
       }
     } else {

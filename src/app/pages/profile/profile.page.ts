@@ -3,7 +3,7 @@ import { AlertController } from "@ionic/angular";
 import { SeoTags } from "src/app/models/class/seoTags/seo";
 import { AccordionInfo } from "src/app/models/class/static/profile/accordion-info.model";
 import { AccordionItem, AlertRadioOptions } from "src/app/models/interface/masterData.model";
-import { ProfileData, Project } from "src/app/models/interface/profile.interface";
+import { Project } from "src/app/models/interface/profile.interface";
 import { AlertService } from "src/app/services/alert/alert.service";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { SeoService } from "src/app/services/seo/seo.service";

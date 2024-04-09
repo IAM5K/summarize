@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { AuthService } from "./auth/service/auth.service";
-import { StatusBar, Style } from "@capacitor/status-bar";
+import { StatusBar } from "@capacitor/status-bar";
 import { isPlatform } from "@ionic/angular";
 import { GoogleTagManagerService } from "angular-google-tag-manager";
 import { FirebaseService } from "./services/firebase/firebase.service";

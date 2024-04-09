@@ -23,7 +23,7 @@ export class StudiesService {
       .doc(this.userId)
       .collection("myStudies")
       .add(data)
-      .then((res) => {
+      .then((_res) => {
         this.successAlert(this.addMessage);
       })
       .catch((err) => {
@@ -38,7 +38,7 @@ export class StudiesService {
       .collection("myStudies")
       .doc(idField)
       .update(data)
-      .then((res) => {
+      .then((_res) => {
         this.successAlert(this.updateMessage);
       })
       .catch((err) => {

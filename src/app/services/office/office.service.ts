@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AngularFirestore, QuerySnapshot } from "@angular/fire/compat/firestore";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { AlertController, ToastController } from "@ionic/angular";
 import { ProfileService } from "../profile/profile.service";
 

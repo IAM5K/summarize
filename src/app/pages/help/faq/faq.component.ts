@@ -1,8 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { AngularFirestoreCollection } from "@angular/fire/compat/firestore";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Component } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
 import { serverTimestamp } from "@angular/fire/firestore";
-import { SeoService } from "src/app/services/seo/seo.service";
 import { SupportService } from "src/app/services/support/support.service";
 
 @Component({
@@ -10,7 +8,7 @@ import { SupportService } from "src/app/services/support/support.service";
   templateUrl: "./faq.component.html",
   styleUrls: ["./faq.component.scss"],
 })
-export class FaqComponent {
+export class FaqComponent  {
   title = "Contact";
   isSubmitted = false;
   constructor(
@@ -37,14 +35,14 @@ export class FaqComponent {
   submitForm() {
     this.supportService
       .postSupport(this.supportForm.value)
-      .then((res) => {
+      .then((_res) => {
         this.supportForm.reset({});
         this.isSubmitted = true;
         setTimeout(() => {
           this.isSubmitted = false;
         }, 15000);
       })
-      .catch((err) => {
+      .catch((_err) => {
         // console.log(err);
       });
   }

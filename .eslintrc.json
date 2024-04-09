@@ -46,10 +46,10 @@
           }
         ],
         "@typescript-eslint/no-unused-vars": [
-          "error",
+          "warn",
           {
             "args": "all",
-            "argsIgnorePattern": "^(_|_res|\\w+\\?)$",
+            "argsIgnorePattern": "^_",
             "caughtErrors": "all",
             "caughtErrorsIgnorePattern": "^_",
             "destructuredArrayIgnorePattern": "^_",

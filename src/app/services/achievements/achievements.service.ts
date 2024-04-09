@@ -22,7 +22,7 @@ export class AchievementsService {
       .doc(this.userId)
       .collection("myAchievement")
       .add(data)
-      .then((res) => {
+      .then((_res) => {
         this.successAlert(this.successMessage);
       })
       .catch((err) => {

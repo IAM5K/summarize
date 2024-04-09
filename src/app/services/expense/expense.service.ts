@@ -13,7 +13,7 @@ export class ExpenseService {
     private profileService: ProfileService,
     private toasterService: ToasterService,
   ) {}
-  analyseExpense: any;
+  analyzeExpense: any;
   userId = this.profileService.getUserProfile()?.uid;
   successMessage = "Expense Added Successfully!";
   deletedMessage = "Expense Deleted Successfully!";
@@ -24,7 +24,7 @@ export class ExpenseService {
       .doc(this.userId)
       .collection("myExpence")
       .add(data)
-      .then((res) => {
+      .then((_res) => {
         this.successAlert(this.successMessage);
       })
       .catch((err) => {
@@ -142,7 +142,7 @@ export class ExpenseService {
       .doc(this.userId)
       .collection("myBudget")
       .add(data)
-      .then((res) => {
+      .then((_res) => {
         const msg = "Budget Added Successfully!";
         this.successAlert(msg);
       })
@@ -160,7 +160,7 @@ export class ExpenseService {
       .collection("myBudget")
       .doc(data.idField)
       .update(data)
-      .then((res) => {
+      .then((_res) => {
         const msg = "Budget updated successfully!";
         this.successAlert(msg);
       })
