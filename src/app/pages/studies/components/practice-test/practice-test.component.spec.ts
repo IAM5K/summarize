@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { IonicModule } from "@ionic/angular";
 
-import { PracticeTestComponent } from './practice-test.component';
+import { PracticeTestComponent } from "./practice-test.component";
 
-describe('PracticeTestComponent', () => {
+describe("PracticeTestComponent", () => {
   let component: PracticeTestComponent;
   let fixture: ComponentFixture<PracticeTestComponent>;
 
@@ -18,7 +18,7 @@ describe('PracticeTestComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

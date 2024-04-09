@@ -4,7 +4,7 @@ export class Budget {
     retrievedBudget = await sessionStorage.getItem("budget");
     let currentBudget: number = 0;
     if (retrievedBudget) {
-      let budget = JSON.parse(retrievedBudget);
+      const budget = JSON.parse(retrievedBudget);
       const budgetForThisMonth = budget.find((item: any) => item.month === currentMonth);
       // console.log(budgetForThisMonth);
 
@@ -22,10 +22,10 @@ export class Budget {
     return currentBudget;
   }
   getTotalBudget(): number {
-    let retrievedBudget = sessionStorage.getItem("budget");
+    const retrievedBudget = sessionStorage.getItem("budget");
     let currentBudget: number = 0;
     if (retrievedBudget) {
-      let budget = JSON.parse(retrievedBudget);
+      const budget = JSON.parse(retrievedBudget);
       budget.forEach((item: any) => {
         currentBudget = currentBudget + item.amount;
       });
