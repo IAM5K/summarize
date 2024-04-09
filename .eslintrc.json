@@ -1,9 +1,9 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*", "functions/**/**"],
+  "ignorePatterns": ["projects/**/*"],
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier", "prettier/@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "jasmine"],
   "rules": {
     "no-fallthrough": "off",
     "no-constant-condition": "off",
@@ -45,12 +45,25 @@
             "style": "camelCase"
           }
         ],
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "args": "all",
+            "argsIgnorePattern": "^(_|_res|\\w+\\?)$",
+            "caughtErrors": "all",
+            "caughtErrorsIgnorePattern": "^_",
+            "destructuredArrayIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "ignoreRestSiblings": true
+          }
+        ],
+        "@typescript-eslint/explicit-module-boundary-types": "off",
         "no-unused-vars": "off",
         "no-undef": "off"
       }
     },
     {
-      "files": ["*.html", "*.component.html"],
+      "files": ["*.html", "*.component.html", "*.page.html"],
       "parserOptions": {
         "project": ["tsconfig.(app|spec).json"]
       },
@@ -62,8 +75,14 @@
     {
       "files": ["*.spec.ts"],
       "rules": {
-        "@typescript-eslint/no-unused-vars": "off",
-        "no-undef": "warn"
+        "@typescript-eslint/no-unused-vars": "off", // Disable unused variable rule since it might be common in spec files
+        "@typescript-eslint/no-empty-function": "off", // Disable rule that disallows empty functions
+        "@typescript-eslint/no-explicit-any": "warn", // Disable rule that disallows the use of 'any' type
+        "@typescript-eslint/explicit-module-boundary-types": "off", // Disable rule that enforces explicit return types on functions
+        "jasmine/no-focused-tests": "warn", // Warn about focused tests (tests using fdescribe, fit, etc.)
+        "jasmine/no-disabled-tests": "warn", // Warn about disabled tests (tests using xdescribe, xit, etc.)
+        "jasmine/no-spec-dupes": "warn", // Warn about duplicated test suites
+        "jasmine/no-suite-dupes": "warn" // Warn about duplicated test cases
       }
     },
     {
