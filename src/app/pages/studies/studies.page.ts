@@ -42,7 +42,7 @@ export class StudiesPage implements OnInit, AfterViewInit, AfterContentInit {
   advancedMode: boolean = false;
   advancedModeAvailable: boolean = true;
   editMode: boolean = false;
-  updateSubmitted: Boolean = false;
+  updateSubmitted: boolean = false;
   dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   studiesForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
