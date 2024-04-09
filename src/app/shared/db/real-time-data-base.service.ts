@@ -31,6 +31,10 @@ export class RealTimeDataBaseService {
     return this.db.object(`dynamicContent/dashboard/${path}`).valueChanges();
   }
 
+  getAboutData(path: string): Observable<any> {
+    return this.db.object(`dynamicContent/about/${path}`).valueChanges();
+  }
+
   // getTargetExam(): Observable<any> {
   //   return this.db.object("targetExams").valueChanges();
   // }
