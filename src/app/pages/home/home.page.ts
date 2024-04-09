@@ -41,14 +41,12 @@ export class HomePage implements OnInit, AfterViewInit {
     this.getAboutParagraphs();
     this.seoService.eventTrigger("page_view", this.title);
   }
-
   getAboutParagraphs(): void {
     this.rtdb.getHomeData("paragraphs").subscribe((data) => {
       const paragraphsFetched = data;
       if (paragraphsFetched.length > 0) {
         this.paragraphs = paragraphsFetched.map((element) => element.content);
       }
-      console.log(this.paragraphs);
     });
   }
 }
