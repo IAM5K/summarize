@@ -34,12 +34,7 @@
           "path": "achievement"
         }
       ],
-      "upcomingFeatures": [
-        "Analyze Studies",
-        "Analyze Expenses (Better analysis)",
-        "Analyze Work",
-        "Advance Studies"
-      ],
+      "upcomingFeatures": ["Analyze Studies", "Analyze Expenses (Better analysis)", "Analyze Work", "Advance Studies"],
       "quotes": [
         {
           "message": "What gets measured, Gets managed",
@@ -154,18 +149,18 @@
       "recentUpdate": [
         {
           "type": "Feature",
-          "date": "",
-          "version": ""
+          "date": "08-04-2024",
+          "version": "2.1.1"
         },
         {
           "type": "Latest patch",
-          "date": "",
-          "version": ""
+          "date": "25-02-2024",
+          "version": "p.3.10"
         },
         {
           "type": "Previous patch",
-          "date": "",
-          "version": ""
+          "date": "22-02-2024",
+          "version": "p.3.9"
         }
       ]
     },
@@ -411,11 +406,7 @@
       {
         "version": "r.1.7",
         "date": "21-06-2023",
-        "details": [
-          "Export expense data to Excel",
-          "Update budget button disabled for default",
-          "Update and details"
-        ]
+        "details": ["Export expense data to Excel", "Update budget button disabled for default", "Update and details"]
       },
       {
         "version": "r.1.6",
@@ -563,12 +554,7 @@
         },
         {
           "name": "Chemistry",
-          "subcategories": [
-            "Organic Chemistry",
-            "Inorganic Chemistry",
-            "Physical Chemistry",
-            "Analytical Chemistry"
-          ]
+          "subcategories": ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry", "Analytical Chemistry"]
         },
         {
           "name": "Mathematics",
@@ -611,12 +597,7 @@
         },
         {
           "name": "Chemistry",
-          "subcategories": [
-            "Organic Chemistry",
-            "Inorganic Chemistry",
-            "Physical Chemistry",
-            "Analytical Chemistry"
-          ]
+          "subcategories": ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry", "Analytical Chemistry"]
         },
         {
           "name": "Mathematics",
@@ -651,12 +632,7 @@
         },
         {
           "name": "Chemistry",
-          "subcategories": [
-            "Organic Chemistry",
-            "Inorganic Chemistry",
-            "Physical Chemistry",
-            "Analytical Chemistry"
-          ]
+          "subcategories": ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry", "Analytical Chemistry"]
         },
         {
           "name": "Physics",
