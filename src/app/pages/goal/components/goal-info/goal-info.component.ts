@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { GoalData } from "src/app/models/class/static/goal";
 import { DataDescription } from "src/app/models/interface/masterData.model";
 
