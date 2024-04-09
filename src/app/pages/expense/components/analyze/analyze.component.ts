@@ -3,6 +3,7 @@ import {
   Component,
   HostListener,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from "@angular/core";
@@ -57,10 +58,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
   public lineChartData: ChartConfiguration<"line">["data"] = {
     labels: Array(this.daysInMonth)
       .fill(this.daysInMonth)
-      .map((x, i) => {
-        x = `${i + 1}-${this.month}-${this.year}`;
-        return x;
-      }),
+      .map((x, i) => (x = `${i + 1}-${this.month}-${this.year}`)),
     datasets: [],
   };
   public totalExpenseData: ChartConfiguration<"line">["data"] = {
@@ -146,7 +144,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
   updateTotalGraph(expense: any[]) {
     const dates: any = [];
     const amount: any = [];
-    expense.forEach((data: any, _index?: number) => {
+    expense.forEach((data: any, index: number) => {
       amount.push(data.dailyAmount);
       dates.push(data.date);
       this.totalAmount += data.dailyAmount;
