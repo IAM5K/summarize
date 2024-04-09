@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { MasterData } from "src/app/models/class/masterData/master-data";
 import { SeoTags } from "src/app/models/class/seoTags/seo";
 import { SeoService } from "src/app/services/seo/seo.service";
@@ -9,7 +9,7 @@ import { RealTimeDataBaseService } from "src/app/shared/db/real-time-data-base.s
   templateUrl: "./home.page.html",
   styleUrls: ["./home.page.scss"],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
   pageTitle = "Home";
   title = SeoTags.pageTitle.homePage;
   pageMetaTags = SeoTags.homePageTags;
@@ -34,16 +34,16 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags);
+  }
+  ngAfterViewInit(): void {
     this.getAboutParagraphs();
   }
-
   getAboutParagraphs(): void {
     this.rtdb.getHomeData("paragraphs").subscribe((data) => {
       const paragraphsFetched = data;
       if (paragraphsFetched.length > 0) {
         this.paragraphs = paragraphsFetched.map((element) => element.content);
       }
-      console.log(this.paragraphs);
     });
   }
 }
