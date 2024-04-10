@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   isLoggedIn: any = false;
   public appPages: any = [];
   public labels: any = [];
-  versionNumber = "2.1.0";
+  versionNumber = "2.2.0";
   private loginStateSubscription: Subscription;
   
   constructor(
