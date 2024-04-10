@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   isLoggedIn: any = false;
   public appPages: any = [];
   public labels: any = [];
-  versionNumber = "2.1.0";
+  versionNumber = "2.2.0";
   private loginStateSubscription: Subscription;
   constructor(
     private authService: AuthService,
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     if (isPlatform("mobile")) {
       StatusBar.setBackgroundColor({ color: "#3880ff" }).catch((error) => {
-        console.error("error while setting background color",error)
+        console.error("error while setting background color", error);
       });
     }
     this.firebaseService.getUserProfile();
