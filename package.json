@@ -19,7 +19,6 @@
   "eslintConfig": {
     "extends": "@ionic/eslint-config/recommended"
   },
-  "prettier": "@ionic/prettier-config",
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint"

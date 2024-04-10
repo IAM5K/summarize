@@ -78,8 +78,10 @@ export class TimePage implements OnInit, OnDestroy {
   }
 
   async getProjects() {
-    this.projectSubscription = await this.profileService.getProjects().subscribe((res: any) => {
-      this.projects = res;
+    this.projectSubscription = await this.profileService.getActiveProjects().subscribe((res: any) => {
+      this.projects = res.filter((project) => project.isActive);
+      console.log(this.projects);
+
       if (this.projects.length > 0) {
         this.workForm.patchValue({
           project: this.projects[0].name,
@@ -116,10 +118,7 @@ export class TimePage implements OnInit, OnDestroy {
 
   async updateWork() {
     this.updateSubmitted = true;
-    const response = await this.officeService.updateWork(
-      this.workForm.value,
-      this.editWorkData.idField,
-    );
+    const response = await this.officeService.updateWork(this.workForm.value, this.editWorkData.idField);
     if (response) {
       this.cancelUpdate();
       this.backToDefault();
