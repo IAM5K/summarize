@@ -19,8 +19,10 @@ export class TimeFunctions {
     });
     let output = "";
     for (const date in totalHoursPerDay) {
-      output += `${date}: ${totalHoursPerDay[date]} hours\n`;
+      const totalHours = totalHoursPerDay[date].toFixed(2); // Limit to two decimal places
+      output += `${date}: ${totalHours} hours\n`;
     }
     return output;
   }
 }
+
