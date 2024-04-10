@@ -157,7 +157,14 @@ export class ProfileService {
     const userId = this.getUserProfile()?.uid;
     return this.afs.collection("userData").doc(userId).collection("myProjects").valueChanges({ idField: "idField" });
   }
-
+  getActiveProjects() {
+    const userId = this.getUserProfile()?.uid;
+    return this.afs
+      .collection("userData")
+      .doc(userId)
+      .collection("myProjects", (ref) => ref.where("isActive", "==", true))
+      .valueChanges({ idField: "idField" });
+  }
   async deleteProjects(idField: string) {
     try {
       const user = await this.fs.getUserProfile();
