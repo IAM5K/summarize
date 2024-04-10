@@ -1,0 +1,13 @@
+.badge-container {
+  position: relative;
+  height: auto;
+  width: calc(250px - 32px);
+  overflow: hidden;
+}
+.get-app-badge {
+  position: relative;
+  height: auto;
+  width: min(100%, 250px);
+  object-fit: cover;
+  overflow: hidden;
+}

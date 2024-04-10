@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-edit-expense",
@@ -6,5 +6,4 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./edit-expense.component.scss"],
 })
 export class EditExpenseComponent {
-  constructor() {}
 }

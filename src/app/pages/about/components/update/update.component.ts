@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-update",
@@ -7,7 +7,6 @@ import { Component, OnInit } from "@angular/core";
 })
 export class UpdateComponent {
   pageTitle = "Updates";
-  constructor() {}
   updates = [
     {
       version: "r.1.7",

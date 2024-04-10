@@ -1,37 +1,62 @@
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from "@angular/fire/compat/database";
-import { Observable } from "rxjs";
-
+import { Observable, of } from "rxjs";
+import { tap } from "rxjs/operators";
 @Injectable({
   providedIn: "root",
 })
 export class RealTimeDataBaseService {
+  private readonly CACHE_KEY = "examsList";
+  private examsList: any[] = [];
   dashboardContent = "/dynamic-content/dashboard";
-  constructor(private db: AngularFireDatabase) {}
+  constructor(private db: AngularFireDatabase) {
+    // Load cached data from localStorage on service initialization
+    const cachedData = localStorage.getItem(this.CACHE_KEY);
+    if (cachedData) {
+      this.examsList = JSON.parse(cachedData);
+    }
+  }
 
   getDashboardContent(): Observable<any> {
     return this.db.list<any>(this.dashboardContent).valueChanges();
   }
 
-  addTemporaryData(): Promise<void> {
-    const paragraphs = [
-      "Summarize is an app that helps you to manage your Time, Money, and work which includes but is not limited to subject-wise studies, notes, to-do's, or office works.",
-      "Thinking when to use Summarize? To live better and managed, one should recall what they have done throughout the day daily before sleep . Also listing tasks for the next day and setting priorities increases the chances to get them done.",
-      "Currently, Summarize is under development, we will keep on adding features one by one. Till then, please feel free to manage Achievements of day, Expenses, Studies, and Time. It is a web-app that can be easily installed on all devices ( Mobile & PC ). Install the app on your devices  to keep in sync and to check how to install visit our Help page.",
-      "Note: Your data will not be used for any advertisement or offering any deal/scheme. Also our app donot need any permission to work on your device. Your privacy is important to us. For more queries, you can contact us through the support page. We are also open to feature requests and suggestions.",
-    ];
-    const paragraphsData = paragraphs.map((paragraph, index) => {
-      return {
-        content: paragraph,
-        orderId: index + 1,
-        type: "text", // or 'note' based on your condition
-      };
-    });
+  // addTemporaryData(): Promise<void> {
+  //   const paragraphs = [ ];
+  // add data and processing logic.
+  //   return this.db.object("dynamicContent/dashboard/paragraphs").set(paragraphsData);
+  // }
 
-    return this.db.object("dynamicContent/home/paragraphs").set(paragraphsData);
+  getHomeData(path: string): Observable<any> {
+    return this.db.object(`dynamicContent/dashboard/${path}`).valueChanges();
   }
 
-  getHomeData(): Observable<any> {
-    return this.db.object("dynamicContent/home").valueChanges();
+  getAboutData(path: string): Observable<any> {
+    return this.db.object(`dynamicContent/about/${path}`).valueChanges();
+  }
+
+  // getTargetExam(): Observable<any> {
+  //   return this.db.object("targetExams").valueChanges();
+  // }
+
+  getTargetExam(): Observable<any> {
+    // Check if data is available in cache
+    if (this.examsList.length > 0) {
+      console.log("return from cache ");
+      return of(this.examsList); // Return cached data
+    } else {
+      // Fetch data from Firebase Realtime Database
+      return this.db
+        .object("targetExams")
+        .valueChanges()
+        .pipe(
+          tap((data) => {
+            console.log("stored exam list in cache ");
+            this.examsList = data; // Store data in cache
+            // Update localStorage with the new data
+            localStorage.setItem(this.CACHE_KEY, JSON.stringify(data));
+          }),
+        );
+    }
   }
 }

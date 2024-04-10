@@ -83,4 +83,21 @@ export class SeoTags {
         "Summarize, summarize-ng, Time management, Task prioritization, Productivity tools, Time tracking, Schedule optimization, Efficiency, Organizational tools, Goal setting, Study management, Study planner, Study progress",
     },
   ];
+
+  public static profilePageTags: seoMetaTag[] = [
+    {
+      name: "description",
+      content:
+        "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better.",
+    },
+    {
+      name: "keyword",
+      content:
+        "Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis",
+    },
+    {
+      name: "author",
+      content: "Sandeep Kumar",
+    },
+  ];
 }

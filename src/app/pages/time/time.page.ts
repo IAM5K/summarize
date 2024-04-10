@@ -4,7 +4,6 @@ import { serverTimestamp } from "@angular/fire/firestore";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { OfficeService } from "src/app/services/office/office.service";
 import { SeoService } from "src/app/services/seo/seo.service";
-import { CustomDate } from "src/app/models/class/date/custom-date";
 import { AlertService } from "src/app/services/alert/alert.service";
 import { DatePipe } from "@angular/common";
 import { Project } from "src/app/models/interface/profile.interface";
@@ -38,9 +37,9 @@ export class TimePage implements OnInit, OnDestroy {
   currentTime = this.datePipe.transform(this.currentDate, "hh:mm");
   workByDate: any = [];
   projects: Project[] = [];
-  editMode: Boolean = false;
+  editMode: boolean = false;
   editWorkData: WorkInterface;
-  updateSubmitted: Boolean = false;
+  updateSubmitted: boolean = false;
   dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   workOf = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   // workSummaryOf = '';
@@ -79,8 +78,10 @@ export class TimePage implements OnInit, OnDestroy {
   }
 
   async getProjects() {
-    this.projectSubscription = await this.profileService.getProjects().subscribe((res: any) => {
-      this.projects = res;
+    this.projectSubscription = await this.profileService.getActiveProjects().subscribe((res: any) => {
+      this.projects = res.filter((project) => project.isActive);
+      console.log(this.projects);
+
       if (this.projects.length > 0) {
         this.workForm.patchValue({
           project: this.projects[0].name,
@@ -117,10 +118,7 @@ export class TimePage implements OnInit, OnDestroy {
 
   async updateWork() {
     this.updateSubmitted = true;
-    const response = await this.officeService.updateWork(
-      this.workForm.value,
-      this.editWorkData.idField,
-    );
+    const response = await this.officeService.updateWork(this.workForm.value, this.editWorkData.idField);
     if (response) {
       this.cancelUpdate();
       this.backToDefault();

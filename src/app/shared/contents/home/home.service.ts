@@ -3,6 +3,5 @@ import { Injectable } from "@angular/core";
 @Injectable({
   providedIn: "root",
 })
-export class SupportService {
-  constructor() {}
+export class HomeService {
 }

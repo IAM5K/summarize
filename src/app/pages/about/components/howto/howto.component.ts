@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-howto",
@@ -6,5 +6,4 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./howto.component.scss"],
 })
 export class HowtoComponent {
-  constructor() {}
 }

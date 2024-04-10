@@ -7,14 +7,21 @@ ion-item {
   display: flex;
   justify-content: space-between;
 }
-  ion-label {
+ion-label {
   span:first-of-type {
     width: 33%;
-  }}
-@media screen and (min-width:424px) {
-
+  }
+}
+@media screen and (min-width: 424px) {
 }
 
 .version-tag {
   text-align: right;
+}
+.update-info {
+  min-height: 160px;
+  margin-bottom: 1rem;
+}
+.update-type {
+  padding-left: 1rem;
 }

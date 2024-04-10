@@ -279,11 +279,11 @@ export class ExpensesPage implements OnInit {
     });
   }
   async addBudget() {
-    let month = this.budgetForm.value.month;
+    const month = this.budgetForm.value.month;
     let savedBudget: any;
     let monthExists: any;
-    await this.getBudget().then((res) => {
-      let tempBudget = sessionStorage.getItem("budget");
+    await this.getBudget().then((_res) => {
+      const tempBudget = sessionStorage.getItem("budget");
       if (tempBudget) {
         savedBudget = JSON.parse(tempBudget);
       } else {
@@ -330,7 +330,7 @@ export class ExpensesPage implements OnInit {
       Type: item.type,
       SpentOn: item.spendedOn,
     }));
-    let categoryWiseData = await new Analyze().getCategoryWiseData(this.Expenses);
+    const categoryWiseData = await new Analyze().getCategoryWiseData(this.Expenses);
     // console.log(categoryWiseData);
 
     const filename = "ExpenseData" + new Date().getTime() + ".xlsx";
