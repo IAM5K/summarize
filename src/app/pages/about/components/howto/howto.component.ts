@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-howto',
-  templateUrl: './howto.component.html',
-  styleUrls: ['./howto.component.scss'],
+  selector: "app-howto",
+  templateUrl: "./howto.component.html",
+  styleUrls: ["./howto.component.scss"],
 })
-export class HowtoComponent  {
-
-  constructor() { }
-
+export class HowtoComponent {
 }

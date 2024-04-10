@@ -1,13 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-create-goal',
-  templateUrl: './create-goal.component.html',
-  styleUrls: ['./create-goal.component.scss'],
+  selector: "app-create-goal",
+  templateUrl: "./create-goal.component.html",
+  styleUrls: ["./create-goal.component.scss"],
 })
 export class CreateGoalComponent {
-
-  constructor() { }
-
-
 }

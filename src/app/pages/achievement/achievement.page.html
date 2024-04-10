@@ -15,8 +15,7 @@
   </ion-header>
 
   <div id="container">
-
-    <div class="card ion-margin ion-padding ">
+    <div class="card ion-margin ion-padding">
       <h1 class="mt-0 h2">Add Achievement</h1>
       <div class="form-container">
         <form [formGroup]="achievementForm" (ngSubmit)="addAchievement()" novalidate>
@@ -40,33 +39,45 @@
           </div>
           <div class="input-item">
             <ion-item fill="outline">
-              <ion-label position="floating">Achievement Title </ion-label>
+              <ion-label position="floating">Achievement Title</ion-label>
               <ion-input formControlName="title" type="text"></ion-input>
             </ion-item>
           </div>
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Description</ion-label>
-              <ion-textarea formControlName="description" autoGrow="true"
-                placeholder="Description about the Achievement.">
-              </ion-textarea>
+              <ion-textarea
+                formControlName="description"
+                autoGrow="true"
+                placeholder="Description about the Achievement."
+              ></ion-textarea>
             </ion-item>
           </div>
           <div class="input-item">
             <ion-item fill="outline">
               <ion-label position="floating">Type</ion-label>
-              <ion-select formControlName="type" interface="popover" placeholder="Type of Achievement">
-                <ion-select-option *ngFor="let type of achievementTypes"
-                  [value]="type.value">{{type.title}}</ion-select-option>
+              <ion-select
+                formControlName="type"
+                interface="popover"
+                placeholder="Type of Achievement"
+              >
+                <ion-select-option *ngFor="let type of achievementTypes" [value]="type.value">
+                  {{type.title}}
+                </ion-select-option>
               </ion-select>
             </ion-item>
           </div>
           <div class="input-item">
-            <ion-button color="primary" type="submit" size="medium"
-              [disabled]="achievementForm.invalid">Submit</ion-button>
+            <ion-button
+              color="primary"
+              type="submit"
+              size="medium"
+              [disabled]="achievementForm.invalid"
+            >
+              Submit
+            </ion-button>
             <ion-button color="warning" type="reset" size="medium">Reset</ion-button>
           </div>
-
         </form>
       </div>
     </div>
@@ -75,13 +86,26 @@
       <div class="table-title">
         <h2 class="mt-0 h2" *ngIf="achievementsCount === 0">No Achievements found</h2>
         <h2 class="h2" *ngIf="achievementsCount !== 0">My Achievements</h2>
-        <ion-button *ngIf="achievementsCount === 5" color="primary" (click)="getAllAchievement()" size="medium">Show All</ion-button>
-        <ion-button *ngIf="achievementsCount > 5" color="primary" (click)="getAchievement()" size="medium">Latest
-          Only</ion-button>
+        <ion-button
+          *ngIf="achievementsCount === 5"
+          color="primary"
+          (click)="getAllAchievement()"
+          size="medium"
+        >
+          Show All
+        </ion-button>
+        <ion-button
+          *ngIf="achievementsCount > 5"
+          color="primary"
+          (click)="getAchievement()"
+          size="medium"
+        >
+          Latest Only
+        </ion-button>
       </div>
       <div class="overflow-auto">
         <div class="timeline" *ngIf="achievementsCount !== 0">
-          <div class=" event-alert event-end">
+          <div class="event-alert event-end">
             <ion-icon name="swap-vertical"></ion-icon>
             <h3>Many more to come...</h3>
           </div>
@@ -101,7 +125,9 @@
         </div>
       </div>
 
-      <ion-note class="mt-15px" color="tertiary" *ngIf="achievementsCount !== 0">* Edit feature coming soon.</ion-note>
+      <ion-note class="mt-15px" color="tertiary" *ngIf="achievementsCount !== 0">
+        * Edit feature coming soon.
+      </ion-note>
     </div>
   </div>
 </ion-content>

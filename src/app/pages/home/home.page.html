@@ -15,32 +15,39 @@
   </ion-header>
 
   <div id="container">
-    <h1 class="ion-text-center ion-padding">What gets measured, Gets managed
-      <br><ion-note color="tertiary" class="h4">- Peter F. Drucker</ion-note>
+    <h1 class="ion-text-center ion-padding">
+      What gets measured, Gets managed
+      <br />
+      <ion-note color="tertiary" class="h4">- Peter F. Drucker</ion-note>
     </h1>
     <section class="transparent-card">
-
-      <app-goal-on-dashboard ></app-goal-on-dashboard>
+      <app-goal-on-dashboard></app-goal-on-dashboard>
     </section>
     <section class="features ion-padding ion-justify-content-around ion-margin ion-align-items-stretch ion-wrap">
       <h2 class="ion-text-center h2 mt0">Available Features</h2>
       <div class="feature-card-container">
-        <div class="feature-card" *ngFor="let f of features" [routerLink]="'/'+f.path"
-          [ngStyle]="{'box-shadow': '0 0 5px inset var(--ion-color-'+ f.color +'-tint)'}">
+        <div
+          class="feature-card"
+          *ngFor="let f of features"
+          [routerLink]="'/'+f.path"
+          [ngStyle]="{'box-shadow': '0 0 5px inset var(--ion-color-'+ f.color +'-tint)'}"
+        >
           <ion-icon slot="start" [color]="f.color" [ios]="f.icon + '-outline'" [md]="f.icon + '-sharp'"></ion-icon>
           <ion-note [color]="f.color">{{f.title}}</ion-note>
         </div>
       </div>
-
     </section>
     <div class="card ion-padding">
       <h3>About Summarize</h3>
       <p class="ion-text-justify" *ngFor="let item of paragraphs">{{item}}</p>
-      <p>More Details in About Page (<a class="color-secondary bold" routerLink="/about">check here</a>)</p>
-
+      <p>
+        More Details in About Page (
+        <a class="color-secondary bold" routerLink="/about">check here</a>
+        )
+      </p>
     </div>
     <div class="card ion-padding">
-      <h4 class="h2">Upcoming Features </h4>
+      <h4 class="h2">Upcoming Features</h4>
       <ol>
         <li>Analyze Studies</li>
         <li>Analyze Work</li>
@@ -50,7 +57,7 @@
     </div>
   </div>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
+    <ion-fab-button [attr.aria-label]="'Floating feature button'">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">

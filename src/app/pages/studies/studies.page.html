@@ -17,118 +17,194 @@
   <div id="container">
     <div class="floating-tab" *ngIf="advancedModeAvailable">
       <ion-tabs class="stay-topmost">
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button [ngClass]="!advancedMode? 'tab-active':'' " (click)="advancedMode=false">
-          <ion-icon name="play-circle"></ion-icon>
-          Normal Mode
-        </ion-tab-button>
-        <ion-tab-button [ngClass]="advancedMode? 'tab-active':'' " (click)="advancedMode=true">
-          <ion-icon name="sparkles"></ion-icon>
-          Advanced Mode
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button [ngClass]="!advancedMode ? 'tab-active' : ''" (click)="advancedMode = false">
+            <ion-icon name="play-circle"></ion-icon>
+            Normal Mode
+          </ion-tab-button>
+          <ion-tab-button [ngClass]="advancedMode ? 'tab-active' : ''" (click)="advancedMode = true">
+            <ion-icon name="sparkles"></ion-icon>
+            Advanced Mode
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
     </div>
     <ng-container *ngIf="!advancedMode; else advancedContent">
-      <div class="card ion-margin ion-padding ">
-        <h1 class="mt-0 h2">{{editMode?"Update":"Add"}} Studies</h1>
+      <div class="card ion-margin ion-padding">
+        <h1 class="mt-0 h2">{{ editMode ? "Update" : "Add" }} Studies</h1>
         <div class="form-container">
           <form [formGroup]="studiesForm" (ngSubmit)="manageStudies()" novalidate>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label [position]="editMode?'stacked':'floating'">Date</ion-label>
-                <ion-input formControlName="date" type="date"></ion-input>
+            <ion-list class="form-ion-list">
+              <ion-item>
+                <ion-select
+                  label="Type"
+                  label-placement="floating"
+                  formControlName="type"
+                  interface="popover"
+                  placeholder="Category of Studies"
+                  (ionChange)="typeChanged()"
+                >
+                  <ion-select-option *ngFor="let type of studiesTypes" [value]="type.value">
+                    {{ type.title }}
+                  </ion-select-option>
+                </ion-select>
               </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Start Time</ion-label>
-                <ion-input formControlName="startTime" type="time"></ion-input>
+              <ion-item>
+                <ion-input label="Date" label-placement="floating" formControlName="date" type="date"></ion-input>
               </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">End Time</ion-label>
-                <ion-input formControlName="endTime" type="time"></ion-input>
+              <ion-item>
+                <ion-input
+                  label="Start Time"
+                  label-placement="floating"
+                  formControlName="startTime"
+                  type="time"
+                ></ion-input>
               </ion-item>
-            </div>
+              <ion-item>
+                <ion-input
+                  label="End Time"
+                  label-placement="floating"
+                  formControlName="endTime"
+                  type="time"
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-select
+                  label="Subject"
+                  label-placement="floating"
+                  formControlName="subject"
+                  placeholder="Subject studied / Book Name"
+                  interface="popover"
+                  (ionChange)="subjectChanged()"
+                >
+                  <ion-select-option *ngFor="let sub of subjects" [value]="sub.name">{{ sub.name }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="subTopic && subTopic.length > 0">
+                <ion-select
+                  label="Sub category"
+                  label-placement="floating"
+                  formControlName="subTopic"
+                  placeholder="Subject studied / Book Name"
+                  interface="popover"
+                >
+                  <ion-select-option *ngFor="let item of subTopic" [value]="item">{{ item }}</ion-select-option>
+                </ion-select>
+              </ion-item>
 
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Subject</ion-label>
-                <ion-input formControlName="subject" type="text" placeholder="Subject studied / Book Name" clear-input></ion-input>
+              <ion-item>
+                <ion-input
+                  label="Topic"
+                  label-placement="floating"
+                  formControlName="topic"
+                  type="text"
+                  placeholder="Chapter/Topic/Sub-topic studied"
+                  clearInput
+                ></ion-input>
               </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Topic</ion-label>
-                <ion-input formControlName="topic" type="text" placeholder="Chapter/Topic/Sub-topic studied" clear-input></ion-input>
+              <ion-item>
+                <ion-textarea
+                  label="Description"
+                  label-placement="floating"
+                  formControlName="description"
+                  type="text"
+                  autoGrow="true"
+                  placeholder="Description/ Sub-topic / comments about topic."
+                  clearInput
+                ></ion-textarea>
               </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Description</ion-label>
-                <ion-textarea formControlName="description" type="text" autoGrow="true" placeholder="Description/ Sub-topic / comments about topic." clear-input>
-                </ion-textarea>
-              </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Type</ion-label>
-                <ion-select formControlName="type" interface="popover" placeholder="Category of Studies">
-                  <ion-select-option *ngFor="let type of studiesTypes" [value]="type.value">{{type.title}}</ion-select-option>
+
+              <ion-item>
+                <ion-select
+                  label="Study Mode"
+                  label-placement="floating"
+                  formControlName="studyMode"
+                  interface="popover"
+                  placeholder="On whom it is Spent"
+                >
+                  <ion-select-option *ngFor="let item of studyMode" [value]="item.value">
+                    {{ item.title }}
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-item fill="outline">
-                <ion-label position="floating">Study Mode</ion-label>
-                <ion-select formControlName="studyMode" interface="popover" placeholder="On whom it is Spent">
-                  <ion-select-option *ngFor="let item of studyMode" [value]="item.value">{{item.title}}</ion-select-option>
-                </ion-select>
-              </ion-item>
-            </div>
-            <div class="input-item">
-              <ion-button color="primary" type="submit" size="medium" [disabled]="studiesForm.invalid || studiesForm.untouched">{{editMode?"Update":"Submit"}}</ion-button>
-              <ion-button color="warning" type="reset" size="medium" *ngIf="!editMode">Reset</ion-button>
-              <ion-button color="danger" size="medium" *ngIf="editMode" (click)="cancelUpdate()">Cancel</ion-button>
-            </div>
+            </ion-list>
+            <ion-button
+              color="primary"
+              type="submit"
+              size="medium"
+              name="addStudies"
+              [disabled]="studiesForm.invalid || studiesForm.untouched"
+            >
+              {{ editMode ? "Update" : "Submit" }}
+            </ion-button>
+            <ion-button name="reset-from" color="warning" type="reset" size="medium" *ngIf="!editMode">
+              Reset
+            </ion-button>
+            <ion-button name="reset-from" color="danger" size="medium" *ngIf="editMode" (click)="cancelUpdate()">
+              Cancel
+            </ion-button>
           </form>
+          <ion-note color="secondary" class="mt-15px">
+            In case of any difficulty reach out to us via
+            <a href="help/contact">support page</a>
+            .
+          </ion-note>
         </div>
       </div>
 
-      <div class="studies ion-margin" *ngIf="!editMode">
-        <h2 class="mt-0 h2" *ngIf="studiesCount === 0">No Study Record</h2>
-        <h2 class="mt-0 h2" *ngIf="studiesCount !== 0">My Studies</h2>
-        <ion-card *ngFor="let study of Studies">
-          <ion-card-header>
-            <ion-text color="primary">{{study?.date}}</ion-text>
-            <ion-card-title>Topic: {{study?.topic}}</ion-card-title>
-            <ion-card-subtitle>Subject: {{study?.subject}}</ion-card-subtitle>
-          </ion-card-header>
+      <ng-container *ngIf="!editMode">
+        <div class="studies ion-margin">
+          <h2 class="mt-0 h2" *ngIf="studiesCount === 0">No Study Record</h2>
+          <h2 class="mt-0 h2" *ngIf="studiesCount !== 0">My Studies</h2>
+          <ion-card *ngFor="let study of Studies; let i = index">
+            <ion-card-header>
+              <ion-text color="primary">{{ study?.date }}</ion-text>
+              <ion-card-title>Topic: {{ study?.topic }},{{ study?.subTopic }}</ion-card-title>
+              <ion-card-subtitle>Subject: {{ study?.subject }}</ion-card-subtitle>
+            </ion-card-header>
 
-          <ion-card-content>
-            <p><span class="bold">Description: </span> {{study?.description}}</p>
-            <p><span class="bold">Date: </span> {{study?.startTime}}</p>
-            <p><span class="bold">Answered By at</span> {{study?.endTime}}</p>
-            <ion-button class="action-button" color="secondary" (click)="editStudies(study)">
-              <ion-icon color="light" [ios]="'pencil-outline'" [md]="'pencil-sharp'"></ion-icon>
-            </ion-button>
-            <ion-button class="action-button" color="danger" (click)="deleteStudies(study.idField)">
-              <ion-icon color="light" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
-            </ion-button>
-          </ion-card-content>
-        </ion-card>
-      </div>
+            <ion-card-content>
+              <p>
+                <span class="bold">Description:</span>
+                {{study?.description}}
+              </p>
+              <p>
+                <span class="bold">From:</span>
+                {{study?.startTime}}
+                <span class="bold">-</span>
+                {{study?.endTime}}
+              </p>
+              <ion-button
+                [attr.aria-label]="'Edit item ' + i"
+                class="action-button"
+                color="secondary"
+                (click)="editStudies(study)"
+              >
+                <ion-icon color="light" [ios]="'pencil-outline'" [md]="'pencil-sharp'"></ion-icon>
+              </ion-button>
 
-      <div class="ion-padding" *ngIf="!editMode">
-        <ion-button color="success" [routerLink]="['free-resource']" routerLinkActive="router-link-active">Get Free Resource</ion-button>
-      </div>
+              <ion-button
+                [attr.aria-label]="'Delete item ' + i"
+                class="action-button"
+                color="danger"
+                (click)="deleteStudies(study.idField)"
+              >
+                <ion-icon color="light" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div class="ion-padding">
+          <ion-button color="success" [routerLink]="['free-resource']" routerLinkActive="router-link-active">
+            Get Free Resource
+          </ion-button>
+        </div>
+      </ng-container>
     </ng-container>
   </div>
 
   <ng-template #advancedContent>
     <app-advanced-studies></app-advanced-studies>
-  </ng-template>  
-
+  </ng-template>
 </ion-content>

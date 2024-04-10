@@ -22,10 +22,10 @@
 
     <div class="card ion-padding">
       <h2>Check for Update</h2>
-      <ion-list>
+      <ion-list class="update-info">
         <ion-item *ngFor="let item of releaseDetails">
           <ion-label class="version-label">
-            <span >{{item.type}} :</span>
+            <span class="update-type">{{item.type}} :</span>
             <span class="version-tag">{{item.date}} :</span>
             <span class="ion-text-bold version-tag">{{item.version}}</span>
           </ion-label>
@@ -33,11 +33,12 @@
       </ion-list>
       <ion-button color="tertiary" (click)="checkForUpdate()">
         <ion-icon name="download-outline" class="mr-10"></ion-icon>
-        Check for update</ion-button>
-        <ion-button color="primary" [routerLink]="['update']">
-          <ion-icon name="document-outline" class="mr-10"></ion-icon>
-          Update Details
-        </ion-button>
+        Check for update
+      </ion-button>
+      <ion-button color="primary" [routerLink]="['update']">
+        <ion-icon name="document-outline" class="mr-10"></ion-icon>
+        Update Details
+      </ion-button>
       <p>
         <ion-text color="dark" *ngIf="lastUpdateOn!==null">Last update check : {{lastUpdateOn }}</ion-text>
       </p>
@@ -48,12 +49,17 @@
       <h3 class="h2">Thanks Awesome Users</h3>
       <ion-note color="primary" class="h4">Top Contributors in reporting bugs and suggestions :</ion-note>
       <ol>
-        <li>Vinayak <ion-text color="success">( 10+ Contributions )</ion-text> </li>
+        <li>
+          Vinayak
+          <ion-text color="success">( 10+ Contributions )</ion-text>
+        </li>
         <li>Charan</li>
         <li>Sofia</li>
-        <li>Sanayam</li>
+        <li>Sanyam</li>
       </ol>
-      <ion-note color="tertiary" class="ion-text-bold">** Hall of frame will be availabe soon. Please keep contributing.</ion-note>
+      <ion-note color="tertiary" class="ion-text-bold">
+        ** Hall of frame will be available soon. Please keep contributing.
+      </ion-note>
       <!-- <ion-button color="success" [routerLink]="['hof']">
         <ion-icon name="ribbon" class="mr-10"></ion-icon>
         Hall of Frame

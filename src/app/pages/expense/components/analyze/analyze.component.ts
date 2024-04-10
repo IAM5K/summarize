@@ -1,44 +1,50 @@
-import { AfterViewInit, Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ChartConfiguration, ChartOptions, } from 'chart.js';
-import { CustomDate } from 'src/app/models/class/date/custom-date';
-import { ExpenseService } from 'src/app/services/expense/expense.service';
-import { BaseChartDirective, } from 'ng2-charts';
-import { Router } from '@angular/router';
-import { Budget } from '../../modules/budget';
-import { MonthlyExpense } from '../../modules/monthly-expense';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { ChartConfiguration, ChartOptions } from "chart.js";
+import { CustomDate } from "src/app/models/class/date/custom-date";
+import { ExpenseService } from "src/app/services/expense/expense.service";
+import { BaseChartDirective } from "ng2-charts";
+import { Router } from "@angular/router";
+import { Budget } from "../../modules/budget";
+import { MonthlyExpense } from "../../modules/monthly-expense";
 
 @Component({
-  selector: 'app-analyze',
-  templateUrl: './analyze.component.html',
-  styleUrls: ['./analyze.component.scss'],
+  selector: "app-analyze",
+  templateUrl: "./analyze.component.html",
+  styleUrls: ["./analyze.component.scss"],
 })
-
 export class AnalyzeComponent implements OnInit, AfterViewInit {
   @ViewChild(BaseChartDirective) chartA!: BaseChartDirective;
   @ViewChild(BaseChartDirective) chartB!: BaseChartDirective;
   // @ViewChild('monthlyChart') monthlyChart!: BaseChartDirective;
-  @ViewChild('totalChart') totalChart!: BaseChartDirective;
+  @ViewChild("totalChart") totalChart!: BaseChartDirective;
 
   @Input() expenseData: any = [];
-  @HostListener('window:resize')
+  @HostListener("window:resize")
   onResize(): void {
     this.setGraphHeight();
     this.setGraphWidth();
   }
   graphHeight: number = 400;
   graphWidth: number = 400;
-  title = "Analyze Expenses"
-  Expense: any = []
-  dailyExpense: number[] = []
+  title = "Analyze Expenses";
+  Expense: any = [];
+  dailyExpense: number[] = [];
   dailyExpenseLimit: number[] = [];
-  monthlyExpense: number[] = []
+  monthlyExpense: number[] = [];
   monthlyExpenseLimit: number[] = [];
-  totalAmount: number = 0
-  totalExpense: number[] = []
+  totalAmount: number = 0;
+  totalExpense: number[] = [];
   totalExpenseLimit: number[] = [];
-  categoryExpense: number[] = []
-  month: number = new Date().getMonth() + 1
-  year = new Date().getFullYear()
+  categoryExpense: number[] = [];
+  month: number = new Date().getMonth() + 1;
+  year = new Date().getFullYear();
   daysInMonth: number = new Date(new Date().getFullYear(), this.month, 0).getDate();
   budget = 54;
   totalBudget = 0;
@@ -46,34 +52,41 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
   currentExpense = 0;
   constructor(
     private expenseService: ExpenseService,
-    private router: Router) {
-  }
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: Array(this.daysInMonth).fill(this.daysInMonth).map((x, i) => x = `${i + 1}-${this.month}-${this.year}`),
-    datasets: []
+    private router: Router,
+  ) {}
+  public lineChartData: ChartConfiguration<"line">["data"] = {
+    labels: Array(this.daysInMonth)
+      .fill(this.daysInMonth)
+      .map((x, i) => {
+        x = `${i + 1}-${this.month}-${this.year}`;
+        return x;
+      }),
+    datasets: [],
   };
-  public totalExpenseData: ChartConfiguration<'line'>['data'] = {
+  public totalExpenseData: ChartConfiguration<"line">["data"] = {
     labels: [],
-    datasets: [{
-      data: [],
-      label: 'Total Expense',
-      fill: false,
-      tension: .5,
-      borderColor: 'lime',
-      backgroundColor: '#00ff00'
-    }]
+    datasets: [
+      {
+        data: [],
+        label: "Total Expense",
+        fill: false,
+        tension: 0.5,
+        borderColor: "lime",
+        backgroundColor: "#00ff00",
+      },
+    ],
   };
-  public currentMonthExpenseData: ChartConfiguration<'line'>['data'] = {
+  public currentMonthExpenseData: ChartConfiguration<"line">["data"] = {
     labels: [],
-    datasets: []
+    datasets: [],
   };
   public lineChartOptions: ChartOptions = {
     responsive: false,
-    plugins: {}
+    plugins: {},
   };
   public monthlyChartOptions: ChartOptions = {
     responsive: false,
-    plugins: {}
+    plugins: {},
   };
   public lineChartLegend = true;
   public monthlyChartLegend = true;
@@ -81,38 +94,35 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
   async ngOnInit() {
     this.setGraphHeight();
     this.setGraphWidth();
-    const currentMonth = new CustomDate().getCurrentMonth()
+    const currentMonth = new CustomDate().getCurrentMonth();
     await this.getExpense(currentMonth);
-    let total_expense: any = sessionStorage.getItem("total_expense")
-    let total_budget: any = sessionStorage.getItem("budget")
+    const total_expense: any = sessionStorage.getItem("total_expense");
+    const total_budget: any = sessionStorage.getItem("budget");
     if (total_expense !== undefined || total_budget !== undefined) {
       this.totalExpense = JSON.parse(total_expense);
       this.dailyExpense = await this.getDailyExpenses(this.totalExpense);
-    }
-    else {
+    } else {
       // console.log("Total budget: " + total_budget);
       // console.log("Total expense: " + total_expense);
-      this.router.navigateByUrl("expense")
+      this.router.navigateByUrl("expense");
     }
-    this.currentBudget = await this.getCurrentBudget(currentMonth,total_budget)
+    this.currentBudget = await this.getCurrentBudget(currentMonth, total_budget);
   }
   async ngAfterViewInit() {
     // console.log("After Init called"+ new Date().getTime());
     // let currentMonth = await new CustomDate().getCurrentMonth()
-    this.totalBudget = await new Budget().getTotalBudget()
-    this.currentExpense = await new MonthlyExpense().getCurrentExpense()
+    this.totalBudget = await new Budget().getTotalBudget();
+    this.currentExpense = await new MonthlyExpense().getCurrentExpense();
   }
   async getExpense(month: string) {
-    await this.expenseService.getCustomExpenses('duration', month).subscribe(async (res: any) => {
-      this.Expense = await res
-    })
+    await this.expenseService.getCustomExpenses("duration", month).subscribe(async (res: any) => {
+      this.Expense = await res;
+    });
     setTimeout(() => {
-      this.updateCurrentMonthGraph(this.Expense.reverse())
-      this.getTypeWiseExpense(this.Expense)
+      this.updateCurrentMonthGraph(this.Expense.reverse());
+      this.getTypeWiseExpense(this.Expense);
     }, 3000);
-
   }
-
 
   async getDailyExpenses(expenses: any[]): Promise<any[]> {
     if (expenses.length > 0) {
@@ -126,94 +136,98 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
           .reduce((acc, curr) => acc + curr.amount, 0);
         dailyExpenses.push({ date, dailyAmount });
       });
-      this.updateTotalGraph(dailyExpenses)
+      this.updateTotalGraph(dailyExpenses);
       return dailyExpenses;
-    }
-    else {
-      return []
+    } else {
+      return [];
     }
   }
 
   updateTotalGraph(expense: any[]) {
-    let dates: any = [];
-    let amount: any = [];
-    expense.forEach((data: any, index: number) => {
+    const dates: any = [];
+    const amount: any = [];
+    expense.forEach((data: any, _index?: number) => {
       amount.push(data.dailyAmount);
       dates.push(data.date);
       this.totalAmount += data.dailyAmount;
     });
     this.totalExpenseData.labels = dates;
     this.totalExpenseData.datasets[0].data = amount;
-    this.chartB.update()
+    this.chartB.update();
   }
   async updateCurrentMonthGraph(expense: any[]) {
-    let monthlyData = await new MonthlyExpense().getMonthlyData(expense, this.currentBudget)
+    const monthlyData = await new MonthlyExpense().getMonthlyData(expense, this.currentBudget);
     this.currentMonthExpenseData.labels = monthlyData.dates;
     this.currentMonthExpenseData.datasets = [
       {
         data: monthlyData.dailyAmount,
-        label: 'Expense today',
+        label: "Expense today",
         fill: false,
-        tension: .5,
-        borderColor: 'blue',
-        backgroundColor: 'blue',
+        tension: 0.5,
+        borderColor: "blue",
+        backgroundColor: "blue",
+        pointRadius: 1,
       },
       {
         data: monthlyData.amount,
-        label: 'Expense till now',
+        label: "Expense till now",
         fill: false,
-        tension: .5,
-        borderColor: 'purple',
-        backgroundColor: 'purple'
+        tension: 0.5,
+        borderColor: "purple",
+        backgroundColor: "purple",
+        pointRadius: 1,
       },
       {
         data: monthlyData.budgetData,
-        label: 'Monthly Budget',
+        label: "Monthly Budget",
         fill: false,
-        tension: .5,
-        borderColor: 'red',
-        backgroundColor: 'red'
-      }
-    ]
-    this.currentExpense = monthlyData.incrementAmount
-    this.chartA.update()
+        tension: 0.5,
+        borderColor: "red",
+        backgroundColor: "red",
+        pointRadius: 0,
+        pointStyle: false,
+      },
+    ];
+    this.currentExpense = monthlyData.incrementAmount;
+    this.chartA.update();
   }
   setGraphHeight(): void {
-    let screenHeight = window.innerHeight;
+    const screenHeight = window.innerHeight;
     if (screenHeight < 680) {
       this.graphHeight = 450;
-    }
-    else if (screenHeight > 680) {
+    } else if (screenHeight > 680) {
       this.graphHeight = 400;
-    }
-    else {
+    } else {
       this.graphHeight = 400;
     }
   }
   setGraphWidth(): void {
-    let screenWidth = window.innerWidth;
-    if (screenWidth < 680) {
-      this.graphWidth = 500;
-    }
-    else if (680 < screenWidth && screenWidth > 780) {
-      this.graphWidth = screenWidth * 2 / 3;
-    }
-    else if (780 < screenWidth && screenWidth < 1080) {
-      this.graphWidth = 1200;
-    }
-    else {
-      this.graphWidth = screenWidth / 2;
-    }
+    const screenWidth = window.innerWidth;
+    // if (screenWidth < 680) {
+    //   this.graphWidth = 500;
+    // }
+    // else if (680 < screenWidth && screenWidth > 780) {
+    //   this.graphWidth = screenWidth * 2 / 3;
+    // }
+    // else if (780 < screenWidth && screenWidth < 1080) {
+    //   this.graphWidth = 1200;
+    // }
+    // else {
+    //   this.graphWidth = screenWidth / 2;
+    // }
+    this.graphWidth = screenWidth - 50;
   }
 
   /* Pie */
-  public pieChartOptions: ChartOptions<'pie'> = {
+  public pieChartOptions: ChartOptions<"pie"> = {
     responsive: true,
   };
-  public pieChartLabels = ['All'];
-  public pieChartDatasets = [{
-    data: [100]
-  }];
+  public pieChartLabels = ["All"];
+  public pieChartDatasets = [
+    {
+      data: [100],
+    },
+  ];
   public pieChartLegend = true;
   public pieChartPlugins = [];
 
@@ -247,46 +261,42 @@ export class AnalyzeComponent implements OnInit, AfterViewInit {
           .filter((e) => e.type === type)
           .reduce((acc, curr) => acc + curr.amount, 0);
         expenseTypes.push({ type, amount });
-      })
-      this.updateTypeWisePie(expenseTypes)
+      });
+      this.updateTypeWisePie(expenseTypes);
       return expenseTypes;
+    } else {
+      return [];
     }
-    else {
-      return []
-    }
-
   }
 
   updateTypeWisePie(expenses: any) {
-    this.pieChartLabels = []
-    this.pieChartDatasets[0].data = []
+    this.pieChartLabels = [];
+    this.pieChartDatasets[0].data = [];
     expenses.forEach((data: any) => {
-      this.pieChartLabels.push(data.type.toUpperCase())
-      this.pieChartDatasets[0].data.push(data.amount)
+      this.pieChartLabels.push(data.type.toUpperCase());
+      this.pieChartDatasets[0].data.push(data.amount);
     });
-
   }
 
   /**External Functions */
-  async getCurrentBudget(currentMonth:string,budget:any):Promise<number> {
-
+  async getCurrentBudget(currentMonth: string, budget: any): Promise<number> {
     // console.log(currentMonth+"After called"+ new Date().getTime());
-    let retrievedBudget :any  = 0
+    let retrievedBudget: any = 0;
     retrievedBudget = budget;
     let currentBudget: number = 0;
     if (retrievedBudget) {
-      let budget = JSON.parse(retrievedBudget)
+      const budget = JSON.parse(retrievedBudget);
       const budgetForThisMonth = budget.find((item: any) => item.month === currentMonth);
-      if(budgetForThisMonth){
-        currentBudget = budgetForThisMonth.amount
+      if (budgetForThisMonth) {
+        currentBudget = budgetForThisMonth.amount;
+      } else {
+        alert("Budget for the current month not found. Add budget first");
       }
-      else{
-        alert("Budget for the current month not found. Add budget first")
-      }
-    }
-    else{
-      currentBudget=0;
-      alert("There was some error getting your budget. Make sure you have added budget for this month.")
+    } else {
+      currentBudget = 0;
+      alert(
+        "There was some error getting your budget. Make sure you have added budget for this month.",
+      );
     }
     return currentBudget;
   }
