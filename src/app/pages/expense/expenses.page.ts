@@ -191,6 +191,7 @@ export class ExpensesPage implements OnInit {
       this.backToDefault();
     }, 100);
   }
+  
   async backToDefault() {
     this.expenseForm.reset({
       createdAt: serverTimestamp(),
@@ -200,6 +201,7 @@ export class ExpensesPage implements OnInit {
       type: "",
       description: "",
     });
+
   }
   async deleteExpense(idField: string) {
     const response = await this.alertService.deleteAlert();
