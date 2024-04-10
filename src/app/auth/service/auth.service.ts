@@ -9,14 +9,11 @@ import {
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import {
   AngularFirestore,
-  AngularFirestoreCollection,
   AngularFirestoreDocument,
 } from "@angular/fire/compat/firestore";
 import { Router } from "@angular/router";
-import { error } from "console";
 import firebase from "firebase/compat/app";
 import { Observable, map } from "rxjs";
-import { User } from "src/app/models/interface/user.model";
 import { ToasterService } from "src/app/services/toaster/toaster.service";
 
 @Injectable({
@@ -46,7 +43,7 @@ export class AuthService {
       const user = await createUserWithEmailAndPassword(this.auth, email, password);
       this.updateUserData(user.user);
       return user;
-    } catch (e) {
+    } catch (_error) {
       return null;
     }
   }
@@ -99,17 +96,17 @@ export class AuthService {
   AuthLogin(provider) {
     return this.afAuth
       .signInWithPopup(provider)
-      .then((result) => {
+      .then((_result) => {
         // console.log('You have been successfully logged in!');
       })
-      .catch((error) => {
+      .catch((_error) => {
         // console.log(error);
       });
   }
 
   async googleSignin(): Promise<any> {
     // this.GoogleAuth()
-    let provider = new GoogleAuthProvider();
+    const provider = new GoogleAuthProvider();
     // console.log(typeof( provider));
     const credential = await this.afAuth.signInWithPopup(provider);
     if (credential) {
@@ -124,7 +121,7 @@ export class AuthService {
     const userRef: AngularFirestoreDocument = this.afs.doc(`user/${user.uid}`);
     if (userRef.get()) {
       userRef.get().subscribe((res: any) => {
-        let responseData = res.data();
+        const responseData = res.data();
         if (responseData === undefined) {
           const data = JSON.parse(JSON.stringify(user));
           userRef.set(data, { merge: true });
@@ -143,7 +140,7 @@ export class AuthService {
     const data = JSON.parse(JSON.stringify(user));
     if (userRef.get()) {
       userRef.get().subscribe((res: any) => {
-        let responseData = res.data();
+        const responseData = res.data();
         if (responseData === undefined) {
           const data = JSON.parse(JSON.stringify(user));
           userRef.set(data, { merge: true });

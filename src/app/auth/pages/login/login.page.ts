@@ -112,7 +112,7 @@ export class LoginPage implements OnInit {
     }
   }
   async loginWithGoogle() {
-    let user = await this.authService.googleSignin();
+    const user = await this.authService.googleSignin();
     if (user !== (null || undefined)) {
       this.showAlert(
         "Login Success",

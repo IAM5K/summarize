@@ -5,7 +5,6 @@ import { ProfileService } from "../profile/profile.service";
 import { FirebaseService } from "../firebase/firebase.service";
 import { ToasterService } from "../toaster/toaster.service";
 import { GoalData } from "src/app/models/interface/goals.interface";
-import { serverTimestamp } from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: "root",
@@ -62,7 +61,7 @@ export class GoalService {
       .doc(userId)
       .collection(goalTerm)
       .add(data)
-      .then((res) => {
+      .then((_res) => {
         // console.log(res);
         this.toasterService.showToast(this.addMessage, "success");
       })

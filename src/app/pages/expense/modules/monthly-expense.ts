@@ -7,12 +7,12 @@ export class MonthlyExpense {
     return expenses.filter((expense) => expense.date >= firstDateOfMonth);
   }
   getMonthlyData(expense: any[], currentBudget: number) {
-    let dates: any = [];
-    let amount: any = [];
-    let dailyAmount: any = [];
+    const dates: any = [];
+    const amount: any = [];
+    const dailyAmount: any = [];
     let incrementAmount: number = 0;
-    let budgetData: any = [];
-    expense.forEach((data: any, index: number) => {
+    const budgetData: any = [];
+    expense.forEach((data: any, _index: number) => {
       dailyAmount.push(data.amount);
       incrementAmount += data.amount;
       amount.push(incrementAmount);

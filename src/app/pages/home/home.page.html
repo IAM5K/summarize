@@ -23,9 +23,7 @@
     <section class="transparent-card">
       <app-goal-on-dashboard></app-goal-on-dashboard>
     </section>
-    <section
-      class="features ion-padding ion-justify-content-around ion-margin ion-align-items-stretch ion-wrap"
-    >
+    <section class="features ion-padding ion-justify-content-around ion-margin ion-align-items-stretch ion-wrap">
       <h2 class="ion-text-center h2 mt0">Available Features</h2>
       <div class="feature-card-container">
         <div
@@ -34,12 +32,7 @@
           [routerLink]="'/'+f.path"
           [ngStyle]="{'box-shadow': '0 0 5px inset var(--ion-color-'+ f.color +'-tint)'}"
         >
-          <ion-icon
-            slot="start"
-            [color]="f.color"
-            [ios]="f.icon + '-outline'"
-            [md]="f.icon + '-sharp'"
-          ></ion-icon>
+          <ion-icon slot="start" [color]="f.color" [ios]="f.icon + '-outline'" [md]="f.icon + '-sharp'"></ion-icon>
           <ion-note [color]="f.color">{{f.title}}</ion-note>
         </div>
       </div>
@@ -64,7 +57,7 @@
     </div>
   </div>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
+    <ion-fab-button [attr.aria-label]="'Floating feature button'">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">

@@ -23,13 +23,11 @@ export class StudiesService {
       .doc(this.userId)
       .collection("myStudies")
       .add(data)
-      .then((res) => {
+      .then((_res) => {
         this.successAlert(this.addMessage);
       })
       .catch((err) => {
-        alert(
-          "There was an error in posting. \n Please try again later. Check console for detail.",
-        );
+        alert("There was an error in posting. \n Please try again later. Check console for detail.");
         console.warn(err);
       });
   }
@@ -40,13 +38,11 @@ export class StudiesService {
       .collection("myStudies")
       .doc(idField)
       .update(data)
-      .then((res) => {
+      .then((_res) => {
         this.successAlert(this.updateMessage);
       })
       .catch((err) => {
-        alert(
-          "There was an error in posting. \n Please try again later. Check console for detail.",
-        );
+        alert("There was an error in posting. \n Please try again later. Check console for detail.");
         console.warn(err);
       });
   }

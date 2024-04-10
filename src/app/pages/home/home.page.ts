@@ -1,19 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { MasterData } from "src/app/models/class/masterData/master-data";
-import { SeoTags } from "src/app/models/class/seoTags/seo";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { features as MasterDataFeatures } from "src/app/models/class/masterData/master-data";
 import { SeoService } from "src/app/services/seo/seo.service";
 import { RealTimeDataBaseService } from "src/app/shared/db/real-time-data-base.service";
-
+import { homePageTags, homePageTitle } from "src/app/models/data/seo-tags";
 @Component({
   selector: "app-home",
   templateUrl: "./home.page.html",
   styleUrls: ["./home.page.scss"],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
   pageTitle = "Home";
-  title = SeoTags.pageTitle.homePage;
-  pageMetaTags = SeoTags.homePageTags;
-  features = MasterData.features;
+  title = homePageTitle;
+  pageMetaTags = homePageTags;
+  features = MasterDataFeatures;
   fabActionButtons = [
     { title: "Goal", color: "secondary", url: "/goal", icon: "bulb" },
     { title: "Expenses", color: "success", url: "/expenses", icon: "cash" },
@@ -34,24 +33,20 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags);
-    // this.getHomeData();
-    // this.addTemporaryData();
+    console.log("meta tag updated, moving to after init");
   }
 
-  getHomeData(): void {
-    this.rtdb.getHomeData().subscribe((data) => {
-      this.paragraphs = data.paragraph.content;
-      console.log(this.paragraphs);
-    });
+  ngAfterViewInit(): void {
+    console.log("Executing after view init");
+    this.getAboutParagraphs();
+    this.seoService.eventTrigger("page_view", this.title);
   }
-  addTemporaryData(): void {
-    this.rtdb
-      .addTemporaryData()
-      .then(() => {
-        console.log("Temporary data added successfully.");
-      })
-      .catch((error) => {
-        console.error("Error adding temporary data:", error);
-      });
+  getAboutParagraphs(): void {
+    this.rtdb.getHomeData("paragraphs").subscribe((data) => {
+      const paragraphsFetched = data;
+      if (paragraphsFetched.length > 0) {
+        this.paragraphs = paragraphsFetched.map((element) => element.content);
+      }
+    });
   }
 }

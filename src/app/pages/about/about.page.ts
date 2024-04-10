@@ -1,15 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterContentInit, AfterViewInit, Component, OnInit } from "@angular/core";
 import { SwUpdate } from "@angular/service-worker";
 import { CustomDate } from "src/app/models/class/date/custom-date";
 import { SeoTags } from "src/app/models/class/seoTags/seo";
 import { SeoService } from "src/app/services/seo/seo.service";
+import { RealTimeDataBaseService } from "src/app/shared/db/real-time-data-base.service";
 
 @Component({
   selector: "app-about",
   templateUrl: "./about.page.html",
   styleUrls: ["./about.page.scss"],
 })
-export class AboutPage implements OnInit {
+export class AboutPage implements OnInit, AfterViewInit, AfterContentInit {
   pageTitle = "About Summarize";
   title = SeoTags.pageTitle.aboutPage;
   pageMetaTags = SeoTags.aboutPageTags;
@@ -23,46 +24,37 @@ export class AboutPage implements OnInit {
   lastUpdateOn: any = null;
   infoNote = "";
   dateToday = new CustomDate().getDateToday();
-  releaseDetails = [
-    {
-      type: "Feature",
-      date: "17-02-2024",
-      version: "d.4.6",
-    },
-    {
-      type: "Last Patch",
-      date: "01-11-2023",
-      version: "p.3.5",
-    },
-    {
-      type: "Latest Patch",
-      date: "21-02-2024",
-      version: "p.3.7",
-    },
-  ];
+  releaseDetails = [];
   constructor(
     private swUpdate: SwUpdate,
     private seoService: SeoService,
+    private rtdb: RealTimeDataBaseService,
   ) {}
 
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags);
+  }
+  ngAfterViewInit(): void {
+    this.getRecentUpdateInfo();
+  }
+  ngAfterContentInit(): void {
     this.lastUpdateOn = localStorage.getItem("lastUpdateOn");
     this.swUpdate.versionUpdates.subscribe(() => {
       this.infoNote = "Checking for update...";
-      if (
-        confirm("Update Available, do you want to install it?") &&
-        this.lastUpdateOn !== this.dateToday
-      ) {
+      if (confirm("Update Available, do you want to install it?") && this.lastUpdateOn !== this.dateToday) {
         window.location.reload();
         this.infoNote = "Updated.";
       }
     });
   }
-
+  getRecentUpdateInfo(): void {
+    this.rtdb.getAboutData("recentUpdate").subscribe((data) => {
+      console.log(data);
+      this.releaseDetails = data;
+    });
+  }
   checkForUpdate() {
-    this.lastUpdateOn =
-      new Date().getFullYear() + "-0" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
+    this.lastUpdateOn = new Date().getFullYear() + "-0" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
     localStorage.setItem("lastUpdateOn", this.lastUpdateOn);
     let updateCount = 0;
     this.swUpdate.versionUpdates.subscribe(() => {

@@ -4,7 +4,6 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
 } from "@angular/fire/compat/firestore";
-import { AlertController } from "@ionic/angular";
 
 @Injectable({
   providedIn: "root",
@@ -29,10 +28,10 @@ export class SupportService {
     this.afs
       .doc(`support/${idField}`)
       .update(data)
-      .then(() => {
+      .then((_res) => {
         // console.log('success');
       })
-      .catch((err) => {
+      .catch((_err) => {
         //(err);
       });
   }

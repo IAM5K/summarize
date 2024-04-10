@@ -6,5 +6,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./analytics.page.scss'],
 })
 export class AnalyticsPage {
-  pageTitle = 'Analytics';
+  pageTitle = "Analytics";
 }
