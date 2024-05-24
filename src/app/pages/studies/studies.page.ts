@@ -1,5 +1,5 @@
 import { DatePipe, ViewportScroller } from "@angular/common";
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from "@angular/core";
 import { serverTimestamp } from "@angular/fire/firestore";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { SeoTags } from "src/app/models/class/seoTags/seo";
@@ -30,6 +30,7 @@ export class StudiesPage implements OnInit, AfterViewInit, AfterContentInit {
     private viewportScroller: ViewportScroller,
     private profileService: ProfileService,
     private changeDetectorRef: ChangeDetectorRef,
+    private zone: NgZone,
     private rtdb: RealTimeDataBaseService,
   ) {}
 
@@ -73,6 +74,7 @@ export class StudiesPage implements OnInit, AfterViewInit, AfterContentInit {
     });
     this.getActiveExamList();
   }
+
   getActiveExamList() {
     this.profileService.getExams().subscribe((res: any) => {
       this.examAspirations = res;
@@ -146,42 +148,70 @@ export class StudiesPage implements OnInit, AfterViewInit, AfterContentInit {
     this.studiesForm.get("date")?.disable();
     this.editMode = true;
   }
+  addControls() {
+    this.studiesForm.addControl("subject", new FormControl("", Validators.required));
+    this.studiesForm.addControl("topic", new FormControl("", Validators.required));
+    this.studiesForm.addControl("description", new FormControl("", Validators.required));
+    this.studiesForm.addControl("studyMode", new FormControl("", Validators.required));
+    this.studiesForm.addControl("subTopic", new FormControl(""));
+  }
+
+  // INFO: Log current controls after change detection
+  logCurrentControls() {
+    const controls = this.studiesForm.controls;
+    console.log("Current form controls:", Object.keys(controls));
+  }
 
   typeChanged() {
     const typeValue = this.studiesForm.get("type").value;
+    this.zone.run(() => {
+      switch (typeValue) {
+        case "slept":
+        case "break":
+          this.studiesForm.removeControl("subject");
+          this.studiesForm.removeControl("topic");
+          this.studiesForm.removeControl("studyMode");
+          this.studiesForm.removeControl("subTopic");
+          break;
 
-    if (typeValue === "test") {
-      // Remove existing fields
-      this.studiesForm.removeControl("subject");
-      this.studiesForm.removeControl("topic");
+        default:
+          this.addControls();
+          break;
+      }
+    });
+    this.logCurrentControls();
+    // if (typeValue === "test") {
+    //   // Remove existing fields
+    //   this.studiesForm.removeControl("subject");
+    //   this.studiesForm.removeControl("topic");
 
-      // Add new fields
-      this.studiesForm.addControl("testField1", new FormControl("", [Validators.required]));
-      this.studiesForm.addControl("testField2", new FormControl("", [Validators.required]));
+    //   // Add new fields
+    //   this.studiesForm.addControl("testField1", new FormControl("", [Validators.required]));
+    //   this.studiesForm.addControl("testField2", new FormControl("", [Validators.required]));
 
-      // Update the UI (if necessary)
-      // You can use Angular's ChangeDetectorRef to trigger change detection
-      this.changeDetectorRef.detectChanges();
-    } else {
-      // Restore original fields if type is not 'test'
-      this.studiesForm.addControl(
-        "subject",
-        new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]),
-      );
-      this.studiesForm.addControl(
-        "topic",
-        new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z 0-9\n .,-]*$")]),
-      );
+    //   // Update the UI (if necessary)
+    //   // You can use Angular's ChangeDetectorRef to trigger change detection
+    //   this.changeDetectorRef.detectChanges();
+    // } else {
+    //   // Restore original fields if type is not 'test'
+    //   this.studiesForm.addControl(
+    //     "subject",
+    //     new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]),
+    //   );
+    //   this.studiesForm.addControl(
+    //     "topic",
+    //     new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z 0-9\n .,-]*$")]),
+    //   );
 
-      // Remove added fields
-      this.studiesForm.removeControl("testField1");
-      this.studiesForm.removeControl("testField2");
-    }
+    //   // Remove added fields
+    //   this.studiesForm.removeControl("testField1");
+    //   this.studiesForm.removeControl("testField2");
+    // }
   }
 
   subjectChanged() {
     const subjectValue = this.studiesForm.get("subject").value;
-    console.log(subjectValue); // Output: Physics
+    console.log("Subject value", subjectValue); // Output: Physics
 
     // Find the subject object with the name "Physics"
     const selectedSubject = this.subjects.find((subject) => subject.name === subjectValue);
