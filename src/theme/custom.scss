@@ -185,8 +185,18 @@
 .tab-active {
   color: var(--ion-color-success) !important;
 }
+.padding-h-0,
 .padding-zero {
-  padding: 0;
+  padding: 0 !important;
+  padding-inline-start: 0 !important;
+  padding-inline-end: 0 !important;
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+}
+.padding-v-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .form-ion-list {
@@ -253,4 +263,8 @@
   @media screen and (min-width: 720px) {
     width: 90%;
   }
+}
+
+.h-fit-content {
+  height: fit-content;
 }

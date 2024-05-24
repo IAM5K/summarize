@@ -8,11 +8,20 @@ ion-grid {
 }
 
 .studies {
-  ion-card{
-    margin:20px 0%;
+  ion-card {
+    margin: 20px 0%;
   }
   ion-button {
     margin-right: 15px;
   }
 }
-// 9351525551
+ion-badge {
+  --padding-end: 1rem;
+  --padding-start: 1rem;
+}
+.m-y-half {
+  margin: 0 0 !important;
+}
+.padding-v-0 {
+  --min-height: 0;
+}

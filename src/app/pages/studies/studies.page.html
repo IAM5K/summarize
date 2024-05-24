@@ -38,13 +38,13 @@
               <ion-item>
                 <ion-select
                   label="Type"
+                  aria-label="Type"
                   label-placement="floating"
                   formControlName="type"
-                  interface="popover"
                   placeholder="Category of Studies"
                   (ionChange)="typeChanged()"
                 >
-                  <ion-select-option *ngFor="let type of studiesTypes" [value]="type.value">
+                  <ion-select-option *ngFor="let type of studiesTypes" [value]="type.value" aria-label="options">
                     {{ type.title }}
                   </ion-select-option>
                 </ion-select>
@@ -68,7 +68,7 @@
                   type="time"
                 ></ion-input>
               </ion-item>
-              <ion-item>
+              <ion-item *ngIf="studiesForm.contains('subject')">
                 <ion-select
                   label="Subject"
                   label-placement="floating"
@@ -80,25 +80,25 @@
                   <ion-select-option *ngFor="let sub of subjects" [value]="sub.name">{{ sub.name }}</ion-select-option>
                 </ion-select>
               </ion-item>
-              <ion-item *ngIf="subTopic && subTopic.length > 0">
+              <ion-item *ngIf="subTopic && subTopic.length > 0 && studiesForm.contains('subTopic')">
                 <ion-select
-                  label="Sub category"
+                  label="Module / Chapter "
                   label-placement="floating"
                   formControlName="subTopic"
-                  placeholder="Subject studied / Book Name"
+                  placeholder="Module / Chapter Name"
                   interface="popover"
                 >
                   <ion-select-option *ngFor="let item of subTopic" [value]="item">{{ item }}</ion-select-option>
                 </ion-select>
               </ion-item>
 
-              <ion-item>
+              <ion-item *ngIf="studiesForm.contains('topic')">
                 <ion-input
                   label="Topic"
                   label-placement="floating"
                   formControlName="topic"
                   type="text"
-                  placeholder="Chapter/Topic/Sub-topic studied"
+                  placeholder="Topic/Sub-topic studied"
                   clearInput
                 ></ion-input>
               </ion-item>
@@ -108,13 +108,13 @@
                   label-placement="floating"
                   formControlName="description"
                   type="text"
-                  autoGrow="true"
+                  [autoGrow]="true"
                   placeholder="Description/ Sub-topic / comments about topic."
                   clearInput
                 ></ion-textarea>
               </ion-item>
 
-              <ion-item>
+              <ion-item *ngIf="studiesForm.contains('studyMode')">
                 <ion-select
                   label="Study Mode"
                   label-placement="floating"
@@ -158,9 +158,15 @@
           <h2 class="mt-0 h2" *ngIf="studiesCount !== 0">My Studies</h2>
           <ion-card *ngFor="let study of Studies; let i = index">
             <ion-card-header>
-              <ion-text color="primary">{{ study?.date }}</ion-text>
-              <ion-card-title>Topic: {{ study?.topic }},{{ study?.subTopic }}</ion-card-title>
-              <ion-card-subtitle>Subject: {{ study?.subject }}</ion-card-subtitle>
+              <ion-item class="padding-h-0 padding-v-0">
+                <ion-label color="primary" class="m-y-half">{{ study?.date }}</ion-label>
+                <ion-badge [color]="study.type == 'slept'?'danger':'primary'">{{study.type| uppercase}}</ion-badge>
+              </ion-item>
+              <ion-card-title *ngIf="study.topic">
+                Topic: {{ study?.topic }}
+                <span *ngIf="study.subTopic">, {{ study?.subTopic }}</span>
+              </ion-card-title>
+              <ion-card-subtitle *ngIf="study.subject">Subject: {{ study?.subject }}</ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
