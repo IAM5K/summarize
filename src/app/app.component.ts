@@ -63,7 +63,7 @@ export class AppComponent implements OnInit, AfterViewInit {
             pageName: event.urlAfterRedirects,
           };
           console.log("pushing gtm from app module", gtmTag);
-          this.gtmService.pushTag(gtmTag);
+          // this.gtmService.pushTag(gtmTag);
         }
       } catch (error) {
         console.error("Error occurred in Google Tag Manager:", error);
