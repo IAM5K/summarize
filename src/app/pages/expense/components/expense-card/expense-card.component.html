@@ -1,16 +1,39 @@
-<ion-card class="container-70-30 ">
-  <ion-card-header class="left-70">
-    <ion-note color="primary">{{expenseItem.date}} : {{expenseItem.type| uppercase }}</ion-note>
-    <ion-card-title>{{expenseItem.amount}} </ion-card-title>
-    <ion-card-subtitle><ion-note>{{expenseItem.spendedOn | titlecase}}</ion-note> : {{expenseItem.description}}</ion-card-subtitle>
-  </ion-card-header>
+<ion-item-sliding class="ion-no-padding">
+  <ion-item color="none" lines="none" no-padding>
+    <ion-card class="container-70-30 " color="light">
+      <ion-card-header class="left-70">
+        <div class="ion-flex ion-justify-content-between ion-align-items-center">
+          <ion-note color="primary">{{expenseItem.date}} : {{expenseItem.type| uppercase }} </ion-note>
+          <ion-badge [color]="getBadgeColor(expenseItem.spendedOn)">{{expenseItem.spendedOn | titlecase}}</ion-badge>
 
-  <div class="expense-action-container">
-    <ion-button class="" color="secondary" (click)="onEditClick()">
-      <ion-icon color="light" [ios]="'pencil-outline'" [md]="'pencil-sharp'"></ion-icon>
-    </ion-button>
-    <ion-button class="" color="danger" (click)="onDeleteClick()">
-      <ion-icon color="light" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
-    </ion-button>
-  </div>
-</ion-card>
+        </div>
+        <ion-card-title>₹ {{expenseItem.amount}} </ion-card-title>
+        <ion-card-subtitle class="ion-text-wrap">{{expenseItem.description}}</ion-card-subtitle>
+        <!-- <ion-item class="ion-no-padding"> -->
+        <!-- </ion-item> -->
+      </ion-card-header>
+
+      <div class="expense-action-container" *ngIf="isLargeScreen">
+        <ion-button color="secondary" (click)="onEditClick()">
+          <ion-icon [ios]="'create-outline'" [md]="'create-sharp'"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="onDeleteClick()">
+          <ion-icon [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card>
+  </ion-item>
+
+  <ion-item-options>
+    <ion-item-option color="primary">
+      <ion-button fill="clear" (click)="onEditClick()">
+        <ion-icon class="white" [ios]="'create-outline'" [md]="'create-sharp'"></ion-icon>
+      </ion-button>
+    </ion-item-option>
+    <ion-item-option color="danger">
+      <ion-button fill="clear" (click)="onDeleteClick()">
+        <ion-icon class="white" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+      </ion-button>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

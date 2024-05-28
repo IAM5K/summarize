@@ -14,8 +14,8 @@
 }
 
 .form-container {
-.form-container {
-  height: fit-content;
+  height: auto;
+  min-width: 60%;
 }
 
 .budget-container {
@@ -40,7 +40,6 @@ ion-grid {
   width: 100%;
   height: auto;
   box-sizing: border-box;
-  padding: 10px 0;
   margin-bottom: 10px;
 
   .input-item {
@@ -82,18 +81,17 @@ ion-grid {
   }
 
   @media screen and (max-width: 560px) {
-  @media screen and (max-width: 560px) {
-    height: 270px;
+    min-height: 220px;
 
     .input-item {
       width: 100%;
     }
   }
-  .data-grid {
-    // box-shadow: 0 0 1px white;
-  }
 }
-.expense-data {
+.data-grid {
+  box-shadow: unset;
+}
+
 .expense-data {
   min-height: 360px;
   height: auto;
@@ -103,8 +101,10 @@ ion-grid {
 .data-grid {
 .data-grid {
   resize: vertical;
-  overflow: auto;
-  min-height: 500px;
+  overflow-x: auto;
+  overflow-y: scroll;
+  height: auto;
+  max-height: 80vh;
 }
 
 .spent-on {
@@ -127,4 +127,38 @@ ion-grid {
 }
 .expense-data-card:last-of-type {
   margin-bottom: 0;
+}
+.button-container {
+  position: relative;
+  display: flex;
+  height: auto;
+  width: 100%;
+
+  @media screen and (min-width: 658px) and (max-width: 990px) {
+    // max-width: 50%;
+    width: 100%;
+    float: inline-end;
+  }
+}
+.button-flex {
+  position: relative;
+  display: flex;
+  text-align: right;
+  width: 100%;
+  gap: 1rem;
+  ion-button {
+    position: relative;
+    flex-grow: 1;
+    margin: 0 auto;
+    gap: 1rem;
+    flex: 1;
+  }
+  @media screen and (min-width: 658px) {
+    display: flex;
+    float: right;
+    ion-button {
+      position: relative;
+      min-width: 23%;
+    }
+  }
 }
