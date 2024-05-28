@@ -19,6 +19,7 @@ export class ProfileService {
     private alertCtrl: AlertController,
   ) {}
   userData;
+  myCurrency = "₹";
   userId = this.getUserProfile()?.uid;
   successMessage = "Profile data updated successfully!";
   deletedMessage = "Profile data Deleted successfully!";
