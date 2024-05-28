@@ -125,7 +125,8 @@ export class ExpensesPage implements OnInit {
     amount: ["", [Validators.required, Validators.pattern("^[0-9]*$")]],
     updatedAt: [serverTimestamp()],
   });
-
+  budgetNote =
+    "*Note : To use upcoming Analyze feature it is required to provide your income / budget ( planned / alloted amount to be spent ) for the specific month";
   ngOnInit() {
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.getExpenses();
