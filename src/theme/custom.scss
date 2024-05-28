@@ -17,7 +17,9 @@
 .card {
   box-shadow: 0 0 5px var(--ion-color-medium-tint);
 }
-
+.lime-outline {
+  outline: 2px solid lime;
+}
 .split-container {
   display: flex;
   align-items: stretch;
@@ -195,6 +197,7 @@
     margin-bottom: 8px;
     border: 1px solid var(--ion-color-light-tint);
     border-radius: 4px;
+    box-shadow: 0 0 2px 2px inset grey;
   }
 }
 
@@ -229,4 +232,8 @@
   align-items: center;
   text-align: center;
   min-width: 80px;
+}
+
+.ion-flex {
+  display: flex;
 }

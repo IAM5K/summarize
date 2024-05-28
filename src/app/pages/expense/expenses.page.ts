@@ -36,7 +36,7 @@ export class ExpensesPage implements OnInit {
     private alertService: AlertService,
     private datePipe: DatePipe,
     public popoverController: PopoverController,
-    private router: Router
+    private router: Router,
   ) {}
   Expenses: any = [];
   Budget: any = [];
@@ -47,7 +47,7 @@ export class ExpensesPage implements OnInit {
   dataSize = 5;
   weekBackDate: string | null = this.datePipe.transform(
     new CustomDate().getWeekBackDate(),
-    "yyyy-MM-dd"
+    "yyyy-MM-dd",
   );
   expenseTypes = [
     { title: "Bills", value: "bill" },
@@ -116,7 +116,8 @@ export class ExpensesPage implements OnInit {
     amount: ["", [Validators.required, Validators.pattern("^[0-9]*$")]],
     updatedAt: [serverTimestamp()],
   });
-
+  budgetNote =
+    "*Note : To use upcoming Analyze feature it is required to provide your income / budget ( planned / alloted amount to be spent ) for the specific month";
   ngOnInit() {
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.getExpenses();
@@ -168,7 +169,7 @@ export class ExpensesPage implements OnInit {
     this.updateSubmitted = true;
     const response = await this.expenseService.updateExpense(
       this.expenseForm.value,
-      this.editExpenseData.idField
+      this.editExpenseData.idField,
     );
     if (response) {
       this.cancelUpdate();
@@ -302,7 +303,7 @@ export class ExpensesPage implements OnInit {
   async updateBudget() {
     const month = this.budgetForm.value.month;
     const updatedBudget = this.Budget.filter(
-      (item: any) => item.month === this.budgetForm.value.month
+      (item: any) => item.month === this.budgetForm.value.month,
     );
     if (updatedBudget !== undefined && updatedBudget.length > 0) {
       const newBudget = updatedBudget[0];

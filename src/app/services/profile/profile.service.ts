@@ -17,17 +17,15 @@ export class ProfileService {
     private afs: AngularFirestore,
     private toasterService: ToasterService,
     private fs: FirebaseService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
   ) {}
   userData;
+  myCurrency = "₹";
   userId = this.getUserProfile()?.uid;
   successMessage = "Profile data updated successfully!";
   deletedMessage = "Profile data Deleted successfully!";
   profileCollection = this.afs.collection("userData");
-  projectsCollection = this.afs
-    .collection("userData")
-    .doc(this.userId)
-    .collection("myProjects");
+  projectsCollection = this.afs.collection("userData").doc(this.userId).collection("myProjects");
   addProjectMessage = "Projects added successfully.";
   updateProjectMessage = "Projects updated successfully.";
   deletedProjectMessage = "Projects has been successfully deleted.";
@@ -44,8 +42,7 @@ export class ProfileService {
     if (localData !== null) {
       let profileData: any = JSON.parse(localData);
       return profileData;
-    } 
-    else {
+    } else {
       try {
         this.toasterService.showToast("Loading Profile data", "secondary");
         let profileData = await this.afs
@@ -76,9 +73,7 @@ export class ProfileService {
     try {
       const user = await this.fs.getUserProfile();
       const profileCollection = this.afs.collection("userData").doc(user.uid);
-      const userDoc = profileCollection
-        .collection("myProjects")
-        .doc(this.userId);
+      const userDoc = profileCollection.collection("myProjects").doc(this.userId);
 
       const profileData = data;
 
@@ -88,10 +83,7 @@ export class ProfileService {
       this.refreshProfileData();
     } catch (error) {
       console.error("Error adding educational detail:", error);
-      this.toasterService.showToast(
-        "Failed to add educational detail",
-        "danger"
-      );
+      this.toasterService.showToast("Failed to add educational detail", "danger");
     }
   }
 

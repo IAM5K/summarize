@@ -16,7 +16,7 @@ import { Subscription } from "rxjs";
 })
 export class AppComponent implements OnInit {
   isLoggedIn: any = false;
-  public appPages: any = []
+  public appPages: any = [];
   public labels: any = [];
   versionNumber: number = 2.0;
   private loginStateSubscription: Subscription;
@@ -24,19 +24,18 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private gtmService: GoogleTagManagerService,
-    private profileService:ProfileService,
-    private sidenavService:SidenavService,
-    private firebaseService: FirebaseService
-
+    private profileService: ProfileService,
+    private sidenavService: SidenavService,
+    private firebaseService: FirebaseService,
   ) {
     this.initGoogleTagManager();
-    this.loginStateSubscription = this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+    this.loginStateSubscription = this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
       if (isLoggedIn) {
-        this.appPages= sidenavService.loggedInPages;
+        this.appPages = sidenavService.loggedInPages;
         this.sidenavService.setLoggedInPages(); // Update appPages with logged-in pages
       } else {
-        this.appPages=sidenavService.defaultPages;
+        this.appPages = sidenavService.defaultPages;
         this.sidenavService.setDefaultPages(); // Update appPages with default pages
       }
     });
@@ -44,12 +43,13 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     if (isPlatform("mobile")) {
-      StatusBar.setBackgroundColor({ color: "#3880ff" }).catch(() => {});
+      StatusBar.setBackgroundColor({ color: "#3880ff" }).catch((error) => {
+        console.info("Error on setting background color", error);
+      });
     }
     this.firebaseService.getUserProfile();
     this.getUser();
   }
-
 
   private initGoogleTagManager(): void {
     this.router.events.subscribe((event) => {
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
         if (event instanceof NavigationEnd) {
           const gtmTag = {
             event: "page",
-            pageName: event.urlAfterRedirects
+            pageName: event.urlAfterRedirects,
           };
           this.gtmService.pushTag(gtmTag);
         }
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
     let userProfile;
     try {
       userProfile = await this.firebaseService.getUserProfile();
-      this.profileService.userData = userProfile
+      this.profileService.userData = userProfile;
       // console.log(userProfile);
     } catch (error) {
       console.error("Error fetching user profile:", error);
@@ -92,7 +92,7 @@ export class AppComponent implements OnInit {
   async logout() {
     await this.authService.logout();
     this.appPages = this.sidenavService.defaultPages;
-    this.isLoggedIn=false;
+    this.isLoggedIn = false;
     this.router.navigateByUrl("login", { replaceUrl: true });
   }
 }
