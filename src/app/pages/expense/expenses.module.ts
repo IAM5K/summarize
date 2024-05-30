@@ -9,6 +9,7 @@ import { ExpensesPageRoutingModule } from "./expenses-routing.module";
 import { ExpensesPage } from "./expenses.page";
 import { AnalyzeComponent } from "./components/analyze/analyze.component";
 import { NgChartsModule } from "ng2-charts";
+import { ExpenseCardComponent } from "./components/expense-card/expense-card.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +19,7 @@ import { NgChartsModule } from "ng2-charts";
     ReactiveFormsModule,
     NgChartsModule,
   ],
-  declarations: [ExpensesPage, AnalyzeComponent],
+  declarations: [ExpensesPage, AnalyzeComponent, ExpenseCardComponent],
   providers: [DatePipe],
 })
 export class ExpensesPageModule {}

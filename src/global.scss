@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -29,3 +29,25 @@
 @import "theme/custom.scss";
 @import "theme/typography.scss";
 @import "theme/theme.scss";
+
+/* Thin scrollbar */
+::-webkit-scrollbar {
+  width: 4px; /* Adjust the width as needed */
+  height: 4px; /* Adjust the height as needed */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; /* Set track background color */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3880ff80; /* Set scrollbar handle color */
+  border-radius: 3px; /* Set scrollbar handle border-radius */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.7); /* Set scrollbar handle color on hover */
+}

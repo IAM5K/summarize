@@ -1,4 +1,4 @@
-.options-container{
+.options-container {
   height: 50px;
 }
 .expense-data {
@@ -6,22 +6,23 @@
   margin: auto;
   box-sizing: border-box;
 
-  @media screen and (max-width:768px) {
+  @media screen and (max-width: 768px) {
     height: 800px;
   }
 }
 
-.form-container{
-  height: fit-content;
+.form-container {
+  height: auto;
+  min-width: 60%;
 }
 
-.budget-container{
+.budget-container {
   min-height: 180px;
   height: fit-content;
 }
 
-.disclaimer{
-  p{
+.disclaimer {
+  p {
     color: var(--ion-color-dark-tint);
   }
 }
@@ -34,7 +35,6 @@ ion-grid {
   width: 100%;
   height: auto;
   box-sizing: border-box;
-  padding: 10px 0;
   margin-bottom: 10px;
 
   .input-item {
@@ -55,16 +55,16 @@ ion-grid {
     font-size: 1.1rem;
     margin: 0;
     padding: 5px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Times New Roman", Times, serif;
   }
 
-  @media screen and (min-width:1024px) {
+  @media screen and (min-width: 1024px) {
     .input-item {
       width: 200px;
     }
   }
 
-  @media screen and (max-width:768px) and (min-width:560px) {
+  @media screen and (max-width: 768px) and (min-width: 560px) {
     height: 200px;
 
     .input-item {
@@ -72,24 +72,84 @@ ion-grid {
     }
   }
 
-  @media screen and (max-width:560px) {
-    height: 270px;
+  @media screen and (max-width: 560px) {
+    min-height: 220px;
 
     .input-item {
       width: 100%;
     }
   }
-  .data-grid{
-    box-shadow: 0 0 1px white ;
-  }
 }
-.expense-data{
+.data-grid {
+  box-shadow: unset;
+}
+
+.expense-data {
   min-height: 360px;
   height: auto;
   overflow: hidden;
 }
 
-.data-grid{
+.data-grid {
   resize: vertical;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: scroll;
+  height: auto;
+  max-height: 80vh;
+}
+
+.spent-on {
+  width: 5rem;
+}
+.inline-radio {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: calc(100% - 6rem);
+  justify-content: space-around;
+  font-size: 0.9rem;
+  ion-radio {
+    width: auto;
+    margin-right: 0.5rem;
+  }
+}
+.expense-data-card {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.expense-data-card:last-of-type {
+  margin-bottom: 0;
+}
+.button-container {
+  position: relative;
+  display: flex;
+  height: auto;
+  width: 100%;
+
+  @media screen and (min-width: 658px) and (max-width: 990px) {
+    // max-width: 50%;
+    width: 100%;
+    float: inline-end;
+  }
+}
+.button-flex {
+  position: relative;
+  display: flex;
+  text-align: right;
+  width: 100%;
+  gap: 1rem;
+  ion-button {
+    position: relative;
+    flex-grow: 1;
+    margin: 0 auto;
+    gap: 1rem;
+    flex: 1;
+  }
+  @media screen and (min-width: 658px) {
+    display: flex;
+    float: right;
+    ion-button {
+      position: relative;
+      min-width: 23%;
+    }
+  }
 }
