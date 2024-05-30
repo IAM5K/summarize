@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { IonicModule } from "@ionic/angular";
 
-import { FilterExpenseComponent } from './filter-expense.component';
+import { FilterExpenseComponent } from "./filter-expense.component";
 
-describe('FilterExpenseComponent', () => {
+describe("FilterExpenseComponent", () => {
   let component: FilterExpenseComponent;
   let fixture: ComponentFixture<FilterExpenseComponent>;
 
@@ -18,7 +18,7 @@ describe('FilterExpenseComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
