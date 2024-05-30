@@ -189,7 +189,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.chartB.update();
   }
   async updateCurrentMonthGraph(expense: any[]) {
-    let monthlyData = new MonthlyExpense().getMonthlyData(expense, this.currentBudget);
+    const monthlyData = new MonthlyExpense().getMonthlyData(expense, this.currentBudget);
     this.currentMonthExpenseData.labels = monthlyData.dates;
     this.currentMonthExpenseData.datasets = [
       {
@@ -232,7 +232,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   setGraphWidth(): void {
-    let screenWidth = window.innerWidth;
+    const screenWidth = window.innerWidth;
     if (screenWidth < 680) {
       this.graphWidth = 500;
     } else if (680 < screenWidth && screenWidth > 780) {
@@ -309,7 +309,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
     retrievedBudget = budget;
     let currentBudget: number = 0;
     if (retrievedBudget) {
-      let budget = JSON.parse(retrievedBudget);
+      const budget = JSON.parse(retrievedBudget);
       const budgetForThisMonth = budget.find((item: any) => item.month === currentMonth);
       if (budgetForThisMonth) {
         currentBudget = budgetForThisMonth.amount;

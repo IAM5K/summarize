@@ -285,7 +285,7 @@ export class ExpensesPage implements OnInit {
     let savedBudget: any;
     let monthExists: any;
     await this.getBudget().then((res) => {
-      let tempBudget = sessionStorage.getItem("budget");
+      const tempBudget = sessionStorage.getItem("budget");
       if (tempBudget) {
         savedBudget = JSON.parse(tempBudget);
       } else {
