@@ -25,6 +25,7 @@
     }
   },
   "dependencies": {
+    "@angular/cdk": "^16.2.12",
     "@angular/common": "16.2.12",
     "@angular/core": "16.2.12",
     "@angular/fire": "16.0.0",
@@ -42,20 +43,20 @@
     "@capacitor/status-bar": "5.0.7",
     "@ionic/angular": "7.1.0",
     "@ionic/cli": "^7.2.0",
-    "@ionic/pwa-elements": "^3.1.1",
+    "@ionic/pwa-elements": "^3.3.0",
     "angular-google-tag-manager": "1.8.0",
-    "chart.js": "4.1.1",
+    "chart.js": "^4.4.4",
     "file-saver": "^2.0.5",
     "http-server": "^14.1.1",
-    "ionicons": "7.2.2",
-    "ng2-charts": "^4.1.1",
+    "ionicons": "^7.4.0",
+    "ng2-charts": "^5.0.4",
     "npm": "^9.7.1",
-    "rxfire": "^6.0.4",
-    "rxjs": "~7.5.0",
-    "tslib": "^2.3.0",
+    "rxfire": "^6.0.5",
+    "rxjs": "^7.8.1",
+    "tslib": "^2.7.0",
     "xlsx": "^0.18.5",
     "xlsx-style": "^0.8.13",
-    "zone.js": "~0.13.1"
+    "zone.js": "^0.13.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.12",

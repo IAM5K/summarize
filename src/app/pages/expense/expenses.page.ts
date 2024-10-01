@@ -45,10 +45,7 @@ export class ExpensesPage implements OnInit {
   expensesCount: number = 0;
   totalExpense = 0;
   dataSize = 5;
-  weekBackDate: string | null = this.datePipe.transform(
-    new CustomDate().getWeekBackDate(),
-    "yyyy-MM-dd",
-  );
+  weekBackDate: string | null = this.datePipe.transform(new CustomDate().getWeekBackDate(), "yyyy-MM-dd");
   expenseTypes = [
     { title: "Bills", value: "bill" },
     { title: "Emi", value: "emi" },
@@ -105,14 +102,12 @@ export class ExpensesPage implements OnInit {
     type: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")]],
     description: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
     spendedOn: ["self", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
+    reimburseable: [false, [Validators.required]],
     updatedAt: [serverTimestamp()],
   });
   budgetForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
-    month: [
-      new CustomDate().getCurrentMonth(),
-      [Validators.required, Validators.pattern("^[0-9-]*$")],
-    ],
+    month: [new CustomDate().getCurrentMonth(), [Validators.required, Validators.pattern("^[0-9-]*$")]],
     amount: ["", [Validators.required, Validators.pattern("^[0-9]*$")]],
     updatedAt: [serverTimestamp()],
   });
@@ -167,10 +162,7 @@ export class ExpensesPage implements OnInit {
 
   async updateExpense() {
     this.updateSubmitted = true;
-    const response = await this.expenseService.updateExpense(
-      this.expenseForm.value,
-      this.editExpenseData.idField,
-    );
+    const response = await this.expenseService.updateExpense(this.expenseForm.value, this.editExpenseData.idField);
     if (response) {
       this.cancelUpdate();
     } else {
@@ -250,12 +242,10 @@ export class ExpensesPage implements OnInit {
         this.expenseMessage = "Total Expenses since " + this.filterParams + " : ";
         break;
       case "spentOn":
-        this.expenseMessage =
-          "Total Expenses on " + this.filterParams + " since " + this.filterDuration + " : ";
+        this.expenseMessage = "Total Expenses on " + this.filterParams + " since " + this.filterDuration + " : ";
         break;
       case "type":
-        this.expenseMessage =
-          "Total Expenses for " + this.filterParams + " since " + this.filterDuration + " : ";
+        this.expenseMessage = "Total Expenses for " + this.filterParams + " since " + this.filterDuration + " : ";
         break;
       default:
         this.expenseMessage = "No Expenses found for " + this.filterParams + " : ";
@@ -302,9 +292,7 @@ export class ExpensesPage implements OnInit {
   }
   async updateBudget() {
     const month = this.budgetForm.value.month;
-    const updatedBudget = this.Budget.filter(
-      (item: any) => item.month === this.budgetForm.value.month,
-    );
+    const updatedBudget = this.Budget.filter((item: any) => item.month === this.budgetForm.value.month);
     if (updatedBudget !== undefined && updatedBudget.length > 0) {
       const newBudget = updatedBudget[0];
       newBudget.amount = this.budgetForm.value.amount;

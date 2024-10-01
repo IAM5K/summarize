@@ -10,6 +10,7 @@ import { ExpensesPage } from "./expenses.page";
 import { AnalyzeComponent } from "./components/analyze/analyze.component";
 import { NgChartsModule } from "ng2-charts";
 import { ExpenseCardComponent } from "./components/expense-card/expense-card.component";
+import { ShoppingListComponent } from "./components/shopping-list/shopping-list.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +20,7 @@ import { ExpenseCardComponent } from "./components/expense-card/expense-card.com
     ReactiveFormsModule,
     NgChartsModule,
   ],
-  declarations: [ExpensesPage, AnalyzeComponent, ExpenseCardComponent],
+  declarations: [ExpensesPage, AnalyzeComponent, ExpenseCardComponent, ShoppingListComponent],
   providers: [DatePipe],
 })
 export class ExpensesPageModule {}

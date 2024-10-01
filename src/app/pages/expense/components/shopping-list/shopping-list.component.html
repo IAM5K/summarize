@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ pageTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [scrollEvents]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title>{{ pageTitle }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container ion-margin">
+    <!-- <ion-chip color="primary">
+      <ion-toggle justify="space-between">Show summary on Dashboard</ion-toggle>
+    </ion-chip> -->
+    <div class="shopping-list-form-container ion-margin ion-padding">
+      <div class="button-container mb-15px">
+        <ion-button id="exam-alert" class="ion-float-right mb-15px">
+          <ion-icon slot="end" name="add"></ion-icon>
+          Add item
+        </ion-button>
+      </div>
+
+      <ion-list class="padding-zero mb-15px">
+        <ion-item class="ion-align-items-center" *ngFor="let item of shoppingList">
+          <ion-button color="danger" class="mr-10" (click)="deleteShoppingItem(item)">
+            <ion-icon name="trash" class=""></ion-icon>
+          </ion-button>
+          <ion-toggle [checked]="item.isActive" (ionChange)="item.isActive = !item.isActive; updateShoppingItem(item)">
+            {{ item.name }} : {{ item.quantity }} - {{ item?.price }}
+          </ion-toggle>
+        </ion-item>
+      </ion-list>
+
+      <ion-alert
+        trigger="exam-alert"
+        header="Add item details"
+        [buttons]="alertButtons"
+        [inputs]="shoppingInputs"
+      ></ion-alert>
+    </div>
+  </div>
+</ion-content>
