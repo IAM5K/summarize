@@ -28,19 +28,16 @@ export class GoalPage implements OnInit {
   goalFor = GoalData.goalFor;
   goalForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
-    date: [this.dateToday, [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
-    progress: [
-      0,
-      [Validators.required, Validators.pattern("^[0-9]*$"), Validators.max(100), Validators.min(0)],
-    ],
+    date: [this.dateToday, [Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
+    progress: [0, [, Validators.pattern("^[0-9]*$"), Validators.max(100), Validators.min(0)]],
     gTerm: ["Tomorrow", [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")]],
     type: ["Studies", [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")]],
     title: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9, -.]*$")]],
-    reward: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
-    resource: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
-    description: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
-    actionSteps: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
-    penalty: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
+    reward: ["", [Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
+    resource: ["", [Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
+    description: ["", [Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
+    actionSteps: ["", [Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
+    penalty: ["", [Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
     updatedAt: [serverTimestamp()],
   });
   rewardError = "Only alphabets and numbers allowed";

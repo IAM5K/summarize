@@ -10,7 +10,7 @@ export class ExpenseService {
   constructor(
     private afs: AngularFirestore,
     private profileService: ProfileService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
   ) {}
   analyzeExpense: Expense[];
   userId = this.profileService.getUserProfile()?.uid;
@@ -19,6 +19,8 @@ export class ExpenseService {
   expenseCollection = this.afs.collection("userData");
 
   addExpense(data: any) {
+    console.log(data);
+
     this.expenseCollection
       .doc(this.userId)
       .collection("myExpence")
@@ -27,9 +29,7 @@ export class ExpenseService {
         this.successAlert(this.successMessage);
       })
       .catch((err) => {
-        alert(
-          "There was an error in posting. \n Please try again later. Check console for detail."
-        );
+        alert("There was an error in posting. \n Please try again later. Check console for detail.");
         console.warn(err);
       });
   }
@@ -59,17 +59,13 @@ export class ExpenseService {
       case "spentOn":
         query = this.expenseCollection
           .doc(this.userId)
-          .collection("myExpence", (ref) =>
-            ref.where("spendedOn", "==", data).orderBy("date").startAt(duration)
-          )
+          .collection("myExpence", (ref) => ref.where("spendedOn", "==", data).orderBy("date").startAt(duration))
           .valueChanges({ idField: "idField" });
         break;
       case "type":
         query = this.expenseCollection
           .doc(this.userId)
-          .collection("myExpence", (ref) =>
-            ref.where("type", "==", data).orderBy("date").startAt(duration)
-          )
+          .collection("myExpence", (ref) => ref.where("type", "==", data).orderBy("date").startAt(duration))
           .valueChanges({ idField: "idField" });
         break;
       default:
@@ -91,11 +87,7 @@ export class ExpenseService {
 
   async updateExpense(data, idField) {
     try {
-      await this.expenseCollection
-        .doc(this.userId)
-        .collection("myExpence")
-        .doc(idField)
-        .update(data);
+      await this.expenseCollection.doc(this.userId).collection("myExpence").doc(idField).update(data);
       this.successAlert("Expense updated successfully");
       return true;
     } catch (error) {

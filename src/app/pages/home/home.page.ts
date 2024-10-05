@@ -18,6 +18,7 @@ export class HomePage implements OnInit, AfterViewInit {
     { title: "Expenses", color: "success", url: "/expenses", icon: "cash" },
     { title: "Studies", color: "primary", url: "/studies", icon: "book" },
     { title: "Time", color: "danger", url: "/time", icon: "hourglass" },
+    { title: "Moments", color: "warning", url: "/moments", icon: "sparkles" },
   ];
   paragraphs = [
     "Summarize is an app that helps you to manage your Time, Money, and work which includes but is not limited to subject-wise studies, notes, to-do's, or office works.",

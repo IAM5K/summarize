@@ -102,7 +102,7 @@ export class ExpensesPage implements OnInit {
     type: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")]],
     description: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
     spendedOn: ["self", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
-    reimburseable: [false, [Validators.required]],
+    reimburseable: [false],
     updatedAt: [serverTimestamp()],
   });
   budgetForm: FormGroup = this.fb.group({
@@ -116,6 +116,7 @@ export class ExpensesPage implements OnInit {
   ngOnInit() {
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.getExpenses();
+    console.log(this.dateToday);
   }
 
   async getExpenses() {
@@ -157,6 +158,7 @@ export class ExpensesPage implements OnInit {
       type: expense.type,
       description: expense.description,
       spendedOn: expense.spendedOn,
+      reimburseable: expense?.reimburseable,
     });
   }
 

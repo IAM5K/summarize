@@ -100,16 +100,16 @@ ion-grid {
 
 .spent-on {
   width: 5rem;
+  margin-right: 2rem;
 }
 .inline-radio {
-  display: inline-flex;
-  flex-wrap: wrap;
   width: calc(100% - 6rem);
-  justify-content: space-around;
   font-size: 0.9rem;
   ion-radio {
     width: auto;
-    margin-right: 0.5rem;
+    padding-right: 2rem;
+  }
+  .radio-wrapper {
   }
 }
 .expense-data-card {

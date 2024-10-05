@@ -27,7 +27,14 @@
         <form [formGroup]="expenseForm" (ngSubmit)="addExpense()" novalidate>
           <ion-list class="form-ion-list">
             <ion-item lines="none">
-              <ion-input label="Date" label-placement="floating" formControlName="date" type="date"></ion-input>
+              <ion-input
+                label="Date"
+                [value]="dateToday | date:'yyyy-MM-dd'"
+                locale="en-IN"
+                label-placement="floating"
+                formControlName="date"
+                type="date"
+              ></ion-input>
             </ion-item>
             <ion-item lines="none">
               <ion-input
@@ -76,17 +83,17 @@
               </ion-radio-group>
             </ion-item>
             <ion-item lines="none">
-              <p class="spent-on">Refund</p>
-              <ion-radio-group
+              <ion-checkbox
                 formControlName="reimburseable"
+                [checked]="expenseForm.get('reimburseable').value"
+                (ionChange)="expenseForm.get('reimburseable').setValue($event.detail.checked)"
                 label="Reimbursable"
                 label-placement="floating"
-                class="inline-radio"
               >
-                <ion-radio value="true" labelPlacement="end">Yes</ion-radio>
-                <ion-radio value="false" labelPlacement="end">No</ion-radio>
-              </ion-radio-group>
+                Reimbursable
+              </ion-checkbox>
             </ion-item>
+
             <div class="button-container">
               <div class="button-flex" *ngIf="!editMode">
                 <ion-button color="warning" type="reset" size="medium">Reset</ion-button>

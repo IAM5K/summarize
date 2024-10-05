@@ -13,5 +13,6 @@ export interface ExpenseData {
     seconds: number;
     nanoseconds: number;
   };
+  reimburseable?: boolean;
   idField?: string;
 }

@@ -26,9 +26,9 @@ export const features: Features[] = [
     path: "time",
   },
   {
-    title: "Achievements",
-    icon: "trophy",
+    title: "Moments",
+    icon: "sparkles",
     color: "warning",
-    path: "achievement",
+    path: "moments",
   },
 ];
