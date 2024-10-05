@@ -99,5 +99,12 @@
   "peerDependencies": {
     "eslint": "^9.11.1"
   },
-  "description": "A project to help people manage Time, Money and resources."
+  "description": "A project to help people manage Time, Money and resources.",
+  "browserslist": [
+    "Chrome >=61",
+    "Firefox >=63",
+    "Edge >=79",
+    "Safari >=13",
+    "iOS >=13"
+  ]
 }

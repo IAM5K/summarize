@@ -164,7 +164,10 @@ export class ExpensesPage implements OnInit {
 
   async updateExpense() {
     this.updateSubmitted = true;
-    const response = await this.expenseService.updateExpense(this.expenseForm.value, this.editExpenseData.idField);
+    const response = await this.expenseService.updateExpense(
+      this.expenseForm.value,
+      this.editExpenseData.idField
+    );
     if (response) {
       this.cancelUpdate();
     } else {
@@ -244,10 +247,12 @@ export class ExpensesPage implements OnInit {
         this.expenseMessage = "Total Expenses since " + this.filterParams + " : ";
         break;
       case "spentOn":
-        this.expenseMessage = "Total Expenses on " + this.filterParams + " since " + this.filterDuration + " : ";
+        this.expenseMessage =
+          "Total Expenses on " + this.filterParams + " since " + this.filterDuration + " : ";
         break;
       case "type":
-        this.expenseMessage = "Total Expenses for " + this.filterParams + " since " + this.filterDuration + " : ";
+        this.expenseMessage =
+          "Total Expenses for " + this.filterParams + " since " + this.filterDuration + " : ";
         break;
       default:
         this.expenseMessage = "No Expenses found for " + this.filterParams + " : ";
