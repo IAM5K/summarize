@@ -3,6 +3,7 @@ import { features as MasterDataFeatures } from "src/app/models/class/masterData/
 import { SeoService } from "src/app/services/seo/seo.service";
 import { RealTimeDataBaseService } from "src/app/shared/db/real-time-data-base.service";
 import { homePageTags, homePageTitle } from "src/app/models/data/seo-tags";
+import { NotificationsService } from "src/app/services/notifications/notifications.service";
 @Component({
   selector: "app-home",
   templateUrl: "./home.page.html",
@@ -29,11 +30,13 @@ export class HomePage implements OnInit, AfterViewInit {
   homeData: any;
   constructor(
     private seoService: SeoService,
+    private notificationsService: NotificationsService,
     private rtdb: RealTimeDataBaseService,
   ) {}
 
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags);
+    this.notificationsService.schedule9PMNotification();
     console.log("meta tag updated, moving to after init");
   }
 
@@ -49,5 +52,11 @@ export class HomePage implements OnInit, AfterViewInit {
         this.paragraphs = paragraphsFetched.map((element) => element.content);
       }
     });
+  }
+
+  testNotification() {
+    const now = new Date();
+    now.setMinutes(now.getMinutes()); // Set notification for 1 minute from now
+    this.notificationsService.scheduleInstantNotification();
   }
 }

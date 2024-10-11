@@ -8,6 +8,7 @@ import { FirebaseService } from "./services/firebase/firebase.service";
 import { ProfileService } from "./services/profile/profile.service";
 import { SidenavService } from "./services/sidenav/sidenav.service";
 import { Subscription } from "rxjs";
+import { NotificationsService } from "./services/notifications/notifications.service";
 @Component({
   selector: "app-root",
   templateUrl: "app.component.html",
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private profileService: ProfileService,
     private sidenavService: SidenavService,
     private firebaseService: FirebaseService,
+    private notificationsService: NotificationsService,
   ) {}
 
   ngOnInit() {
@@ -49,6 +51,9 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.sidenavService.setDefaultPages(); // Update appPages with default pages
       }
     });
+
+    this.notificationsService.schedule9PMNotification();
+    this.notificationsService.checkNotificationPreference();
   }
 
   private initGoogleTagManager(): void {
