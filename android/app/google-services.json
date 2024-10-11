@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "896604807056",
+    "firebase_url": "https://summarize-ng-default-rtdb.firebaseio.com",
+    "project_id": "summarize-ng",
+    "storage_bucket": "summarize-ng.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896604807056:android:b4612616c855827fe01d15",
+        "android_client_info": {
+          "package_name": "app.web.summarize"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896604807056-r96qpu2imciie5lcb40opcar4dp64avl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2WZ5B1kNnhoDUcYLnE2HFPqmqu7IJMh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "896604807056-r96qpu2imciie5lcb40opcar4dp64avl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

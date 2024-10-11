@@ -14,7 +14,8 @@
     "prettier": "prettier \"**/*.ts\"",
     "postbuild": "gulp compress",
     "prettier-format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
-    "deploy": "ng build --configuration production && firebase deploy --only hosting"
+    "deploy": "ng build --configuration production && firebase deploy --only hosting",
+    "android": "ng build && npx cap sync android"
   },
   "private": true,
   "eslintConfig": {
@@ -35,6 +36,7 @@
     "@angular/platform-browser-dynamic": "18.2.6",
     "@angular/router": "18.2.6",
     "@angular/service-worker": "18.2.6",
+    "@capacitor-firebase/messaging": "^6.1.0",
     "@capacitor/android": "6.1.2",
     "@capacitor/app": "^6.0.1",
     "@capacitor/camera": "^6.0.2",
