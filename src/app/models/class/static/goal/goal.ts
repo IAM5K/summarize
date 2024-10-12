@@ -1,4 +1,4 @@
-import { DataDescription, Options } from "../../interface/masterData.model";
+import { DataDescription, Options } from "../../../interface/masterData.model";
 
 export class GoalData {
   public static goalType: Options[] = [
