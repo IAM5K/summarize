@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { GoalData } from "src/app/models/class/static/goal";
+import { GoalData } from "src/app/models/class/static/goal/goal";
 import { DataDescription } from "src/app/models/interface/masterData.model";
 
 @Component({

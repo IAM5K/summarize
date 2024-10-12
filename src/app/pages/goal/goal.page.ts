@@ -4,7 +4,7 @@ import { serverTimestamp } from "@angular/fire/firestore";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CustomDate } from "src/app/models/class/date/custom-date";
 import { SeoTags } from "src/app/models/class/seoTags/seo";
-import { GoalData } from "src/app/models/class/static/goal";
+import { GoalData } from "src/app/models/class/static/goal/goal";
 import { GoalService } from "src/app/services/goal/goal.service";
 import { SeoService } from "src/app/services/seo/seo.service";
 
