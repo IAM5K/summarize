@@ -19,6 +19,7 @@
     "rxfire",
     "Sandeep",
     "Sanyam",
+    "spended",
     "subdir"
   ],
   "[typescript]": {
@@ -74,5 +75,8 @@
       "backgroundColor": "rgba(0, 0, 0, 0.2)",
       "isWholeLine": true // Highlight the complete line
     }
-  ]
+  ],
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  }
 }

@@ -11,9 +11,11 @@ import { Router } from "@angular/router";
 import * as XLSX from "xlsx";
 import * as FileSaver from "file-saver";
 import { Analyze } from "./modules/analyze";
-import { PopoverController } from "@ionic/angular";
 import { SeoTags } from "src/app/models/class/seoTags/seo";
 import { ExpenseData } from "src/app/models/interface/expense.interface";
+import { SpeechRecognitionService } from "src/app/services/speech-recognition/speech-recognition.service";
+import { ExpenseStaticData } from "src/app/models/class/static/expense/expense-data";
+
 @Component({
   selector: "app-expenses",
   templateUrl: "./expenses.page.html",
@@ -29,15 +31,49 @@ export class ExpensesPage implements OnInit {
   dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   expenseOf: string = this.dateToday;
   expenseByDate: any;
+  recognizedText: string = ""; // Holds the recognized speech
+  expenseInput: string = ""; // Stores the narrated expense
+  isListening: boolean = false; // For toggling the mic button and animation
+
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
     private expenseService: ExpenseService,
     private alertService: AlertService,
     private datePipe: DatePipe,
-    public popoverController: PopoverController,
     private router: Router,
+    private speechRecognitionService: SpeechRecognitionService,
   ) {}
+
+  // Toggle speech recognition on and off
+  toggleSpeechRecognition() {
+    if (this.isListening) {
+      this.stopListening(); // Stop listening when the mic button is clicked again
+    } else {
+      this.startListening(); // Start listening when the mic button is clicked
+    }
+  }
+
+  // Start listening to narration
+  startListening() {
+    this.isListening = true;
+    this.speechRecognitionService.startRecognition((text: string) => {
+      this.expenseInput = text; // Update the expense input as speech is recognized
+    });
+  }
+
+  // Stop listening to narration
+  stopListening() {
+    this.isListening = false;
+    this.speechRecognitionService.stopRecognition(); // Stop speech recognition
+  }
+
+  // Submit the expense (or perform any action like saving or sending to API)
+  submitExpense() {
+    console.log("Submitting expense:", this.expenseInput);
+    // Add your logic to submit the expense, like sending it to an API
+  }
+
   Expenses: any = [];
   Budget: any = [];
   budgetExists = false;
@@ -46,32 +82,8 @@ export class ExpensesPage implements OnInit {
   totalExpense = 0;
   dataSize = 5;
   weekBackDate: string | null = this.datePipe.transform(new CustomDate().getWeekBackDate(), "yyyy-MM-dd");
-  expenseTypes = [
-    { title: "Bills", value: "bill" },
-    { title: "Emi", value: "emi" },
-    { title: "Education", value: "education" },
-    { title: "Entertainment", value: "entertainment" },
-    { title: "Food", value: "food" },
-    { title: "Groceries", value: "grocery" },
-    { title: "Health", value: "health" },
-    { title: "Home Utilities", value: "utilities" },
-    { title: "Insurance", value: "insurance" },
-    { title: "Investment", value: "investment" },
-    { title: "Personal care", value: "personal care" },
-    { title: "Refreshments", value: "refreshments" },
-    { title: "Rent", value: "rent" },
-    { title: "Saving", value: "saving" },
-    { title: "Shopping", value: "shopping" },
-    { title: "Transportation", value: "transportation" },
-    { title: "Travel", value: "travel" },
-    { title: "Donate", value: "donated" },
-    { title: "Miscellaneous", value: "miscellaneous" },
-  ];
-  spentOn = [
-    { value: "self", title: "Self" },
-    { value: "group", title: "Group" },
-    { value: "family", title: "Family" },
-  ];
+  expenseTypes = ExpenseStaticData.expenseTypes;
+  spentOn = ExpenseStaticData.spentOn;
   filterType: string = "duration";
   filterParams: any = "";
   filterDuration: any = this.weekBackDate;
@@ -164,10 +176,7 @@ export class ExpensesPage implements OnInit {
 
   async updateExpense() {
     this.updateSubmitted = true;
-    const response = await this.expenseService.updateExpense(
-      this.expenseForm.value,
-      this.editExpenseData.idField
-    );
+    const response = await this.expenseService.updateExpense(this.expenseForm.value, this.editExpenseData.idField);
     if (response) {
       this.cancelUpdate();
     } else {
@@ -247,12 +256,10 @@ export class ExpensesPage implements OnInit {
         this.expenseMessage = "Total Expenses since " + this.filterParams + " : ";
         break;
       case "spentOn":
-        this.expenseMessage =
-          "Total Expenses on " + this.filterParams + " since " + this.filterDuration + " : ";
+        this.expenseMessage = "Total Expenses on " + this.filterParams + " since " + this.filterDuration + " : ";
         break;
       case "type":
-        this.expenseMessage =
-          "Total Expenses for " + this.filterParams + " since " + this.filterDuration + " : ";
+        this.expenseMessage = "Total Expenses for " + this.filterParams + " since " + this.filterDuration + " : ";
         break;
       default:
         this.expenseMessage = "No Expenses found for " + this.filterParams + " : ";

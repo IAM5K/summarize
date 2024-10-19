@@ -16,12 +16,18 @@
 
   <div id="container ion-margin">
     <div class="ion-margin options-container">
-      <ion-button routerLink="./shopping-list" color="primary" class="ion-float-right">
+      <!-- Textarea to show recognized text -->
+      <ion-item>
+        <ion-textarea [(ngModel)]="recognizedText" placeholder="Recognized speech will appear here..."></ion-textarea>
+      </ion-item>
+
+      <!-- <ion-button routerLink="./shopping-list" color="primary" class="ion-float-right">
         <ion-icon class="mr-10" name="cart-outline"></ion-icon>
         Shopping List
-      </ion-button>
+      </ion-button> -->
+      <!-- Confirm button -->
     </div>
-    <div class="card ion-margin ion-padding">
+    <!-- <div class="card ion-margin ion-padding">
       <h1 class="mt-0 h2">{{editMode?"Update":"Add"}} Expense</h1>
       <div class="form-container">
         <form [formGroup]="expenseForm" (ngSubmit)="addExpense()" novalidate>
@@ -70,17 +76,19 @@
               </ion-select>
             </ion-item>
             <ion-item lines="none">
-              <p class="spent-on">Spent on</p>
-              <ion-radio-group
-                formControlName="spendedOn"
-                label="Spent On"
-                label-placement="floating"
-                class="inline-radio"
-              >
-                <ion-radio *ngFor="let item of spentOn" [value]="item.value" labelPlacement="end">
-                  {{item.title}}
-                </ion-radio>
-              </ion-radio-group>
+              <div>
+                <p class="spent-on">Spent on</p>
+                <ion-radio-group
+                  formControlName="spendedOn"
+                  label="Spent On"
+                  label-placement="floating"
+                  class="inline-radio"
+                >
+                  <ion-radio *ngFor="let item of spentOn" [value]="item.value" labelPlacement="end">
+                    {{item.title}}
+                  </ion-radio>
+                </ion-radio-group>
+              </div>
             </ion-item>
             <ion-item lines="none">
               <ion-checkbox
@@ -119,7 +127,6 @@
     </div>
 
     <ng-container *ngIf="!editMode">
-      <!-- Info: Expense for a day -->
       <div class="card ion-margin ion-padding">
         <h3 class="h2 mt-0">Get all for a day</h3>
         <div class="mt-15px">
@@ -171,7 +178,6 @@
             <h2 class="h2" *ngIf="expensesCount !== 0">My Expenses</h2>
           </div>
         </ng-template>
-        <!-- Info: Expense filter -->
         <div class="form-container">
           <form #filterForm="ngForm">
             <ion-list class="form-ion-list">
@@ -328,6 +334,16 @@
           </ion-list>
         </div>
       </div>
-    </ng-container>
+    </ng-container>-->
   </div>
+  <!-- Floating mic button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="startListening()" *ngIf="!isListening">
+      <ion-icon name="mic"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button (click)="stopListening()" *ngIf="isListening">
+      <ion-icon name="mic-off"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
