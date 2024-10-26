@@ -1,37 +1,38 @@
 import { Injectable } from "@angular/core";
 import { SpeechRecognition } from "@capacitor-community/speech-recognition";
 import { Platform } from "@ionic/angular";
+import { SpeechRecognitionEvent } from "src/app/models/interface/speechRecognition.interface";
 
 // Declare webkitSpeechRecognition for web browsers
-declare var webkitSpeechRecognition: any;
+declare var webkitSpeechRecognition: any; // Declare the global var for webkitSpeechRecognition
 
 @Injectable({
   providedIn: "root",
 })
 export class SpeechRecognitionService {
-  recognition: any; // Web Speech API recognition object
+  private recognition: any; // Web Speech API recognition object
+  private timeout: any; // Timeout for long pauses
   public textInput: string = "";
-  public finalTranscript: string = "";
+  stoppedManually = false;
+  private readonly PAUSE_TIMEOUT_MS = 3000; // Adjust timeout duration as needed
 
   constructor(private platform: Platform) {}
 
   // Start speech recognition based on platform
   async startRecognition(callback: (text: string) => void) {
     if (this.platform.is("capacitor")) {
-      // For native platforms (iOS/Android)
-      this.startNativeRecognition(callback);
+      await this.startNativeRecognition(callback);
     } else {
-      // For web platforms
-      this.startWebRecognition(callback);
+      await this.startWebRecognition(callback);
     }
   }
 
   // Stop speech recognition based on platform
   async stopRecognition() {
     if (this.platform.is("capacitor")) {
-      this.stopNativeRecognition();
+      await this.stopNativeRecognition();
     } else {
-      this.stopWebRecognition();
+      await this.stopWebRecognition();
     }
   }
 
@@ -44,9 +45,14 @@ export class SpeechRecognitionService {
         return;
       }
 
-      const hasPermission = await SpeechRecognition.hasPermission();
-      if (!hasPermission) {
-        await SpeechRecognition.requestPermission();
+      // Check for permissions and request them if necessary
+      const permissionStatus = await SpeechRecognition.checkPermissions();
+      if (permissionStatus.speechRecognition !== "granted") {
+        const requestResult = await SpeechRecognition.requestPermissions();
+        if (requestResult.speechRecognition !== "granted") {
+          alert("Permission not granted for speech recognition.");
+          return;
+        }
       }
 
       await SpeechRecognition.start({
@@ -56,11 +62,14 @@ export class SpeechRecognitionService {
       });
 
       // Listen for partial results
-      SpeechRecognition.addListener("partialResults", (data: any) => {
+      SpeechRecognition.addListener("partialResults", (data: { matches: string[] }) => {
         if (data.matches && data.matches.length > 0) {
-          callback(data.matches.join(" ")); // Send recognized text to the callback
+          this.updateTextInput(data.matches.join(" "), callback);
         }
       });
+
+      // Start a timeout for long pauses
+      this.resetPauseTimeout(callback);
     } catch (error) {
       console.error("Error starting native speech recognition:", error);
     }
@@ -71,60 +80,132 @@ export class SpeechRecognitionService {
     try {
       await SpeechRecognition.stop();
       SpeechRecognition.removeAllListeners();
+      clearTimeout(this.timeout); // Clear the pause timeout
     } catch (error) {
       console.error("Error stopping native speech recognition:", error);
     }
   }
 
-  // Web speech recognition
-  private startWebRecognition(callback: (text: string) => void) {
+  // Start web speech recognition
+  private async startWebRecognition(callback: (text: string) => void) {
     if (!("webkitSpeechRecognition" in window)) {
+      console.error("Speech recognition not supported in this browser.");
       alert("Speech recognition not supported in this browser.");
       return;
     }
 
-    const recognition = new webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = "en-US";
+    this.recognition = new webkitSpeechRecognition();
+    this.recognition.continuous = true;
+    this.recognition.interimResults = true;
+    this.recognition.lang = "en-US";
 
-    recognition.onstart = () => {
+    // Log when speech recognition starts
+    this.recognition.onstart = () => {
       console.log("Speech recognition started.");
+      this.resetPauseTimeout(callback); // Start timeout for long pauses
     };
 
-    recognition.onresult = (event: any) => {
+    // Handle the recognition result (partial and final)
+    this.recognition.onresult = (event: SpeechRecognitionEvent) => {
       let finalTranscript = "";
       let interimTranscript = "";
+
+      console.log("Speech recognition event triggered:", event);
 
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
           finalTranscript += event.results[i][0].transcript + " ";
+          console.log(`Final transcript: ${event.results[i][0].transcript}`);
         } else {
           interimTranscript += event.results[i][0].transcript + " ";
+          console.log(`Interim transcript: ${event.results[i][0].transcript}`);
         }
       }
 
-      // Append final transcript without resetting the input
-      this.textInput += finalTranscript || interimTranscript;
-      callback(this.textInput.trim());
+      // Append the final or interim transcript
+      this.updateTextInput(finalTranscript || interimTranscript, callback);
+
+      // Log and reset the pause timeout each time recognition results are received
+      console.log("Resetting pause timeout due to speech activity.");
+      this.resetPauseTimeout(callback);
     };
 
-    recognition.onerror = (event: any) => {
+    // Handle errors and log them
+    this.recognition.onerror = (event) => {
       console.error("Speech recognition error:", event.error);
+
+      // If the error is 'no-speech', handle it gracefully
+      if (event.error === "no-speech") {
+        console.log("No speech detected. Waiting for input...");
+      } else {
+        alert(`Error occurred in speech recognition: ${event.error}`);
+      }
     };
 
-    recognition.onend = () => {
+    // Handle when recognition ends (auto stops or manually stopped)
+    this.recognition.onend = () => {
       console.log("Speech recognition ended.");
+      clearTimeout(this.timeout); // Clear the pause timeout
+
+      // Check if it ended due to inactivity (which triggers onerror first)
+      if (!this.stoppedManually) {
+        alert("Listening stopped due to inactivity.");
+      }
     };
 
-    recognition.start();
-    this.recognition = recognition; // Store the recognition instance
+    // Log starting the recognition process and begin listening
+    console.log("Starting speech recognition...");
+    this.stoppedManually = false;
+    this.recognition.start();
   }
 
-  // Stop web speech recognition
+  // Update the text input area with transcripts
+  private updateTextInput(transcript: string, callback: (text: string) => void) {
+    this.textInput += transcript;
+    callback(this.textInput.trim());
+  }
+
+  // Reset the timeout that detects long pauses in speech recognition
+  private resetPauseTimeout(callback: (text: string) => void) {
+    clearTimeout(this.timeout);
+
+    // Set timeout for 10 seconds of inactivity
+    this.timeout = setTimeout(() => {
+      console.log("Timeout due to inactivity.");
+      this.stopWebRecognition(); // Stop recognition due to inactivity
+      alert("Listening stopped due to inactivity.");
+      callback(this.textInput.trim());
+    }, 10000); // Adjust this value as needed (10 seconds)
+  }
+
+  // Stop web speech recognition manually
   private stopWebRecognition() {
     if (this.recognition) {
+      this.stoppedManually = true;
       this.recognition.stop();
     }
   }
+
+  // // Stop web speech recognition
+  // private stopWebRecognition() {
+  //   if (this.recognition) {
+  //     this.recognition.stop();
+  //   }
+  // }
+
+  // // Update text input and call the callback
+  // private updateTextInput(transcript: string, callback: (text: string) => void) {
+  //   this.textInput += transcript;
+  //   callback(this.textInput.trim());
+  // }
+
+  // // Reset the timeout for long pauses
+  // private resetPauseTimeout(callback: (text: string) => void) {
+  //   clearTimeout(this.timeout);
+  //   this.timeout = setTimeout(() => {
+  //     this.stopRecognition();
+  //     callback(this.textInput.trim()); // Optionally send final input after stopping
+  //     alert("Listening stopped due to inactivity.");
+  //   }, this.PAUSE_TIMEOUT_MS);
+  // }
 }
