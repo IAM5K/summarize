@@ -10,7 +10,14 @@ export interface seoMetaTag {
   content: string;
 }
 
-export interface Expense {}
+export interface Expense {
+  spendedOn: string;
+  type: string;
+  amount: number;
+  date: string;
+  description: string;
+  idField?: string; // Added optional property for Firestore document ID
+}
 export interface Options {
   title: string;
   value: string | Date | null;

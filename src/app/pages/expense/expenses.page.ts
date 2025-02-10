@@ -17,6 +17,9 @@ import { SpeechRecognitionService } from "src/app/services/speech-recognition/sp
 import { ExpenseStaticData } from "src/app/models/class/static/expense/expense-data";
 import { MLService } from "src/app/services/ml/ml.service";
 import { GenAiService } from "src/app/services/gen-ai/gen-ai.service";
+import { ModalController } from "@ionic/angular";
+import { FilterExpenseComponent } from "./components/filter-expense/filter-expense.component";
+import { ToasterService } from "src/app/services/toaster/toaster.service";
 
 @Component({
   selector: "app-expenses",
@@ -47,6 +50,8 @@ export class ExpensesPage implements OnInit {
     private speechRecognitionService: SpeechRecognitionService,
     private mls: MLService,
     private genAi: GenAiService,
+    private toaster: ToasterService,
+    private modalController: ModalController, // New injection
   ) {}
 
   // Toggle speech recognition on and off
@@ -88,24 +93,6 @@ export class ExpensesPage implements OnInit {
   weekBackDate: string | null = this.datePipe.transform(new CustomDate().getWeekBackDate(), "yyyy-MM-dd");
   expenseTypes = ExpenseStaticData.expenseTypes;
   spentOn = ExpenseStaticData.spentOn;
-  filterType: string = "duration";
-  filterParams: any = "";
-  filterDuration: any = this.weekBackDate;
-  durationFilter: Options[] = [
-    // { title: "5 Recent", value: "recent" },
-    { title: "Today", value: this.dateToday },
-    { title: "7 Days", value: this.weekBackDate },
-    {
-      title: "30 Days",
-      value: this.datePipe.transform(new CustomDate().getLastMonthDate(), "yyyy-MM-dd"),
-    },
-    {
-      title: "365 Days",
-      value: this.datePipe.transform(new CustomDate().getLastYearDate(), "yyyy-MM-dd"),
-    },
-    { title: "This Month", value: new CustomDate().getThisMonth() },
-    { title: "This Year", value: new CustomDate().getThisYear() },
-  ];
   expenseMessage: string = "Getting Last 5 Expenses :";
   expenseCurrency: string = "₹";
   showFilter: boolean = false;
@@ -162,10 +149,40 @@ export class ExpensesPage implements OnInit {
     this.seoService.eventTrigger("form", this.pageTitle);
   }
 
-  addZeroExpense() {
+  // Open zero expense modal via ModalController
+  zeroExpenseInputs = [
+    {
+      type: "date",
+      placeholder: "Select date",
+      value: this.dateToday,
+    },
+  ];
+
+  zeroExpenseButtons = [
+    {
+      text: "Cancel",
+      role: "cancel",
+    },
+    {
+      text: "Submit",
+      role: "confirm",
+      handler: (value: object) => {
+        if (value) {
+          console.log("Zero expense date:", value);
+
+          this.addZeroExpense(value[0].toString());
+        } else {
+          this.toaster.showToast("Submitted without selection", "danger");
+        }
+      },
+    },
+  ];
+
+  // Update addZeroExpense to take a date parameter for zero expense
+  addZeroExpense(zeroExpenseDate: string) {
     const zeroExpenseValue = {
       createdAt: serverTimestamp(),
-      date: this.dateToday,
+      date: zeroExpenseDate,
       amount: 0,
       type: "saving",
       description: "Zero expense day",
@@ -174,7 +191,7 @@ export class ExpensesPage implements OnInit {
       updatedAt: serverTimestamp(),
     };
     console.log("Zero expense value:", zeroExpenseValue);
-    this.expenseService.addExpense(zeroExpenseValue);
+    // this.expenseService.addExpense(zeroExpenseValue);
 
     this.seoService.eventTrigger("form", this.pageTitle);
   }
@@ -251,49 +268,34 @@ export class ExpensesPage implements OnInit {
     }
   }
 
-  filterBy() {
-    switch (this.filterType) {
-      case "duration":
-        this.filterParams = this.weekBackDate;
-        break;
-
-      case "spentOn":
-        this.filterParams = "self";
-        break;
-
-      case "type":
-        this.filterParams = "food";
-        break;
-
-      default:
-        this.filterType = "duration";
-        this.filterParams = "week";
-        break;
-    }
-  }
-  async filter() {
-    switch (this.filterType) {
-      case "duration":
-        this.expenseMessage = "Total Expenses since " + this.filterParams + " : ";
-        break;
-      case "spentOn":
-        this.expenseMessage = "Total Expenses on " + this.filterParams + " since " + this.filterDuration + " : ";
-        break;
-      case "type":
-        this.expenseMessage = "Total Expenses for " + this.filterParams + " since " + this.filterDuration + " : ";
-        break;
-      default:
-        this.expenseMessage = "No Expenses found for " + this.filterParams + " : ";
-        break;
-    }
-    this.Expenses = [];
-    await this.expenseService
-      .getCustomExpenses(this.filterType, this.filterParams, this.filterDuration)
-      .subscribe((res: any) => {
+  // Open filter modal using ModalController
+  async openFilterModal() {
+    const modal = await this.modalController.create({
+      component: FilterExpenseComponent,
+    });
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    if (data) {
+      console.log("Filter data:", data);
+      const filterQuery: any = {};
+      // Apply date filtering: if customRange exists it takes precedence.
+      if (data.customRange) {
+        filterQuery.startDate = data.customRange.start;
+        filterQuery.endDate = data.customRange.end;
+      } else if (data.duration) {
+        filterQuery.duration = data.duration;
+      }
+      // Attach filter option if category is spentOn or type
+      if (data.filterCategory === "spentOn" || data.filterCategory === "type") {
+        filterQuery.parameter = data.parameter;
+      }
+      // Call service method to get filtered expenses
+      this.expenseService.getCustomExpenses(filterQuery).subscribe((res: any) => {
         this.Expenses = res;
         this.expensesCount = this.Expenses.length;
         this.getTotalExpense();
       });
+    }
   }
 
   async getBudget() {

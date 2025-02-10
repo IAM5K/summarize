@@ -26,7 +26,9 @@
       </div>
     </div> -->
     <div class="ion-margin options-container">
-      <ion-button color="success" class="ion-float-right" (click)="addZeroExpense()">
+      <!-- Added filter icon button -->
+
+      <ion-button id="zero-expense-alert" color="success" class="ion-float-right">
         <ion-icon class="mr-10" name="cash-outline"></ion-icon>
         0 Expense day
       </ion-button>
@@ -34,6 +36,12 @@
         <ion-icon class="mr-10" name="cart-outline"></ion-icon>
         Shopping List
       </ion-button>
+      <ion-alert
+        trigger="zero-expense-alert"
+        header="Add item details"
+        [buttons]="zeroExpenseButtons"
+        [inputs]="zeroExpenseInputs"
+      ></ion-alert>
     </div>
     <div class="card ion-margin ion-padding">
       <h1 class="mt-0 h2">{{editMode?"Update":"Add"}} Expense</h1>
@@ -180,78 +188,16 @@
       </div>
 
       <div class="expense-data card ion-margin ion-padding">
-        <ng-template #noExpense>
-          <div class="table-title">
-            <h2 class="mt-0 h2" *ngIf="expensesCount === 0">No Expenses found</h2>
-            <h2 class="h2" *ngIf="expensesCount !== 0">My Expenses</h2>
-          </div>
-        </ng-template>
-        <div class="form-container">
-          <form #filterForm="ngForm">
-            <ion-list class="form-ion-list">
-              <ion-item lines="none">
-                <ion-select
-                  label="Filter By"
-                  label-placement="floating"
-                  [(ngModel)]="filterType"
-                  name="filterType"
-                  interface="popover"
-                  placeholder="Filter By"
-                  (ionChange)="filterBy()"
-                >
-                  <ion-select-option value="duration">Duration</ion-select-option>
-                  <ion-select-option value="spentOn">Spent On</ion-select-option>
-                  <ion-select-option value="type">Type</ion-select-option>
-                </ion-select>
-              </ion-item>
-
-              <ion-item lines="none">
-                <ion-select
-                  label="Parameter"
-                  label-placement="floating"
-                  [(ngModel)]="filterParams"
-                  name="filterParams"
-                  interface="popover"
-                  placeholder="parameter"
-                  (ionChange)="filter()"
-                >
-                  <ng-container *ngIf="filterType === 'duration'">
-                    <ion-select-option *ngFor="let item of durationFilter" [value]="item.value">
-                      {{item.title }}
-                    </ion-select-option>
-                  </ng-container>
-                  <ng-container *ngIf="filterType === 'spentOn'">
-                    <ion-select-option *ngFor="let item of spentOn" [value]="item.value">
-                      {{ item.title }}
-                    </ion-select-option>
-                  </ng-container>
-                  <ng-container *ngIf="filterType === 'type'">
-                    <ion-select-option *ngFor="let item of expenseTypes" [value]="item.value">
-                      {{item.title}}
-                    </ion-select-option>
-                  </ng-container>
-                </ion-select>
-              </ion-item>
-
-              <ion-item lines="none" [disabled]="filterType ==='duration'">
-                <ion-select
-                  label="Duration"
-                  label-placement="floating"
-                  [(ngModel)]="filterDuration"
-                  name="filterDuration"
-                  placeholder="Filter By"
-                  (ionChange)="filter()"
-                >
-                  <ion-select-option *ngFor="let item of durationFilter" [value]="item.value">
-                    {{ item.title }}
-                  </ion-select-option>
-                </ion-select>
-              </ion-item>
-            </ion-list>
-          </form>
-          <div class="">
-            <p class="ion-text-bold">{{expenseMessage}} {{expenseCurrency}} {{totalExpense}}</p>
-          </div>
+        <div class="table-title">
+          <h2 class="mt-0 h2" *ngIf="expensesCount === 0">No Expenses found</h2>
+          <h2 class="h2" *ngIf="expensesCount > 0">My Expenses</h2>
+          <ion-button color="medium" (click)="openFilterModal()">
+            <ion-icon slot="start" name="options-outline"></ion-icon>
+            Filter
+          </ion-button>
+        </div>
+        <div class="">
+          <p class="ion-text-bold">{{ expenseMessage }} {{ expenseCurrency }} {{ totalExpense }}</p>
         </div>
         <ng-container *ngIf="expensesCount > 0">
           <div class="form-container data-grid">

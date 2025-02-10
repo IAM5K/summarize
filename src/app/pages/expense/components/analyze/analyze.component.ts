@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  HostListener,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { AfterViewInit, Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { ChartConfiguration, ChartOptions } from "chart.js";
 import { CustomDate } from "src/app/models/class/date/custom-date";
 import { ExpenseService } from "src/app/services/expense/expense.service";
@@ -66,7 +58,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private expenseService: ExpenseService,
     private router: Router,
-    private toaster: ToasterService
+    private toaster: ToasterService,
   ) {}
 
   ngOnInit() {
@@ -132,7 +124,9 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
   // 7. Load data to graph
 
   async getDataOnInit() {
-    this.currentMonthExpense = await this.expenseService.getCustomExpenses();
+    this.expenseService.getCustomExpenses({ duration: new CustomDate().getThisMonth() }).subscribe((res: Expense[]) => {
+      this.currentMonthExpense = res;
+    });
     // let total_expense: any = sessionStorage.getItem("total_expense");
     // let total_budget: any = sessionStorage.getItem("budget");
     // if (total_expense !== undefined || total_budget !== undefined) {
@@ -150,8 +144,8 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async getExpense(month: string) {
-    await this.expenseService.getCustomExpenses("duration", month).subscribe(async (res: any) => {
-      this.Expense = await res;
+    this.expenseService.getCustomExpenses({ duration: month }).subscribe((res: Expense[]) => {
+      this.Expense = res;
     });
     setTimeout(() => {
       this.updateCurrentMonthGraph(this.Expense.reverse());
@@ -164,9 +158,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
       const dailyExpenses: any[] = [];
       const uniqueDates = [...new Set(expenses.map((e) => e.date))];
       uniqueDates.forEach((date) => {
-        const dailyAmount = expenses
-          .filter((e) => e.date === date)
-          .reduce((acc, curr) => acc + curr.amount, 0);
+        const dailyAmount = expenses.filter((e) => e.date === date).reduce((acc, curr) => acc + curr.amount, 0);
         dailyExpenses.push({ date, dailyAmount });
       });
       this.updateTotalGraph(dailyExpenses);
@@ -282,9 +274,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
       const expenseTypes: any[] = [];
       const uniqueTypes = [...new Set(expenses.map((e) => e.type))];
       uniqueTypes.forEach((type) => {
-        const amount = expenses
-          .filter((e) => e.type === type)
-          .reduce((acc, curr) => acc + curr.amount, 0);
+        const amount = expenses.filter((e) => e.type === type).reduce((acc, curr) => acc + curr.amount, 0);
         expenseTypes.push({ type, amount });
       });
       this.updateTypeWisePie(expenseTypes);
@@ -318,9 +308,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     } else {
       currentBudget = 0;
-      alert(
-        "There was some error getting your budget. Make sure you have added budget for this month."
-      );
+      alert("There was some error getting your budget. Make sure you have added budget for this month.");
     }
     return currentBudget;
   }

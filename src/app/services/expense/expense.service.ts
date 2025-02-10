@@ -3,6 +3,8 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { ProfileService } from "../profile/profile.service";
 import { ToasterService } from "../toaster/toaster.service";
 import { Expense } from "src/app/models/interface/masterData.model";
+import { map } from "rxjs/operators";
+
 @Injectable({
   providedIn: "root",
 })
@@ -33,56 +35,69 @@ export class ExpenseService {
         console.warn(err);
       });
   }
+
   getExpenses(count?: number) {
-    if (count) {
-      return this.expenseCollection
-        .doc(this.userId)
-        .collection("myExpence", (ref) => ref.orderBy("date", "desc").limit(count))
-        .valueChanges({ idField: "idField" });
-    } else {
-      return this.expenseCollection
-        .doc(this.userId)
-        .collection("myExpence", (ref) => ref.orderBy("date", "desc"))
-        .valueChanges({ idField: "idField" });
-    }
+    const collectionRef = this.expenseCollection
+      .doc(this.userId)
+      .collection("myExpence", (ref) =>
+        count ? ref.orderBy("date", "desc").limit(count) : ref.orderBy("date", "desc"),
+      );
+    return collectionRef.snapshotChanges().pipe(
+      map((actions) =>
+        actions.map((a) => {
+          const data = a.payload.doc.data() as Expense;
+          const idField = a.payload.doc.id;
+          return { ...data, idField };
+        }),
+      ),
+    );
   }
-  getCustomExpenses(filterBy?: string, data?: string, duration?: string) {
-    // console.log(filterBy +" : " + data  +" : " +duration );
-    let query = null;
-    switch (filterBy) {
-      case "duration":
-        query = this.expenseCollection
-          .doc(this.userId)
-          .collection("myExpence", (ref) => ref.orderBy("date", "desc").where("date", ">=", data))
-          .valueChanges({ idField: "idField" });
-        break;
-      case "spentOn":
-        query = this.expenseCollection
-          .doc(this.userId)
-          .collection("myExpence", (ref) => ref.where("spendedOn", "==", data).orderBy("date").startAt(duration))
-          .valueChanges({ idField: "idField" });
-        break;
-      case "type":
-        query = this.expenseCollection
-          .doc(this.userId)
-          .collection("myExpence", (ref) => ref.where("type", "==", data).orderBy("date").startAt(duration))
-          .valueChanges({ idField: "idField" });
-        break;
-      default:
-        query = this.expenseCollection
-          .doc(this.userId)
-          .collection("myExpence", (ref) => ref.orderBy("date", "desc").limit(5))
-          .valueChanges({ idField: "idField" });
-        break;
-    }
-    return query;
+
+  getCustomExpenses(filterQuery: any) {
+    // filterQuery may include:
+    // - customRange: { startDate, endDate } for custom date filtering
+    // - duration: a start date for predefined ranges
+    // - filterCategory: "spentOn" or "type"
+    // - parameter: value for spentOn or type filtering
+    const collectionRef = this.expenseCollection.doc(this.userId).collection("myExpence", (ref) => {
+      let queryRef = ref.orderBy("date", "desc");
+      if (filterQuery.startDate && filterQuery.endDate) {
+        // Custom range filtering
+        queryRef = queryRef.where("date", ">=", filterQuery.startDate).where("date", "<=", filterQuery.endDate);
+      } else if (filterQuery.duration) {
+        queryRef = queryRef.where("date", ">=", filterQuery.duration);
+      }
+      if (filterQuery.filterCategory === "spentOn" && filterQuery.parameter) {
+        queryRef = queryRef.where("spendedOn", "==", filterQuery.parameter);
+      } else if (filterQuery.filterCategory === "type" && filterQuery.parameter) {
+        queryRef = queryRef.where("type", "==", filterQuery.parameter);
+      }
+      return queryRef;
+    });
+    return collectionRef.snapshotChanges().pipe(
+      map((actions) =>
+        actions.map((a) => {
+          const data = a.payload.doc.data() as Expense;
+          const idField = a.payload.doc.id;
+          return { ...data, idField };
+        }),
+      ),
+    );
   }
 
   getExpenseByDate(date: string) {
-    return this.expenseCollection
+    const collectionRef = this.expenseCollection
       .doc(this.userId)
-      .collection("myExpence", (ref) => ref.where("date", "==", date).orderBy("amount", "asc"))
-      .valueChanges({ idField: "idField" });
+      .collection("myExpence", (ref) => ref.where("date", "==", date).orderBy("amount", "asc"));
+    return collectionRef.snapshotChanges().pipe(
+      map((actions) =>
+        actions.map((a) => {
+          const data = a.payload.doc.data() as Expense;
+          const idField = a.payload.doc.id;
+          return { ...data, idField };
+        }),
+      ),
+    );
   }
 
   async updateExpense(data, idField) {

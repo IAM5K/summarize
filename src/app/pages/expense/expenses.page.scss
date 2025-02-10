@@ -195,3 +195,16 @@ ion-grid {
     transform: scale(1);
   }
 }
+
+// Optionally, add styles for the filter modal container if needed
+.filter-modal {
+  position: fixed;
+  top: 10%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1000;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
