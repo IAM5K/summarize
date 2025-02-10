@@ -15,19 +15,27 @@
   </ion-header>
 
   <div id="container ion-margin">
-    <div class="ion-margin options-container">
-      <!-- Textarea to show recognized text -->
+    <!-- <div class="ion-margin options-container">
       <ion-item>
         <ion-textarea [(ngModel)]="recognizedText" placeholder="Recognized speech will appear here..."></ion-textarea>
       </ion-item>
-
-      <!-- <ion-button routerLink="./shopping-list" color="primary" class="ion-float-right">
+      <ion-button (click)="transformExpenseInput()">Add Expense</ion-button>
+      <div *ngIf="transformedData">
+        <h3>Extracted Information:</h3>
+        <pre>{{ transformedData | json }}</pre>
+      </div>
+    </div> -->
+    <div class="ion-margin options-container">
+      <ion-button color="success" class="ion-float-right" (click)="addZeroExpense()">
+        <ion-icon class="mr-10" name="cash-outline"></ion-icon>
+        0 Expense day
+      </ion-button>
+      <ion-button routerLink="./shopping-list" color="primary" class="ion-float-right">
         <ion-icon class="mr-10" name="cart-outline"></ion-icon>
         Shopping List
-      </ion-button> -->
-      <!-- Confirm button -->
+      </ion-button>
     </div>
-    <!-- <div class="card ion-margin ion-padding">
+    <div class="card ion-margin ion-padding">
       <h1 class="mt-0 h2">{{editMode?"Update":"Add"}} Expense</h1>
       <div class="form-container">
         <form [formGroup]="expenseForm" (ngSubmit)="addExpense()" novalidate>
@@ -334,7 +342,7 @@
           </ion-list>
         </div>
       </div>
-    </ng-container>-->
+    </ng-container>
   </div>
   <!-- Floating mic button -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

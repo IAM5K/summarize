@@ -15,6 +15,8 @@ import { SeoTags } from "src/app/models/class/seoTags/seo";
 import { ExpenseData } from "src/app/models/interface/expense.interface";
 import { SpeechRecognitionService } from "src/app/services/speech-recognition/speech-recognition.service";
 import { ExpenseStaticData } from "src/app/models/class/static/expense/expense-data";
+import { MLService } from "src/app/services/ml/ml.service";
+import { GenAiService } from "src/app/services/gen-ai/gen-ai.service";
 
 @Component({
   selector: "app-expenses",
@@ -34,7 +36,7 @@ export class ExpensesPage implements OnInit {
   recognizedText: string = ""; // Holds the recognized speech
   expenseInput: string = ""; // Stores the narrated expense
   isListening: boolean = false; // For toggling the mic button and animation
-
+  transformedData: any;
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
@@ -43,6 +45,8 @@ export class ExpensesPage implements OnInit {
     private datePipe: DatePipe,
     private router: Router,
     private speechRecognitionService: SpeechRecognitionService,
+    private mls: MLService,
+    private genAi: GenAiService,
   ) {}
 
   // Toggle speech recognition on and off
@@ -155,6 +159,23 @@ export class ExpensesPage implements OnInit {
       amount: "",
       description: "",
     });
+    this.seoService.eventTrigger("form", this.pageTitle);
+  }
+
+  addZeroExpense() {
+    const zeroExpenseValue = {
+      createdAt: serverTimestamp(),
+      date: this.dateToday,
+      amount: 0,
+      type: "saving",
+      description: "Zero expense day",
+      spendedOn: "self",
+      reimburseable: false,
+      updatedAt: serverTimestamp(),
+    };
+    console.log("Zero expense value:", zeroExpenseValue);
+    this.expenseService.addExpense(zeroExpenseValue);
+
     this.seoService.eventTrigger("form", this.pageTitle);
   }
 
@@ -353,5 +374,40 @@ export class ExpensesPage implements OnInit {
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     });
     FileSaver.saveAs(excelBlob, filename);
+  }
+
+  async transformExpenseInput() {
+    const description = `On 3 november i spent , Milk 28, Rice 111, Bread 30, Yakult 80, Paneer 79 , on 2nd nov , 70 breakfast, 10 water, 30 milk`;
+    // const description = this.recognizedText;
+    // this.mls.analyzeDescription(description).subscribe({
+    //   next: (data) => {
+    //     console.log("Extracted Entities:", data);
+    //     this.transformedData = data;
+    //   },
+    //   error: (error) => {
+    //     console.error("Error analyzing description:", error);
+    //   },
+    // });
+    // this.genAi.processExpenseData(description).subscribe(
+    //   (response) => {
+    //     console.log("AI Response:", response);
+    //   },
+    //   (error) => {
+    //     console.error("Error:", error);
+    //   },
+    // );
+    await this.genAi.processExpenseData(description).subscribe({
+      next: (response) => {
+        console.log("AI Response:", response);
+        // Assuming response contains the processed expenses
+        // this.processedExpenses = this.transformAiResponse(response);
+        // this.processing = false;
+      },
+      error: (error) => {
+        console.error("Error processing expense data:", error);
+        // this.errorMessage = "Failed to process expense data.";
+        // this.processing = false;
+      },
+    });
   }
 }
