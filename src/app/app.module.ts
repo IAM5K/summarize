@@ -22,6 +22,7 @@ import { initializeAppCheck, ReCaptchaEnterpriseProvider, provideAppCheck } from
 import { getFunctions, provideFunctions } from "@angular/fire/functions";
 import { getMessaging, provideMessaging } from "@angular/fire/messaging";
 import { getPerformance, providePerformance } from "@angular/fire/performance";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { getPerformance, providePerformance } from "@angular/fire/performance";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    HttpClientModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
       // Note: Register the ServiceWorker as soon as the application is stable or after 30 seconds (whichever comes first).
