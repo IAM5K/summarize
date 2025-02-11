@@ -22,7 +22,10 @@ module.exports = {
   ],
   plugins: ["@typescript-eslint", "import"],
   rules: {
-    quotes: ["error", "double"],
+    "object-curly-spacing": ["error", "always"],
+    "@typescript-eslint/no-unused-vars": "warn",
+    "quote-props": ["error", "consistent-as-needed"],
+    "quotes": ["error", "double"],
     "import/no-unresolved": 0,
   },
 };
