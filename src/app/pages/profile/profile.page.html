@@ -33,7 +33,7 @@
       <h1 class="h2">Hello! {{ userProfile?.displayName ? userProfile?.displayName : userProfile?.email }}</h1>
       <ion-list>
         <ion-item *ngIf="!userProfile?.displayName">
-          <ion-icon aria-hidden="true" name="person" slot="start" color="primary"></ion-icon>
+          <ion-icon name="person" slot="start" color="primary"></ion-icon>
           <ion-label>Name is not available</ion-label>
           <ion-icon
             *ngIf="!userProfile?.displayName"
@@ -44,7 +44,7 @@
           ></ion-icon>
         </ion-item>
         <ion-item>
-          <ion-icon aria-hidden="true" name="mail" slot="start" color="primary"></ion-icon>
+          <ion-icon name="mail" slot="start" color="primary"></ion-icon>
           <ion-label>{{ userProfile?.email ? userProfile?.email : "Add Email" }}</ion-label>
           <ion-icon
             *ngIf="userProfile?.emailVerified"
@@ -61,7 +61,7 @@
           ></ion-icon>
         </ion-item>
         <ion-item>
-          <ion-icon aria-hidden="true" name="call" slot="start" color="primary"></ion-icon>
+          <ion-icon name="call" slot="start" color="primary"></ion-icon>
           <ion-label>{{ userProfile?.phoneNumber ? userProfile.phoneNumber : "Add Phone Number" }}</ion-label>
           <ion-icon
             *ngIf="userProfile?.phoneNumber"
@@ -78,7 +78,7 @@
           ></ion-icon>
         </ion-item>
         <ion-item>
-          <ion-icon aria-hidden="true" name="language-outline" slot="start" color="primary"></ion-icon>
+          <ion-icon name="language-outline" slot="start" color="primary"></ion-icon>
           <ion-label>English (default)</ion-label>
         </ion-item>
       </ion-list>
