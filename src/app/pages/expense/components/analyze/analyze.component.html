@@ -4,12 +4,10 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>{{ title }}</ion-title>
-    <ion-button
-      slot="end"
-      class="mr-10"
-      [routerLink]="['../']"
-      routerLinkActive="router-link-active"
-    >
+    <ion-button color="medium" slot="end" class="mr-10" (click)="openFilterModal()">
+      <ion-icon name="filter-outline"></ion-icon>
+    </ion-button>
+    <ion-button slot="end" class="mr-10" [routerLink]="['../']" routerLinkActive="router-link-active">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -17,48 +15,83 @@
 
 <ion-content [fullscreen]="true">
   <div class="overview-cards ion-margin">
-    <ion-card [color]="'success'">
+    <ion-card [color]="'warning'">
       <ion-card-header>
-        <ion-card-title>₹ {{ totalAmount }}</ion-card-title>
+        <ion-card-title>₹ {{ totalStats.totalAmount }}</ion-card-title>
         <ion-card-subtitle>Total Expenses</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
     <ion-card color="primary">
       <ion-card-header>
-        <ion-card-title>₹ {{totalBudget}}</ion-card-title>
+        <ion-card-title>₹ {{ totalBudget }}</ion-card-title>
         <ion-card-subtitle>Budget</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
     <ion-card color="secondary">
       <ion-card-header>
-        <ion-card-title>
-          ₹
-          <span *ngIf="currentExpense === 0">Calculating</span>
-          <span *ngIf="currentExpense !== 0">{{ currentExpense }}</span>
-        </ion-card-title>
-        <ion-card-subtitle>Remaining Balance</ion-card-subtitle>
+        <ion-card-title>{{ zeroExpenseDays }}</ion-card-title>
+        <ion-card-subtitle>Zero Expense Days</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
-    <ion-card color="danger">
+    <ion-card [color]="remainingBalance < 0 ? 'danger' : 'success'">
       <ion-card-header>
-        <ion-card-title>₹ {{currentBudget}}</ion-card-title>
-        <ion-card-subtitle>Exceeding Amount</ion-card-subtitle>
+        <ion-card-title>₹ {{ Math.abs(remainingBalance) }}</ion-card-title>
+        <ion-card-subtitle>{{ remainingBalance < 0 ? "Exceeding Amount" : "Remaining Balance" }}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
   </div>
-  <h2 class="ion-text-center">Under migration for new UI <br> Will be available soon!</h2>
-  <!-- <div class="card ion-padding line-graph">
-    <div class="linechart">
-      <h1>Current month total expenses</h1>
-      <canvas #chartA baseChart [width]="graphWidth" [height]="graphHeight" [type]="'line'" [data]="currentMonthExpenseData" [options]="monthlyChartOptions" [legend]="monthlyChartLegend">
-      </canvas>
-    </div>
+
+  <div class="charts-container">
+    <!-- Monthly Expense Line Chart -->
+    <ion-card class="chart-card">
+      <ion-card-content style="height: 300px">
+        <canvas
+          #lineChart="base-chart"
+          baseChart
+          [data]="lineChartConfig.data"
+          [options]="lineChartConfig.options"
+          [type]="lineChartConfig.type"
+        ></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Expense by Type Pie Chart -->
+    <ion-card class="chart-card">
+      <ion-card-content style="height: 300px">
+        <canvas
+          #pieChart="base-chart"
+          baseChart
+          [data]="pieChartConfig.data"
+          [options]="pieChartConfig.options"
+          [type]="pieChartConfig.type"
+        ></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Expense by SpentOn Doughnut Chart -->
+    <ion-card class="chart-card">
+      <ion-card-content style="height: 300px">
+        <canvas
+          #doughnutChart="base-chart"
+          baseChart
+          [data]="doughnutChartConfig.data"
+          [options]="doughnutChartConfig.options"
+          [type]="doughnutChartConfig.type"
+        ></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Zero Expense Days Bar Chart -->
+    <ion-card class="chart-card">
+      <ion-card-content style="height: 300px">
+        <canvas
+          #barChart="base-chart"
+          baseChart
+          [data]="barChartConfig.data"
+          [options]="barChartConfig.options"
+          [type]="barChartConfig.type"
+        ></canvas>
+      </ion-card-content>
+    </ion-card>
   </div>
-  <div class="card ion-padding">
-    <div class="pie-chart">
-      <h2>Current month category wise expenses</h2>
-      <canvas #chartP baseChart [type]="'pie'" [width]="graphWidth" [height]="graphHeight" [datasets]="pieChartDatasets" [labels]="pieChartLabels" [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
-      </canvas>
-    </div>
-  </div> -->
 </ion-content>

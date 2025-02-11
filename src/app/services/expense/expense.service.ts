@@ -4,6 +4,7 @@ import { ProfileService } from "../profile/profile.service";
 import { ToasterService } from "../toaster/toaster.service";
 import { Expense } from "src/app/models/interface/masterData.model";
 import { map } from "rxjs/operators";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -19,6 +20,21 @@ export class ExpenseService {
   successMessage = "Expense Added Successfully!";
   deletedMessage = "Expense Deleted Successfully!";
   expenseCollection = this.afs.collection("userData");
+
+  private analysisDataSubject = new BehaviorSubject<Expense[]>([]);
+  analysisData$ = this.analysisDataSubject.asObservable();
+
+  setAnalysisData(expenses: Expense[]) {
+    if (!expenses) {
+      this.toasterService.showToast("No expense data available", "warning");
+      return;
+    }
+    this.analysisDataSubject.next(expenses);
+  }
+
+  clearAnalysisData() {
+    this.analysisDataSubject.next([]);
+  }
 
   addExpense(data: any) {
     console.log(data);
@@ -54,26 +70,30 @@ export class ExpenseService {
   }
 
   getCustomExpenses(filterQuery: any) {
-    // filterQuery may include:
-    // - customRange: { startDate, endDate } for custom date filtering
-    // - duration: a start date for predefined ranges
-    // - filterCategory: "spentOn" or "type"
-    // - parameter: value for spentOn or type filtering
     const collectionRef = this.expenseCollection.doc(this.userId).collection("myExpence", (ref) => {
       let queryRef = ref.orderBy("date", "desc");
-      if (filterQuery.startDate && filterQuery.endDate) {
-        // Custom range filtering
-        queryRef = queryRef.where("date", ">=", filterQuery.startDate).where("date", "<=", filterQuery.endDate);
+
+      // Date filtering
+      if (filterQuery.customRange) {
+        // For custom date range
+        queryRef = queryRef
+          .where("date", ">=", filterQuery.customRange.start)
+          .where("date", "<=", filterQuery.customRange.end);
       } else if (filterQuery.duration) {
+        // For predefined durations
         queryRef = queryRef.where("date", ">=", filterQuery.duration);
       }
+
+      // Category filtering
       if (filterQuery.filterCategory === "spentOn" && filterQuery.parameter) {
         queryRef = queryRef.where("spendedOn", "==", filterQuery.parameter);
       } else if (filterQuery.filterCategory === "type" && filterQuery.parameter) {
         queryRef = queryRef.where("type", "==", filterQuery.parameter);
       }
+
       return queryRef;
     });
+
     return collectionRef.snapshotChanges().pipe(
       map((actions) =>
         actions.map((a) => {

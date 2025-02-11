@@ -343,9 +343,7 @@ export class ExpensesPage implements OnInit {
   }
 
   async analyzeExpense() {
-    this.expenseService.analyzeExpense = this.Expenses;
-    // this.getAllExpenses();
-    // await this.getBudget();
+    this.expenseService.setAnalysisData(this.Expenses);
     this.router.navigateByUrl("expenses/analyze");
   }
 
@@ -411,5 +409,11 @@ export class ExpensesPage implements OnInit {
         // this.processing = false;
       },
     });
+  }
+
+  navigateToAnalyze() {
+    // Set the current expense data for analysis
+    this.expenseService.setAnalysisData(this.Expenses);
+    this.router.navigate(["expenses/analyze"]);
   }
 }

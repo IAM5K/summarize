@@ -126,13 +126,12 @@
     span {
       display: none;
     }
-    ion-button:hover {
-      span {
-        display: block;
-        transition: all 2s ease-in-out;
-        transition-duration: 3s;
-      }
-    }
+    // ion-button:hover {
+    //   span {
+    //     display: block;
+    //     transition: all 1s ease-in-out;
+    //   }
+    // }
   }
 }
 .data-grid {
