@@ -191,11 +191,23 @@
         <div class="table-title">
           <h2 class="mt-0 h2" *ngIf="expensesCount === 0">No Expenses found</h2>
           <h2 class="h2" *ngIf="expensesCount > 0">My Expenses</h2>
-          <ion-button color="medium" (click)="openFilterModal()">
-            <ion-icon slot="start" name="options-outline"></ion-icon>
-            Filter
-          </ion-button>
+
+          <div class="action-bar" *ngIf="expensesCount > 0">
+            <ion-button size="small" color="medium" (click)="openFilterModal()">
+              <ion-icon slot="icon-only" name="filter"></ion-icon>
+              <span>Filter</span>
+            </ion-button>
+            <ion-button size="small" color="tertiary" (click)="exportData()">
+              <ion-icon slot="icon-only" name="cloud-download-outline"></ion-icon>
+              <span>Export</span>
+            </ion-button>
+            <ion-button size="small" (click)="analyzeExpense()" color="success">
+              <ion-icon slot="icon-only" name="analytics-outline"></ion-icon>
+              <span>Analyze</span>
+            </ion-button>
+          </div>
         </div>
+
         <div class="">
           <p class="ion-text-bold">{{ expenseMessage }} {{ expenseCurrency }} {{ totalExpense }}</p>
         </div>
@@ -209,15 +221,7 @@
               (deleteClicked)="deleteExpense($event.idField)"
             ></app-expense-card>
           </div>
-          <div class="mt-15px form-container">
-            <div class="button-flex">
-              <ion-button color="tertiary" size="medium" (click)="exportData()">Export Data</ion-button>
-              <ion-button (click)="analyzeExpense()" color="success">
-                <ion-icon class="mr-10" name="analytics-outline"></ion-icon>
-                Analyze
-              </ion-button>
-            </div>
-          </div>
+          <div class="mt-15px form-container"></div>
         </ng-container>
       </div>
 

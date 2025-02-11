@@ -114,7 +114,27 @@
     width: 200px;
   }
 }
+.action-bar {
+  ion-icon {
+    padding: 0.5rem;
+  }
+  span {
+    padding: 0.5rem 0.5rem 0.5rem 0;
+  }
 
+  @media screen and (max-width: 992px) {
+    span {
+      display: none;
+    }
+    ion-button:hover {
+      span {
+        display: block;
+        transition: all 2s ease-in-out;
+        transition-duration: 3s;
+      }
+    }
+  }
+}
 .data-grid {
   height: 310px;
   overflow-y: auto;
@@ -244,7 +264,6 @@
   text-align: center;
   min-width: 80px;
 }
-
 
 // Info: Achievement CSS
 .event-container {
