@@ -14,60 +14,64 @@ export class SeoTags {
     {
       name: "description",
       content:
-        "Summarize (summarize-ng web app) help users manage their achievements, money, time, and studies effectively. Install on any device and boost your productivity.",
+        "Summarize is a powerful personal management tool designed to help users track achievements, manage finances, optimize time, and organize studies. Boost productivity effortlessly across all devices. summarize-ng.web.app",
     },
     {
       name: "keywords",
       content:
-        "Summarize, summarize-ng, Money management, Budgeting, Financial goals, Expense tracking, Time management, Study management, Productivity, Goal setting, Organizational tools, Personal finance, Study planner, Study materials, Study schedule, Study progress, Study tracker, Study management app",
+        "personal management, productivity tool, finance tracker, budgeting app, time management, study planner, goal tracking, task organization, achievement tracker, expense tracker, study management, Summarize app, summarize-ng",
     },
   ];
+
   public static aboutPageTags: seoMetaTag[] = [
     {
       name: "description",
       content:
-        "Tempting advertisement and deals makes you to spend more money and time to purchase and use their product/service. Summarize helps you in managing achievement, studies, expenses, time and spend only on needs for better savings.",
+        "Summarize helps you take control of your time, finances, and studies. Avoid unnecessary expenses, track progress, and achieve your goals with our efficient management system.",
     },
     {
       name: "keywords",
       content:
-        "Summarize, summarize-ng, Money management, Budgeting, Financial goals, Expense tracking, Time management, Study management, Productivity, Goal setting, Organizational tools, Personal finance, Study planner, Study materials, Study schedule, Study progress, Study notes, Study reminders, Study rewards, Study reports, Study tracker, Study management app",
+        "Summarize, financial planning, smart budgeting, expense tracker, study organizer, time management app, productivity tools, savings planner, study progress tracker, personal development, goal setting",
     },
   ];
+
   public static helpPageTags: seoMetaTag[] = [
     {
       name: "description",
       content:
-        "Need help to install Summarize (summarize-ng.web.app) on PC ( Windows / MAC / Linux all-distro ),Install on Android, Install on IOS, Update Summarize.",
+        "Get step-by-step help to install Summarize on Windows, Mac, Linux, Android, and iOS. Learn how to update and optimize your experience for seamless productivity.",
     },
     {
       name: "keywords",
       content:
-        "Summarize, summarize-ng , time management, money management, expense management, study assistant , digital dairy,iam5k, IAM5K, Sandeep Kumar",
+        "Summarize installation, install on PC, install on Mac, install on Android, install on iOS, software update, troubleshooting, productivity app setup, digital planner, time management assistant",
     },
   ];
+
   public static loginPageTags: seoMetaTag[] = [
     {
       name: "description",
       content:
-        "Login or Sign up now to Summarize (summarize-ng.web.app) now. With its user-friendly interface and secure login, Simplify time, money, achievement, and study management. Easily track progress, set goals, and stay organized. ",
+        "Sign up or log in to Summarize and take charge of your time, finances, and study plans. Secure, easy-to-use, and designed for maximum productivity.",
     },
     {
       name: "keywords",
       content:
-        "Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis",
+        "Summarize login, productivity app, account access, personal finance tracker, digital planner, goal tracking, secure login, time and money management, study tracker",
     },
   ];
+
   public static studiesPageTags: seoMetaTag[] = [
     {
       name: "description",
       content:
-        "Summarize (summarize-ng web app) helps users manage their studies efficiently. Stay organized, track progress, and boost productivity with our study management tools.",
+        "Summarize makes study management easy. Organize materials, track progress, and optimize your learning experience with our intuitive study planner.",
     },
     {
       name: "keywords",
       content:
-        "Summarize, summarize-ng, Study management, Study planner, Study materials, Study schedule, Study progress, Study tracker, Productivity, Educational tools, Time management, Organization, Learning app",
+        "study planner, learning management, education tools, study schedule, academic progress tracker, student productivity, time optimization, digital notebook, study assistant",
     },
   ];
 
@@ -75,12 +79,12 @@ export class SeoTags {
     {
       name: "description",
       content:
-        "Efficient time management is crucial for success. With Summarize (summarize-ng web app), prioritize tasks, track time usage, and enhance productivity across all your endeavors.",
+        "Optimize your time with Summarize. Prioritize tasks, track productivity, and manage schedules effectively for a balanced work and study life.",
     },
     {
       name: "keywords",
       content:
-        "Summarize, summarize-ng, Time management, Task prioritization, Productivity tools, Time tracking, Schedule optimization, Efficiency, Organizational tools, Goal setting, Study management, Study planner, Study progress",
+        "time management, productivity tracker, schedule planner, task prioritization, daily planner, efficiency tools, work-life balance, time tracking app, organization tools",
     },
   ];
 
@@ -88,12 +92,12 @@ export class SeoTags {
     {
       name: "description",
       content:
-        "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better.",
+        "Track and analyze your expenses with Summarize. Gain insights into your spending habits and learn how to save more efficiently. Finance tips coming soon!",
     },
     {
-      name: "keyword",
+      name: "keywords",
       content:
-        "Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis",
+        "expense tracker, budgeting app, personal finance, cost analysis, money management, financial insights, digital expense log, savings planner, spending tracker",
     },
     {
       name: "author",
@@ -105,12 +109,25 @@ export class SeoTags {
     {
       name: "description",
       content:
-        "Summarize all your expenses here. Summarize will help you to check them down in the list immediately and later Analyze them to have an understanding about where you can spend wisely and how to manage your expenses in better way. Soon we will also give finance tips that will help you better.",
+        "Monitor your spending with Summarize. Easily categorize expenses, track trends, and make informed financial decisions for a more secure future.",
     },
     {
-      name: "keyword",
+      name: "keywords",
       content:
-        "Summarize, Summarize, arise, arize, money management, expense management, cost analysis,summarize-ng, summarize-ng, digital dairy, expense analysis",
+        "expense management, money tracker, budgeting software, financial planning, spending analysis, cost control, personal finance app, financial goals",
+    },
+  ];
+
+  public static goalPageTags: seoMetaTag[] = [
+    {
+      name: "description",
+      content:
+        "Set, track, and achieve your goals with Summarize. Stay focused, monitor progress, and develop better financial and personal habits for long-term success.",
+    },
+    {
+      name: "keywords",
+      content:
+        "goal setting, achievement tracker, productivity goals, financial goals, personal growth, time management, success planning, milestone tracking, habit building",
     },
   ];
 }
