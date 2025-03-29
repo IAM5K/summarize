@@ -22,11 +22,11 @@
     </h1>
     <!-- <ion-button (click)="testNotification()">Test Notification</ion-button> -->
 
-    <section class="transparent-card">
+    <section class="transparent-card padding-zero mb-0">
       <app-goal-on-dashboard></app-goal-on-dashboard>
     </section>
     <section class="features ion-padding ion-justify-content-around ion-margin ion-align-items-stretch ion-wrap">
-      <h2 class="ion-text-center h2 mt0">Available Features</h2>
+      <h2 class="ion-text-center h2 mt0">Features for you</h2>
       <div class="feature-card-container">
         <div
           class="feature-card"
@@ -39,6 +39,11 @@
         </div>
       </div>
     </section>
+
+    <section class="transparent-card padding-zero">
+      <app-quick-features class="bg-lime"></app-quick-features>
+    </section>
+
     <div class="card ion-padding">
       <h3>About Summarize</h3>
       <p class="ion-text-justify" *ngFor="let item of paragraphs">{{item}}</p>

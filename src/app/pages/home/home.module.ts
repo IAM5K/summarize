@@ -8,9 +8,10 @@ import { HomePageRoutingModule } from "./home-routing.module";
 
 import { HomePage } from "./home.page";
 import { GoalOnDashboardComponent } from "./components/goal-on-dashboard/goal-on-dashboard.component";
+import { QuickFeaturesComponent } from "./components/quick-features/quick-features.component";
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
-  declarations: [HomePage, GoalOnDashboardComponent],
+  declarations: [HomePage, GoalOnDashboardComponent, QuickFeaturesComponent],
 })
 export class HomePageModule {}
