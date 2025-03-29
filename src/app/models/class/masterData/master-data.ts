@@ -14,6 +14,18 @@ export const features: Features[] = [
     path: "goal",
   },
   {
+    title: "List",
+    icon: "cart",
+    color: "medium",
+    path: "expenses/shopping-list",
+  },
+  {
+    title: "Moments",
+    icon: "sparkles",
+    color: "warning",
+    path: "moments",
+  },
+  {
     title: "Studies",
     icon: "book",
     color: "tertiary",
@@ -24,11 +36,5 @@ export const features: Features[] = [
     icon: "hourglass",
     color: "danger",
     path: "time",
-  },
-  {
-    title: "Moments",
-    icon: "sparkles",
-    color: "warning",
-    path: "moments",
   },
 ];

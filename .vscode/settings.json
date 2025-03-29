@@ -17,6 +17,7 @@
     "Parens",
     "postbuild",
     "Registerables",
+    "rtdb",
     "rxfire",
     "Sandeep",
     "Sanyam",
@@ -83,6 +84,9 @@
     "editor.defaultFormatter": "redhat.vscode-xml"
   },
   "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
