@@ -1,6 +1,6 @@
 <section class="goal-dashboard feature-card-container">
   <ion-card class="daily-goal card">
-    <h2 class="ion-text-center bold h3">Goals for {{ dateToday }}</h2>
+    <h2 class="ion-text-center bold h4">Goals for {{ dateToday }}</h2>
     <div *ngIf="dailyGoals?.length > 0; else noDailyGoals">
       <ion-list [inset]="true">
         <ion-item-sliding *ngFor="let item of dailyGoals; let i = index">
@@ -42,9 +42,18 @@
     <ng-template #noDailyGoals>
       <div class="ion-text-center ion-padding">
         <p>No goals found.</p>
-        <ion-button color="tertiary" size="medium" class="ion-text-bold" routerLink="/goal">Add daily goal</ion-button>
       </div>
     </ng-template>
+    <div class="ion-padding goal-action-buttons">
+      <ion-button color="tertiary" size="medium" class="ion-text-bold">
+        <ion-icon name="create"></ion-icon>
+        <span>Manage</span>
+      </ion-button>
+      <ion-button color="success" size="medium" class="ion-text-bold">
+        <ion-icon name="flash"></ion-icon>
+        <span>Quick Add</span>
+      </ion-button>
+    </div>
   </ion-card>
   <ion-card class="daily-goal card">
     <h2 class="ion-text-center bold h4">Priority Goals</h2>
@@ -74,12 +83,12 @@
           <ion-item-options>
             <ion-item-option color="primary">
               <ion-button fill="clear" (click)="editGoal(item)">
-                <ion-icon class="white" [ios]="'create-outline'" [md]="'create-sharp'"></ion-icon>
+                <ion-icon color="dark" [ios]="'create-outline'" [md]="'create-sharp'"></ion-icon>
               </ion-button>
             </ion-item-option>
             <ion-item-option color="danger">
               <ion-button fill="clear" (click)="deleteGoal(item, item.idField)">
-                <ion-icon class="white" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+                <ion-icon color="dark" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
               </ion-button>
             </ion-item-option>
           </ion-item-options>
@@ -89,8 +98,18 @@
     <ng-template #noPriorityGoals>
       <div class="ion-text-center ion-padding">
         <p>No goals found.</p>
-        <ion-button color="tertiary" size="medium" class="ion-text-bold">Add Goals</ion-button>
       </div>
     </ng-template>
+
+    <div class="ion-padding goal-action-buttons">
+      <ion-button color="tertiary" size="medium" class="ion-text-bold">
+        <ion-icon name="create"></ion-icon>
+        <span>Manage</span>
+      </ion-button>
+      <ion-button color="success" size="medium" class="ion-text-bold">
+        <ion-icon name="flash"></ion-icon>
+        <span>Quick Add</span>
+      </ion-button>
+    </div>
   </ion-card>
 </section>
