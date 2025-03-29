@@ -42,6 +42,10 @@
   // min-height: 200px;
 }
 
+.min-h-250 {
+  min-height: 250px !important;
+}
+
 @media screen and (max-width: 992px) {
   .split-container {
     display: block;
@@ -205,6 +209,14 @@
 
 .tab-active {
   color: var(--ion-color-success) !important;
+}
+
+.margin-h-0 {
+  margin: 0 !important;
+  margin-inline-start: 0 !important;
+  margin-inline-end: 0 !important;
+  --margin-start: 0;
+  --margin-end: 0;
 }
 .padding-h-0,
 .padding-zero {
