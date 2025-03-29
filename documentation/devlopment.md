@@ -36,3 +36,38 @@ There are already code and logic for graph in analyze component,
     4. Bar graph showing 0 expense day, (Days on which Amount 0 was logged with type as saving)
     5. If you feel that we should add more graph then feel free to add 
 - Note: Do not change the core functionality, we have helper functions in `expense/modules` which we use to do calculations and return data back to analyze component. Prefer Using data type instead of any, in case you are not sure about data type you can use any.   
+
+
+Let's proceed with the following steps:
+
+Update goal-on-dashboard.component.ts:
+
+Add "Today" to the list of goal dates.
+Implement checkbox functionality to mark goals as done.
+Use Ionic swipe actions to implement edit and delete functionality.
+Update goal-on-dashboard.component.html:
+
+Add checkbox functionality to mark goals as done.
+Use Ionic swipe actions for edit and delete functionality.
+Update goal.page.html:
+
+Create a similar UI for goals as in the expense cards, including responsive options.
+Step 1: Update goal-on-dashboard.component.ts
+We will add "Today" to the list of goal dates and implement checkbox functionality to mark goals as done.
+
+Step 2: Update goal-on-dashboard.component.html
+We will add checkbox functionality to mark goals as done and use Ionic swipe actions for edit and delete functionality.
+
+Step 3: Update goal.page.html
+We will create a similar UI for goals as in the expense cards, including responsive options.
+
+Let's proceed with the changes.
+
+Update goal-on-dashboard.component.ts
+We will add "Today" to the list of goal dates and implement checkbox functionality to mark goals as done.
+
+Update goal-on-dashboard.component.html
+We will add checkbox functionality to mark goals as done and use Ionic swipe actions for edit and delete functionality.
+
+Update goal.page.html
+We will create a similar UI for goals as in the expense cards, including responsive options.
