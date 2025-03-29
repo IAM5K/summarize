@@ -1,15 +1,16 @@
-export interface GoalData {
-  createdAt?: { seconds: number; nanoseconds: number };
-  type: string;
-  gTerm: string;
-  reward: string;
-  progress: number;
-  date: string;
-  title: string;
-  description: string;
-  updatedAt?: { seconds: number; nanoseconds: number };
-  penalty: string;
-  resource: string;
-  actionSteps: string;
+export interface IGoalData {
   idField?: string;
+  title: string;
+  gTerm?: string;
+  type: string;
+  date: string;
+  progress: number;
+  reward?: string;
+  resource?: string;
+  description?: string;
+  actionSteps?: string;
+  penalty?: string;
+  createdAt?: any;
+  updatedAt?: any;
+  completedOn?: Date;
 }

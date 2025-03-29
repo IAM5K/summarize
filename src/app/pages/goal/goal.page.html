@@ -35,11 +35,7 @@
               fill="outline"
               (ionChange)="dateUpdate()"
             >
-              <ion-select-option
-                *ngFor="let item of goalType"
-                [value]="item.value"
-                aria-label="Goal Type option"
-              >
+              <ion-select-option *ngFor="let item of goalType" [value]="item.value" aria-label="Goal Type option">
                 {{item.title}}
               </ion-select-option>
             </ion-select>
@@ -63,9 +59,7 @@
               placeholder="Category of Goal"
               fill="outline"
             >
-              <ion-select-option *ngFor="let type of goalFor" [value]="type.value">
-                {{type.title}}
-              </ion-select-option>
+              <ion-select-option *ngFor="let type of goalFor" [value]="type.value">{{type.title}}</ion-select-option>
             </ion-select>
           </div>
           <div class="input-item">
@@ -142,7 +136,12 @@
             ></ion-input>
           </div>
           <div class="input-item">
-            <ion-button color="primary" type="submit" size="medium" [disabled]="goalForm.invalid">
+            <ion-button
+              color="primary"
+              type="submit"
+              size="medium"
+              [disabled]="goalForm.invalid || submissionInProgress"
+            >
               Submit
             </ion-button>
             <ion-button color="warning" type="reset" size="medium">Reset</ion-button>
@@ -150,18 +149,86 @@
         </form>
       </div>
     </div>
-
     <div class="goals-list ion-margin">
       <ion-note color="secondary">
-        Note: This Feature is under development. Please give us some time to complete it. Till then
-        feel free to add goals. Manage goals will be available soon. If you feel you have already
-        waited for long, ping me on
-        <a href="https://www.linkedin.com/in/iam5k/" target="_blank" rel="noopener noreferrer">
-          LinkedIn
-        </a>
+        Note: This Feature is under development. Please give us some time to complete it. Till then feel free to add
+        goals. Manage goals will be available soon. If you feel you have already waited for long, ping me on
+        <a href="https://www.linkedin.com/in/iam5k/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </ion-note>
 
-      <!-- <p *ngFor="let item of goalData">{{item.title}}</p> -->
+      <div *ngFor="let goal of dailyGoals">
+        <ion-item-sliding class="ion-no-padding">
+          <ion-item color="none" lines="none" no-padding>
+            <ion-card class="container-70-30" color="light">
+              <ion-card-header class="left-70">
+                <div class="ion-flex ion-justify-content-between ion-align-items-center">
+                  <ion-note color="primary">{{goal.date}} : {{goal.type | uppercase }}</ion-note>
+                  <ion-badge color="success">{{goal.type | titlecase}}</ion-badge>
+                </div>
+                <ion-card-title>{{goal.title}}</ion-card-title>
+                <ion-card-subtitle class="ion-text-wrap">{{goal.description}}</ion-card-subtitle>
+              </ion-card-header>
+              <div class="goal-action-container" *ngIf="isLargeScreen">
+                <ion-button color="secondary" (click)="editGoal(goal)">
+                  <ion-icon [ios]="'create-outline'" [md]="'create-sharp'"></ion-icon>
+                </ion-button>
+                <ion-button color="danger" (click)="deleteGoal(goal, goal.idField)">
+                  <ion-icon [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+                </ion-button>
+              </div>
+            </ion-card>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="primary">
+              <ion-button fill="clear" (click)="editGoal(goal)">
+                <ion-icon class="white" [ios]="'create-outline'" [md]="'create-sharp'"></ion-icon>
+              </ion-button>
+            </ion-item-option>
+            <ion-item-option color="danger">
+              <ion-button fill="clear" (click)="deleteGoal(goal, goal.idField)">
+                <ion-icon class="white" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+              </ion-button>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </div>
+
+      <div *ngFor="let goal of priorityGoals">
+        <ion-item-sliding class="ion-no-padding">
+          <ion-item color="none" lines="none" no-padding>
+            <ion-card class="container-70-30" color="light">
+              <ion-card-header class="left-70">
+                <div class="ion-flex ion-justify-content-between ion-align-items-center">
+                  <ion-note color="primary">{{goal.date}} : {{goal.type | uppercase }}</ion-note>
+                  <ion-badge color="success">{{goal.type | titlecase}}</ion-badge>
+                </div>
+                <ion-card-title>{{goal.title}}</ion-card-title>
+                <ion-card-subtitle class="ion-text-wrap">{{goal.description}}</ion-card-subtitle>
+              </ion-card-header>
+              <div class="goal-action-container" *ngIf="isLargeScreen">
+                <ion-button color="secondary" (click)="editGoal(goal)">
+                  <ion-icon [ios]="'create-outline'" [md]="'create-sharp'"></ion-icon>
+                </ion-button>
+                <ion-button color="danger" (click)="deleteGoal(goal, goal.idField)">
+                  <ion-icon [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+                </ion-button>
+              </div>
+            </ion-card>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="primary">
+              <ion-button fill="clear" (click)="editGoal(goal)">
+                <ion-icon class="white" [ios]="'create-outline'" [md]="'create-sharp'"></ion-icon>
+              </ion-button>
+            </ion-item-option>
+            <ion-item-option color="danger">
+              <ion-button fill="clear" (click)="deleteGoal(goal, goal.idField)">
+                <ion-icon class="white" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+              </ion-button>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </div>
     </div>
   </div>
 </ion-content>
