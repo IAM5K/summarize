@@ -226,7 +226,7 @@
       </div>
 
       <div class="card ion-margin ion-padding disclaimer">
-        <h3 class="mt-0 h2">{{ budgetExists ? 'My budget' : 'Record and Analyze Expense' }}</h3>
+        <h3 class="mt-0 h3 mb-5">{{ budgetExists ? 'My budget' : 'Add Budget' }}</h3>
         <ion-note *ngIf="!budgetExists" color="secondary" class="ion-margin ion-text-justify">{{budgetNote}}</ion-note>
 
         <form class="form-container budget-container" [formGroup]="budgetForm" novalidate>
@@ -279,18 +279,24 @@
             </div>
           </div>
         </form>
-        <div *ngIf="budgetExists">
-          <span class="h2 ml-10">Existing Budget</span>
+        <div *ngIf="budgetExists; else noBudget" class="form-container">
+          <span class="h3">Monthly Budget</span>
           <ion-list class="form-ion-list mt-15px" lines="none">
             <ion-item lines="none">
-              <ion-label class="ion-text-bold">Month : Amount</ion-label>
+              <ion-label class="ion-text-bold">Month</ion-label>
+              <ion-label class="ion-text-bold">Amount</ion-label>
             </ion-item>
             <ion-item lines="none" *ngFor="let item of Budget">
               <ion-label class="ion-text-bold">{{ item.month | date:'MMM y' }}</ion-label>
-              <ion-label>: {{expenseCurrency}} {{item.amount}}</ion-label>
+              <ion-label>{{expenseCurrency}} {{item.amount}}</ion-label>
             </ion-item>
           </ion-list>
         </div>
+        <ng-template #noBudget>
+          <ion-note color="warning" class="ion-margin ion-text-justify">
+            No Budget Found, Fill amount and add budget.
+          </ion-note>
+        </ng-template>
       </div>
     </ng-container>
   </div>

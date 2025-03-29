@@ -119,6 +119,7 @@ export class ExpensesPage implements OnInit {
   ngOnInit() {
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.getExpenses();
+    this.getBudget();
     console.log(this.dateToday);
   }
 
@@ -301,6 +302,8 @@ export class ExpensesPage implements OnInit {
   async getBudget() {
     await this.expenseService.getBudget().subscribe((res: any) => {
       this.Budget = res;
+      console.log("Budget", res);
+
       if (this.Budget.length > 0) {
         this.budgetExists = true;
       }
