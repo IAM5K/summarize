@@ -1,5 +1,17 @@
+.feature-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
 .daily-goal {
   position: relative;
+  display: flex;
+  flex-direction: column;
   min-height: 175px;
   height: auto;
   width: 100%;
@@ -12,16 +24,6 @@
   }
 }
 
-.feature-card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-}
-
 ion-icon {
   cursor: help;
 }
@@ -29,8 +31,22 @@ ion-icon {
 .goal-action-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: auto;
   ion-button {
     width: calc(50% - 0.5rem);
+    span {
+      font-size: 1rem;
+      @media screen and (max-width: 992px) {
+        font-size: 0.8rem;
+      }
+    }
+    ion-icon {
+      font-size: 1.1rem;
+      padding-bottom: 2px;
+      margin-right: 0.4rem;
+      @media screen and (max-width: 992px) {
+        font-size: 0.9rem;
+      }
+    }
   }
 }
