@@ -1,3 +1,5 @@
+import { ModalController } from "@ionic/angular";
+import { QuickGoalModalComponent } from "../../../goal/components/quick-goal-modal/quick-goal-modal.component";
 import { DatePipe } from "@angular/common";
 import { Component, HostListener, OnInit } from "@angular/core";
 import { serverTimestamp } from "@angular/fire/firestore";
@@ -25,6 +27,7 @@ export class GoalOnDashboardComponent implements OnInit {
     private goalService: GoalService,
     private toasterService: ToasterService,
     private datePipe: DatePipe,
+    private modalController: ModalController,
   ) {
     this.goalForm = this.fb.group({
       updatedAt: [serverTimestamp()],
@@ -83,5 +86,13 @@ export class GoalOnDashboardComponent implements OnInit {
 
   deleteGoal(goal: IGoalData, goalId: string) {
     this.goalService.deleteGoal(goal, goalId);
+  }
+
+  async openAddGoalModal(goalType: string) {
+    const modal = await this.modalController.create({
+      component: QuickGoalModalComponent,
+      componentProps: { goalType },
+    });
+    await modal.present();
   }
 }

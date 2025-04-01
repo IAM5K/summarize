@@ -45,11 +45,11 @@
       </div>
     </ng-template>
     <div class="ion-padding goal-action-buttons">
-      <ion-button color="tertiary" size="medium" class="ion-text-bold">
+      <ion-button color="tertiary" size="medium" class="ion-text-bold" routerLink="/goals">
         <ion-icon name="cog"></ion-icon>
         <span>Manage</span>
       </ion-button>
-      <ion-button color="success" size="medium" class="ion-text-bold">
+      <ion-button color="success" size="medium" class="ion-text-bold" (click)="openAddGoalModal('daily')">
         <ion-icon name="flash"></ion-icon>
         <span>Add</span>
       </ion-button>
@@ -102,11 +102,11 @@
     </ng-template>
 
     <div class="ion-padding goal-action-buttons">
-      <ion-button color="tertiary" size="medium" class="ion-text-bold">
+      <ion-button color="tertiary" size="medium" class="ion-text-bold" routerLink="/goals">
         <ion-icon name="cog"></ion-icon>
         <span>Manage</span>
       </ion-button>
-      <ion-button color="success" size="medium" class="ion-text-bold">
+      <ion-button color="success" size="medium" class="ion-text-bold" (click)="openAddGoalModal('priority')">
         <ion-icon name="flash"></ion-icon>
         <span>Add</span>
       </ion-button>
