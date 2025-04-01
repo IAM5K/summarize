@@ -37,8 +37,6 @@ export class ExpenseService {
   }
 
   addExpense(data: any) {
-    console.log(data);
-
     this.expenseCollection
       .doc(this.userId)
       .collection("myExpence")

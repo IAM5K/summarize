@@ -79,7 +79,7 @@ export class ExpensesPage implements OnInit {
 
   // Submit the expense (or perform any action like saving or sending to API)
   submitExpense() {
-    console.log("Submitting expense:", this.expenseInput);
+    // console.log("Submitting expense:", this.expenseInput);
     // Add your logic to submit the expense, like sending it to an API
   }
 
@@ -120,7 +120,7 @@ export class ExpensesPage implements OnInit {
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.getExpenses();
     this.getBudget();
-    console.log(this.dateToday);
+    // console.log(this.dateToday);
   }
 
   async getExpenses() {
@@ -169,8 +169,7 @@ export class ExpensesPage implements OnInit {
       role: "confirm",
       handler: (value: object) => {
         if (value) {
-          console.log("Zero expense date:", value);
-
+          // console.log("Zero expense date:", value);
           this.addZeroExpense(value[0].toString());
         } else {
           this.toaster.showToast("Submitted without selection", "danger");
@@ -191,15 +190,11 @@ export class ExpensesPage implements OnInit {
       reimburseable: false,
       updatedAt: serverTimestamp(),
     };
-    console.log("Zero expense value:", zeroExpenseValue);
-    // this.expenseService.addExpense(zeroExpenseValue);
-
+    this.expenseService.addExpense(zeroExpenseValue);
     this.seoService.eventTrigger("form", this.pageTitle);
   }
 
   editExpense(expense: ExpenseData) {
-    console.log("Edit expense called");
-
     this.editMode = true;
     this.editExpenseData = expense;
     this.expenseForm.patchValue({
@@ -243,12 +238,10 @@ export class ExpensesPage implements OnInit {
   }
 
   onDeleteExpense(expenseItem: any) {
-    console.log("Delete expense:", expenseItem);
+    // console.log("Delete expense:", expenseItem);
     // Your delete expense logic here
   }
   async deleteExpense(idField: string) {
-    console.log("Delete function called");
-
     const response = await this.alertService.deleteAlert();
     if (response === "confirm") {
       this.expenseService.deleteExpense(idField);
@@ -277,7 +270,7 @@ export class ExpensesPage implements OnInit {
     await modal.present();
     const { data } = await modal.onDidDismiss();
     if (data) {
-      console.log("Filter data:", data);
+      // console.log("Filter data:", data);
       const filterQuery: any = {};
       // Apply date filtering: if customRange exists it takes precedence.
       if (data.customRange) {
@@ -302,7 +295,7 @@ export class ExpensesPage implements OnInit {
   async getBudget() {
     await this.expenseService.getBudget().subscribe((res: any) => {
       this.Budget = res;
-      console.log("Budget", res);
+      // console.log("Budget", res);
 
       if (this.Budget.length > 0) {
         this.budgetExists = true;
@@ -401,7 +394,7 @@ export class ExpensesPage implements OnInit {
     // );
     await this.genAi.processExpenseData(description).subscribe({
       next: (response) => {
-        console.log("AI Response:", response);
+        // console.log("AI Response:", response);
         // Assuming response contains the processed expenses
         // this.processedExpenses = this.transformAiResponse(response);
         // this.processing = false;
