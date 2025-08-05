@@ -24,7 +24,6 @@ export class SeoService {
       event: eventName,
       pageName: pageName,
     };
-    console.log("pushing analytics from seo:", gtmTag);
 
     this.gtmService.pushTag(gtmTag);
   }
