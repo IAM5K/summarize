@@ -46,6 +46,10 @@
   min-height: 250px !important;
 }
 
+.w-100 {
+  width: 100% !important;
+}
+
 @media screen and (max-width: 992px) {
   .split-container {
     display: block;
@@ -328,4 +332,12 @@
 }
 .ion-flex {
   display: flex;
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
 }

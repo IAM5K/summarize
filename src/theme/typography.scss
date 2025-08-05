@@ -17,7 +17,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+ion-note {
   display: block !important;
   position: relative;
   width: 100% !important;
@@ -130,4 +131,12 @@ ion-title {
 }
 .strike-through {
   text-decoration: line-through;
+}
+
+.fixed-bottom {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
