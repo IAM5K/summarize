@@ -23,6 +23,7 @@
     "Sanyam",
     "spended",
     "subdir",
+    "uids",
     "uncategorized",
     "vertexai"
   ],
@@ -52,32 +53,32 @@
       "color": "lime",
       "backgroundColor": "rgba(0, 0, 0, 0.2)",
       "overviewRulerColor": "grey",
-      "isWholeLine": true // Highlight the complete line
+      "isWholeLine": true
     },
     {
       "text": "Info:",
-      "color": "#00FFFF", // Aqua color
+      "color": "#00FFFF",
       "backgroundColor": "rgba(0, 0, 0, 0.2)",
-      "isWholeLine": true // Highlight the complete line
+      "isWholeLine": true
     },
     {
       "text": "FIXME:",
-      "color": "orange",
+      "color": "red",
       "backgroundColor": "rgba(0, 0, 0, 0.2)",
-      "isWholeLine": true // Highlight the complete line
+      "isWholeLine": true
     },
     {
       "text": "TODO:",
-      "color": "red",
+      "color": "orange",
       "backgroundColor": "rgba(0, 0, 0, 0.2)",
-      "borderRadius": "2px", // Using borderRadius along with `border`
-      "isWholeLine": true // Highlight the complete line
+      "borderRadius": "2px",
+      "isWholeLine": true
     },
     {
       "text": "CHORE:",
-      "color": "#FF00FF", // Magenta color
+      "color": "#FF00FF",
       "backgroundColor": "rgba(0, 0, 0, 0.2)",
-      "isWholeLine": true // Highlight the complete line
+      "isWholeLine": true
     }
   ],
   "[xml]": {
@@ -87,6 +88,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
