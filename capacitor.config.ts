@@ -2,7 +2,7 @@ import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
   appId: "app.web.summarize",
-  appName: "summarize",
+  appName: "Summarize",
   webDir: "www",
   bundledWebRuntime: false,
   plugins: {
