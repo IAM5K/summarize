@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">summarize</string>
-    <string name="title_activity_main">summarize</string>
+    <string name="app_name">Summarize</string>
+    <string name="title_activity_main">Summarize</string>
     <string name="package_name">app.web.summarize</string>
     <string name="custom_url_scheme">app.web.summarize</string>
 </resources>
