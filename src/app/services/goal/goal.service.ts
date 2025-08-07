@@ -47,6 +47,11 @@ export class GoalService {
   async addGoal(data: IGoalData) {
     const goalTerm = data.gTerm === "Daily" ? "dailyGoals" : "priorityGoals";
     const userId = this.fs.userData.uid;
+    if (!userId) {
+      console.error("User ID is not available");
+      this.toasterService.showToast("User ID is not available, check if you are logged in.", "danger");
+      return;
+    }
     await this.goalCollection
       .doc(userId)
       .collection(goalTerm)
@@ -76,7 +81,7 @@ export class GoalService {
   async updateDailyGoal(data: IGoalData, idField: string) {
     try {
       const userId = this.fs.userData.uid;
-      const goalTerm = data.gTerm === "Daily" ? "completedGoals" : "priorityGoals";
+      const goalTerm = data.gTerm === "Daily" ? "dailyGoals" : "priorityGoals";
       delete data.idField;
       await this.goalCollection.doc(userId).collection(goalTerm).doc(idField).update(data);
       this.toasterService.showToast(this.updateMessage, "success");
