@@ -4,11 +4,11 @@ import { serverTimestamp } from "@angular/fire/firestore";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { SeoTags } from "src/app/models/class/seoTags/seo";
 import { StudyOptionsData } from "src/app/models/data/studyOptions.data";
-import { extractSubjects } from "src/app/models/functions/studies.function";
 import { AlertService } from "src/app/services/alert/alert.service";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { SeoService } from "src/app/services/seo/seo.service";
 import { StudiesService } from "src/app/services/studies/studies.service";
+import { ToasterService } from "src/app/services/toaster/toaster.service";
 import { RealTimeDataBaseService } from "src/app/shared/db/real-time-data-base.service";
 
 @Component({
@@ -32,6 +32,7 @@ export class StudiesPage implements OnInit, AfterViewInit, AfterContentInit {
     private changeDetectorRef: ChangeDetectorRef,
     private zone: NgZone,
     private rtdb: RealTimeDataBaseService,
+    private toaster: ToasterService,
   ) {}
 
   pageTitle = "Studies";
@@ -40,7 +41,7 @@ export class StudiesPage implements OnInit, AfterViewInit, AfterContentInit {
   Studies: any = [];
   studiesCount: number = 0;
   currentTime = this.datePipe.transform(new Date(), "hh:mm");
-  advancedMode: boolean = false;
+  advancedMode: boolean = true;
   advancedModeAvailable: boolean = true;
   editMode: boolean = false;
   updateSubmitted: boolean = false;
@@ -69,16 +70,22 @@ export class StudiesPage implements OnInit, AfterViewInit, AfterContentInit {
   }
 
   async ngAfterContentInit(): Promise<void> {
-    await this.rtdb.getTargetExam().subscribe((data) => {
-      this.examsList = data;
-    });
+    try {
+      await this.rtdb.getTargetExam().subscribe((data) => {
+        this.examsList = data;
+      });
+    } catch (error) {
+      console.log("Error fetching target exams:", error);
+      this.toaster.showToast("Error fetching target exams", "danger");
+    }
+
     this.getActiveExamList();
   }
 
   getActiveExamList() {
     this.profileService.getExams().subscribe((res: any) => {
       this.examAspirations = res;
-      this.subjects = extractSubjects(this.examAspirations, this.examsList);
+      // this.subjects = extractSubjects(this.examAspirations, this.examsList);
     });
   }
   async getStudies() {
@@ -227,9 +234,9 @@ export class StudiesPage implements OnInit, AfterViewInit, AfterContentInit {
     const profileData = await this.profileService.getProfileData();
     if (profileData.educationDetails) {
       this.advancedModeAvailable = true;
-      this.advancedMode = false;
+      this.advancedMode = true;
     } else {
-      this.advancedModeAvailable = false;
+      this.advancedModeAvailable = true;
     }
   }
 }
