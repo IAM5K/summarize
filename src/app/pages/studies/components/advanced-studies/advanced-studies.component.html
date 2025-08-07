@@ -1,10 +1,173 @@
 <div class="ion-justify-content-center flex">
-  <h1>
-    Feature coming soon!
-    <br />
-    <ion-note color="secondary">
-      Users will be able to log and track their studies based on their syllabus of either School,
-      college or any competitive exam.
-    </ion-note>
-  </h1>
+  <h1>PYQ Practice for UPSC Students</h1>
 </div>
+
+<form [formGroup]="answersForm" (ngSubmit)="onSubmit()">
+  <div class="exam-selection card ion-padding" *ngIf="!examStarted">
+    <ion-list class="form-ion-list">
+      <ion-item fill="none">
+        <ion-label>Exam Year</ion-label>
+        <ion-select [value]="selectedYear" (ionChange)="onYearChange($event)">
+          <ion-select-option *ngFor="let item of examYears" [value]="item">{{ item }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Paper</ion-label>
+        <ion-select [value]="selectedPaper" (ionChange)="onPaperChange($event)">
+          <ion-select-option *ngFor="let paper of papers" [value]="paper">Paper {{ paper }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" type="button" (click)="startExam()">Start Exam</ion-button>
+  </div>
+
+  <div class="pyq-questions ion-padding" *ngIf="examStarted">
+    <div>
+      <h3>Year: {{ selectedYear }} | Paper: {{ selectedPaper }}</h3>
+    </div>
+
+    <div *ngFor="let q of questions" class="pyq-question-row">
+      <div class="pyq-qno">{{ q }}.</div>
+      <div class="pyq-options flex-align-center">
+        <ion-radio-group [formControlName]="'q' + q">
+          <ion-item *ngFor="let opt of options">
+            <ion-label>{{ opt }}</ion-label>
+            <ion-radio slot="start" [value]="opt"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <ion-button
+          fill="clear"
+          size="small"
+          color="danger"
+          (click)="clearAnswer(q)"
+          title="Clear answer"
+          type="button"
+        >
+          <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+        </ion-button>
+      </div>
+      <!-- Add this method in your component.ts -->
+      <!--
+clearAnswer(q: number) {
+  this.answersForm.get('q' + q)?.setValue(null);
+}
+-->
+    </div>
+    <div class="pyq-actions-row">
+      <ion-button color="danger" (click)="exitExam()">Exit Exam</ion-button>
+      <ion-button color="success" type="submit" [disabled]="loading">Submit</ion-button>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="showResultAnalysis && resultAnalysis" class="result-analysis ion-padding">
+  <h2>Result Analysis</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Questions</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="ion-text-bold">Total</td>
+        <td>{{ resultAnalysis.total }}</td>
+        <td>{{ resultAnalysis.fullMarks }}</td>
+      </tr>
+      <tr>
+        <td class="ion-text-bold">Correct</td>
+        <td>{{ resultAnalysis.correct }}</td>
+        <td>{{ resultAnalysis.correctScore.toFixed(2) }}</td>
+      </tr>
+      <tr>
+        <td class="ion-text-bold">Wrong</td>
+        <td>{{ resultAnalysis.wrong }}</td>
+        <td>-{{ resultAnalysis.incorrectScore.toFixed(2) }}</td>
+      </tr>
+      <tr>
+        <td class="ion-text-bold">Un-attempted</td>
+        <td>{{ resultAnalysis.unanswered }}</td>
+        <td>{{ resultAnalysis.unansweredScore.toFixed(2) }}</td>
+      </tr>
+      <tr>
+        <td class="ion-text-bold">Attempted</td>
+        <td colspan="2">{{ resultAnalysis.total - resultAnalysis.unanswered }}</td>
+      </tr>
+      <tr>
+        <td class="ion-text-bold">Accuracy</td>
+        <td colspan="2">{{ resultAnalysis.accuracy }}%</td>
+      </tr>
+      <tr>
+        <td class="ion-text-bold">Final Score</td>
+        <td colspan="2">{{ resultAnalysis.totalScore }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ion-note color="warning">
+    Result Analysis will be gone after you exit this page or take any other action. Please keep a copy of this to refer
+    later.
+  </ion-note>
+  <ion-button color="medium" (click)="copyResult()">Copy Result</ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let detail of resultAnalysis.details">
+      <ion-label>
+        Q{{ detail.question }}:
+        <span [ngStyle]="{ color: detail.isCorrect ? 'green' : detail.userAnswer ? 'red' : 'gray' }">
+          Your Answer: {{ detail.userAnswer || "Not Answered" }}
+        </span>
+        <span *ngIf="!detail.isCorrect && detail.userAnswer">| Correct: {{ detail.correctAnswer }}</span>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="showResultAnalysis = false">Close</ion-button>
+</div>
+
+<div class="" *ngIf="!examStarted && resultHistoryList !== null">
+  <h2 class="h3 ion-margin">Previous Results</h2>
+  <ion-card class="ion-margin" *ngFor="let result of resultHistoryList">
+    <ion-card-header>
+      <ion-card-title>Year: {{ result.year }} | Paper: {{ result.paper }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text class="ion-text-bold" color="secondary">
+        Attempted On: {{ result.attemptedOn | date: "short" }}
+      </ion-text>
+      <p>
+        <span class="ion-text-bold">Score: {{ result?.analysis?.totalScore }}</span>
+      </p>
+
+      <ion-text color="success">
+        <span class="ion-text-bold">Correct Answers: {{ result?.analysis?.correct }}</span>
+      </ion-text>
+
+      <p>
+        <ion-text color="medium">
+          <span class="ion-text-bold">Attempted: {{ result?.analysis?.total - result?.analysis?.unanswered }}</span>
+        </ion-text>
+      </p>
+      <p>
+        <ion-text color="danger">
+          <span class="ion-text-bold">Wrong Answers: {{ result?.analysis?.wrong }}</span>
+        </ion-text>
+      </p>
+      <p>
+        <ion-text color="medium">
+          <span class="ion-text-bold">Un-attempted: {{ result?.analysis?.unanswered }}</span>
+        </ion-text>
+      </p>
+      <p>
+        <span class="ion-text-bold">Accuracy: {{ result?.analysis?.accuracy }}%</span>
+      </p>
+    </ion-card-content>
+  </ion-card>
+</div>
+
+<ion-note color="secondary" class="ion-padding fixed-bottom">
+  For any suggestion/feedback/issues, please reach out to us.
+  <a class="color-secondary ion-text-bold" routerLink="/help/contact">Contact Us</a>
+</ion-note>

@@ -1,5 +1,64 @@
-.flex{
-    display: flex;
-    align-items: center;
-    text-align: center;
+.pyq-actions-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  ion-button {
+    --padding-start: 1rem;
+    --padding-end: 1rem;
+    width: 50%;
+  }
+}
+.flex {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.pyq-question-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  background: transparent;
+  border-radius: 0;
+  padding: 0.25rem 0;
+}
+.pyq-qno {
+  font-weight: bold;
+  margin-right: 1rem;
+  min-width: 2rem;
+}
+.pyq-options {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  min-width: 200px;
+}
+.pyq-options ion-item {
+  --background: transparent;
+  --min-width: 40px;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin: 0;
+  padding: 0 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  width: auto;
+}
+.pyq-options ion-label {
+  margin: 0 0.25rem 0 0;
+  font-weight: 500;
+  display: inline;
+}
+
+.result-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  th {
+    min-width: min(30%, 200px);
+    text-align: left;
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem;
+  }
 }
