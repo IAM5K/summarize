@@ -38,8 +38,8 @@
         </div>
       </form>
 
-      <ion-note color="warning" class="mt-15px ion-text-bold">
-        Please use valid email else we will not be able to retrieve data in case of forgotten password.
+      <ion-note color="warning" class="mt-15px">
+        Note: Please use valid email else we will not be able to retrieve data in case of forgotten password.
       </ion-note>
       <!-- <ion-note color="secondary" class="mt-15px ion-text-bold">
         New section added for UPSC PYQ practice. Please login and check the studies section.
@@ -68,12 +68,14 @@
         </div>
       </form>
     </div>
-    <div class="mt-5">
-      <h2><ion-note color="success" class="h3 ml-5">Recommended</ion-note></h2>
-      <ion-button type="button" expand="block" color="success" class="btn-google-login" (click)="loginWithGoogle()">
+    <div class="mt-10">
+      <ion-button type="button" expand="block" color="primary" class="btn-google-login" (click)="loginWithGoogle()">
         <ion-icon name="logo-google"></ion-icon>
         <span>Login with Google</span>
       </ion-button>
+      <ion-note color="success" class="mt-15px ion-text-bold">
+        Note: Google login is recommended for better security and ease of use.
+      </ion-note>
     </div>
   </div>
   <div class="card ion-padding" *ngIf="showFaq">

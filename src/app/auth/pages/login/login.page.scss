@@ -9,17 +9,25 @@ h1 {
   --background: var(--ion-color-success);
   --color: #fff;
   --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
   display: flex;
   align-items: center;
   justify-content: center;
-  &:hover {
-    --background: darken(var(--ion-color-success), 5%);
-  }
+
   ion-icon {
-    margin-right: 10px;
+    margin-right: 8px;
+    display: inline-flex;
+    font-size: 20px;
   }
+
   span {
-    padding-top: 3px;
+    display: inline-flex;
+    align-items: center;
     font-weight: bold;
+    padding-top: 2px;
+  }
+
+  &:hover {
+    --background: #2e9b5d;
   }
 }
