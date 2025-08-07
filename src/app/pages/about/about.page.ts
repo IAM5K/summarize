@@ -49,7 +49,6 @@ export class AboutPage implements OnInit, AfterViewInit, AfterContentInit {
   }
   getRecentUpdateInfo(): void {
     this.rtdb.getAboutData("recentUpdate").subscribe((data) => {
-      console.log(data);
       this.releaseDetails = data;
     });
   }
