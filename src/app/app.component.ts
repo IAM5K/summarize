@@ -31,11 +31,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    if (isPlatform("mobile")) {
-      StatusBar.setBackgroundColor({ color: "#3880ff" }).catch((error) => {
-        console.error("error while setting background color", error);
-      });
-    }
     this.firebaseService.getUserProfile();
     this.getUser();
   }
@@ -52,8 +47,21 @@ export class AppComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this.notificationsService.schedule9PMNotification();
-    this.notificationsService.checkNotificationPreference();
+    try {
+      StatusBar.setBackgroundColor({ color: "#3880ff" }).catch((error) => {
+        if (!error || !error.message || !error.message.includes("not implemented on web")) {
+          console.error("error while setting background color", error);
+        }
+      });
+      if (isPlatform("capacitor")) {
+        this.notificationsService.schedule9PMNotification();
+        this.notificationsService.checkNotificationPreference();
+      }
+    } catch (error) {
+      if (!error || !error.message || !error.message.includes("not implemented on web")) {
+        console.error("Error with PushNotifications or related plugin:", error);
+      }
+    }
   }
 
   private initGoogleTagManager(): void {
@@ -64,8 +72,7 @@ export class AppComponent implements OnInit, AfterViewInit {
             event: "page_view",
             pageName: event.urlAfterRedirects,
           };
-          console.log("pushing gtm from app module", gtmTag);
-          // this.gtmService.pushTag(gtmTag);
+          this.gtmService.pushTag(gtmTag);
         }
       } catch (error) {
         console.error("Error occurred in Google Tag Manager:", error);
