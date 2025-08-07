@@ -80,7 +80,6 @@ export class TimePage implements OnInit, OnDestroy {
   async getProjects() {
     this.projectSubscription = await this.profileService.getActiveProjects().subscribe((res: any) => {
       this.projects = res.filter((project) => project.isActive);
-      console.log(this.projects);
 
       if (this.projects.length > 0) {
         this.workForm.patchValue({
