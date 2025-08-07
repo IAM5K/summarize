@@ -307,15 +307,19 @@ export class ExpensesPage implements OnInit {
     const month = this.budgetForm.value.month;
     let savedBudget: any;
     let monthExists: any;
-    await this.getBudget().then((res) => {
-      const tempBudget = sessionStorage.getItem("budget");
-      if (tempBudget) {
-        savedBudget = JSON.parse(tempBudget);
-      } else {
-        alert("There was some error in adding budget. Try later or report via help section.");
-      }
-      monthExists = savedBudget.find((item: any) => item.month === month);
-    });
+    await this.getBudget()
+      .then((res) => {
+        const tempBudget = sessionStorage.getItem("budget");
+        if (tempBudget) {
+          savedBudget = JSON.parse(tempBudget);
+        } else {
+          alert("There was some error in adding budget. Try later or report via help section.");
+        }
+        monthExists = savedBudget.find((item: any) => item.month === month);
+      })
+      .catch((error) => {
+        console.error("Error fetching budget:", error);
+      });
     if (monthExists) {
       alert("This month already exists.Please use update section to verify and update.");
     } else {
