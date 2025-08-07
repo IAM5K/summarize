@@ -28,11 +28,9 @@ export class HomePage implements OnInit, AfterViewInit {
   ngOnInit() {
     this.seoService.seo(this.title, this.pageMetaTags);
     this.notificationsService.schedule9PMNotification();
-    console.log("meta tag updated, moving to after init");
   }
 
   ngAfterViewInit(): void {
-    console.log("Executing after view init");
     this.getAboutParagraphs();
     this.seoService.eventTrigger("page_view", this.title);
   }
