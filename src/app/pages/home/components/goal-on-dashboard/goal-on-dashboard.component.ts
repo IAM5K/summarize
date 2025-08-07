@@ -53,9 +53,11 @@ export class GoalOnDashboardComponent implements OnInit {
     if (userProfile) {
       this.goalService.getDailyGoal().subscribe((res: any) => {
         this.dailyGoals = res;
+        console.log("Daily Goals:", this.dailyGoals);
       });
       this.goalService.getPriorityGoal().subscribe((res: any) => {
         this.priorityGoals = res;
+        console.log("Priority Goals:", this.priorityGoals);
       });
     } else {
       this.toasterService.showToast("No goals found : User not logged in.", "warning");
@@ -89,10 +91,31 @@ export class GoalOnDashboardComponent implements OnInit {
   }
 
   async openAddGoalModal(goalType: string) {
+    if (!this.firebaseService.userData) {
+      this.toasterService.showToast("Please login to add a goal.", "warning");
+      return;
+    }
+    console.log("User is logged in:", this.firebaseService.userData);
     const modal = await this.modalController.create({
       component: QuickGoalModalComponent,
       componentProps: { goalType },
     });
     await modal.present();
+    const { data } = await modal.onDidDismiss();
+    if (data) {
+      console.log("Goal submitted from modal:", data, goalType);
+      this.addGoal(data, goalType);
+    }
+  }
+
+  addGoal(goalData: any, goalType: string) {
+    this.goalForm.value.gTerm = goalType;
+    this.goalForm.value.date = this.dateToday;
+    this.goalForm.value.progress = 0;
+    this.goalForm.value.updatedAt = serverTimestamp();
+    this.goalForm.value.createdAt = serverTimestamp();
+    this.goalForm.value.title = goalData.title;
+    this.goalForm.value.description = goalData.description;
+    this.goalService.addGoal(this.goalForm.value);
   }
 }

@@ -27,12 +27,12 @@
           <ion-item-options>
             <ion-item-option color="primary">
               <ion-button fill="clear" (click)="editGoal(item)">
-                <ion-icon class="white" [ios]="'create-outline'" [md]="'create-sharp'"></ion-icon>
+                <ion-icon color="dark" [ios]="'create-outline'" [md]="'create-sharp'"></ion-icon>
               </ion-button>
             </ion-item-option>
             <ion-item-option color="danger">
               <ion-button fill="clear" (click)="deleteGoal(item, item.idField)">
-                <ion-icon class="white" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+                <ion-icon color="dark" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
               </ion-button>
             </ion-item-option>
           </ion-item-options>
@@ -49,7 +49,7 @@
         <ion-icon name="cog"></ion-icon>
         <span>Manage</span>
       </ion-button>
-      <ion-button color="success" size="medium" class="ion-text-bold" (click)="openAddGoalModal('daily')">
+      <ion-button color="success" size="medium" class="ion-text-bold" (click)="openAddGoalModal('Daily')">
         <ion-icon name="flash"></ion-icon>
         <span>Add</span>
       </ion-button>
