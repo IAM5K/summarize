@@ -16,9 +16,10 @@
 
   <div id="container">
     <h1 class="ion-text-center ion-padding">
-      Summarize if you want to rise
+      Summarize
       <br />
-      <ion-note color="success" class="h4">- No advertisement, No distraction</ion-note>
+      <ion-note color="success" class="h5">Helps you maintain discipline and focus</ion-note>
+      <ion-note color="warning" class="h5">No advertisement, No distraction</ion-note>
     </h1>
     <!-- <ion-button (click)="testNotification()">Test Notification</ion-button> -->
 
@@ -43,6 +44,22 @@
     <section class="transparent-card padding-zero">
       <app-quick-features class="bg-lime"></app-quick-features>
     </section>
+    <ion-note color="danger" class="ion-padding h4 ion-text-bold">
+      Some features are unstable. Sorry for the inconvenience.
+    </ion-note>
+
+    <div class="card ion-padding">
+      <h4 class="h2">Upcoming Features soon</h4>
+      <ol>
+        <li>Analyze Studies</li>
+        <li>Analyze Work</li>
+        <li>Shared Expense list</li>
+        <li>Shared Study list</li>
+        <li>Split Expenses</li>
+        <li>Goal Setting</li>
+        <li>Co-Live: Manage your co-living space</li>
+      </ol>
+    </div>
 
     <div class="card ion-padding">
       <h3>About Summarize</h3>
@@ -52,15 +69,6 @@
         <a class="color-secondary bold" routerLink="/about">check here</a>
         )
       </p>
-    </div>
-    <div class="card ion-padding">
-      <h4 class="h2">Upcoming Features</h4>
-      <ol>
-        <li>Analyze Studies</li>
-        <li>Analyze Work</li>
-        <li>Goal Setting</li>
-        <li>Analyze Studies based on target Exams.</li>
-      </ol>
     </div>
   </div>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
