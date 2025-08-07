@@ -34,6 +34,54 @@ export class ProfilePage implements OnInit, AfterViewInit {
   examAspirations: any = [];
   projects: Project[] = [];
   friendsGroup = [];
+  groupInputs = [
+    {
+      placeholder: "Group Name",
+      name: "groupName",
+      type: "text",
+    },
+  ];
+  memberInputs = [
+    {
+      placeholder: "Member Name",
+      name: "memberName",
+      type: "text",
+    },
+  ];
+  groupButtons = [
+    {
+      text: "Cancel",
+      role: "cancel",
+    },
+    {
+      text: "Add",
+      role: "confirm",
+      handler: (value: any) => {
+        if (value.groupName) {
+          this.addGroup(value.groupName);
+        }
+      },
+    },
+  ];
+
+  memberButtons(group: any) {
+    return [
+      {
+        text: "Cancel",
+        role: "cancel",
+      },
+      {
+        text: "Add",
+        role: "confirm",
+        handler: (value: any) => {
+          if (value.memberName) {
+            this.addMember(group, value.memberName);
+          }
+        },
+      },
+    ];
+  }
+
   subjects: string = "";
   updateDisabled: boolean = true;
   examsList: any[];
@@ -86,9 +134,14 @@ export class ProfilePage implements OnInit, AfterViewInit {
     this.fetchExamList();
   }
   fetchExamList(): void {
-    this.rtdb.getTargetExam().subscribe((data) => {
-      this.examsList = data;
-    });
+    try {
+      this.rtdb.getTargetExam().subscribe((data) => {
+        this.examsList = data;
+      });
+    } catch (error) {
+      console.log("Error fetching exam list:", error);
+      this.toaster.showToast("Error fetching exam list", "danger");
+    }
   }
   updateAddExamOptions(): void {
     // Clear existing options
@@ -303,5 +356,32 @@ export class ProfilePage implements OnInit, AfterViewInit {
     });
 
     await alert.present();
+  }
+
+  addGroup(groupName: string) {
+    const newGroup = {
+      id: Date.now(),
+      name: groupName,
+      members: [],
+    };
+    this.friendsGroup.push(newGroup);
+  }
+
+  deleteGroup(group: any) {
+    this.friendsGroup = this.friendsGroup.filter((g) => g.id !== group.id);
+  }
+
+  addMember(group: any, memberName: string) {
+    const targetGroup = this.friendsGroup.find((g) => g.id === group.id);
+    if (targetGroup) {
+      targetGroup.members.push(memberName);
+    }
+  }
+
+  removeMember(group: any, memberName: string) {
+    const targetGroup = this.friendsGroup.find((g) => g.id === group.id);
+    if (targetGroup) {
+      targetGroup.members = targetGroup.members.filter((m) => m !== memberName);
+    }
   }
 }

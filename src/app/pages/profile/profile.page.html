@@ -216,23 +216,57 @@
             </div>
 
             <ion-list *ngIf="friendsGroup.length > 0">
-              <ion-item *ngFor="let item of projects">
-                <ion-toggle
-                  [checked]="item.isActive"
-                  (ionChange)="item.isActive = !item.isActive; updateProjectStatus(item)"
-                >
-                  {{ item.name }}
-                </ion-toggle>
+              <ion-item *ngFor="let group of friendsGroup">
+                <ion-label>{{ group.name }}</ion-label>
+                <ion-button color="danger" slot="end" (click)="deleteGroup(group)">
+                  <ion-icon name="trash"></ion-icon>
+                </ion-button>
               </ion-item>
             </ion-list>
-            <!-- <ion-button id="present-alert">Create friends group</ion-button> -->
+
+            <ion-button id="group-alert">
+              <ion-icon slot="start" name="add"></ion-icon>
+              Add Group
+            </ion-button>
+            <ion-alert
+              trigger="group-alert"
+              header="Add Group"
+              [buttons]="groupButtons"
+              [inputs]="groupInputs"
+            ></ion-alert>
+
+            <ion-item *ngFor="let group of friendsGroup">
+              <ion-label>
+                <strong>{{ group.name }}</strong>
+              </ion-label>
+              <ion-button id="member-alert-{{ group.id }}">
+                <ion-icon slot="start" name="add"></ion-icon>
+                Add Member
+              </ion-button>
+              <ion-alert
+                trigger="member-alert-{{ group.id }}"
+                header="Add Member to {{ group.name }}"
+                [buttons]="memberButtons(group)"
+                [inputs]="memberInputs"
+              ></ion-alert>
+              <ion-list>
+                <ion-item *ngFor="let member of group.members">
+                  <ion-label>{{ member }}</ion-label>
+                  <ion-button color="danger" slot="end" (click)="removeMember(group, member)">
+                    <ion-icon name="trash"></ion-icon>
+                  </ion-button>
+                </ion-item>
+              </ion-list>
+            </ion-item>
           </div>
         </ion-accordion>
       </ion-accordion-group>
     </div>
     <div class="ion-padding ion-text-center">
       <ion-note color="tertiary" class="h4">
-        Profile page is under development. It will be available soon with some exciting features.
+        Project is under development. It will be available soon with some exciting features. Feel free to provide your
+        feedback , suggestions or any feature that you want to be added. Visit "Help" page for more details.
+        <ion-icon name="help-circle-outline" color="primary" routerLink="/help"></ion-icon>
       </ion-note>
     </div>
   </div>
