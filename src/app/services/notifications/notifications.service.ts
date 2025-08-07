@@ -17,8 +17,6 @@ export class NotificationsService {
     const permissionStatus = await LocalNotifications.requestPermissions();
     if (permissionStatus.display !== "granted") {
       console.log("Notifications permission not granted");
-    } else {
-      console.log("Notifications permission granted");
     }
   }
 
@@ -51,9 +49,9 @@ export class NotificationsService {
           },
         ],
       });
-      this.toaster.showToast("Notification scheduled for 9 PM daily", "success");
+      // this.toaster.showToast("Notification scheduled for 9 PM daily", "success");
     } else {
-      console.log("Notification permission denied");
+      console.warn("Notification permission denied");
     }
   }
   // Schedule a local notification
@@ -76,7 +74,6 @@ export class NotificationsService {
           },
         ],
       });
-      this.toaster.showToast("Instant Notification scheduled", "success");
     } else {
       console.log("Notification permission denied");
     }
@@ -88,17 +85,19 @@ export class NotificationsService {
   }
 
   initiatePushNotification() {
-    console.log("Initializing Push notification");
-
     // Request permission to use push notifications
-    PushNotifications.requestPermissions().then((result) => {
-      if (result.receive === "granted") {
-        // Register with Apple / Google to receive push via APNS/FCM
-        PushNotifications.register();
-      } else {
-        console.log("Push notification permission not granted");
-      }
-    });
+    PushNotifications.requestPermissions()
+      .then((result) => {
+        if (result.receive === "granted") {
+          // Register with Apple / Google to receive push via APNS/FCM
+          PushNotifications.register();
+        } else {
+          console.log("Push notification permission not granted");
+        }
+      })
+      .catch((error) => {
+        console.warn("Error requesting push notification permissions: ", error);
+      });
 
     // Registration success (you can log token but not show it to user)
     PushNotifications.addListener("registration", (token: Token) => {
