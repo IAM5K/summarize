@@ -2,13 +2,14 @@ import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { AuthService } from "./auth/service/auth.service";
 import { StatusBar } from "@capacitor/status-bar";
-import { isPlatform } from "@ionic/angular";
+import { isPlatform, Platform } from "@ionic/angular";
 import { GoogleTagManagerService } from "angular-google-tag-manager";
 import { FirebaseService } from "./services/firebase/firebase.service";
 import { ProfileService } from "./services/profile/profile.service";
 import { SidenavService } from "./services/sidenav/sidenav.service";
 import { Subscription } from "rxjs";
 import { NotificationsService } from "./services/notifications/notifications.service";
+import { FcmService } from "./services/fcm/fcm.service";
 @Component({
   selector: "app-root",
   templateUrl: "app.component.html",
@@ -28,11 +29,33 @@ export class AppComponent implements OnInit, AfterViewInit {
     private sidenavService: SidenavService,
     private firebaseService: FirebaseService,
     private notificationsService: NotificationsService,
-  ) {}
+    private platform: Platform,
+    private fcm: FcmService,
+  ) {
+    this.platform
+      .ready()
+      .then(() => {
+        this.fcm.initPush();
+      })
+      .catch((e) => {
+        console.error("error fcm: ", e);
+      });
+  }
 
   ngOnInit() {
     this.firebaseService.getUserProfile();
     this.getUser();
+
+    // Check and store device push token on app init (only on device)
+    if (isPlatform("capacitor")) {
+      this.notificationsService.ensureDeviceTokenStored().then((token) => {
+        if (token) {
+          console.debug("Device push token stored.");
+        } else {
+          console.debug("Device push token not available or permission denied.");
+        }
+      });
+    }
   }
   ngAfterViewInit(): void {
     this.initGoogleTagManager();
@@ -40,10 +63,10 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.isLoggedIn = isLoggedIn;
       if (isLoggedIn) {
         this.appPages = this.sidenavService.loggedInPages;
-        this.sidenavService.setLoggedInPages(); // Update appPages with logged-in pages
+        this.sidenavService.setLoggedInPages();
       } else {
         this.appPages = this.sidenavService.defaultPages;
-        this.sidenavService.setDefaultPages(); // Update appPages with default pages
+        this.sidenavService.setDefaultPages();
       }
     });
 

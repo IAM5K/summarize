@@ -4,6 +4,7 @@ import { AlertService } from "../alert/alert.service";
 import { ToasterService } from "../toaster/toaster.service";
 import { ActionPerformed, PushNotificationSchema, PushNotifications, Token } from "@capacitor/push-notifications";
 import { Clipboard } from "@capacitor/clipboard";
+import { Platform } from "@ionic/angular";
 @Injectable({
   providedIn: "root",
 })
@@ -85,11 +86,9 @@ export class NotificationsService {
   }
 
   initiatePushNotification() {
-    // Request permission to use push notifications
     PushNotifications.requestPermissions()
       .then((result) => {
         if (result.receive === "granted") {
-          // Register with Apple / Google to receive push via APNS/FCM
           PushNotifications.register();
         } else {
           console.log("Push notification permission not granted");
@@ -99,25 +98,23 @@ export class NotificationsService {
         console.warn("Error requesting push notification permissions: ", error);
       });
 
-    // Registration success (you can log token but not show it to user)
     PushNotifications.addListener("registration", (token: Token) => {
       console.log("Push registration success, token: " + token.value);
-      // Send the token to your server for later use
-      // this.saveTokenToServer(token.value); // Implement this function
+      localStorage.setItem("device-push-token", token.value);
+      // Optionally, show a toast or alert
+      this.toaster.showToast("Push token: " + token.value, "success");
     });
 
-    // Registration error
     PushNotifications.addListener("registrationError", (error: any) => {
       console.error("Error on registration: " + JSON.stringify(error));
+      this.toaster.showToast("Push registration error: " + JSON.stringify(error), "danger");
     });
 
-    // Push notification received
     PushNotifications.addListener("pushNotificationReceived", (notification: PushNotificationSchema) => {
       console.log("Push received: " + JSON.stringify(notification));
-      // this.showNotification(notification); // Implement your own display logic
+      this.toaster.showToast("Push received: " + notification.title, "primary");
     });
 
-    // Push notification action performed
     PushNotifications.addListener("pushNotificationActionPerformed", (notification: ActionPerformed) => {
       console.log("Push action performed: " + JSON.stringify(notification));
     });
@@ -148,6 +145,43 @@ export class NotificationsService {
       // Enable notifications if they don't exist or are set to true
       localStorage.setItem("notification-preference", JSON.stringify({ ...preference, notification: true }));
       this.initiatePushNotification();
+    }
+  }
+
+  /**
+   * Get device push token and store in localStorage if not already present.
+   * Returns a Promise that resolves to the token string or null.
+   */
+  async ensureDeviceTokenStored(): Promise<string | null> {
+    const existingToken = localStorage.getItem("device-push-token");
+    if (existingToken) {
+      return existingToken;
+    }
+    try {
+      const perm = await PushNotifications.requestPermissions();
+      if (perm.receive !== "granted") {
+        console.warn("Push notification permission not granted");
+        return null;
+      }
+      // Register and get token
+      return new Promise((resolve) => {
+        PushNotifications.register();
+        PushNotifications.addListener("registration", (token: Token) => {
+          if (token && token.value) {
+            localStorage.setItem("device-push-token", token.value);
+            resolve(token.value);
+          } else {
+            resolve(null);
+          }
+        });
+        PushNotifications.addListener("registrationError", (error: any) => {
+          console.error("Push registration error:", error);
+          resolve(null);
+        });
+      });
+    } catch (error) {
+      console.error("Error getting device push token:", error);
+      return null;
     }
   }
 }
