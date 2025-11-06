@@ -5,6 +5,11 @@
 h1 {
   color: var(--ion-color-success);
 }
+.login-form {
+  ion-note {
+    font-weight: bold;
+  }
+}
 .btn-google-login {
   --background: var(--ion-color-success);
   --color: #fff;

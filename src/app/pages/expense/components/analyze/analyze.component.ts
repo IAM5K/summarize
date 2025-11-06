@@ -170,16 +170,18 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Bar chart configuration
   barChartConfig: ChartConfiguration = {
-    type: 'bar',
+    type: "bar",
     data: {
-      labels: ['Zero Expense Days'],
-      datasets: [{
-        data: [0], // Will be updated with actual count
-        label: 'Count',
-        backgroundColor: '#3880ff',
-        borderColor: '#3880ff',
-        borderWidth: 1
-      }]
+      labels: ["Zero Expense Days"],
+      datasets: [
+        {
+          data: [0], // Will be updated with actual count
+          label: "Count",
+          backgroundColor: "#3880ff",
+          borderColor: "#3880ff",
+          borderWidth: 1,
+        },
+      ],
     },
     options: {
       responsive: true,
@@ -190,19 +192,19 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
         },
         title: {
           display: true,
-          text: 'Zero Expense Days'
-        }
+          text: "Zero Expense Days",
+        },
       },
       scales: {
         y: {
           beginAtZero: true,
           title: {
             display: true,
-            text: 'Count'
-          }
-        }
-      }
-    }
+            text: "Count",
+          },
+        },
+      },
+    },
   };
 
   private chartStates = {
@@ -279,14 +281,15 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
 
         let totalBudget = 0;
         let currentDate = start;
-
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        console.info("year", year);
+        console.info("month", month);
+        const monthBudget = await budgetHelper.getCurrentBudget(`${year}-${month.toString().padStart(2, "0")}`);
         while (currentDate <= end) {
-          const year = currentDate.getFullYear();
-          const month = currentDate.getMonth() + 1;
           const daysInMonth = new Date(year, month, 0).getDate();
 
           // Get budget for current month
-          const monthBudget = await budgetHelper.getCurrentBudget(`${year}-${month.toString().padStart(2, "0")}`);
 
           if (currentDate.getMonth() === start.getMonth() && currentDate.getMonth() === end.getMonth()) {
             // Same month - calculate for specific days
@@ -383,7 +386,7 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   updateBarChart() {
-    if (this.initializeChart(this.barChart, 'bar')) {
+    if (this.initializeChart(this.barChart, "bar")) {
       this.barChartConfig.data.datasets[0].data = [this.zeroExpenseDays];
       this.barChart?.update();
     }

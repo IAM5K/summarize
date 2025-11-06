@@ -151,7 +151,6 @@ ion-grid {
   width: 100%;
 
   @media screen and (min-width: 658px) and (max-width: 990px) {
-    // max-width: 50%;
     width: 100%;
     float: inline-end;
   }
@@ -184,7 +183,6 @@ ion-grid {
   display: block;
   width: auto !important;
 }
-/* AI animation */
 
 .pulsing {
   animation: pulse 1s infinite;
@@ -202,7 +200,6 @@ ion-grid {
   }
 }
 
-// Optionally, add styles for the filter modal container if needed
 .filter-modal {
   position: fixed;
   top: 10%;

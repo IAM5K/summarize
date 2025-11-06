@@ -102,21 +102,21 @@ export class NotificationsService {
       console.log("Push registration success, token: " + token.value);
       localStorage.setItem("device-push-token", token.value);
       // Optionally, show a toast or alert
-      this.toaster.showToast("Push token: " + token.value, "success");
+      // this.toaster.showToast("Push token: " + token.value, "success");
     });
 
     PushNotifications.addListener("registrationError", (error: any) => {
       console.error("Error on registration: " + JSON.stringify(error));
-      this.toaster.showToast("Push registration error: " + JSON.stringify(error), "danger");
+      // this.toaster.showToast("Push registration error: " + JSON.stringify(error), "danger");
     });
 
     PushNotifications.addListener("pushNotificationReceived", (notification: PushNotificationSchema) => {
       console.log("Push received: " + JSON.stringify(notification));
-      this.toaster.showToast("Push received: " + notification.title, "primary");
+      // this.toaster.showToast("Push received: " + notification.title, "primary");
     });
 
     PushNotifications.addListener("pushNotificationActionPerformed", (notification: ActionPerformed) => {
-      console.log("Push action performed: " + JSON.stringify(notification));
+      // console.log("Push action performed: " + JSON.stringify(notification));
     });
   }
 
