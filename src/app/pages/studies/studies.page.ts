@@ -12,9 +12,10 @@ import { ToasterService } from "src/app/services/toaster/toaster.service";
 import { RealTimeDataBaseService } from "src/app/shared/db/real-time-data-base.service";
 
 @Component({
-  selector: "app-studies",
-  templateUrl: "./studies.page.html",
-  styleUrls: ["./studies.page.scss"],
+    selector: "app-studies",
+    templateUrl: "./studies.page.html",
+    styleUrls: ["./studies.page.scss"],
+    standalone: false
 })
 export class StudiesPage implements OnInit, AfterViewInit, AfterContentInit {
   examAspirations: any;

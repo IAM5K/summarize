@@ -7,9 +7,10 @@ import { NotificationsService } from "src/app/services/notifications/notificatio
 import { fabActionButtonsAtHome, homePageParagraphs } from "src/app/models/data/home-page.data";
 import { SpeechRecognition } from "@capacitor-community/speech-recognition";
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.page.html",
-  styleUrls: ["./home.page.scss"],
+    selector: "app-home",
+    templateUrl: "./home.page.html",
+    styleUrls: ["./home.page.scss"],
+    standalone: false
 })
 export class HomePage implements OnInit, AfterViewInit {
   pageTitle = "Home";

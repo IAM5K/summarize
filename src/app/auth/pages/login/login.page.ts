@@ -7,9 +7,10 @@ import { SeoService } from "src/app/services/seo/seo.service";
 import { AuthService } from "../../service/auth.service";
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.page.html",
-  styleUrls: ["./login.page.scss"],
+    selector: "app-login",
+    templateUrl: "./login.page.html",
+    styleUrls: ["./login.page.scss"],
+    standalone: false
 })
 export class LoginPage implements OnInit {
   credentials!: FormGroup;

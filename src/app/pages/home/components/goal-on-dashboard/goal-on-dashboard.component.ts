@@ -10,9 +10,10 @@ import { GoalService } from "src/app/services/goal/goal.service";
 import { ToasterService } from "src/app/services/toaster/toaster.service";
 
 @Component({
-  selector: "app-goal-on-dashboard",
-  templateUrl: "./goal-on-dashboard.component.html",
-  styleUrls: ["./goal-on-dashboard.component.scss"],
+    selector: "app-goal-on-dashboard",
+    templateUrl: "./goal-on-dashboard.component.html",
+    styleUrls: ["./goal-on-dashboard.component.scss"],
+    standalone: false
 })
 export class GoalOnDashboardComponent implements OnInit {
   dailyGoals: IGoalData[];

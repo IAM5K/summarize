@@ -13,9 +13,10 @@ interface FilterData {
 }
 
 @Component({
-  selector: "app-filter-expense",
-  templateUrl: "./filter-expense.component.html",
-  styleUrls: ["./filter-expense.component.scss"],
+    selector: "app-filter-expense",
+    templateUrl: "./filter-expense.component.html",
+    styleUrls: ["./filter-expense.component.scss"],
+    standalone: false
 })
 export class FilterExpenseComponent implements OnInit {
   @Output() filterApplied = new EventEmitter<FilterData>();

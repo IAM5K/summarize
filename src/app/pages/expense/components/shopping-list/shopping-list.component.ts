@@ -19,9 +19,10 @@ interface AugmentedShoppingList extends ShoppingList {
 }
 
 @Component({
-  selector: "app-shopping-list",
-  templateUrl: "./shopping-list.component.html",
-  styleUrls: ["./shopping-list.component.scss"],
+    selector: "app-shopping-list",
+    templateUrl: "./shopping-list.component.html",
+    styleUrls: ["./shopping-list.component.scss"],
+    standalone: false
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   userLists$: Observable<AugmentedShoppingList[]>;

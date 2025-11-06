@@ -22,9 +22,10 @@ import { FilterExpenseComponent } from "./components/filter-expense/filter-expen
 import { ToasterService } from "src/app/services/toaster/toaster.service";
 
 @Component({
-  selector: "app-expenses",
-  templateUrl: "./expenses.page.html",
-  styleUrls: ["./expenses.page.scss"],
+    selector: "app-expenses",
+    templateUrl: "./expenses.page.html",
+    styleUrls: ["./expenses.page.scss"],
+    standalone: false
 })
 export class ExpensesPage implements OnInit {
   @Output() expenseData = new EventEmitter<any>();

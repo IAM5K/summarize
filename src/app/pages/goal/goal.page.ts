@@ -10,9 +10,10 @@ import { GoalService } from "src/app/services/goal/goal.service";
 import { SeoService } from "src/app/services/seo/seo.service";
 
 @Component({
-  selector: "app-goal",
-  templateUrl: "./goal.page.html",
-  styleUrls: ["./goal.page.scss"],
+    selector: "app-goal",
+    templateUrl: "./goal.page.html",
+    styleUrls: ["./goal.page.scss"],
+    standalone: false
 })
 export class GoalPage implements OnInit {
   pageTitle = "Goal";

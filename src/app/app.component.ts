@@ -11,9 +11,10 @@ import { Subscription } from "rxjs";
 import { NotificationsService } from "./services/notifications/notifications.service";
 import { FcmService } from "./services/fcm/fcm.service";
 @Component({
-  selector: "app-root",
-  templateUrl: "app.component.html",
-  styleUrls: ["app.component.scss"],
+    selector: "app-root",
+    templateUrl: "app.component.html",
+    styleUrls: ["app.component.scss"],
+    standalone: false
 })
 export class AppComponent implements OnInit, AfterViewInit {
   isLoggedIn: any = false;

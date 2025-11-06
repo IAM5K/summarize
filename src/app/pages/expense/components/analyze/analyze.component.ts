@@ -15,9 +15,10 @@ import { ExpenseService } from "src/app/services/expense/expense.service";
 Chart.register(...registerables);
 
 @Component({
-  selector: "app-analyze",
-  templateUrl: "./analyze.component.html",
-  styleUrls: ["./analyze.component.scss"],
+    selector: "app-analyze",
+    templateUrl: "./analyze.component.html",
+    styleUrls: ["./analyze.component.scss"],
+    standalone: false
 })
 export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;

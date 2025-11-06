@@ -11,9 +11,10 @@ import { ToasterService } from "src/app/services/toaster/toaster.service";
 import { RealTimeDataBaseService } from "src/app/shared/db/real-time-data-base.service";
 
 @Component({
-  selector: "app-profile",
-  templateUrl: "./profile.page.html",
-  styleUrls: ["./profile.page.scss"],
+    selector: "app-profile",
+    templateUrl: "./profile.page.html",
+    styleUrls: ["./profile.page.scss"],
+    standalone: false
 })
 export class ProfilePage implements OnInit, AfterViewInit {
   constructor(

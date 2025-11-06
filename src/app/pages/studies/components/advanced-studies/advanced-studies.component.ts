@@ -5,9 +5,10 @@ import { ToasterService } from "src/app/services/toaster/toaster.service";
 import { RealTimeDataBaseService } from "src/app/shared/db/real-time-data-base.service";
 
 @Component({
-  selector: "app-advanced-studies",
-  templateUrl: "./advanced-studies.component.html",
-  styleUrls: ["./advanced-studies.component.scss"],
+    selector: "app-advanced-studies",
+    templateUrl: "./advanced-studies.component.html",
+    styleUrls: ["./advanced-studies.component.scss"],
+    standalone: false
 })
 export class AdvancedStudiesComponent implements OnInit {
   examStarted = false;

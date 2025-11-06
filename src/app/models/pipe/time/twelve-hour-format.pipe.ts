@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: "twelveHourFormat",
+    name: "twelveHourFormat",
+    standalone: false
 })
 export class TwelveHourFormatPipe implements PipeTransform {
   transform(value: string): string {

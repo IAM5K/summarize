@@ -2,9 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { ModalController } from "@ionic/angular";
 
 @Component({
-  selector: "app-quick-goal-modal",
-  templateUrl: "./quick-goal-modal.component.html",
-  styleUrls: ["./quick-goal-modal.component.scss"],
+    selector: "app-quick-goal-modal",
+    templateUrl: "./quick-goal-modal.component.html",
+    styleUrls: ["./quick-goal-modal.component.scss"],
+    standalone: false
 })
 export class QuickGoalModalComponent implements OnInit {
   goalTitle: string = "";

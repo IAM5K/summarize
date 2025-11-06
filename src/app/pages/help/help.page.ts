@@ -3,9 +3,10 @@ import { SeoTags } from "src/app/models/class/seoTags/seo";
 import { SeoService } from "src/app/services/seo/seo.service";
 
 @Component({
-  selector: "app-help",
-  templateUrl: "./help.page.html",
-  styleUrls: ["./help.page.scss"],
+    selector: "app-help",
+    templateUrl: "./help.page.html",
+    styleUrls: ["./help.page.scss"],
+    standalone: false
 })
 export class HelpPage implements OnInit {
   pageTitle = "Help & Support";

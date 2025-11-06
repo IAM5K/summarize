@@ -3,9 +3,10 @@ import { AuthService } from "../../service/auth.service";
 import { ToasterService } from "src/app/services/toaster/toaster.service";
 
 @Component({
-  selector: "app-reset-password",
-  templateUrl: "./reset-password.component.html",
-  styleUrls: ["./reset-password.component.scss"],
+    selector: "app-reset-password",
+    templateUrl: "./reset-password.component.html",
+    styleUrls: ["./reset-password.component.scss"],
+    standalone: false
 })
 export class ResetPasswordComponent {
   pageTitle = "Reset password";

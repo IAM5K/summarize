@@ -4,9 +4,10 @@ import { serverTimestamp } from "@angular/fire/firestore";
 import { SupportService } from "src/app/services/support/support.service";
 
 @Component({
-  selector: "app-faq",
-  templateUrl: "./faq.component.html",
-  styleUrls: ["./faq.component.scss"],
+    selector: "app-faq",
+    templateUrl: "./faq.component.html",
+    styleUrls: ["./faq.component.scss"],
+    standalone: false
 })
 export class FaqComponent  {
   title = "Contact";

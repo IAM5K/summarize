@@ -5,9 +5,10 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { OfficeService } from "src/app/services/office/office.service";
 import { SeoService } from "src/app/services/seo/seo.service";
 @Component({
-  selector: "app-office",
-  templateUrl: "./office.page.html",
-  styleUrls: ["./office.page.scss"],
+    selector: "app-office",
+    templateUrl: "./office.page.html",
+    styleUrls: ["./office.page.scss"],
+    standalone: false
 })
 export class OfficePage implements OnInit {
   pageTitle = "Office";
