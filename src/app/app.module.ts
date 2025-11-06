@@ -18,7 +18,7 @@ import { GoogleTagManagerModule } from "angular-google-tag-manager";
 import { DatePipe } from "@angular/common";
 import { provideCharts, withDefaultRegisterables } from "ng2-charts";
 import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
-import { initializeAppCheck, ReCaptchaEnterpriseProvider, provideAppCheck } from "@angular/fire/app-check";
+import { IonicStorageModule } from "@ionic/storage-angular";
 import { getFunctions, provideFunctions } from "@angular/fire/functions";
 import { getMessaging, provideMessaging } from "@angular/fire/messaging";
 import { getPerformance, providePerformance } from "@angular/fire/performance";
@@ -29,6 +29,7 @@ import { HttpClientModule } from "@angular/common/http";
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
@@ -61,4 +62,3 @@ import { HttpClientModule } from "@angular/common/http";
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-// Note: Add app check
