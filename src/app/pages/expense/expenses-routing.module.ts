@@ -14,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: "shopping-list",
-    component: ShoppingListComponent,
+    loadChildren: () =>
+      import("./components/shopping-list/shopping-list.component").then((m) => m.ShoppingListComponent),
   },
 ];
 

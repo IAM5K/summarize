@@ -18,3 +18,8 @@
 ion-list {
   width: 100%;
 }
+
+.purchased {
+  text-decoration: line-through;
+  color: var(--ion-color-medium);
+}
