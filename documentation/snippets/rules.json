@@ -1,0 +1,41 @@
+{
+  "rules": {
+    "dynamicContent": {
+      ".read": "auth != null && auth.token.email !== ''",
+      ".write": "auth != null && auth.token.email == 'admin@gmail.com'"
+    },
+    "shopping": {
+      ".read": "auth != null && auth.token.email !== ''",
+      "lists": {
+        "$listId": {
+          ".read": "auth != null && data.child('members/' + auth.uid).exists()",
+          ".write": "auth != null && data.child('members/' + auth.uid).exists()",
+          "items": {
+            "$itemId": {
+              ".read": "auth != null && data.parent().parent().child('members/' + auth.uid).exists()",
+              ".write": "auth != null && data.parent().parent().child('members/' + auth.uid).exists()"
+            }
+          },
+          "members": {
+            ".read": "auth != null && data.parent().child('members/' + auth.uid).exists()",
+            ".write": "auth != null && data.parent().child('owner').val() == auth.uid"
+          },
+          "invitations": {
+            "$invitationId": {
+              ".read": "auth != null && data.child('invitedEmail').val() == auth.token.email",
+              ".write": "auth != null && data.child('invitedEmail').val() == auth.token.email"
+            }
+          }
+        }
+      }
+    },
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    ".read": true,
+    ".write": false
+  }
+}
