@@ -27,7 +27,7 @@
     }
   },
   "dependencies": {
-    "@angular/cdk": "^18.2.6",
+    "@angular/cdk": "^19.2.19",
     "@angular/common": "19.2.15",
     "@angular/core": "19.2.15",
     "@angular/fire": "^19.2.0",
@@ -70,21 +70,21 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.19",
-    "@angular-eslint/eslint-plugin": "^18.3.1",
-    "@angular-eslint/eslint-plugin-template": "^18.3.1",
+    "@angular-eslint/eslint-plugin": "^18.4.3",
+    "@angular-eslint/eslint-plugin-template": "^18.4.3",
     "@angular/cli": "^19.2.19",
     "@angular/compiler": "^19.2.15",
     "@angular/compiler-cli": "^19.2.15",
     "@angular/language-service": "^19.2.15",
     "@capacitor/cli": "^6.1.2",
     "@ionic/angular-toolkit": "^12.1.1",
-    "@ionic/eslint-config": "^0.4.0",
     "@ionic/prettier-config": "^4.0.0",
     "@types/file-saver": "2.0.7",
     "@types/jasmine": "^5.1.4",
     "@types/node": "^22.7.7",
     "@typescript-eslint/eslint-plugin": "^8.10.0",
-    "eslint": "^8.57.1",
+    "@typescript-eslint/parser": "^8.10.0",
+    "eslint": "^9.8.0",
     "eslint-plugin-jasmine": "^4.2.2",
     "eslint-plugin-prettier": "^5.2.1",
     "gulp": "^5.0.0",
@@ -101,9 +101,6 @@
     "karma-jasmine-html-reporter": "^2.1.0",
     "ts-node": "^10.9.2",
     "typescript": "5.5.4"
-  },
-  "peerDependencies": {
-    "eslint": "^8.57.1"
   },
   "description": "A project to help people manage Time, Money and resources.",
   "browserslist": [
