@@ -9,6 +9,7 @@ import { FirebaseService } from "src/app/services/firebase/firebase.service";
 import { GoalService } from "src/app/services/goal/goal.service";
 import { ToasterService } from "src/app/services/toaster/toaster.service";
 
+
 @Component({
     selector: "app-goal-on-dashboard",
     templateUrl: "./goal-on-dashboard.component.html",

@@ -16,12 +16,14 @@ import { FcmService } from "./services/fcm/fcm.service";
     styleUrls: ["app.component.scss"],
     standalone: false
 })
+
 export class AppComponent implements OnInit, AfterViewInit {
   isLoggedIn: any = false;
   public appPages: any = [];
   public labels: any = [];
   versionNumber = "2.2.0";
   private loginStateSubscription: Subscription;
+  
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -58,6 +60,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       });
     }
   }
+
   ngAfterViewInit(): void {
     this.initGoogleTagManager();
     this.loginStateSubscription = this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
@@ -109,7 +112,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     try {
       userProfile = await this.firebaseService.getUserProfile();
       this.profileService.userData = userProfile;
-      // console.log(userProfile);
     } catch (error) {
       console.error("Error fetching user profile:", error);
     }

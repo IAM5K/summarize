@@ -45,7 +45,7 @@
     </div>
     <div class="card ion-margin ion-padding">
       <h1 class="mt-0 h2">{{editMode?"Update":"Add"}} Expense</h1>
-      <div class="form-container">
+      <div class="form-container ">
         <form [formGroup]="expenseForm" (ngSubmit)="addExpense()" novalidate>
           <ion-list class="form-ion-list">
             <ion-item lines="none">
@@ -143,6 +143,7 @@
     </div>
 
     <ng-container *ngIf="!editMode">
+      <!-- Info: Expense for a day -->
       <div class="card ion-margin ion-padding">
         <h3 class="h2 mt-0">Get all for a day</h3>
         <div class="mt-15px">
@@ -243,6 +244,9 @@
 
             <ion-item lines="none">
               <ion-input label="Budget for" label-placement="floating" formControlName="month" type="month"></ion-input>
+
+            <ion-item lines="none">
+              <ion-input label="Budget for" label-placement="floating" formControlName="month" type="month"></ion-input>
             </ion-item>
           </ion-list>
           <div class="button-container">
@@ -286,6 +290,7 @@
               <ion-label class="ion-text-bold">Month</ion-label>
               <ion-label class="ion-text-bold">Amount</ion-label>
             </ion-item>
+            <ion-item lines="none" *ngFor="let item of Budget">
             <ion-item lines="none" *ngFor="let item of Budget">
               <ion-label class="ion-text-bold">{{ item.month | date:'MMM y' }}</ion-label>
               <ion-label>{{expenseCurrency}} {{item.amount}}</ion-label>

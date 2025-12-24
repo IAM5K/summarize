@@ -132,7 +132,7 @@ export class TimePage implements OnInit, OnDestroy {
     this.workForm.markAsUntouched();
     this.updateSubmitted = false;
   }
-
+  
   backToDefault() {
     this.workForm.reset({
       date: this.dateToday,

@@ -37,6 +37,7 @@ export class SidenavService {
       color: "tertiary",
       url: "help",
       icon: "help-circle",
+
     },
   ];
   appPages = this.defaultPages;
@@ -47,5 +48,6 @@ export class SidenavService {
 
   setDefaultPages() {
     this.appPages = this.defaultPages;
+
   }
 }

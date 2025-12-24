@@ -47,6 +47,7 @@ export class StudiesPage implements OnInit, AfterViewInit, AfterContentInit {
   editMode: boolean = false;
   updateSubmitted: boolean = false;
   dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
+
   studiesForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     date: [this.dateToday, [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
