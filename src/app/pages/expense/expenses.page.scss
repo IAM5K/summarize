@@ -1,13 +1,14 @@
 .options-container {
-.options-container {
-  height: 50px;
+  display: block;
+  position: relative;
+  min-height: 50px;
+  height: auto;
 }
 .expense-data {
   height: 620px;
   margin: auto;
   box-sizing: border-box;
 
-  @media screen and (max-width: 768px) {
   @media screen and (max-width: 768px) {
     height: 800px;
   }
@@ -16,16 +17,16 @@
 .form-container {
   height: auto;
   min-width: 60%;
+.form-container {
+  height: auto;
+  min-width: 60%;
 }
 
-.budget-container {
 .budget-container {
   min-height: 180px;
   height: fit-content;
 }
 
-.disclaimer {
-  p {
 .disclaimer {
   p {
     color: var(--ion-color-dark-tint);
@@ -61,17 +62,14 @@ ion-grid {
     margin: 0;
     padding: 5px;
     font-family: "Times New Roman", Times, serif;
-    font-family: "Times New Roman", Times, serif;
   }
 
-  @media screen and (min-width: 1024px) {
   @media screen and (min-width: 1024px) {
     .input-item {
       width: 200px;
     }
   }
 
-  @media screen and (max-width: 768px) and (min-width: 560px) {
   @media screen and (max-width: 768px) and (min-width: 560px) {
     height: 200px;
 
@@ -80,6 +78,8 @@ ion-grid {
     }
   }
 
+  @media screen and (max-width: 560px) {
+    min-height: 220px;
   @media screen and (max-width: 560px) {
     min-height: 220px;
 
@@ -91,6 +91,11 @@ ion-grid {
 .data-grid {
   box-shadow: unset;
 }
+.data-grid {
+  box-shadow: unset;
+}
+
+.expense-data {
 
 .expense-data {
   min-height: 360px;
@@ -98,7 +103,6 @@ ion-grid {
   overflow: hidden;
 }
 
-.data-grid {
 .data-grid {
   resize: vertical;
   overflow-x: auto;
@@ -109,16 +113,38 @@ ion-grid {
 
 .spent-on {
   width: 5rem;
+  margin-right: 2rem;
 }
+
 .inline-radio {
-  display: inline-flex;
-  flex-wrap: wrap;
   width: calc(100% - 6rem);
-  justify-content: space-around;
   font-size: 0.9rem;
+
   ion-radio {
     width: auto;
-    margin-right: 0.5rem;
+    padding-right: 1.5rem;
+    :host(.radio-label-placement-end) .label-text-wrapper {
+      --margin-inline-start: 0.5rem !important;
+      -webkit-margin-start: 0.5rem !important;
+    }
+  }
+
+  .radio-wrapper {
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .spent-on,
+  .inline-radio {
+    align-content: center;
+    width: 100%;
+    min-height: 35px;
+    margin-right: unset;
+    margin: auto;
+    float: left;
+    display: block;
+    position: relative;
   }
 }
 .expense-data-card {
@@ -135,7 +161,6 @@ ion-grid {
   width: 100%;
 
   @media screen and (min-width: 658px) and (max-width: 990px) {
-    // max-width: 50%;
     width: 100%;
     float: inline-end;
   }
@@ -161,4 +186,38 @@ ion-grid {
       min-width: 23%;
     }
   }
+}
+
+.table-title .h2 {
+  margin: 5px;
+  display: block;
+  width: auto !important;
+}
+
+.pulsing {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.filter-modal {
+  position: fixed;
+  top: 10%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1000;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }

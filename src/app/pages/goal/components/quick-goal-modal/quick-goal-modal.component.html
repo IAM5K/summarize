@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Quick Add Goal</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form (ngSubmit)="saveGoal()" #quickGoalForm="ngForm" class="ion-padding">
+    <ion-list>
+      <ion-item lines="none">
+        <ion-input
+          label="Goal Title"
+          label-placement="floating"
+          [(ngModel)]="goalTitle"
+          name="goalTitle"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-textarea
+          label="Description"
+          label-placement="floating"
+          [(ngModel)]="goalDescription"
+          name="goalDescription"
+          autoGrow="true"
+          placeholder="Describe your goal (optional)"
+        ></ion-textarea>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-input
+          label="Action Step"
+          label-placement="floating"
+          [(ngModel)]="newActionStep"
+          name="newActionStep"
+          (keyup.enter)="addActionStep()"
+        ></ion-input>
+        <ion-button fill="clear" (click)="addActionStep()" [disabled]="!newActionStep.trim()">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-list *ngIf="actionSteps.length > 0">
+        <ion-item *ngFor="let step of actionSteps; let i = index">
+          <ion-label>{{ step }}</ion-label>
+          <ion-button fill="clear" color="danger" (click)="removeActionStep(i)">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-list>
+    <div class="button-container ion-margin-top">
+      <ion-button color="warning" type="button" (click)="closeModal()">Cancel</ion-button>
+      <ion-button color="success" type="submit" [disabled]="!goalTitle.trim()">Add Goal</ion-button>
+    </div>
+  </form>
+</ion-content>

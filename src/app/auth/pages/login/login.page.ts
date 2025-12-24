@@ -7,18 +7,20 @@ import { SeoService } from "src/app/services/seo/seo.service";
 import { AuthService } from "../../service/auth.service";
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.page.html",
-  styleUrls: ["./login.page.scss"],
+    selector: "app-login",
+    templateUrl: "./login.page.html",
+    styleUrls: ["./login.page.scss"],
+    standalone: false
 })
 export class LoginPage implements OnInit {
   credentials!: FormGroup;
   pageTitle: string = "Login Page";
   pageMetaTags = SeoTags.loginPageTags;
   title = SeoTags.pageTitle.loginPage;
-  loginMode: boolean = true; // Indicates whether the user is in login or registration mode
+  loginMode: boolean = true;
   loginForm: FormGroup;
   registerForm: FormGroup;
+  showFaq: boolean = false;
   constructor(
     private fb: FormBuilder,
     private loadingController: LoadingController,
@@ -82,10 +84,7 @@ export class LoginPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    const user = await this.authService.register(
-      this.credentials.value.email,
-      this.credentials.value.password,
-    );
+    const user = await this.authService.register(this.credentials.value.email, this.credentials.value.password);
     await loading.dismiss();
 
     if (user) {
@@ -99,10 +98,7 @@ export class LoginPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    const user = await this.authService.login(
-      this.loginForm.value.email,
-      this.loginForm.value.password,
-    );
+    const user = await this.authService.login(this.loginForm.value.email, this.loginForm.value.password);
     await loading.dismiss();
 
     if (user) {
@@ -113,11 +109,8 @@ export class LoginPage implements OnInit {
   }
   async loginWithGoogle() {
     const user = await this.authService.googleSignin();
-    if (user !== (null || undefined)) {
-      this.showAlert(
-        "Login Success",
-        "Welcome to Summarize...\nNavigate Manually in case of delay.",
-      );
+    if (user) {
+      this.showAlert("Login Success", "Welcome to Summarize...\nNavigate manually in case of delay.");
       this.router.navigateByUrl("/home", { replaceUrl: true });
     } else {
       this.showAlert("Login failed", "Please try again!");

@@ -1,0 +1,28 @@
+<h3 class="ion-text-center h2 mt0">Quick features</h3>
+
+<div class="whatspp-opener">
+  <ion-list class="" fill="none">
+    <ion-item style="flex: 1" lines="none" fill="none">
+      <ion-input
+        position="stacked"
+        [(ngModel)]="countryCode"
+        label="Country Code"
+        placeholder="Enter country code"
+      ></ion-input>
+    </ion-item>
+    <ion-item style="flex: 3" lines="none" fill="none">
+      <ion-input
+        position="stacked"
+        label="Mobile Number"
+        [(ngModel)]="phoneNumber"
+        placeholder="Enter mobile number"
+      ></ion-input>
+    </ion-item>
+    <ion-item lines="none" fill="none">
+      <ion-button class="mb-15px" size="default" color="success" (click)="openWhatsAppLink()">
+        <ion-icon name="logo-whatsapp" slot="start"></ion-icon>
+        Send WhatsApp Message
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</div>

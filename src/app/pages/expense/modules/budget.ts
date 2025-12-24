@@ -5,19 +5,17 @@ export class Budget {
     let currentBudget: number = 0;
     if (retrievedBudget) {
       const budget = JSON.parse(retrievedBudget);
-      const budgetForThisMonth = budget.find((item: any) => item.month === currentMonth);
+      const budgetForThisMonth = await budget.find((item: any) => item.month === currentMonth);
       // console.log(budgetForThisMonth);
 
       if (budgetForThisMonth) {
         currentBudget = budgetForThisMonth.amount;
       } else {
-        alert("Budget for the current month not found. Add budget first");
+        console.info("Budget for the current month not found. Add budget first");
       }
     } else {
       currentBudget = 0;
-      alert(
-        "There was some error getting your budget. Make sure you have added budget for this month.",
-      );
+      console.info("There was some error getting your budget. Make sure you have added budget for this month.");
     }
     return currentBudget;
   }

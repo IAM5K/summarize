@@ -1,10 +1,20 @@
 import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: "app.web.summarize-ng",
-  appName: "summarize",
-  webDir: "www",
+  appId: "app.web.summarize",
+  appName: "Summarize",
+  webDir: "www/browser",
   bundledWebRuntime: false,
+  plugins: {
+    LocalNotifications: {
+      smallIcon: "ic_stat_icon_config_sample",
+      iconColor: "#488AFF",
+      sound: "beep.wav",
+    },
+    PushNotifications: {
+      presentationOptions: ["badge", "sound", "alert"],
+    },
+  },
 };
 
 export default config;

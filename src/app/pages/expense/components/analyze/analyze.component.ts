@@ -1,328 +1,442 @@
-import {
-  AfterViewInit,
-  Component,
-  HostListener,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { ChartConfiguration, ChartOptions } from "chart.js";
-import { CustomDate } from "src/app/models/class/date/custom-date";
-import { ExpenseService } from "src/app/services/expense/expense.service";
 import { BaseChartDirective } from "ng2-charts";
 import { Router } from "@angular/router";
 import { Budget } from "../../modules/budget";
 import { MonthlyExpense } from "../../modules/monthly-expense";
+import { Analyze } from "../../modules/analyze";
 import { ToasterService } from "src/app/services/toaster/toaster.service";
 import { Expense } from "src/app/models/interface/masterData.model";
+import { FilterExpenseComponent } from "../../components/filter-expense/filter-expense.component";
+import { ModalController } from "@ionic/angular";
+import { Chart, registerables } from "chart.js";
+import { Subscription } from "rxjs";
+import { ExpenseService } from "src/app/services/expense/expense.service";
+Chart.register(...registerables);
 
 @Component({
-  selector: "app-analyze",
-  templateUrl: "./analyze.component.html",
-  styleUrls: ["./analyze.component.scss"],
+    selector: "app-analyze",
+    templateUrl: "./analyze.component.html",
+    styleUrls: ["./analyze.component.scss"],
+    standalone: false
 })
 export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(BaseChartDirective) chartA!: BaseChartDirective;
-  @ViewChild(BaseChartDirective) chartB!: BaseChartDirective;
-  @ViewChild("monthlyChart") monthlyChart!: BaseChartDirective;
-  @ViewChild("totalChart") totalChart!: BaseChartDirective;
-  @HostListener("window:resize")
-  // Graph resize
-  onResize(): void {
-    this.setGraphHeight();
-    this.setGraphWidth();
-  }
-  graphHeight: number = 400;
-  graphWidth: number = 400;
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+  @ViewChild("lineChart") lineChart?: BaseChartDirective;
+  @ViewChild("pieChart") pieChart?: BaseChartDirective;
+  @ViewChild("doughnutChart") doughnutChart?: BaseChartDirective;
+  @ViewChild("barChart") barChart?: BaseChartDirective;
 
-  // Note: Component Metadata and default variable
+  private chartInitialized = false;
+
+  private subscription = new Subscription();
   title = "Analyze Expenses";
+  expenseData: Expense[] = [];
+  protected readonly Math = Math; // Add Math to template
+
+  // Analysis data
+  totalStats: { totalAmount: number; totalCount: number } = { totalAmount: 0, totalCount: 0 };
+  categoryData: { type: string; amount: number }[] = [];
+  spentOnData: { spentOn: string; amount: number }[] = [];
+  zeroExpenseDays: number = 0;
+  monthlyData: any;
+
+  // Budget info
+  totalAmount: number = 0;
   totalBudget: number = 0;
   currentBudget: number = 0;
-  currentExpense: number = 0;
-  budget: number = 0;
-  expenseData: Expense[] = [];
-  currentMonthExpense: Expense[] = [];
-  // Info: Fetch data for analysis from models
-  currentMonth = new CustomDate().getCurrentMonth();
-  month: number = new Date().getMonth() + 1;
-  year = new Date().getFullYear();
-  daysInMonth: number = new Date(new Date().getFullYear(), this.month, 0).getDate();
+  remainingBalance: number = 0;
 
-  // Info: Expense data : Monthly or by filter
-  Expense: any = [];
+  // Line chart configuration for monthly expense comparison
+  lineChartConfig: ChartConfiguration = {
+    type: "line",
+    data: {
+      labels: [],
+      datasets: [
+        {
+          data: [],
+          label: "Daily Expense",
+          borderColor: "#3880ff",
+          backgroundColor: "rgba(56, 128, 255, 0.1)",
+          borderWidth: 2,
+          tension: 0.3,
+          fill: true,
+        },
+        {
+          data: [],
+          label: "Cumulative Expense",
+          borderColor: "#eb445a",
+          backgroundColor: "rgba(235, 68, 90, 0.1)",
+          borderWidth: 2,
+          tension: 0.3,
+          fill: true,
+        },
+        {
+          data: [],
+          label: "Budget Line",
+          borderColor: "#2dd36f",
+          backgroundColor: "rgba(45, 211, 111, 0.1)",
+          borderWidth: 2,
+          tension: 0,
+          borderDash: [5, 5],
+          fill: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        title: {
+          display: true,
+          text: "Monthly Expense Trend",
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "Amount (₹)",
+          },
+        },
+        x: {
+          title: {
+            display: true,
+            text: "Date",
+          },
+        },
+      },
+    },
+  };
 
-  // Info: Data for graph : Daily, Monthly, budget
-  dailyExpense: number[] = [];
-  dailyExpenseLimit: number[] = [];
-  monthlyExpense: number[] = [];
-  monthlyExpenseLimit: number[] = [];
-  totalAmount: number = 0;
-  totalExpense: number[] = [];
-  totalExpenseLimit: number[] = [];
-  categoryExpense: number[] = [];
+  // Pie chart configuration
+  pieChartConfig: ChartConfiguration = {
+    type: "pie",
+    data: {
+      labels: [],
+      datasets: [
+        {
+          data: [],
+          backgroundColor: ["#3880ff", "#eb445a", "#2dd36f", "#ffc409", "#92949c", "#5260ff"],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        title: {
+          display: true,
+          text: "Expense by Type",
+        },
+      },
+    },
+  };
+
+  // Doughnut chart configuration
+  doughnutChartConfig: ChartConfiguration = {
+    type: "doughnut",
+    data: {
+      labels: [],
+      datasets: [
+        {
+          data: [],
+          backgroundColor: ["#3880ff", "#eb445a", "#2dd36f", "#ffc409", "#92949c", "#5260ff"],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        title: {
+          display: true,
+          text: "Expense by Category",
+        },
+      },
+    },
+  };
+
+  // Bar chart configuration
+  barChartConfig: ChartConfiguration = {
+    type: "bar",
+    data: {
+      labels: ["Zero Expense Days"],
+      datasets: [
+        {
+          data: [0], // Will be updated with actual count
+          label: "Count",
+          backgroundColor: "#3880ff",
+          borderColor: "#3880ff",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false, // Hide legend since we only have one value
+        },
+        title: {
+          display: true,
+          text: "Zero Expense Days",
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "Count",
+          },
+        },
+      },
+    },
+  };
+
+  private chartStates = {
+    line: false,
+    pie: false,
+    doughnut: false,
+    bar: false,
+  };
+
+  private initializeChart(chart: BaseChartDirective | undefined, type: keyof typeof this.chartStates): boolean {
+    if (!chart || !this.chartInitialized) return false;
+    this.chartStates[type] = true;
+    return true;
+  }
 
   constructor(
     private expenseService: ExpenseService,
     private router: Router,
-    private toaster: ToasterService
+    private toaster: ToasterService,
+    private modalController: ModalController,
   ) {}
 
   ngOnInit() {
-    this.expenseData = this.expenseService.analyzeExpense;
-    if (this.expenseData === undefined || this.expenseData.length === 0) {
-      this.toaster.showToast("Expense not selected, redirecting to Expense page", "warning");
-      this.router.navigateByUrl("expenses");
-    } else {
-      this.toaster.showToast("Analyzing Expense", "primary");
-      console.log("Data received : ", this.expenseData);
-      this.getDataOnInit();
-    }
-    this.setGraphHeight();
-    this.setGraphWidth();
-  }
-
-  // Info: Line graph setup
-  public lineChartData: ChartConfiguration<"line">["data"] = {
-    labels: Array(this.daysInMonth)
-      .fill(this.daysInMonth)
-      .map((x, i) => (x = `${i + 1}-${this.month}-${this.year}`)),
-    datasets: [],
-  };
-
-  public totalExpenseData: ChartConfiguration<"line">["data"] = {
-    labels: [],
-    datasets: [
-      {
-        data: [],
-        label: "Total Expense",
-        fill: false,
-        tension: 0.5,
-        borderColor: "lime",
-        backgroundColor: "#00ff00",
-      },
-    ],
-  };
-
-  public currentMonthExpenseData: ChartConfiguration<"line">["data"] = {
-    labels: [],
-    datasets: [],
-  };
-
-  public lineChartOptions: ChartOptions = {
-    responsive: false,
-    plugins: {},
-  };
-
-  public monthlyChartOptions: ChartOptions = {
-    responsive: false,
-    plugins: {},
-  };
-
-  public lineChartLegend = true;
-  public monthlyChartLegend = true;
-
-  // 1. Get current month
-  // 2. Convert data to date wise expense.
-  // 3. Convert data to category wise expense.
-  // 4. Line graph
-  // 5. Pie chart
-  // 6. Bar graph
-  // 7. Load data to graph
-
-  async getDataOnInit() {
-    this.currentMonthExpense = await this.expenseService.getCustomExpenses();
-    // let total_expense: any = sessionStorage.getItem("total_expense");
-    // let total_budget: any = sessionStorage.getItem("budget");
-    // if (total_expense !== undefined || total_budget !== undefined) {
-    //   this.totalExpense = JSON.parse(total_expense);
-    //   this.dailyExpense = await this.getDailyExpenses(this.totalExpense);
-    // } else {
-    //   this.router.navigateByUrl("expense");
-    // }
-    // this.currentBudget = await this.getCurrentBudget(this.currentMonth, total_budget);
+    this.subscription.add(
+      this.expenseService.analysisData$.subscribe((data) => {
+        if (!data || data.length === 0) {
+          this.toaster.showToast("No expense data found, redirecting to Expense page", "warning");
+          this.router.navigateByUrl("expenses");
+          return;
+        }
+        this.expenseData = data;
+        if (this.chartInitialized) {
+          this.analyzeData();
+        }
+      }),
+    );
   }
 
   ngAfterViewInit() {
-    // this.totalBudget = new Budget().getTotalBudget();
-    this.currentExpense = new MonthlyExpense().getCurrentExpense();
-  }
-
-  async getExpense(month: string) {
-    await this.expenseService.getCustomExpenses("duration", month).subscribe(async (res: any) => {
-      this.Expense = await res;
-    });
+    // Wait for charts to be available
     setTimeout(() => {
-      this.updateCurrentMonthGraph(this.Expense.reverse());
-      this.getTypeWiseExpense(this.Expense);
-    }, 3000);
-  }
-
-  async getDailyExpenses(expenses: any[]): Promise<any[]> {
-    if (expenses.length > 0) {
-      const dailyExpenses: any[] = [];
-      const uniqueDates = [...new Set(expenses.map((e) => e.date))];
-      uniqueDates.forEach((date) => {
-        const dailyAmount = expenses
-          .filter((e) => e.date === date)
-          .reduce((acc, curr) => acc + curr.amount, 0);
-        dailyExpenses.push({ date, dailyAmount });
-      });
-      this.updateTotalGraph(dailyExpenses);
-      return dailyExpenses;
-    } else {
-      return [];
-    }
-  }
-
-  updateTotalGraph(expense: any[]) {
-    const dates: any = [];
-    const amount: any = [];
-    expense.forEach((data: any, _index?: number) => {
-      amount.push(data.dailyAmount);
-      dates.push(data.date);
-      this.totalAmount += data.dailyAmount;
-    });
-    this.totalExpenseData.labels = dates;
-    this.totalExpenseData.datasets[0].data = amount;
-    this.chartB.update();
-  }
-  async updateCurrentMonthGraph(expense: any[]) {
-    const monthlyData = new MonthlyExpense().getMonthlyData(expense, this.currentBudget);
-    this.currentMonthExpenseData.labels = monthlyData.dates;
-    this.currentMonthExpenseData.datasets = [
-      {
-        data: monthlyData.dailyAmount,
-        label: "Expense today",
-        fill: false,
-        tension: 0.5,
-        borderColor: "blue",
-        backgroundColor: "blue",
-        pointRadius: 1,
-      },
-      {
-        data: monthlyData.amount,
-        label: "Expense till now",
-        fill: false,
-        tension: 0.5,
-        borderColor: "purple",
-        backgroundColor: "purple",
-      },
-      {
-        data: monthlyData.budgetData,
-        label: "Monthly Budget",
-        fill: false,
-        tension: 0.5,
-        borderColor: "red",
-        backgroundColor: "red",
-      },
-    ];
-    this.currentExpense = monthlyData.incrementAmount;
-    this.chartA.update();
-  }
-  setGraphHeight(): void {
-    const screenHeight = window.innerHeight;
-    if (screenHeight < 680) {
-      this.graphHeight = 450;
-    } else if (screenHeight > 680) {
-      this.graphHeight = 400;
-    } else {
-      this.graphHeight = 400;
-    }
-  }
-  setGraphWidth(): void {
-    const screenWidth = window.innerWidth;
-    if (screenWidth < 680) {
-      this.graphWidth = 500;
-    } else if (680 < screenWidth && screenWidth > 780) {
-      this.graphWidth = (screenWidth * 2) / 3;
-    } else if (780 < screenWidth && screenWidth < 1080) {
-      this.graphWidth = 1200;
-    } else {
-      this.graphWidth = screenWidth / 2;
-    }
-  }
-
-  // Info: Pie chart setup
-  /* Pie */
-  public pieChartOptions: ChartOptions<"pie"> = {
-    responsive: true,
-  };
-  public pieChartLabels = ["All"];
-  public pieChartDatasets = [
-    {
-      data: [100],
-    },
-  ];
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
-
-  // /* Bar Chart */
-  // public barChartLegend = true;
-  // public barChartPlugins = [];
-
-  // public barChartData: ChartConfiguration<'bar'>['data'] = {
-  //   labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
-  //   datasets: [
-  //     {
-  //       data: [65, 59, 80, 81, 56, 55, 40],
-  //       label: 'Expenses',
-  //       backgroundColor: 'aqua'
-  //     },
-  //     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Budget', backgroundColor: 'orange' }
-  //   ]
-  // };
-
-  // public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-  //   responsive: false,
-  // };
-  async getTypeWiseExpense(expenses: any[]) {
-    if (expenses.length > 0) {
-      const expenseTypes: any[] = [];
-      const uniqueTypes = [...new Set(expenses.map((e) => e.type))];
-      uniqueTypes.forEach((type) => {
-        const amount = expenses
-          .filter((e) => e.type === type)
-          .reduce((acc, curr) => acc + curr.amount, 0);
-        expenseTypes.push({ type, amount });
-      });
-      this.updateTypeWisePie(expenseTypes);
-      return expenseTypes;
-    } else {
-      return [];
-    }
-  }
-
-  updateTypeWisePie(expenses: any) {
-    this.pieChartLabels = [];
-    this.pieChartDatasets[0].data = [];
-    expenses.forEach((data: any) => {
-      this.pieChartLabels.push(data.type.toUpperCase());
-      this.pieChartDatasets[0].data.push(data.amount);
-    });
-  }
-
-  /**External Functions */
-  async getCurrentBudget(currentMonth: string, budget: any): Promise<number> {
-    let retrievedBudget: any = 0;
-    retrievedBudget = budget;
-    let currentBudget: number = 0;
-    if (retrievedBudget) {
-      const budget = JSON.parse(retrievedBudget);
-      const budgetForThisMonth = budget.find((item: any) => item.month === currentMonth);
-      if (budgetForThisMonth) {
-        currentBudget = budgetForThisMonth.amount;
-      } else {
-        alert("Budget for the current month not found. Add budget first");
+      this.chartInitialized = true;
+      if (this.expenseData.length > 0) {
+        this.analyzeData();
       }
-    } else {
-      currentBudget = 0;
-      alert(
-        "There was some error getting your budget. Make sure you have added budget for this month."
-      );
+    }, 500); // Increased delay to ensure DOM is ready
+  }
+
+  async analyzeData() {
+    if (!this.chartInitialized) return;
+
+    try {
+      const analyzer = new Analyze();
+      const monthlyExpense = new MonthlyExpense();
+      const budgetHelper = new Budget();
+
+      // Get total stats for selected duration
+      this.totalStats = analyzer.getTotalStats(this.expenseData);
+      this.totalAmount = this.totalStats.totalAmount;
+
+      // Count zero expense days (where amount = 0 and type = saving)
+      this.zeroExpenseDays = this.expenseData.filter(
+        (expense) => expense.amount === 0 && expense.type === "saving",
+      ).length;
+
+      // Calculate budget for the selected duration
+      let startDate = this.expenseData[this.expenseData.length - 1]?.date;
+      let endDate = this.expenseData[0]?.date;
+
+      if (startDate && endDate) {
+        // Convert dates to proper format
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+
+        let totalBudget = 0;
+        let currentDate = start;
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        console.info("year", year);
+        console.info("month", month);
+        const monthBudget = await budgetHelper.getCurrentBudget(`${year}-${month.toString().padStart(2, "0")}`);
+        while (currentDate <= end) {
+          const daysInMonth = new Date(year, month, 0).getDate();
+
+          // Get budget for current month
+
+          if (currentDate.getMonth() === start.getMonth() && currentDate.getMonth() === end.getMonth()) {
+            // Same month - calculate for specific days
+            const dayCount = end.getDate() - start.getDate() + 1;
+            totalBudget += (monthBudget / daysInMonth) * dayCount;
+          } else if (currentDate.getMonth() === start.getMonth()) {
+            // First month - calculate remaining days
+            const dayCount = daysInMonth - start.getDate() + 1;
+            totalBudget += (monthBudget / daysInMonth) * dayCount;
+          } else if (currentDate.getMonth() === end.getMonth()) {
+            // Last month - calculate days until end
+            totalBudget += (monthBudget / daysInMonth) * end.getDate();
+          } else {
+            // Full month
+            totalBudget += monthBudget;
+          }
+
+          // Move to next month
+          currentDate.setMonth(currentDate.getMonth() + 1);
+        }
+
+        this.totalBudget = Math.round(totalBudget);
+        this.remainingBalance = this.totalBudget - this.totalAmount;
+      }
+
+      // Get category wise data
+      this.categoryData = analyzer.getCategoryWiseData(this.expenseData);
+      setTimeout(() => this.updatePieChart(), 100);
+
+      // Get spent on data
+      this.spentOnData = analyzer.getSpentOnWiseData(this.expenseData);
+      setTimeout(() => this.updateDoughnutChart(), 200);
+
+      // Get monthly analysis
+      this.monthlyData = monthlyExpense.getMonthlyData(this.expenseData, this.totalBudget);
+      setTimeout(() => this.updateLineChart(), 300);
+      setTimeout(() => this.updateBarChart(), 400);
+    } catch (error) {
+      console.error("Error analyzing data:", error);
+      this.toaster.showToast("Error analyzing expense data", "danger");
+      this.router.navigateByUrl("expenses");
     }
-    return currentBudget;
+  }
+
+  // Chart update methods
+  updateLineChart() {
+    if (!this.monthlyData || !this.initializeChart(this.lineChart, "line")) return;
+
+    try {
+      this.lineChartConfig.data.labels = this.monthlyData.dates;
+      this.lineChartConfig.data.datasets[0].data = this.monthlyData.dailyAmount;
+      this.lineChartConfig.data.datasets[1].data = this.monthlyData.amount;
+      this.lineChartConfig.data.datasets[2].data = Array(this.monthlyData.dates.length).fill(this.currentBudget);
+      this.lineChartConfig.data.datasets[3].data = Array(this.monthlyData.dates.length).fill(
+        this.currentBudget / this.monthlyData.dates.length,
+      );
+
+      requestAnimationFrame(() => {
+        this.lineChart?.render();
+      });
+    } catch (error) {
+      console.error("Error updating line chart:", error);
+    }
+  }
+
+  updatePieChart() {
+    if (!this.categoryData || !this.initializeChart(this.pieChart, "pie")) return;
+
+    try {
+      this.pieChartConfig.data.labels = this.categoryData.map((item) => item.type);
+      this.pieChartConfig.data.datasets[0].data = this.categoryData.map((item) => item.amount);
+
+      requestAnimationFrame(() => {
+        this.pieChart?.render();
+      });
+    } catch (error) {
+      console.error("Error updating pie chart:", error);
+    }
+  }
+
+  updateDoughnutChart() {
+    if (!this.spentOnData || !this.initializeChart(this.doughnutChart, "doughnut")) return;
+
+    try {
+      this.doughnutChartConfig.data.labels = this.spentOnData.map((item) => item.spentOn);
+      this.doughnutChartConfig.data.datasets[0].data = this.spentOnData.map((item) => item.amount);
+
+      requestAnimationFrame(() => {
+        this.doughnutChart?.render();
+      });
+    } catch (error) {
+      console.error("Error updating doughnut chart:", error);
+    }
+  }
+
+  updateBarChart() {
+    if (this.initializeChart(this.barChart, "bar")) {
+      this.barChartConfig.data.datasets[0].data = [this.zeroExpenseDays];
+      this.barChart?.update();
+    }
+  }
+
+  // Shared chart options
+  chartOptions: ChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Expense Analysis",
+      },
+    },
+  };
+
+  async openFilterModal() {
+    try {
+      const modal = await this.modalController.create({
+        component: FilterExpenseComponent,
+      });
+      await modal.present();
+
+      const { data } = await modal.onDidDismiss();
+      if (data) {
+        this.expenseService.getCustomExpenses(data).subscribe({
+          next: (expenses: Expense[]) => {
+            this.expenseData = expenses;
+            this.analyzeData();
+          },
+          error: (error) => {
+            console.error("Error getting filtered expenses:", error);
+            this.toaster.showToast("Error getting filtered expenses", "danger");
+          },
+        });
+      }
+    } catch (error) {
+      console.error("Error with filter modal:", error);
+      this.toaster.showToast("Error opening filter", "danger");
+    }
+  }
+
+  ngOnDestroy() {
+    this.chartInitialized = false;
+    this.subscription.unsubscribe();
+    this.expenseService.clearAnalysisData();
   }
   returnToExpense() {
     this.router.navigateByUrl("expenses");

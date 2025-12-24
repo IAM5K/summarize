@@ -10,9 +10,10 @@ import { SeoService } from "../services/seo/seo.service";
 import { ResourceService } from "../services/resource/resource.service";
 
 @Component({
-  selector: "app-admin",
-  templateUrl: "./admin.page.html",
-  styleUrls: ["./admin.page.scss"],
+    selector: "app-admin",
+    templateUrl: "./admin.page.html",
+    styleUrls: ["./admin.page.scss"],
+    standalone: false
 })
 export class AdminPage implements OnInit {
   pageTitle = "Resource";

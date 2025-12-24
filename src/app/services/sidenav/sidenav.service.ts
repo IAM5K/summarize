@@ -24,10 +24,10 @@ export class SidenavService {
     { title: "Studies", color: "primary", url: "studies", icon: "book" },
     { title: "Time", color: "danger", url: "time", icon: "hourglass" },
     {
-      title: "Achievements",
+      title: "Moments",
       color: "warning",
-      url: "achievement",
-      icon: "trophy",
+      url: "moments",
+      icon: "sparkles",
     },
     // { title: 'Analytics', color: 'success', url: 'analytics', icon: 'analytics' },
     // { title: 'Setup', color: 'warning', url: 'setup', icon: 'settings' },

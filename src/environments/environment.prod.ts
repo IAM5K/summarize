@@ -13,6 +13,7 @@ export const environment = {
     appId: "1:896604807056:web:a9f238465aa5b46ce01d15",
     measurementId: "G-V35KRGKSYW",
   },
+  firebaseFunctionsUrl: "https://127.0.0.1:5001",
   GTM_ID: "GTM-TT56N59",
   production: true,
   apiUrl: "https://summarize-ng-default-rtdb.firebaseio.com",

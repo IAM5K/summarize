@@ -6,9 +6,10 @@ import { AchievementsService } from "src/app/services/achievements/achievements.
 import { SeoService } from "src/app/services/seo/seo.service";
 
 @Component({
-  selector: "app-achievement",
-  templateUrl: "./achievement.page.html",
-  styleUrls: ["./achievement.page.scss"],
+    selector: "app-achievement",
+    templateUrl: "./achievement.page.html",
+    styleUrls: ["./achievement.page.scss"],
+    standalone: false
 })
 export class AchievementPage implements OnInit {
   pageTitle = "Achievement";

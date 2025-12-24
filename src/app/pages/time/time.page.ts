@@ -13,9 +13,10 @@ import { SeoTags } from "src/app/models/class/seoTags/seo";
 import { TimeFunctions } from "src/app/models/functions/time.function";
 
 @Component({
-  selector: "app-time",
-  templateUrl: "./time.page.html",
-  styleUrls: ["./time.page.scss"],
+    selector: "app-time",
+    templateUrl: "./time.page.html",
+    styleUrls: ["./time.page.scss"],
+    standalone: false
 })
 export class TimePage implements OnInit, OnDestroy {
   constructor(
@@ -80,7 +81,6 @@ export class TimePage implements OnInit, OnDestroy {
   async getProjects() {
     this.projectSubscription = await this.profileService.getActiveProjects().subscribe((res: any) => {
       this.projects = res.filter((project) => project.isActive);
-      console.log(this.projects);
 
       if (this.projects.length > 0) {
         this.workForm.patchValue({

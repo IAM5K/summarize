@@ -16,15 +16,18 @@
 
   <div id="container">
     <h1 class="ion-text-center ion-padding">
-      What gets measured, Gets managed
+      Summarize
       <br />
-      <ion-note color="tertiary" class="h4">- Peter F. Drucker</ion-note>
+      <ion-note color="success" class="h5">Helps you maintain discipline and focus</ion-note>
+      <ion-note color="warning" class="h5">No advertisement, No distraction</ion-note>
     </h1>
-    <section class="transparent-card">
+    <!-- <ion-button (click)="testNotification()">Test Notification</ion-button> -->
+
+    <section class="transparent-card padding-zero mb-0">
       <app-goal-on-dashboard></app-goal-on-dashboard>
     </section>
     <section class="features ion-padding ion-justify-content-around ion-margin ion-align-items-stretch ion-wrap">
-      <h2 class="ion-text-center h2 mt0">Available Features</h2>
+      <h2 class="ion-text-center h2 mt0">Features for you</h2>
       <div class="feature-card-container">
         <div
           class="feature-card"
@@ -37,6 +40,27 @@
         </div>
       </div>
     </section>
+
+    <section class="transparent-card padding-zero">
+      <app-quick-features class="bg-lime"></app-quick-features>
+    </section>
+    <ion-note color="danger" class="ion-padding h4 ion-text-bold">
+      Some features are unstable. Sorry for the inconvenience.
+    </ion-note>
+
+    <div class="card ion-padding">
+      <h4 class="h2">Upcoming Features soon</h4>
+      <ol>
+        <li>Analyze Studies</li>
+        <li>Analyze Work</li>
+        <li>Shared Expense list</li>
+        <li>Shared Study list</li>
+        <li>Split Expenses</li>
+        <li>Goal Setting</li>
+        <li>Co-Live: Manage your co-living space</li>
+      </ol>
+    </div>
+
     <div class="card ion-padding">
       <h3>About Summarize</h3>
       <p class="ion-text-justify" *ngFor="let item of paragraphs">{{item}}</p>
@@ -45,15 +69,6 @@
         <a class="color-secondary bold" routerLink="/about">check here</a>
         )
       </p>
-    </div>
-    <div class="card ion-padding">
-      <h4 class="h2">Upcoming Features</h4>
-      <ol>
-        <li>Analyze Studies</li>
-        <li>Analyze Work</li>
-        <li>Goal Setting</li>
-        <li>Analyze Studies based on target Exams.</li>
-      </ol>
     </div>
   </div>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">

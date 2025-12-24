@@ -1,9 +1,10 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from "@angular/core";
 
 @Component({
-  selector: "app-expense-card",
-  templateUrl: "./expense-card.component.html",
-  styleUrls: ["./expense-card.component.scss"],
+    selector: "app-expense-card",
+    templateUrl: "./expense-card.component.html",
+    styleUrls: ["./expense-card.component.scss"],
+    standalone: false
 })
 export class ExpenseCardComponent implements OnInit {
   @Input() expenseItem: any;

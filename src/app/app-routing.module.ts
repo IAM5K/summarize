@@ -45,9 +45,8 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: "achievement",
-    loadChildren: () =>
-      import("./pages/achievement/achievement.module").then((m) => m.AchievementPageModule),
+    path: "moments",
+    loadChildren: () => import("./pages/achievement/achievement.module").then((m) => m.AchievementPageModule),
     ...canActivate(redirectUnauthorizedToLogin),
   },
   {
@@ -67,8 +66,7 @@ const routes: Routes = [
   },
   {
     path: "privacy-policy",
-    loadChildren: () =>
-      import("./pages/privacy-policy/privacy-policy.module").then((m) => m.PrivacyPolicyPageModule),
+    loadChildren: () => import("./pages/privacy-policy/privacy-policy.module").then((m) => m.PrivacyPolicyPageModule),
   },
   // {
   //   path: 'admin',

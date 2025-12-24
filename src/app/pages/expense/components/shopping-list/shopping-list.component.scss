@@ -1,0 +1,25 @@
+.shopping-list-form-container {
+  box-shadow: 0 0 5px var(--ion-color-medium-tint);
+  height: fit-content;
+  border-radius: 0.5rem;
+  min-height: 75px;
+}
+
+.button-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  ion-button {
+    display: block;
+  }
+}
+
+ion-list {
+  width: 100%;
+}
+
+.purchased {
+  text-decoration: line-through;
+  color: var(--ion-color-medium);
+}

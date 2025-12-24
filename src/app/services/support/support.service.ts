@@ -41,7 +41,7 @@ export class SupportService {
   }
 
   formatDate(str: any) {
-    if (str === (null || undefined)) {
+    if (!str) {
       return false;
     } else {
       return str.toDate().toString().slice(4, 24);

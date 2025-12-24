@@ -1,0 +1,207 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Shared Shopping Lists</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Shared Shopping Lists</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="content">
+    <div class="button-container ion-padding mb-15px">
+      <ion-button id="add-list-alert" class="ion-float-right mb-15px" [disabled]="creatingList">
+        <ion-icon slot="end" name="add"></ion-icon>
+        Add list
+      </ion-button>
+
+      <ion-alert
+        trigger="add-list-alert"
+        header="Add list name"
+        [buttons]="alertButtons"
+        [inputs]="shoppingInputs"
+      ></ion-alert>
+    </div>
+
+    <div *ngIf="loadingLists" class="ion-text-center ion-padding loading-spinnner">
+      <ion-spinner>
+        <span class="loading-text">Loading...</span>
+      </ion-spinner>
+      <!-- <p>Loading lists...</p> -->
+      <!-- <ion-loading trigger="open-loading" message="Dismissing after 3 seconds..." duration="3000"></ion-loading> -->
+    </div>
+
+    <div *ngIf="errors['lists']" class="ion-padding">
+      <ion-text color="danger">
+        <p>Error loading lists: {{ errors["lists"]?.message }}</p>
+      </ion-text>
+    </div>
+
+    <ion-accordion-group
+      *ngIf="(userLists$ | async)?.length > 0 && !loadingLists"
+      [value]="expandedListId"
+      class="ion-margin-top"
+    >
+      <ion-accordion *ngFor="let list of userLists$ | async" value="{{ list.key }}" class="ion-padding padding-v-0">
+        <ion-item slot="header">
+          <ion-label>{{ list.name }}</ion-label>
+        </ion-item>
+
+        <div slot="content" class="mb-15px">
+          <div *ngIf="loadingItems[list.key!]" class="ion-text-center ion-padding">
+            <ion-spinner name="dots"></ion-spinner>
+            <p>Loading items...</p>
+          </div>
+
+          <div *ngIf="errors['items-' + list.key!]">
+            <ion-text color="danger">
+              <p>Error loading items: {{ errors["items-" + list.key!]?.message }}</p>
+            </ion-text>
+          </div>
+
+          <ion-list *ngIf="list.items; else noItems">
+            <ion-item-sliding *ngFor="let itemEntry of list.items | keyvalue as itemEntries">
+              <ion-item>
+                <ion-checkbox
+                  slot="start"
+                  [checked]="itemEntry.value['purchased']"
+                  (ionChange)="updateItemStatus(list.key!, itemEntry.key, $event)"
+                  [color]="itemEntry.value['purchased'] ? 'success' : 'medium'"
+                ></ion-checkbox>
+                <ion-label [class.purchased]="itemEntry.value['purchased']">
+                  <h2>{{ itemEntry.value["name"] }}</h2>
+                  <p>Quantity: {{ itemEntry.value["quantity"] }}</p>
+                </ion-label>
+              </ion-item>
+              <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="deleteItem(list.key!, itemEntry.key)">
+                  <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+            <ion-item
+              *ngIf="(list.items | keyvalue).length === 0 && !loadingItems[list.key!] && !errors['items-' + list.key!]"
+            >
+              <ion-label class="ion-text-center">No items in this list yet.</ion-label>
+            </ion-item>
+          </ion-list>
+          <ng-template #noItems>
+            <ion-item>
+              <ion-note color="warning" class="h4 ion-text-center m-15px">No items available</ion-note>
+            </ion-item>
+          </ng-template>
+
+          <ion-item>
+            <ion-input label="New Item" [(ngModel)]="newItemName" labelPlacement="floating"></ion-input>
+            <ion-input
+              type="number"
+              label="Qty"
+              [(ngModel)]="newItemQuantity"
+              labelPlacement="floating"
+              [min]="1"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-button fill="clear" size="small" (click)="toggleMembers(list.key!)">
+              <ion-icon
+                slot="start"
+                [name]="showMembersForListId === list.key ? 'people' : 'people-outline'"
+              ></ion-icon>
+              {{ showMembersForListId === list.key ? "Hide Members" : "Show Members" }}
+            </ion-button>
+            <ion-button
+              slot="end"
+              color="primary"
+              (click)="addNewItem(list.key!)"
+              [disabled]="!newItemName.trim() || !list.key"
+            >
+              Add Item
+            </ion-button>
+            <ion-button slot="end" color="danger" (click)="deleteList(list.key!)" [disabled]="!list.key">
+              Delete List
+            </ion-button>
+          </ion-item>
+
+          <div *ngIf="showMembersForListId === list.key">
+            <div *ngIf="loadingMembers[list.key!]" class="ion-text-center ion-padding">
+              <ion-spinner name="dots"></ion-spinner>
+              <p>Loading members...</p>
+            </div>
+
+            <div *ngIf="errors['members-' + list.key!]">
+              <ion-text color="danger">
+                <p>Error loading members: {{ errors["members-" + list.key!]?.message }}</p>
+              </ion-text>
+            </div>
+
+            <!-- List of members -->
+            <ion-list-header color="light">
+              <ion-label color="secondary">Members of {{ list.name }}</ion-label>
+            </ion-list-header>
+            <ion-list *ngIf="list.members$ | async as members">
+              <ion-item *ngFor="let member of members">
+                <ion-label>
+                  <h2>{{ member.profile.name || member.profile.email }}</h2>
+                  <p *ngIf="member.profile.name">{{ member.profile.email }}</p>
+                  <p *ngIf="list.owner === member.uid">(Owner)</p>
+                </ion-label>
+                <ion-button
+                  *ngIf="isOwner(list.owner) && member.uid !== currentUserUid"
+                  slot="end"
+                  fill="clear"
+                  size="small"
+                  color="danger"
+                  (click)="removeMember(list.key!, member.uid)"
+                >
+                  <ion-icon name="remove-circle-outline"></ion-icon>
+                </ion-button>
+              </ion-item>
+              <ion-item *ngIf="members.length === 0 && !loadingMembers[list.key!] && !errors['members-' + list.key!]">
+                <ion-label class="ion-text-center">No other members yet.</ion-label>
+              </ion-item>
+            </ion-list>
+
+            <ion-item>
+              <ion-input
+                label="Invite by Email"
+                [(ngModel)]="invitedMemberEmail"
+                labelPlacement="floating"
+                type="email"
+              ></ion-input>
+              <ion-button
+                slot="end"
+                (click)="inviteMember(list.key!)"
+                [disabled]="!invitedMemberEmail.trim() || !list.key || loadingMembers[list.key!]"
+              >
+                Invite
+              </ion-button>
+            </ion-item>
+            <div *ngIf="errors['invite']" class="ion-padding-start ion-padding-end">
+              <ion-text color="danger">
+                <p>{{ errors["invite"]?.message }}</p>
+              </ion-text>
+            </div>
+          </div>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <div class="ion-padding ion-flex w-100">
+      <!-- Todo: add ngIf to ion-item itself so that it don't render blank space -->
+      <!-- Update the message based on the list count -->
+      <ion-note *ngIf="(userLists$ | async)?.length === 0" color="warning" class="h4 ion-text-center m-15px">
+        No shopping lists available. Create one or ask someone to invite you.
+      </ion-note>
+
+      <div *ngIf="errors['createList']" class="ion-padding-top">
+        <ion-text color="danger">
+          <p>{{ errors["createList"]?.message }}</p>
+        </ion-text>
+      </div>
+    </div>
+  </div>
+</ion-content>

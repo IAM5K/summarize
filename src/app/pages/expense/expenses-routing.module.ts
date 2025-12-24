@@ -1,8 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { AnalyzeComponent } from "./components/analyze/analyze.component";
-
 import { ExpensesPage } from "./expenses.page";
+import { ShoppingListComponent } from "./components/shopping-list/shopping-list.component";
 
 const routes: Routes = [
   {
@@ -11,7 +10,12 @@ const routes: Routes = [
   },
   {
     path: "analyze",
-    component: AnalyzeComponent,
+    loadChildren: () => import("./components/analyze/analyze.module").then((m) => m.AnalyzeModule),
+  },
+  {
+    path: "shopping-list",
+    loadChildren: () =>
+      import("./components/shopping-list/shopping-list.component").then((m) => m.ShoppingListComponent),
   },
 ];
 

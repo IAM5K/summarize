@@ -4,7 +4,7 @@ html,
 body {
   font-size: 16px;
   @media screen and (max-width: 992px) {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
@@ -17,7 +17,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+ion-note {
   display: block !important;
   position: relative;
   width: 100% !important;
@@ -82,6 +83,13 @@ pre {
   display: block;
   margin-top: 15px;
 }
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.mb-5px {
+  display: block;
+  margin-bottom: 5px;
+}
 .mb-10px {
   display: block;
   margin-bottom: 10px;
@@ -103,6 +111,10 @@ pre {
 .m-15px {
   margin: 15px auto;
 }
+.pd-5px {
+  box-sizing: border-box;
+  padding: 5px;
+}
 .pdb-15px {
   padding-bottom: 30px;
 }
@@ -119,4 +131,12 @@ ion-title {
 }
 .strike-through {
   text-decoration: line-through;
+}
+
+.fixed-bottom {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }

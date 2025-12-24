@@ -59,4 +59,29 @@ export class RealTimeDataBaseService {
         );
     }
   }
+
+  getAnswerKey(path: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .object(path)
+        .valueChanges()
+        .pipe(
+          tap((data) => {
+            console.log("Answer key data:", data);
+            localStorage.setItem("examAnswers", JSON.stringify(data));
+          }),
+        )
+        .subscribe({
+          next: (data) => resolve(data),
+          error: (err) => reject(err),
+        });
+    });
+  }
+  saveResult(path: string, data: any): Promise<void> {
+    return this.db.object(path).set(data);
+  }
+
+  getResult(path: string): Observable<any> {
+    return this.db.object(path).valueChanges();
+  }
 }

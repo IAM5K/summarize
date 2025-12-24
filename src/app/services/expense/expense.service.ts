@@ -3,6 +3,9 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { ProfileService } from "../profile/profile.service";
 import { ToasterService } from "../toaster/toaster.service";
 import { Expense } from "src/app/models/interface/masterData.model";
+import { map } from "rxjs/operators";
+import { BehaviorSubject } from "rxjs";
+
 @Injectable({
   providedIn: "root",
 })
@@ -13,10 +16,26 @@ export class ExpenseService {
     private toasterService: ToasterService
   ) {}
   analyzeExpense: Expense[];
+  analyzeExpense: Expense[];
   userId = this.profileService.getUserProfile()?.uid;
   successMessage = "Expense Added Successfully!";
   deletedMessage = "Expense Deleted Successfully!";
   expenseCollection = this.afs.collection("userData");
+
+  private analysisDataSubject = new BehaviorSubject<Expense[]>([]);
+  analysisData$ = this.analysisDataSubject.asObservable();
+
+  setAnalysisData(expenses: Expense[]) {
+    if (!expenses) {
+      this.toasterService.showToast("No expense data available", "warning");
+      return;
+    }
+    this.analysisDataSubject.next(expenses);
+  }
+
+  clearAnalysisData() {
+    this.analysisDataSubject.next([]);
+  }
 
   addExpense(data: any) {
     this.expenseCollection
@@ -24,78 +43,86 @@ export class ExpenseService {
       .collection("myExpence")
       .add(data)
       .then((res) => {
+      .then((res) => {
         this.successAlert(this.successMessage);
       })
       .catch((err) => {
-        alert(
-          "There was an error in posting. \n Please try again later. Check console for detail."
-        );
+        alert("There was an error in posting. \n Please try again later. Check console for detail.");
         console.warn(err);
       });
   }
+
   getExpenses(count?: number) {
-    if (count) {
-      return this.expenseCollection
-        .doc(this.userId)
-        .collection("myExpence", (ref) => ref.orderBy("date", "desc").limit(count))
-        .valueChanges({ idField: "idField" });
-    } else {
-      return this.expenseCollection
-        .doc(this.userId)
-        .collection("myExpence", (ref) => ref.orderBy("date", "desc"))
-        .valueChanges({ idField: "idField" });
-    }
+    const collectionRef = this.expenseCollection
+      .doc(this.userId)
+      .collection("myExpence", (ref) =>
+        count ? ref.orderBy("date", "desc").limit(count) : ref.orderBy("date", "desc"),
+      );
+    return collectionRef.snapshotChanges().pipe(
+      map((actions) =>
+        actions.map((a) => {
+          const data = a.payload.doc.data() as Expense;
+          const idField = a.payload.doc.id;
+          return { ...data, idField };
+        }),
+      ),
+    );
   }
-  getCustomExpenses(filterBy?: string, data?: string, duration?: string) {
-    // console.log(filterBy +" : " + data  +" : " +duration );
-    let query = null;
-    switch (filterBy) {
-      case "duration":
-        query = this.expenseCollection
-          .doc(this.userId)
-          .collection("myExpence", (ref) => ref.orderBy("date", "desc").where("date", ">=", data))
-          .valueChanges({ idField: "idField" });
-        break;
-      case "spentOn":
-        query = this.expenseCollection
-          .doc(this.userId)
-          .collection("myExpence", (ref) =>
-            ref.where("spendedOn", "==", data).orderBy("date").startAt(duration)
-          )
-          .valueChanges({ idField: "idField" });
-        break;
-      case "type":
-        query = this.expenseCollection
-          .doc(this.userId)
-          .collection("myExpence", (ref) =>
-            ref.where("type", "==", data).orderBy("date").startAt(duration)
-          )
-          .valueChanges({ idField: "idField" });
-        break;
-      default:
-        query = this.expenseCollection
-          .doc(this.userId)
-          .collection("myExpence", (ref) => ref.orderBy("date", "desc").limit(5))
-          .valueChanges({ idField: "idField" });
-        break;
-    }
-    return query;
+
+  getCustomExpenses(filterQuery: any) {
+    const collectionRef = this.expenseCollection.doc(this.userId).collection("myExpence", (ref) => {
+      let queryRef = ref.orderBy("date", "desc");
+
+      // Date filtering
+      if (filterQuery.customRange) {
+        // For custom date range
+        queryRef = queryRef
+          .where("date", ">=", filterQuery.customRange.start)
+          .where("date", "<=", filterQuery.customRange.end);
+      } else if (filterQuery.duration) {
+        // For predefined durations
+        queryRef = queryRef.where("date", ">=", filterQuery.duration);
+      }
+
+      // Category filtering
+      if (filterQuery.filterCategory === "spentOn" && filterQuery.parameter) {
+        queryRef = queryRef.where("spendedOn", "==", filterQuery.parameter);
+      } else if (filterQuery.filterCategory === "type" && filterQuery.parameter) {
+        queryRef = queryRef.where("type", "==", filterQuery.parameter);
+      }
+
+      return queryRef;
+    });
+
+    return collectionRef.snapshotChanges().pipe(
+      map((actions) =>
+        actions.map((a) => {
+          const data = a.payload.doc.data() as Expense;
+          const idField = a.payload.doc.id;
+          return { ...data, idField };
+        }),
+      ),
+    );
   }
 
   getExpenseByDate(date: string) {
-    return this.expenseCollection
+    const collectionRef = this.expenseCollection
       .doc(this.userId)
-      .collection("myExpence", (ref) => ref.where("date", "==", date).orderBy("amount", "asc"))
-      .valueChanges({ idField: "idField" });
+      .collection("myExpence", (ref) => ref.where("date", "==", date).orderBy("amount", "asc"));
+    return collectionRef.snapshotChanges().pipe(
+      map((actions) =>
+        actions.map((a) => {
+          const data = a.payload.doc.data() as Expense;
+          const idField = a.payload.doc.id;
+          return { ...data, idField };
+        }),
+      ),
+    );
   }
 
   async updateExpense(data, idField) {
     try {
-      await this.expenseCollection
-        .doc(this.userId)
-        .collection("myExpence")
-        .doc(idField)
-        .update(data);
+      await this.expenseCollection.doc(this.userId).collection("myExpence").doc(idField).update(data);
       this.successAlert("Expense updated successfully");
       return true;
     } catch (error) {
@@ -132,10 +159,14 @@ export class ExpenseService {
       .collection("myBudget")
       .add(data)
       .then((res) => {
+      .then((res) => {
         const msg = "Budget Added Successfully!";
         this.successAlert(msg);
       })
       .catch((err) => {
+        const message =
+          "There was an error in posting.\n Please try again later. Check console for detail. \nContact /report us in case of no success ";
+        this.toasterService.showToast(message, "warning");
         const message =
           "There was an error in posting.\n Please try again later. Check console for detail. \nContact /report us in case of no success ";
         this.toasterService.showToast(message, "warning");
@@ -150,10 +181,15 @@ export class ExpenseService {
       .doc(data.idField)
       .update(data)
       .then((res) => {
+      .then((res) => {
         const msg = "Budget updated successfully!";
         this.successAlert(msg);
       })
       .catch((err) => {
+        const message =
+          "There was an error in updating budget. \n Please try again later. Check console for detail. \nContact /report us in case of no success ";
+        this.toasterService.showToast(message, "warning");
+        alert();
         const message =
           "There was an error in updating budget. \n Please try again later. Check console for detail. \nContact /report us in case of no success ";
         this.toasterService.showToast(message, "warning");

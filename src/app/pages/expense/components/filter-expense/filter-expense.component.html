@@ -1,0 +1,99 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+    <ion-button slot="end" color="danger" class="mr-10" (click)="modal.dismiss()">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container" class="ion-padding">
+    <form #filterForm="ngForm" (ngSubmit)="applyFilter()" class="form" novalidate>
+      <ion-list class="form-ion-list">
+        <ion-item lines="none">
+          <ion-select
+            label="Filter By"
+            label-placement="floating"
+            [(ngModel)]="filterCategory"
+            name="filterCategory"
+            interface="popover"
+            placeholder="Filter By"
+            (ionChange)="onFilterCategoryChange($event.detail.value)"
+          >
+            <ion-select-option value="duration">Duration</ion-select-option>
+            <ion-select-option value="spentOn">Spent On</ion-select-option>
+            <ion-select-option value="type">Type</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div *ngIf="filterCategory === 'spentOn' || filterCategory === 'type'">
+          <ion-item lines="none">
+            <ion-select
+              label="Parameter"
+              label-placement="floating"
+              [(ngModel)]="selectedOption"
+              name="selectedOption"
+              interface="popover"
+              placeholder="parameter"
+            >
+              <ng-container *ngIf="filterCategory === 'spentOn'">
+                <ion-select-option *ngFor="let item of spentOnOptions" [value]="item.value">
+                  {{ item.title }}
+                </ion-select-option>
+              </ng-container>
+              <ng-container *ngIf="filterCategory === 'type'">
+                <ion-select-option *ngFor="let item of expenseTypeOptions" [value]="item.value">
+                  {{ item.title }}
+                </ion-select-option>
+              </ng-container>
+            </ion-select>
+          </ion-item>
+        </div>
+        <ion-item lines="none">
+          <ion-select
+            label="Select duration"
+            label-placement="floating"
+            [(ngModel)]="selectedDuration"
+            name="selectedDuration"
+            placeholder="Filter By"
+            (ionChange)="onDurationChange($event.detail.value)"
+          >
+            <ion-select-option *ngFor="let item of durationFilter" [value]="item.value">
+              {{ item.title }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div *ngIf="selectedDuration === 'custom'">
+          <ion-item lines="none">
+            <ion-input
+              placeholder="From date"
+              type="date"
+              displayFormat="DD/MM/YYYY"
+              [(ngModel)]="fromDate"
+              name="fromDate"
+              [max]="dateToday"
+            ></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input
+              placeholder="To date"
+              type="date"
+              displayFormat="DD/MM/YYYY"
+              [(ngModel)]="toDate"
+              name="toDate"
+              [max]="dateToday"
+            ></ion-input>
+          </ion-item>
+        </div>
+      </ion-list>
+      <div class="button-container mt-15px ion-float-right">
+        <ion-button class="mr-10" color="medium" type="reset">Reset</ion-button>
+        <ion-button class="mr-10" color="warning" (click)="modal.dismiss()">Cancel</ion-button>
+        <ion-button class="mr-10" color="success" type="submit">Apply</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

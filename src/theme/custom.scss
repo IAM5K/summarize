@@ -20,6 +20,9 @@
 .lime-outline {
   outline: 2px solid lime;
 }
+.lime-outline {
+  outline: 2px solid lime;
+}
 .split-container {
   display: flex;
   align-items: stretch;
@@ -40,6 +43,14 @@
   width: 50%;
   float: left;
   // min-height: 200px;
+}
+
+.min-h-250 {
+  min-height: 250px !important;
+}
+
+.w-100 {
+  width: 100% !important;
 }
 
 @media screen and (max-width: 992px) {
@@ -114,7 +125,26 @@
     width: 200px;
   }
 }
+.action-bar {
+  ion-icon {
+    padding: 0.5rem;
+  }
+  span {
+    padding: 0.5rem 0.5rem 0.5rem 0;
+  }
 
+  @media screen and (max-width: 992px) {
+    span {
+      display: none;
+    }
+    // ion-button:hover {
+    //   span {
+    //     display: block;
+    //     transition: all 1s ease-in-out;
+    //   }
+    // }
+  }
+}
 .data-grid {
   height: 310px;
   overflow-y: auto;
@@ -187,8 +217,26 @@
 .tab-active {
   color: var(--ion-color-success) !important;
 }
+
+.margin-h-0 {
+  margin: 0 !important;
+  margin-inline-start: 0 !important;
+  margin-inline-end: 0 !important;
+  --margin-start: 0;
+  --margin-end: 0;
+}
 .padding-h-0,
 .padding-zero {
+  padding: 0 !important;
+  padding-inline-start: 0 !important;
+  padding-inline-end: 0 !important;
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+}
+.padding-v-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
   padding: 0 !important;
   padding-inline-start: 0 !important;
   padding-inline-end: 0 !important;
@@ -208,6 +256,7 @@
     margin-bottom: 8px;
     border: 1px solid var(--ion-color-light-tint);
     border-radius: 4px;
+    box-shadow: 0 0 2px 2px inset grey;
     box-shadow: 0 0 2px 2px inset grey;
   }
 }
@@ -244,7 +293,6 @@
   text-align: center;
   min-width: 80px;
 }
-
 
 // Info: Achievement CSS
 .event-container {
@@ -298,4 +346,12 @@
 }
 .ion-flex {
   display: flex;
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
 }

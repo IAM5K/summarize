@@ -6,9 +6,10 @@ import { SeoService } from "src/app/services/seo/seo.service";
 import { RealTimeDataBaseService } from "src/app/shared/db/real-time-data-base.service";
 
 @Component({
-  selector: "app-about",
-  templateUrl: "./about.page.html",
-  styleUrls: ["./about.page.scss"],
+    selector: "app-about",
+    templateUrl: "./about.page.html",
+    styleUrls: ["./about.page.scss"],
+    standalone: false
 })
 export class AboutPage implements OnInit, AfterViewInit, AfterContentInit {
   pageTitle = "About Summarize";
@@ -49,7 +50,6 @@ export class AboutPage implements OnInit, AfterViewInit, AfterContentInit {
   }
   getRecentUpdateInfo(): void {
     this.rtdb.getAboutData("recentUpdate").subscribe((data) => {
-      console.log(data);
       this.releaseDetails = data;
     });
   }

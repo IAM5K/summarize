@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "ionic.ionic",
     "donjayamanne.githistory",
     "streetsidesoftware.code-spell-checker",
     "dbaeumer.vscode-eslint",
@@ -15,6 +14,7 @@
     "johnpapa.angular2",
     "angular.ng-template",
     "github.vscode-github-actions",
-    "ambar.bundle-size"
+    "ambar.bundle-size",
+    "Webnative.webnative"
   ]
 }
