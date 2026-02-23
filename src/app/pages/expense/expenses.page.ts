@@ -36,7 +36,6 @@ export class ExpensesPage implements OnInit {
   expenseOf: string = this.dateToday;
   expenseByDate: any;
   recognizedText: string = ""; // Holds the recognized speech
-  expenseInput: string = ""; // Stores the narrated expense
   isListening: boolean = false; // For toggling the mic button and animation
   quickAddInput: string = "";
   isProcessingQuickAdd: boolean = false;
@@ -124,10 +123,10 @@ export class ExpensesPage implements OnInit {
 
   // Start listening to narration
   startListening() {
+    this.quickAddInput = "";
     this.isListening = true;
     this.speechRecognitionService.startRecognition((text: string) => {
-      this.expenseInput = text; // Update the expense input as speech is recognized
-      this.quickAddInput = text; // Also update quickAddInput for voice integration
+      this.quickAddInput = text;
     });
   }
 

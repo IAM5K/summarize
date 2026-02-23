@@ -29,6 +29,12 @@
           autoGrow="true"
           rows="2"
         ></ion-textarea>
+        @if (isListening) {
+          <div class="listening-badge" slot="helper">
+            <ion-icon name="mic" class="pulsing"></ion-icon>
+            <ion-text color="danger">Listening...</ion-text>
+          </div>
+        }
       </ion-item>
       <ion-button
         expand="block"
