@@ -22,14 +22,14 @@ export class SpeechRecognitionService {
     this.isNative = this.platform.is("hybrid");
   }
 
-  async startRecognition(callback: (text: string) => void) {
+  async startRecognition(callback: (text: string) => void, errorCallback?: (error: string) => void) {
     this.finalTranscript = "";
     this.stoppedManually = false;
 
     if (this.isNative) {
-      await this.startNativeRecognition(callback);
+      await this.startNativeRecognition(callback, errorCallback);
     } else {
-      await this.startWebRecognition(callback);
+      await this.startWebRecognition(callback, errorCallback);
     }
     
     this.triggerHaptic(ImpactStyle.Light);
@@ -45,11 +45,11 @@ export class SpeechRecognitionService {
     this.triggerHaptic(ImpactStyle.Medium);
   }
 
-  private async startNativeRecognition(callback: (text: string) => void) {
+  private async startNativeRecognition(callback: (text: string) => void, errorCallback?: (error: string) => void) {
     try {
       const available = await SpeechRecognition.available();
       if (!available.available) {
-        alert("Speech recognition not available on this device.");
+        if (errorCallback) errorCallback("Speech recognition not available");
         return;
       }
 
@@ -57,6 +57,7 @@ export class SpeechRecognitionService {
       if (permissionStatus.speechRecognition !== "granted") {
         const requestResult = await SpeechRecognition.requestPermissions();
         if (requestResult.speechRecognition !== "granted") {
+          if (errorCallback) errorCallback("Permission denied");
           return;
         }
       }
@@ -70,7 +71,6 @@ export class SpeechRecognitionService {
       SpeechRecognition.addListener("partialResults", (data: { matches: string[] }) => {
         this.zone.run(() => {
           if (data.matches && data.matches.length > 0) {
-            // Capacitor plugin usually returns the full transcript in matches[0]
             callback(data.matches[0].trim());
           }
           this.resetInactivityTimeout(callback);
@@ -78,8 +78,9 @@ export class SpeechRecognitionService {
       });
 
       this.resetInactivityTimeout(callback);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Native recognition error:", error);
+      if (errorCallback) errorCallback(error.message || "Native recognition error");
     }
   }
 
@@ -93,9 +94,9 @@ export class SpeechRecognitionService {
     }
   }
 
-  private async startWebRecognition(callback: (text: string) => void) {
+  private async startWebRecognition(callback: (text: string) => void, errorCallback?: (error: string) => void) {
     if (!("webkitSpeechRecognition" in window)) {
-      alert("Speech recognition not supported in this browser.");
+      if (errorCallback) errorCallback("Speech recognition not supported");
       return;
     }
 
@@ -125,9 +126,13 @@ export class SpeechRecognitionService {
     };
 
     this.recognition.onerror = (event: any) => {
-      if (event.error !== "no-speech") {
-        console.error("Web recognition error:", event.error);
-      }
+      this.zone.run(() => {
+        if (event.error !== "no-speech") {
+          console.error("Web recognition error:", event.error);
+          if (errorCallback) errorCallback(event.error);
+          this.stopRecognition();
+        }
+      });
     };
 
     this.recognition.onend = () => {

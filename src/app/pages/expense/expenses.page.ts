@@ -125,9 +125,15 @@ export class ExpensesPage implements OnInit {
   startListening() {
     this.quickAddInput = "";
     this.isListening = true;
-    this.speechRecognitionService.startRecognition((text: string) => {
-      this.quickAddInput = text;
-    });
+    this.speechRecognitionService.startRecognition(
+      (text: string) => {
+        this.quickAddInput = text;
+      },
+      (error: string) => {
+        this.isListening = false;
+        this.toaster.showToast(`Speech Error: ${error}`, "danger");
+      },
+    );
   }
 
   // Stop listening to narration
