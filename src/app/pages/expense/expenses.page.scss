@@ -1,3 +1,53 @@
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auto-add-toggle {
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  margin-top: -10px;
+  ion-toggle {
+    margin: 0;
+  }
+}
+
+.parsed-preview {
+  background: var(--ion-color-light);
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 15px;
+  
+  h4 {
+    margin-top: 0;
+  }
+
+  ion-list {
+    background: transparent;
+  }
+
+  ion-item {
+    --background: var(--ion-background-color);
+    margin-bottom: 5px;
+    border-radius: 8px;
+  }
+}
+
+.color-success {
+  color: var(--ion-color-success);
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-15px {
+  margin-top: 15px;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+
 .options-container {
   display: block;
   position: relative;

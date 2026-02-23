@@ -16,11 +16,11 @@ import { SeoTags } from "src/app/models/class/seoTags/seo";
 import { ExpenseData } from "src/app/models/interface/expense.interface";
 import { SpeechRecognitionService } from "src/app/services/speech-recognition/speech-recognition.service";
 import { ExpenseStaticData } from "src/app/models/class/static/expense/expense-data";
-import { MLService } from "src/app/services/ml/ml.service";
-import { GenAiService } from "src/app/services/gen-ai/gen-ai.service";
 import { ModalController } from "@ionic/angular";
 import { FilterExpenseComponent } from "./components/filter-expense/filter-expense.component";
 import { ToasterService } from "src/app/services/toaster/toaster.service";
+
+import { GeminiService } from "src/app/services/gemini/gemini";
 
 @Component({
     selector: "app-expenses",
@@ -32,17 +32,17 @@ export class ExpensesPage implements OnInit {
   @Output() expenseData = new EventEmitter<any>();
   pageTitle = "Expenses";
   pageMetaTags = SeoTags.expensePageTags;
-  pageMetaTags = SeoTags.expensePageTags;
-  editMode: boolean = false;
-  updateSubmitted = false;
-  editExpenseData: any;
   dateToday: string | null = this.datePipe.transform(new Date(), "yyyy-MM-dd");
   expenseOf: string = this.dateToday;
   expenseByDate: any;
   recognizedText: string = ""; // Holds the recognized speech
   expenseInput: string = ""; // Stores the narrated expense
   isListening: boolean = false; // For toggling the mic button and animation
-  transformedData: any;
+  quickAddInput: string = "";
+  isProcessingQuickAdd: boolean = false;
+  autoAdd: boolean = false;
+  parsedExpenses: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private seoService: SeoService,
@@ -51,11 +51,67 @@ export class ExpensesPage implements OnInit {
     private datePipe: DatePipe,
     private router: Router,
     private speechRecognitionService: SpeechRecognitionService,
-    private mls: MLService,
-    private genAi: GenAiService,
+    private geminiService: GeminiService,
     private toaster: ToasterService,
     private modalController: ModalController, // New injection
   ) {}
+
+  async processQuickAdd() {
+    if (!this.quickAddInput.trim()) return;
+
+    this.isProcessingQuickAdd = true;
+    try {
+      const expenses = await this.geminiService.processExpenseDescription(
+        this.quickAddInput,
+        this.dateToday || new Date().toISOString().split("T")[0],
+      );
+      if (expenses && expenses.length > 0) {
+        if (this.autoAdd) {
+          this.confirmAddAll(expenses);
+        } else {
+          this.parsedExpenses = expenses.map(exp => ({
+            ...exp,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          }));
+          this.toaster.showToast(`${expenses.length} Expenses parsed for review.`, "primary");
+        }
+        this.quickAddInput = "";
+      } else {
+        this.toaster.showToast("Could not parse expenses from the statement.", "warning");
+      }
+    } catch (error: any) {
+      console.error("Quick Add Error:", error);
+      this.toaster.showToast(error.message || "Failed to process expense statement.", "danger");
+    } finally {
+      this.isProcessingQuickAdd = false;
+    }
+  }
+
+  async confirmAddAll(expensesToConfirm?: any[]) {
+    const listToAdd = expensesToConfirm || this.parsedExpenses;
+    if (listToAdd.length === 0) return;
+
+    for (const expense of listToAdd) {
+      const expenseData = {
+        ...expense,
+        createdAt: expense.createdAt || serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      };
+      this.expenseService.addExpense(expenseData);
+    }
+    this.toaster.showToast(`${listToAdd.length} Expenses added successfully!`, "success");
+    if (!expensesToConfirm) this.parsedExpenses = [];
+    this.getExpenses();
+  }
+
+  removeParsedExpense(index: number) {
+    this.parsedExpenses.splice(index, 1);
+  }
+
+  clearParsedExpenses() {
+    this.parsedExpenses = [];
+  }
 
   // Toggle speech recognition on and off
   toggleSpeechRecognition() {
@@ -71,6 +127,7 @@ export class ExpensesPage implements OnInit {
     this.isListening = true;
     this.speechRecognitionService.startRecognition((text: string) => {
       this.expenseInput = text; // Update the expense input as speech is recognized
+      this.quickAddInput = text; // Also update quickAddInput for voice integration
     });
   }
 
@@ -78,12 +135,6 @@ export class ExpensesPage implements OnInit {
   stopListening() {
     this.isListening = false;
     this.speechRecognitionService.stopRecognition(); // Stop speech recognition
-  }
-
-  // Submit the expense (or perform any action like saving or sending to API)
-  submitExpense() {
-    // console.log("Submitting expense:", this.expenseInput);
-    // Add your logic to submit the expense, like sending it to an API
   }
 
   Expenses: any = [];
@@ -101,16 +152,7 @@ export class ExpensesPage implements OnInit {
   showFilter: boolean = false;
   handlerMessage = "";
   roleMessage = "";
-  expenseForm: FormGroup = this.fb.group({
-    createdAt: [serverTimestamp()],
-    date: [this.dateToday, [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
-    amount: ["", [Validators.required, Validators.pattern("^[0-9]*$")]],
-    type: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]*$")]],
-    description: ["", [Validators.required, Validators.pattern("^[a-zA-Z0-9\n, -.]*$")]],
-    spendedOn: ["self", [Validators.required, Validators.pattern("^[a-zA-Z 0-9 .,-]*$")]],
-    reimburseable: [false],
-    updatedAt: [serverTimestamp()],
-  });
+
   budgetForm: FormGroup = this.fb.group({
     createdAt: [serverTimestamp()],
     month: [new CustomDate().getCurrentMonth(), [Validators.required, Validators.pattern("^[0-9-]*$")]],
@@ -144,15 +186,6 @@ export class ExpensesPage implements OnInit {
       sessionStorage.setItem("total_expense", JSON.stringify(this.Expenses));
     });
     this.expenseSize = "all";
-  }
-
-  addExpense() {
-    this.expenseService.addExpense(this.expenseForm.value);
-    this.expenseForm.patchValue({
-      amount: "",
-      description: "",
-    });
-    this.seoService.eventTrigger("form", this.pageTitle);
   }
 
   // Open zero expense modal via ModalController
@@ -199,54 +232,10 @@ export class ExpensesPage implements OnInit {
     this.seoService.eventTrigger("form", this.pageTitle);
   }
 
-  editExpense(expense: ExpenseData) {
-    this.editMode = true;
-    this.editExpenseData = expense;
-    this.expenseForm.patchValue({
-      createdAt: expense.createdAt,
-      date: expense.date,
-      amount: expense.amount,
-      type: expense.type,
-      description: expense.description,
-      spendedOn: expense.spendedOn,
-      reimburseable: expense?.reimburseable,
-    });
+  onEditExpense(expense: ExpenseData) {
+    this.router.navigate(["/expenses/edit", expense.idField]);
   }
 
-  async updateExpense() {
-    this.updateSubmitted = true;
-    const response = await this.expenseService.updateExpense(this.expenseForm.value, this.editExpenseData.idField);
-    if (response) {
-      this.cancelUpdate();
-    } else {
-      this.updateSubmitted = false;
-    }
-  }
-
-  cancelUpdate() {
-    this.editMode = false;
-    this.expenseForm.markAsUntouched();
-    this.updateSubmitted = false;
-    setTimeout(() => {
-      this.backToDefault();
-    }, 100);
-  }
-  
-  async backToDefault() {
-    this.expenseForm.reset({
-      createdAt: serverTimestamp(),
-      date: this.dateToday.toString(),
-      spendedOn: "self",
-      amount: 0,
-      type: "",
-      description: "",
-    });
-  }
-
-  onDeleteExpense(expenseItem: any) {
-    // console.log("Delete expense:", expenseItem);
-    // Your delete expense logic here
-  }
   async deleteExpense(idField: string) {
     console.log("Delete function called");
 
@@ -382,41 +371,6 @@ export class ExpensesPage implements OnInit {
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     });
     FileSaver.saveAs(excelBlob, filename);
-  }
-
-  async transformExpenseInput() {
-    const description = `On 3 november i spent , Milk 28, Rice 111, Bread 30, Yakult 80, Paneer 79 , on 2nd nov , 70 breakfast, 10 water, 30 milk`;
-    // const description = this.recognizedText;
-    // this.mls.analyzeDescription(description).subscribe({
-    //   next: (data) => {
-    //     console.log("Extracted Entities:", data);
-    //     this.transformedData = data;
-    //   },
-    //   error: (error) => {
-    //     console.error("Error analyzing description:", error);
-    //   },
-    // });
-    // this.genAi.processExpenseData(description).subscribe(
-    //   (response) => {
-    //     console.log("AI Response:", response);
-    //   },
-    //   (error) => {
-    //     console.error("Error:", error);
-    //   },
-    // );
-    await this.genAi.processExpenseData(description).subscribe({
-      next: (response) => {
-        // console.log("AI Response:", response);
-        // Assuming response contains the processed expenses
-        // this.processedExpenses = this.transformAiResponse(response);
-        // this.processing = false;
-      },
-      error: (error) => {
-        console.error("Error processing expense data:", error);
-        // this.errorMessage = "Failed to process expense data.";
-        // this.processing = false;
-      },
-    });
   }
 
   navigateToAnalyze() {

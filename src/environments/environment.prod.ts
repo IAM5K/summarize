@@ -17,6 +17,7 @@ export const environment = {
   GTM_ID: "GTM-TT56N59",
   production: true,
   apiUrl: "https://summarize-ng-default-rtdb.firebaseio.com",
+  geminiKey: "",
 };
 
 /*

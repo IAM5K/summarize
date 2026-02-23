@@ -15,19 +15,72 @@
   </ion-header>
 
   <div id="container ion-margin">
-    <!-- <div class="ion-margin options-container">
-      <ion-item>
-        <ion-textarea [(ngModel)]="recognizedText" placeholder="Recognized speech will appear here..."></ion-textarea>
-      </ion-item>
-      <ion-button (click)="transformExpenseInput()">Add Expense</ion-button>
-      <div *ngIf="transformedData">
-        <h3>Extracted Information:</h3>
-        <pre>{{ transformedData | json }}</pre>
+    <div class="card ion-margin ion-padding">
+      <div class="flex-between">
+        <h3 class="h2 mt-0">Quick Add (Gemini AI)</h3>
+        <ion-item lines="none" class="auto-add-toggle">
+          <ion-toggle [(ngModel)]="autoAdd" label-placement="start">Auto-Add</ion-toggle>
+        </ion-item>
       </div>
-    </div> -->
-    <div class="ion-margin options-container">
-      <!-- Added filter icon button -->
+      <ion-item lines="none" class="mb-10">
+        <ion-textarea
+          [(ngModel)]="quickAddInput"
+          placeholder="e.g. My expense for 22 Feb 2026 was ₹10 on Vegetable, ₹30 on milk."
+          autoGrow="true"
+          rows="2"
+        ></ion-textarea>
+      </ion-item>
+      <ion-button
+        expand="block"
+        (click)="processQuickAdd()"
+        [disabled]="isProcessingQuickAdd || !quickAddInput.trim()"
+      >
+        @if (isProcessingQuickAdd) {
+          <ion-spinner name="crescent" slot="start"></ion-spinner>
+          Processing...
+        } @else {
+          <ion-icon name="sparkles-outline" slot="start"></ion-icon>
+          Process with AI
+        }
+      </ion-button>
 
+      @if (parsedExpenses.length > 0) {
+        <div class="parsed-preview mt-15px">
+          <h4 class="h3">Preview Parsed Expenses</h4>
+          <ion-list>
+            @for (exp of parsedExpenses; track $index) {
+              <ion-item-sliding>
+                <ion-item>
+                  <ion-label>
+                    <div class="flex-between">
+                      <span class="ion-text-bold">{{ exp.date }}</span>
+                      <span class="ion-text-bold color-success">₹{{ exp.amount }}</span>
+                    </div>
+                    <p>{{ exp.description }}</p>
+                    <ion-note slot="end" color="primary">{{ exp.type }}</ion-note>
+                  </ion-label>
+                </ion-item>
+                <ion-item-options side="end">
+                  <ion-item-option color="danger" (click)="removeParsedExpense($index)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+            }
+          </ion-list>
+          <div class="button-flex mt-10">
+            <ion-button color="success" (click)="confirmAddAll()" expand="block">Confirm All</ion-button>
+            <ion-button color="medium" (click)="clearParsedExpenses()" fill="clear" expand="block">Clear</ion-button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="ion-margin options-container">
+      <ion-button routerLink="./add" color="primary">
+        <ion-icon class="mr-10" name="add-outline"></ion-icon>
+        Add Expense
+      </ion-button>
       <ion-button id="zero-expense-alert" color="success" class="ion-float-right">
         <ion-icon class="mr-10" name="cash-outline"></ion-icon>
         0 Expense day
@@ -43,157 +96,63 @@
         [inputs]="zeroExpenseInputs"
       ></ion-alert>
     </div>
+
     <div class="card ion-margin ion-padding">
-      <h1 class="mt-0 h2">{{editMode?"Update":"Add"}} Expense</h1>
-      <div class="form-container ">
-        <form [formGroup]="expenseForm" (ngSubmit)="addExpense()" novalidate>
+      <h3 class="h2 mt-0">Get all for a day</h3>
+      <div class="mt-15px">
+        <form #getExpenseOf="ngForm" class="form-container" (ngSubmit)="getAllExpenseOf()">
           <ion-list class="form-ion-list">
             <ion-item lines="none">
               <ion-input
                 label="Date"
-                [value]="dateToday | date:'yyyy-MM-dd'"
-                locale="en-IN"
                 label-placement="floating"
-                formControlName="date"
                 type="date"
+                name="expenseOf"
+                [(ngModel)]="expenseOf"
               ></ion-input>
             </ion-item>
-            <ion-item lines="none">
-              <ion-input
-                label="Amount"
-                label-placement="floating"
-                formControlName="amount"
-                type="number"
-                clearOnEdit="true"
-              ></ion-input>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-textarea
-                label="Description"
-                label-placement="floating"
-                formControlName="description"
-                type="text"
-                autoGrow="true"
-                placeholder="Description about item purchased, location etc."
-                clear-input
-              ></ion-textarea>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-select
-                label="Type"
-                label-placement="floating"
-                formControlName="type"
-                interface="popover"
-                placeholder="Category of Expense"
-              >
-                <ion-select-option *ngFor="let type of expenseTypes" [value]="type.value">
-                  {{type.title}}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-item lines="none">
-              <div>
-                <p class="spent-on">Spent on</p>
-                <ion-radio-group
-                  formControlName="spendedOn"
-                  label="Spent On"
-                  label-placement="floating"
-                  class="inline-radio"
-                >
-                  <ion-radio *ngFor="let item of spentOn" [value]="item.value" labelPlacement="end">
-                    {{item.title}}
-                  </ion-radio>
-                </ion-radio-group>
-              </div>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-checkbox
-                formControlName="reimburseable"
-                [checked]="expenseForm.get('reimburseable').value"
-                (ionChange)="expenseForm.get('reimburseable').setValue($event.detail.checked)"
-                label="Reimbursable"
-                label-placement="floating"
-              >
-                Reimbursable
-              </ion-checkbox>
-            </ion-item>
-
             <div class="button-container">
-              <div class="button-flex" *ngIf="!editMode">
+              <div class="button-flex">
                 <ion-button color="warning" type="reset" size="medium">Reset</ion-button>
-                <ion-button color="success" type="submit" size="medium" [disabled]="expenseForm.invalid">
+                <ion-button
+                  [disabled]="getExpenseOf.untouched && expenseOf === ''"
+                  color="success"
+                  type="submit"
+                  size="medium"
+                >
                   Submit
                 </ion-button>
-              </div>
-              <div class="button-flex" *ngIf="editMode">
-                <ion-button
-                  color="warning"
-                  (click)="updateExpense()"
-                  size="medium"
-                  [disabled]="expenseForm.untouched || updateSubmitted"
-                >
-                  Update
-                </ion-button>
-                <ion-button color="primary" type="reset" size="medium" (click)="cancelUpdate()">Cancel</ion-button>
               </div>
             </div>
           </ion-list>
         </form>
       </div>
-    </div>
 
-    <ng-container *ngIf="!editMode">
-      <!-- Info: Expense for a day -->
-      <div class="card ion-margin ion-padding">
-        <h3 class="h2 mt-0">Get all for a day</h3>
-        <div class="mt-15px">
-          <form #getExpenseOf="ngForm" class="form-container" (ngSubmit)="getAllExpenseOf()">
-            <ion-list class="form-ion-list">
-              <ion-item lines="none">
-                <ion-input
-                  label="Date"
-                  label-placement="floating"
-                  type="date"
-                  name="expenseOf"
-                  [(ngModel)]="expenseOf"
-                ></ion-input>
-              </ion-item>
-              <div class="button-container">
-                <div class="button-flex">
-                  <ion-button color="warning" type="reset" size="medium">Reset</ion-button>
-                  <ion-button
-                    [disabled]="getExpenseOf.untouched && expenseOf === ''"
-                    color="success"
-                    type="submit"
-                    size="medium"
-                  >
-                    Submit
-                  </ion-button>
-                </div>
-              </div>
-            </ion-list>
-          </form>
-        </div>
-        <div class="expenses" *ngIf="expenseByDate">
+      @if (expenseByDate) {
+        <div class="expenses">
           <h4>Expense logged for {{expenseOf}}</h4>
           <div class="form-container data-grid">
-            <app-expense-card
-              class="expense-data-card"
-              *ngFor="let item of expenseByDate"
-              [expenseItem]="item"
-              (editClicked)="editExpense($event)"
-              (deleteClicked)="deleteExpense($event.idField)"
-            ></app-expense-card>
+            @for (item of expenseByDate; track item.idField) {
+              <app-expense-card
+                class="expense-data-card"
+                [expenseItem]="item"
+                (editClicked)="onEditExpense($event)"
+                (deleteClicked)="deleteExpense($event.idField)"
+              ></app-expense-card>
+            }
           </div>
         </div>
-      </div>
+      }
+    </div>
 
-      <div class="expense-data card ion-margin ion-padding">
-        <div class="table-title">
-          <h2 class="mt-0 h2" *ngIf="expensesCount === 0">No Expenses found</h2>
-          <h2 class="h2" *ngIf="expensesCount > 0">My Expenses</h2>
+    <div class="expense-data card ion-margin ion-padding">
+      <div class="table-title">
+        @if (expensesCount === 0) {
+          <h2 class="mt-0 h2">No Expenses found</h2>
+        } @else {
+          <h2 class="h2">My Expenses</h2>
 
-          <div class="action-bar" *ngIf="expensesCount > 0">
+          <div class="action-bar">
             <ion-button size="small" color="medium" (click)="openFilterModal()">
               <ion-icon slot="icon-only" name="filter"></ion-icon>
               <span>Filter</span>
@@ -207,65 +166,68 @@
               <span>Analyze</span>
             </ion-button>
           </div>
-        </div>
-
-        <div class="">
-          <p class="ion-text-bold">{{ expenseMessage }} {{ expenseCurrency }} {{ totalExpense }}</p>
-        </div>
-        <ng-container *ngIf="expensesCount > 0">
-          <div class="form-container data-grid">
-            <app-expense-card
-              class="expense-data-card"
-              *ngFor="let item of Expenses"
-              [expenseItem]="item"
-              (editClicked)="editExpense($event)"
-              (deleteClicked)="deleteExpense($event.idField)"
-            ></app-expense-card>
-          </div>
-          <div class="mt-15px form-container"></div>
-        </ng-container>
+        }
       </div>
 
-      <div class="card ion-margin ion-padding disclaimer">
-        <h3 class="mt-0 h3 mb-5">{{ budgetExists ? 'My budget' : 'Add Budget' }}</h3>
-        <ion-note *ngIf="!budgetExists" color="secondary" class="ion-margin ion-text-justify">{{budgetNote}}</ion-note>
+      <div>
+        <p class="ion-text-bold">{{ expenseMessage }} {{ expenseCurrency }} {{ totalExpense }}</p>
+      </div>
+      
+      @if (expensesCount > 0) {
+        <div class="form-container data-grid">
+          @for (item of Expenses; track item.idField) {
+            <app-expense-card
+              class="expense-data-card"
+              [expenseItem]="item"
+              (editClicked)="onEditExpense($event)"
+              (deleteClicked)="deleteExpense($event.idField)"
+            ></app-expense-card>
+          }
+        </div>
+        <div class="mt-15px form-container"></div>
+      }
+    </div>
 
-        <form class="form-container budget-container" [formGroup]="budgetForm" novalidate>
-          <ion-list class="form-ion-list" lines="none">
-            <ion-item lines="none">
-              <ion-input
-                label="Amount"
-                label-placement="floating"
-                formControlName="amount"
-                type="number"
-                clearOnEdit="true"
-              ></ion-input>
-            </ion-item>
+    <div class="card ion-margin ion-padding disclaimer">
+      <h3 class="mt-0 h3 mb-5">{{ budgetExists ? 'My budget' : 'Add Budget' }}</h3>
+      @if (!budgetExists) {
+        <ion-note color="secondary" class="ion-margin ion-text-justify">{{budgetNote}}</ion-note>
+      }
 
-            <ion-item lines="none">
-              <ion-input label="Budget for" label-placement="floating" formControlName="month" type="month"></ion-input>
+      <form class="form-container budget-container" [formGroup]="budgetForm" novalidate>
+        <ion-list class="form-ion-list" lines="none">
+          <ion-item lines="none">
+            <ion-input
+              label="Amount"
+              label-placement="floating"
+              formControlName="amount"
+              type="number"
+              clearOnEdit="true"
+            ></ion-input>
+          </ion-item>
 
-            <ion-item lines="none">
-              <ion-input label="Budget for" label-placement="floating" formControlName="month" type="month"></ion-input>
-            </ion-item>
-          </ion-list>
-          <div class="button-container">
-            <div class="button-flex">
-              <ion-button color="tertiary" *ngIf="!budgetExists" size="medium" (click)="getBudget()">
+          <ion-item lines="none">
+            <ion-input label="Budget for" label-placement="floating" formControlName="month" type="month"></ion-input>
+          </ion-item>
+        </ion-list>
+        <div class="button-container">
+          <div class="button-flex">
+            @if (!budgetExists) {
+              <ion-button color="tertiary" size="medium" (click)="getBudget()">
                 My Budget
               </ion-button>
               <ion-button
                 color="success"
                 type="submit"
                 size="medium"
-                *ngIf="!budgetExists"
                 [disabled]="budgetForm.invalid"
                 (click)="addBudget()"
               >
                 <ion-icon name="add-outline" slot="start"></ion-icon>
                 Budget
               </ion-button>
-              <ion-button color="tertiary" *ngIf="budgetExists" size="medium" (click)="budgetExists=false">
+            } @else {
+              <ion-button color="tertiary" size="medium" (click)="budgetExists=false">
                 <ion-icon slot="start" name="arrow-undo-outline"></ion-icon>
                 Add Budget
               </ion-button>
@@ -273,46 +235,51 @@
                 color="success"
                 type="submit"
                 size="medium"
-                *ngIf="budgetExists"
                 [disabled]="budgetForm.invalid"
                 (click)="updateBudget()"
               >
                 <ion-icon slot="start" name="create-outline"></ion-icon>
                 Update
               </ion-button>
-            </div>
+            }
           </div>
-        </form>
-        <div *ngIf="budgetExists; else noBudget" class="form-container">
+        </div>
+      </form>
+
+      @if (budgetExists) {
+        <div class="form-container">
           <span class="h3">Monthly Budget</span>
           <ion-list class="form-ion-list mt-15px" lines="none">
             <ion-item lines="none">
               <ion-label class="ion-text-bold">Month</ion-label>
               <ion-label class="ion-text-bold">Amount</ion-label>
             </ion-item>
-            <ion-item lines="none" *ngFor="let item of Budget">
-            <ion-item lines="none" *ngFor="let item of Budget">
-              <ion-label class="ion-text-bold">{{ item.month | date:'MMM y' }}</ion-label>
-              <ion-label>{{expenseCurrency}} {{item.amount}}</ion-label>
-            </ion-item>
+            @for (item of Budget; track item.idField) {
+              <ion-item lines="none">
+                <ion-label class="ion-text-bold">{{ item.month | date:'MMM y' }}</ion-label>
+                <ion-label>{{expenseCurrency}} {{item.amount}}</ion-label>
+              </ion-item>
+            }
           </ion-list>
         </div>
-        <ng-template #noBudget>
-          <ion-note color="warning" class="ion-margin ion-text-justify">
-            No Budget Found, Fill amount and add budget.
-          </ion-note>
-        </ng-template>
-      </div>
-    </ng-container>
+      } @else {
+        <ion-note color="warning" class="ion-margin ion-text-justify">
+          No Budget Found, Fill amount and add budget.
+        </ion-note>
+      }
+    </div>
   </div>
+
   <!-- Floating mic button -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="startListening()" *ngIf="!isListening">
-      <ion-icon name="mic"></ion-icon>
-    </ion-fab-button>
-
-    <ion-fab-button (click)="stopListening()" *ngIf="isListening">
-      <ion-icon name="mic-off"></ion-icon>
-    </ion-fab-button>
+    @if (!isListening) {
+      <ion-fab-button (click)="startListening()">
+        <ion-icon name="mic"></ion-icon>
+      </ion-fab-button>
+    } @else {
+      <ion-fab-button (click)="stopListening()">
+        <ion-icon name="mic-off"></ion-icon>
+      </ion-fab-button>
+    }
   </ion-fab>
 </ion-content>

@@ -130,6 +130,22 @@ export class ExpenseService {
       return false;
     }
   }
+
+  getExpenseById(id: string) {
+    return this.expenseCollection
+      .doc(this.userId)
+      .collection("myExpence")
+      .doc(id)
+      .snapshotChanges()
+      .pipe(
+        map((a) => {
+          const data = a.payload.data() as any;
+          const idField = a.payload.id;
+          return { ...data, idField };
+        }),
+      );
+  }
+
   deleteExpense(idField: string) {
     this.expenseCollection
       .doc(this.userId)
