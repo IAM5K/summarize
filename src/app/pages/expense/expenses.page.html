@@ -15,85 +15,19 @@
   </ion-header>
 
   <div id="container ion-margin">
-    <div class="card ion-margin ion-padding">
-      <div class="flex-between">
-        <h3 class="h2 mt-0">Quick Add (Gemini AI)</h3>
-        <ion-item lines="none" class="auto-add-toggle">
-          <ion-toggle [(ngModel)]="autoAdd" label-placement="start">Auto-Add</ion-toggle>
-        </ion-item>
-      </div>
-      <ion-item lines="none" class="mb-10">
-        <ion-textarea
-          [(ngModel)]="quickAddInput"
-          placeholder="e.g. My expense for 22 Feb 2026 was ₹10 on Vegetable, ₹30 on milk."
-          autoGrow="true"
-          rows="2"
-        ></ion-textarea>
-        @if (isListening) {
-          <div class="listening-badge" slot="helper">
-            <ion-icon name="mic" class="pulsing"></ion-icon>
-            <ion-text color="danger">Listening...</ion-text>
-          </div>
-        }
-      </ion-item>
-      <ion-button
-        expand="block"
-        (click)="processQuickAdd()"
-        [disabled]="isProcessingQuickAdd || !quickAddInput.trim()"
-      >
-        @if (isProcessingQuickAdd) {
-          <ion-spinner name="crescent" slot="start"></ion-spinner>
-          Processing...
-        } @else {
-          <ion-icon name="sparkles-outline" slot="start"></ion-icon>
-          Process with AI
-        }
-      </ion-button>
-
-      @if (parsedExpenses.length > 0) {
-        <div class="parsed-preview mt-15px">
-          <h4 class="h3">Preview Parsed Expenses</h4>
-          <ion-list>
-            @for (exp of parsedExpenses; track $index) {
-              <ion-item-sliding>
-                <ion-item>
-                  <ion-label>
-                    <div class="flex-between">
-                      <span class="ion-text-bold">{{ exp.date }}</span>
-                      <span class="ion-text-bold color-success">₹{{ exp.amount }}</span>
-                    </div>
-                    <p>{{ exp.description }}</p>
-                    <ion-note slot="end" color="primary">{{ exp.type }}</ion-note>
-                  </ion-label>
-                </ion-item>
-                <ion-item-options side="end">
-                  <ion-item-option color="danger" (click)="removeParsedExpense($index)">
-                    <ion-icon slot="icon-only" name="trash"></ion-icon>
-                  </ion-item-option>
-                </ion-item-options>
-              </ion-item-sliding>
-            }
-          </ion-list>
-          <div class="button-flex mt-10">
-            <ion-button color="success" (click)="confirmAddAll()" expand="block">Confirm All</ion-button>
-            <ion-button color="medium" (click)="clearParsedExpenses()" fill="clear" expand="block">Clear</ion-button>
-          </div>
-        </div>
-      }
-    </div>
-
     <div class="ion-margin options-container">
-      <ion-button routerLink="./add" color="primary">
-        <ion-icon class="mr-10" name="add-outline"></ion-icon>
-        Add Expense
-      </ion-button>
-      <ion-button id="zero-expense-alert" color="success" class="ion-float-right">
-        <ion-icon class="mr-10" name="cash-outline"></ion-icon>
-        0 Expense day
-      </ion-button>
-      <ion-button routerLink="./shopping-list" color="primary" class="ion-float-right">
+      <ion-button routerLink="./shopping-list" color="primary">
         <ion-icon class="mr-10" name="cart-outline"></ion-icon>
-        Shopping List
+        List
+      </ion-button>
+      <ion-button id="zero-expense-alert" color="success">
+        <ion-icon class="mr-10" name="cash-outline"></ion-icon>
+        0 Expense
+      </ion-button>
+
+      <ion-button routerLink="./add" color="warning">
+        <ion-icon class="mr-10" name="add-outline"></ion-icon>
+        Add
       </ion-button>
       <ion-alert
         trigger="zero-expense-alert"
@@ -101,6 +35,68 @@
         [buttons]="zeroExpenseButtons"
         [inputs]="zeroExpenseInputs"
       ></ion-alert>
+    </div>
+    <!-- <br /> -->
+    <div class="card ion-margin ion-padding">
+      <div class="flex-between">
+        <h3 class="h4 mt-0">Quick Add (Gemini AI)</h3>
+
+        <div class="auto-add-toggle">
+          <ion-toggle [(ngModel)]="autoAdd" label-placement="start">Auto-Add</ion-toggle>
+        </div>
+      </div>
+      <ion-textarea
+        class="mb-10"
+        [(ngModel)]="quickAddInput"
+        placeholder="e.g. My expense for 22 Feb 2026 was ₹10 on Vegetable, ₹30 on milk."
+        autoGrow="true"
+        fill="outline"
+        rows="3"
+      ></ion-textarea>
+      @if (isListening) {
+      <div class="listening-badge" slot="helper">
+        <ion-icon name="mic" class="pulsing"></ion-icon>
+        <ion-text color="danger">Listening...</ion-text>
+      </div>
+      }
+      <ion-button expand="block" (click)="processQuickAdd()" [disabled]="isProcessingQuickAdd || !quickAddInput.trim()">
+        @if (isProcessingQuickAdd) {
+        <ion-spinner name="crescent" slot="start"></ion-spinner>
+        Processing... } @else {
+        <ion-icon name="sparkles-outline" slot="start"></ion-icon>
+        Process with AI }
+      </ion-button>
+
+      @if (parsedExpenses.length > 0) {
+      <div class="parsed-preview mt-15px">
+        <h4 class="h3">Preview Parsed Expenses</h4>
+        <ion-list>
+          @for (exp of parsedExpenses; track $index) {
+          <ion-item-sliding>
+            <ion-item>
+              <ion-label>
+                <div class="flex-between">
+                  <span class="ion-text-bold">{{ exp.date }}</span>
+                  <span class="ion-text-bold color-success">₹{{ exp.amount }}</span>
+                </div>
+                <p>{{ exp.description }}</p>
+                <ion-note slot="end" color="primary">{{ exp.type }}</ion-note>
+              </ion-label>
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option color="danger" (click)="removeParsedExpense($index)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          }
+        </ion-list>
+        <div class="button-flex mt-10">
+          <ion-button color="success" (click)="confirmAddAll()" expand="block">Confirm All</ion-button>
+          <ion-button color="medium" (click)="clearParsedExpenses()" fill="clear" expand="block">Clear</ion-button>
+        </div>
+      </div>
+      }
     </div>
 
     <div class="card ion-margin ion-padding">
@@ -135,69 +131,69 @@
       </div>
 
       @if (expenseByDate) {
-        <div class="expenses">
-          <h4>Expense logged for {{expenseOf}}</h4>
-          <div class="form-container data-grid">
-            @for (item of expenseByDate; track item.idField) {
-              <app-expense-card
-                class="expense-data-card"
-                [expenseItem]="item"
-                (editClicked)="onEditExpense($event)"
-                (deleteClicked)="deleteExpense($event.idField)"
-              ></app-expense-card>
-            }
-          </div>
+      <div class="expenses">
+        <h4>Expense logged for {{expenseOf}}</h4>
+        <div class="form-container data-grid">
+          @for (item of expenseByDate; track item.idField) {
+          <app-expense-card
+            class="expense-data-card"
+            [expenseItem]="item"
+            (editClicked)="onEditExpense($event)"
+            (deleteClicked)="deleteExpense($event.idField)"
+          ></app-expense-card>
+          }
         </div>
+      </div>
       }
     </div>
 
     <div class="expense-data card ion-margin ion-padding">
       <div class="table-title">
         @if (expensesCount === 0) {
-          <h2 class="mt-0 h2">No Expenses found</h2>
+        <h2 class="mt-0 h2">No Expenses found</h2>
         } @else {
-          <h2 class="h2">My Expenses</h2>
+        <h2 class="h2">My Expenses</h2>
 
-          <div class="action-bar">
-            <ion-button size="small" color="medium" (click)="openFilterModal()">
-              <ion-icon slot="icon-only" name="filter"></ion-icon>
-              <span>Filter</span>
-            </ion-button>
-            <ion-button size="small" color="tertiary" (click)="exportData()">
-              <ion-icon slot="icon-only" name="cloud-download-outline"></ion-icon>
-              <span>Export</span>
-            </ion-button>
-            <ion-button size="small" (click)="analyzeExpense()" color="success">
-              <ion-icon slot="icon-only" name="analytics-outline"></ion-icon>
-              <span>Analyze</span>
-            </ion-button>
-          </div>
+        <div class="action-bar">
+          <ion-button size="small" color="medium" (click)="openFilterModal()">
+            <ion-icon slot="icon-only" name="filter"></ion-icon>
+            <span>Filter</span>
+          </ion-button>
+          <ion-button size="small" color="tertiary" (click)="exportData()">
+            <ion-icon slot="icon-only" name="cloud-download-outline"></ion-icon>
+            <span>Export</span>
+          </ion-button>
+          <ion-button size="small" (click)="analyzeExpense()" color="success">
+            <ion-icon slot="icon-only" name="analytics-outline"></ion-icon>
+            <span>Analyze</span>
+          </ion-button>
+        </div>
         }
       </div>
 
       <div>
         <p class="ion-text-bold">{{ expenseMessage }} {{ expenseCurrency }} {{ totalExpense }}</p>
       </div>
-      
+
       @if (expensesCount > 0) {
-        <div class="form-container data-grid">
-          @for (item of Expenses; track item.idField) {
-            <app-expense-card
-              class="expense-data-card"
-              [expenseItem]="item"
-              (editClicked)="onEditExpense($event)"
-              (deleteClicked)="deleteExpense($event.idField)"
-            ></app-expense-card>
-          }
-        </div>
-        <div class="mt-15px form-container"></div>
+      <div class="form-container data-grid">
+        @for (item of Expenses; track item.idField) {
+        <app-expense-card
+          class="expense-data-card"
+          [expenseItem]="item"
+          (editClicked)="onEditExpense($event)"
+          (deleteClicked)="deleteExpense($event.idField)"
+        ></app-expense-card>
+        }
+      </div>
+      <div class="mt-15px form-container"></div>
       }
     </div>
 
     <div class="card ion-margin ion-padding disclaimer">
       <h3 class="mt-0 h3 mb-5">{{ budgetExists ? 'My budget' : 'Add Budget' }}</h3>
       @if (!budgetExists) {
-        <ion-note color="secondary" class="ion-margin ion-text-justify">{{budgetNote}}</ion-note>
+      <ion-note color="secondary" class="ion-margin ion-text-justify">{{budgetNote}}</ion-note>
       }
 
       <form class="form-container budget-container" [formGroup]="budgetForm" novalidate>
@@ -219,59 +215,57 @@
         <div class="button-container">
           <div class="button-flex">
             @if (!budgetExists) {
-              <ion-button color="tertiary" size="medium" (click)="getBudget()">
-                My Budget
-              </ion-button>
-              <ion-button
-                color="success"
-                type="submit"
-                size="medium"
-                [disabled]="budgetForm.invalid"
-                (click)="addBudget()"
-              >
-                <ion-icon name="add-outline" slot="start"></ion-icon>
-                Budget
-              </ion-button>
+            <ion-button color="tertiary" size="medium" (click)="getBudget()">My Budget</ion-button>
+            <ion-button
+              color="success"
+              type="submit"
+              size="medium"
+              [disabled]="budgetForm.invalid"
+              (click)="addBudget()"
+            >
+              <ion-icon name="add-outline" slot="start"></ion-icon>
+              Budget
+            </ion-button>
             } @else {
-              <ion-button color="tertiary" size="medium" (click)="budgetExists=false">
-                <ion-icon slot="start" name="arrow-undo-outline"></ion-icon>
-                Add Budget
-              </ion-button>
-              <ion-button
-                color="success"
-                type="submit"
-                size="medium"
-                [disabled]="budgetForm.invalid"
-                (click)="updateBudget()"
-              >
-                <ion-icon slot="start" name="create-outline"></ion-icon>
-                Update
-              </ion-button>
+            <ion-button color="tertiary" size="medium" (click)="budgetExists=false">
+              <ion-icon slot="start" name="arrow-undo-outline"></ion-icon>
+              Add Budget
+            </ion-button>
+            <ion-button
+              color="success"
+              type="submit"
+              size="medium"
+              [disabled]="budgetForm.invalid"
+              (click)="updateBudget()"
+            >
+              <ion-icon slot="start" name="create-outline"></ion-icon>
+              Update
+            </ion-button>
             }
           </div>
         </div>
       </form>
 
       @if (budgetExists) {
-        <div class="form-container">
-          <span class="h3">Monthly Budget</span>
-          <ion-list class="form-ion-list mt-15px" lines="none">
-            <ion-item lines="none">
-              <ion-label class="ion-text-bold">Month</ion-label>
-              <ion-label class="ion-text-bold">Amount</ion-label>
-            </ion-item>
-            @for (item of Budget; track item.idField) {
-              <ion-item lines="none">
-                <ion-label class="ion-text-bold">{{ item.month | date:'MMM y' }}</ion-label>
-                <ion-label>{{expenseCurrency}} {{item.amount}}</ion-label>
-              </ion-item>
-            }
-          </ion-list>
-        </div>
+      <div class="form-container">
+        <span class="h3">Monthly Budget</span>
+        <ion-list class="form-ion-list mt-15px" lines="none">
+          <ion-item lines="none">
+            <ion-label class="ion-text-bold">Month</ion-label>
+            <ion-label class="ion-text-bold">Amount</ion-label>
+          </ion-item>
+          @for (item of Budget; track item.idField) {
+          <ion-item lines="none">
+            <ion-label class="ion-text-bold">{{ item.month | date:'MMM y' }}</ion-label>
+            <ion-label>{{expenseCurrency}} {{item.amount}}</ion-label>
+          </ion-item>
+          }
+        </ion-list>
+      </div>
       } @else {
-        <ion-note color="warning" class="ion-margin ion-text-justify">
-          No Budget Found, Fill amount and add budget.
-        </ion-note>
+      <ion-note color="warning" class="ion-margin ion-text-justify">
+        No Budget Found, Fill amount and add budget.
+      </ion-note>
       }
     </div>
   </div>
@@ -279,13 +273,13 @@
   <!-- Floating mic button -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     @if (!isListening) {
-      <ion-fab-button (click)="startListening()">
-        <ion-icon name="mic"></ion-icon>
-      </ion-fab-button>
+    <ion-fab-button (click)="startListening()">
+      <ion-icon name="mic"></ion-icon>
+    </ion-fab-button>
     } @else {
-      <ion-fab-button (click)="stopListening()">
-        <ion-icon name="mic-off"></ion-icon>
-      </ion-fab-button>
+    <ion-fab-button (click)="stopListening()">
+      <ion-icon name="mic-off"></ion-icon>
+    </ion-fab-button>
     }
   </ion-fab>
 </ion-content>

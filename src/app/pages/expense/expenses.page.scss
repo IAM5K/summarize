@@ -19,7 +19,7 @@
   padding: 10px;
   border-radius: 8px;
   margin-top: 15px;
-  
+
   h4 {
     margin-top: 0;
   }
@@ -78,9 +78,10 @@
 }
 
 .options-container {
-  display: block;
   position: relative;
-  min-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex: 1 1 auto;
   height: auto;
 }
 .expense-data {
