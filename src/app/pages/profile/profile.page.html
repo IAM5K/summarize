@@ -260,6 +260,32 @@
             </ion-item>
           </div>
         </ion-accordion>
+        <ion-accordion value="gemini" class="mb-10px">
+          <ion-item slot="header" color="light">
+            <ion-label>Gemini</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-list>
+              <ion-item lines="none">
+                <ion-input
+                  label="Gemini API Key"
+                  label-placement="floating"
+                  type="password"
+                  [(ngModel)]="geminiApiKey"
+                  placeholder="Enter your Gemini API Key"
+                ></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <div class="button-container">
+                  <div class="button-flex">
+                    <ion-button (click)="getGeminiApiKey()" color="tertiary" size="medium"> Get Key </ion-button>
+                    <ion-button (click)="saveGeminiApiKey()" color="success" size="medium"> Save Key </ion-button>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-list>
+          </div>
+        </ion-accordion>
       </ion-accordion-group>
     </div>
     <div class="ion-padding ion-text-center">

@@ -27,7 +27,7 @@ export class GeminiService {
   // }
 
   async processExpenseDescription(description: string, today: string): Promise<any[]> {
-    const apiKey = environment.geminiKey;
+    const apiKey = localStorage.getItem("geminiApiKey") || environment.geminiKey;
     if (!apiKey) {
       throw new Error("Gemini API Key not found. Please add it in your profile.");
     }
@@ -90,7 +90,7 @@ export class GeminiService {
 
   async translateQuestion(questionData: any, targetLanguage: string = "Hindi"): Promise<any> {
     // const apiKey = await this.getApiKey();
-    const apiKey = environment.geminiKey;
+    const apiKey = localStorage.getItem("geminiApiKey") || environment.geminiKey;
     if (!apiKey) {
       throw new Error("Gemini API Key not found. Please add it in your profile.");
     }

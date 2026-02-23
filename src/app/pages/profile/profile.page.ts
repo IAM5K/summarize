@@ -35,6 +35,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
   examAspirations: any = [];
   projects: Project[] = [];
   friendsGroup = [];
+  geminiApiKey: string = "";
   groupInputs = [
     {
       placeholder: "Group Name",
@@ -127,6 +128,20 @@ export class ProfilePage implements OnInit, AfterViewInit {
     if (this.profileData.educationDetails) {
       this.populateProfileData(this.profileData);
     }
+    this.geminiApiKey = localStorage.getItem("geminiApiKey") || "";
+  }
+
+  saveGeminiApiKey() {
+    if (this.geminiApiKey) {
+      localStorage.setItem("geminiApiKey", this.geminiApiKey);
+      this.toaster.showToast("Gemini API Key saved successfully", "success");
+    } else {
+      this.toaster.showToast("Please enter a valid API Key", "warning");
+    }
+  }
+
+  getGeminiApiKey() {
+    window.open("https://aistudio.google.com/app/apikey", "_blank");
   }
 
   async ngAfterViewInit(): Promise<void> {
