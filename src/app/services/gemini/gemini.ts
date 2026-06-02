@@ -35,34 +35,43 @@ export class GeminiService {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`;
 
     const prompt = `
-      Act as a high-precision financial parser. Extract expenses from the input text and convert them into a JSON array.
-      Current Date (Today): ${today}.
-      Return ONLY a JSON array. No conversational text.
+    You are a financial expense parser. Your goal is to extract expenses and merge them by category.
 
-      JSON Structure:
-      {
-        "date": "YYYY-MM-DD",
-        "amount": number, // Total for the Date + Category group
-        "description": "string", // Itemized: "Item: Price \\n Item: Price"
-        "type": "string", // category: grocery, food, travel, education, shopping, bill, medical, etc.
-        "spendedOn": "self" | "group" | "family", // default to self
-        "reimburseable": boolean // default to false
-      }
+    ### GOAL
+    Extract every expense from the input. If multiple items share the same DATE, TYPE, and SPENDEDON, you MUST merge them into a single JSON object, summing their amounts.
 
-      Strict Extraction Rules:
-      1. Flexible Parsing: Accurately identify dates, items, and prices regardless of how they are phrased (e.g., "On Jan 5th spent 50 on milk" or "50 milk 05/01/26").
-      2. Grouping: Club all items that share the SAME DATE, SAME CATEGORY, and SAME 'spendedOn' status into a single JSON object.
-      3. Calculation: Sum up individual item amounts (handling quantities if mentioned) for the final 'amount'.
-      4. Date Standardization: Convert all relative dates (today, yesterday) or formatted dates into YYYY-MM-DD.
-      5. Description: Provide an itemized list of all items in the group using the "Item: Price \\n Item: Price" format. 
-         - If a location or vendor is mentioned (e.g., "at Dominos", "from Amazon", "at local market"), include it in the description (e.g., "Pizza (at Dominos): 500").
-      6. Contextual Properties:
-         - 'spendedOn': Detect if it's for "group" (keywords: group, friends, shared, we, us), "family" (keywords: family, kids, home, wife), or "self" (default).
-         - 'reimburseable': Set to true if keywords like "office", "work", "reimburse", "claim", or "company" are mentioned. Default is false.
-      7. Completeness: Ensure NO item mentioned in the text is skipped. Every single transaction must be accounted for.
-      8. Categorization: Intelligently assign a 'type' based on the items (e.g., vegetables/milk -> grocery, restaurant/chicken -> food).
+    ### JSON SCHEMA
+    [{
+      "date": "YYYY-MM-DD",
+      "amount": number,
+      "description": "Item (Vendor): Price \\n Item (Vendor): Price",
+      "type": "grocery | food | travel | shopping | bill | medical | education | other",
+      "spendedOn": "self | group | family", // default to self
+      "reimburseable": boolean // default to false
+    }]
 
-      Input: "${description}"
+    ### CATEGORY HINTS
+    - grocery: supermarket, dmart, vegetables, milk
+    - food: restaurant, dosa, juice, sweets, meals
+    - travel: metro, bus, train, auto, fuel
+    - Context: "group" (friends/we), "family" (home/wife/kids), "reimburseable" (office/work/claim).
+
+    ### EXAMPLE OF MERGING (CRITICAL)
+    Input: "Today: 2026-03-08. Spent 50 on coffee and 100 on a sandwich."
+    Output: [{
+      "date": "2026-03-08",
+      "amount": 150,
+      "description": "Coffee: 50 \\n Sandwich: 100",
+      "type": "food",
+      "spendedOn": "self",
+      "reimburseable": false
+    }]
+
+    ### TASK
+    Today's Date: ${today}
+    Input: "${description}"
+
+    Return ONLY valid JSON. Summarize and merge categories strictly.
     `;
 
     const body = {
