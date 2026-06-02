@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ExpenseService } from "src/app/services/expense/expense.service";
 import { SeoService } from "src/app/services/seo/seo.service";
 import { Expense, Options } from "src/app/models/interface/masterData.model";
-import { Expense, Options } from "src/app/models/interface/masterData.model";
 import { AlertService } from "src/app/services/alert/alert.service";
 import { DatePipe } from "@angular/common";
 import { Router } from "@angular/router";
@@ -23,10 +22,9 @@ import { ToasterService } from "src/app/services/toaster/toaster.service";
 import { GeminiService } from "src/app/services/gemini/gemini";
 
 @Component({
-    selector: "app-expenses",
-    templateUrl: "./expenses.page.html",
-    styleUrls: ["./expenses.page.scss"],
-    standalone: false
+  selector: "app-expenses",
+  templateUrl: "./expenses.page.html",
+  styleUrls: ["./expenses.page.scss"],
 })
 export class ExpensesPage implements OnInit {
   @Output() expenseData = new EventEmitter<any>();
@@ -166,8 +164,6 @@ export class ExpensesPage implements OnInit {
   });
   budgetNote =
     "*Note : To use upcoming Analyze feature it is required to provide your income / budget ( planned / alloted amount to be spent ) for the specific month";
-  budgetNote =
-    "*Note : To use upcoming Analyze feature it is required to provide your income / budget ( planned / alloted amount to be spent ) for the specific month";
   ngOnInit() {
     this.seoService.seo(this.pageTitle, this.pageMetaTags);
     this.getExpenses();
@@ -242,8 +238,6 @@ export class ExpensesPage implements OnInit {
   }
 
   async deleteExpense(idField: string) {
-    console.log("Delete function called");
-
     const response = await this.alertService.deleteAlert();
     if (response === "confirm") {
       this.expenseService.deleteExpense(idField);

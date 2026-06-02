@@ -38,8 +38,8 @@
     "@angular/service-worker": "19.2.17",
     "@capacitor-community/speech-recognition": "^6.0.1",
     "@capacitor-community/text-to-speech": "^5.0.0",
-    "@capacitor-firebase/messaging": "^6.1.0",
-    "@capacitor/android": "6.1.2",
+    "@capacitor-firebase/messaging": "^6.0.0",
+    "@capacitor/android": "^6.2.1",
     "@capacitor/app": "^6.0.1",
     "@capacitor/camera": "^6.0.2",
     "@capacitor/clipboard": "^6.0.1",
@@ -55,7 +55,7 @@
     "@ionic/cli": "^7.2.0",
     "@ionic/pwa-elements": "^3.3.0",
     "@ionic/storage-angular": "^4.0.0",
-    "angular-google-tag-manager": "^1.11.0",
+    "angular-google-tag-manager": "1.10.0",
     "chart.js": "^4.4.5",
     "file-saver": "^2.0.5",
     "http-server": "^14.1.1",
@@ -106,6 +106,7 @@
     "Firefox >=63",
     "Edge >=79",
     "Safari >=13",
-    "iOS >=13"
+    "iOS >=13",
+    "ChromeAndroid >=60"
   ]
 }
