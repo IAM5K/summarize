@@ -437,4 +437,10 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
     this.expenseService.clearAnalysisData();
   }
+<<<<<<< expense/add-expense-by-voice
+=======
+  returnToExpense() {
+    this.router.navigateByUrl("expenses");
+  }
+>>>>>>> master
 }
