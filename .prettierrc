@@ -1,9 +1,9 @@
 {
-  "htmlWhitespaceSensitivity": "ignore",
+  "htmlWhitespaceSensitivity": "strict",
   "trailingComma": "all",
   "tabWidth": 2,
   "semi": true,
-  "singleQuote": false,
+  "singleQuote": true,
   "bracketSpacing": true,
   "printWidth": 120,
   "useTabs": false,
@@ -13,9 +13,15 @@
   "arrowParens": "always",
   "overrides": [
     {
+      "files": ["*.html"],
+      "options": {
+        "parser": "angular"
+      }
+    },
+    {
       "files": ["*.ts"],
       "options": {
-        "singleQuote": false
+        "singleQuote": true
       }
     },
     {
@@ -29,6 +35,13 @@
       "options": {
         "parser": "json",
         "trailingComma": "all"
+      }
+    },
+    {
+      "files": ["src/assets/i18n/**/*.json"],
+      "options": {
+        "plugins": ["prettier-plugin-sort-json"],
+        "jsonRecursiveSort": true
       }
     }
   ]
