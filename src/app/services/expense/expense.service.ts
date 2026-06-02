@@ -13,9 +13,8 @@ export class ExpenseService {
   constructor(
     private afs: AngularFirestore,
     private profileService: ProfileService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
   ) {}
-  analyzeExpense: Expense[];
   analyzeExpense: Expense[];
   userId = this.profileService.getUserProfile()?.uid;
   successMessage = "Expense Added Successfully!";
@@ -42,7 +41,6 @@ export class ExpenseService {
       .doc(this.userId)
       .collection("myExpence")
       .add(data)
-      .then((res) => {
       .then((res) => {
         this.successAlert(this.successMessage);
       })
@@ -159,14 +157,10 @@ export class ExpenseService {
       .collection("myBudget")
       .add(data)
       .then((res) => {
-      .then((res) => {
         const msg = "Budget Added Successfully!";
         this.successAlert(msg);
       })
       .catch((err) => {
-        const message =
-          "There was an error in posting.\n Please try again later. Check console for detail. \nContact /report us in case of no success ";
-        this.toasterService.showToast(message, "warning");
         const message =
           "There was an error in posting.\n Please try again later. Check console for detail. \nContact /report us in case of no success ";
         this.toasterService.showToast(message, "warning");
@@ -181,15 +175,10 @@ export class ExpenseService {
       .doc(data.idField)
       .update(data)
       .then((res) => {
-      .then((res) => {
         const msg = "Budget updated successfully!";
         this.successAlert(msg);
       })
       .catch((err) => {
-        const message =
-          "There was an error in updating budget. \n Please try again later. Check console for detail. \nContact /report us in case of no success ";
-        this.toasterService.showToast(message, "warning");
-        alert();
         const message =
           "There was an error in updating budget. \n Please try again later. Check console for detail. \nContact /report us in case of no success ";
         this.toasterService.showToast(message, "warning");
