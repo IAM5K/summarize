@@ -17,9 +17,6 @@
 .form-container {
   height: auto;
   min-width: 60%;
-.form-container {
-  height: auto;
-  min-width: 60%;
 }
 
 .budget-container {
@@ -80,8 +77,6 @@ ion-grid {
 
   @media screen and (max-width: 560px) {
     min-height: 220px;
-  @media screen and (max-width: 560px) {
-    min-height: 220px;
 
     .input-item {
       width: 100%;
@@ -91,11 +86,6 @@ ion-grid {
 .data-grid {
   box-shadow: unset;
 }
-.data-grid {
-  box-shadow: unset;
-}
-
-.expense-data {
 
 .expense-data {
   min-height: 360px;

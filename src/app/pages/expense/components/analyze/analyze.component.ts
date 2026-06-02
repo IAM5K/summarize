@@ -441,7 +441,4 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
   returnToExpense() {
     this.router.navigateByUrl("expenses");
   }
-  ngOnDestroy(): void {
-    console.log("Analyze component destroyed");
-  }
 }

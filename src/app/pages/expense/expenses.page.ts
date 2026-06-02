@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ExpenseService } from "src/app/services/expense/expense.service";
 import { SeoService } from "src/app/services/seo/seo.service";
 import { Expense, Options } from "src/app/models/interface/masterData.model";
-import { Expense, Options } from "src/app/models/interface/masterData.model";
 import { AlertService } from "src/app/services/alert/alert.service";
 import { DatePipe } from "@angular/common";
 import { Router } from "@angular/router";
@@ -31,7 +30,6 @@ import { ToasterService } from "src/app/services/toaster/toaster.service";
 export class ExpensesPage implements OnInit {
   @Output() expenseData = new EventEmitter<any>();
   pageTitle = "Expenses";
-  pageMetaTags = SeoTags.expensePageTags;
   pageMetaTags = SeoTags.expensePageTags;
   editMode: boolean = false;
   updateSubmitted = false;
@@ -117,8 +115,6 @@ export class ExpensesPage implements OnInit {
     amount: ["", [Validators.required, Validators.pattern("^[0-9]*$")]],
     updatedAt: [serverTimestamp()],
   });
-  budgetNote =
-    "*Note : To use upcoming Analyze feature it is required to provide your income / budget ( planned / alloted amount to be spent ) for the specific month";
   budgetNote =
     "*Note : To use upcoming Analyze feature it is required to provide your income / budget ( planned / alloted amount to be spent ) for the specific month";
   ngOnInit() {
@@ -248,8 +244,6 @@ export class ExpensesPage implements OnInit {
     // Your delete expense logic here
   }
   async deleteExpense(idField: string) {
-    console.log("Delete function called");
-
     const response = await this.alertService.deleteAlert();
     if (response === "confirm") {
       this.expenseService.deleteExpense(idField);
