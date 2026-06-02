@@ -1,7 +1,87 @@
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auto-add-toggle {
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  margin-top: -10px;
+  ion-toggle {
+    margin: 0;
+  }
+}
+
+.parsed-preview {
+  background: var(--ion-color-light);
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 15px;
+
+  h4 {
+    margin-top: 0;
+  }
+
+  ion-list {
+    background: transparent;
+  }
+
+  ion-item {
+    --background: var(--ion-background-color);
+    margin-bottom: 5px;
+    border-radius: 8px;
+  }
+}
+
+.color-success {
+  color: var(--ion-color-success);
+}
+
+.listening-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.pulsing {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-15px {
+  margin-top: 15px;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+
 .options-container {
-  display: block;
   position: relative;
-  min-height: 50px;
+  display: flex;
+  justify-content: right;
+  flex: 1 1 auto;
   height: auto;
 }
 .expense-data {

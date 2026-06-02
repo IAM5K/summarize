@@ -1,0 +1,75 @@
+.form-container {
+  height: auto;
+  min-width: 60%;
+}
+
+.button-container {
+  position: relative;
+  display: flex;
+  height: auto;
+  width: 100%;
+
+  @media screen and (min-width: 658px) and (max-width: 990px) {
+    width: 100%;
+    float: inline-end;
+  }
+}
+.button-flex {
+  position: relative;
+  display: flex;
+  text-align: right;
+  width: 100%;
+  gap: 1rem;
+  ion-button {
+    position: relative;
+    flex-grow: 1;
+    margin: 0 auto;
+    gap: 1rem;
+    flex: 1;
+  }
+  @media screen and (min-width: 658px) {
+    display: flex;
+    float: right;
+    ion-button {
+      position: relative;
+      min-width: 23%;
+    }
+  }
+}
+
+.spent-on {
+  width: 5rem;
+  margin-right: 2rem;
+}
+
+.inline-radio {
+  width: calc(100% - 6rem);
+  font-size: 0.9rem;
+
+  ion-radio {
+    width: auto;
+    padding-right: 1.5rem;
+    :host(.radio-label-placement-end) .label-text-wrapper {
+      --margin-inline-start: 0.5rem !important;
+      -webkit-margin-start: 0.5rem !important;
+    }
+  }
+
+  .radio-wrapper {
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .spent-on,
+  .inline-radio {
+    align-content: center;
+    width: 100%;
+    min-height: 35px;
+    margin-right: unset;
+    margin: auto;
+    float: left;
+    display: block;
+    position: relative;
+  }
+}

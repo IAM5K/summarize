@@ -1,56 +1,63 @@
-import { Injectable } from "@angular/core";
+import { Injectable, NgZone } from "@angular/core";
 import { SpeechRecognition } from "@capacitor-community/speech-recognition";
+import { Haptics, ImpactStyle } from "@capacitor/haptics";
 import { Platform } from "@ionic/angular";
 import { SpeechRecognitionEvent } from "src/app/models/interface/speechRecognition.interface";
 
 // Declare webkitSpeechRecognition for web browsers
-declare var webkitSpeechRecognition: any; // Declare the global var for webkitSpeechRecognition
+declare var webkitSpeechRecognition: any;
 
 @Injectable({
   providedIn: "root",
 })
 export class SpeechRecognitionService {
-  private recognition: any; // Web Speech API recognition object
-  private timeout: any; // Timeout for long pauses
-  public textInput: string = "";
-  stoppedManually = false;
-  private readonly PAUSE_TIMEOUT_MS = 3000; // Adjust timeout duration as needed
+  private recognition: any;
+  private timeout: any;
+  private finalTranscript: string = "";
+  private isNative: boolean;
+  private stoppedManually = false;
+  private readonly INACTIVITY_TIMEOUT_MS = 8000;
 
-  constructor(private platform: Platform) {}
-
-  // Start speech recognition based on platform
-  async startRecognition(callback: (text: string) => void) {
-    if (this.platform.is("capacitor")) {
-      await this.startNativeRecognition(callback);
-    } else {
-      await this.startWebRecognition(callback);
-    }
+  constructor(private platform: Platform, private zone: NgZone) {
+    this.isNative = this.platform.is("hybrid");
   }
 
-  // Stop speech recognition based on platform
+  async startRecognition(callback: (text: string) => void, errorCallback?: (error: string) => void) {
+    this.finalTranscript = "";
+    this.stoppedManually = false;
+
+    if (this.isNative) {
+      await this.startNativeRecognition(callback, errorCallback);
+    } else {
+      await this.startWebRecognition(callback, errorCallback);
+    }
+    
+    this.triggerHaptic(ImpactStyle.Light);
+  }
+
   async stopRecognition() {
-    if (this.platform.is("capacitor")) {
+    this.stoppedManually = true;
+    if (this.isNative) {
       await this.stopNativeRecognition();
     } else {
       await this.stopWebRecognition();
     }
+    this.triggerHaptic(ImpactStyle.Medium);
   }
 
-  // Native speech recognition (Capacitor)
-  private async startNativeRecognition(callback: (text: string) => void) {
+  private async startNativeRecognition(callback: (text: string) => void, errorCallback?: (error: string) => void) {
     try {
       const available = await SpeechRecognition.available();
-      if (!available) {
-        alert("Speech recognition not available on this device.");
+      if (!available.available) {
+        if (errorCallback) errorCallback("Speech recognition not available");
         return;
       }
 
-      // Check for permissions and request them if necessary
       const permissionStatus = await SpeechRecognition.checkPermissions();
       if (permissionStatus.speechRecognition !== "granted") {
         const requestResult = await SpeechRecognition.requestPermissions();
         if (requestResult.speechRecognition !== "granted") {
-          alert("Permission not granted for speech recognition.");
+          if (errorCallback) errorCallback("Permission denied");
           return;
         }
       }
@@ -61,36 +68,35 @@ export class SpeechRecognitionService {
         popup: false,
       });
 
-      // Listen for partial results
       SpeechRecognition.addListener("partialResults", (data: { matches: string[] }) => {
-        if (data.matches && data.matches.length > 0) {
-          this.updateTextInput(data.matches.join(" "), callback);
-        }
+        this.zone.run(() => {
+          if (data.matches && data.matches.length > 0) {
+            callback(data.matches[0].trim());
+          }
+          this.resetInactivityTimeout(callback);
+        });
       });
 
-      // Start a timeout for long pauses
-      this.resetPauseTimeout(callback);
-    } catch (error) {
-      console.error("Error starting native speech recognition:", error);
+      this.resetInactivityTimeout(callback);
+    } catch (error: any) {
+      console.error("Native recognition error:", error);
+      if (errorCallback) errorCallback(error.message || "Native recognition error");
     }
   }
 
-  // Stop native speech recognition
   private async stopNativeRecognition() {
     try {
       await SpeechRecognition.stop();
       SpeechRecognition.removeAllListeners();
-      clearTimeout(this.timeout); // Clear the pause timeout
+      clearTimeout(this.timeout);
     } catch (error) {
-      console.error("Error stopping native speech recognition:", error);
+      console.error("Error stopping native recognition:", error);
     }
   }
 
-  // Start web speech recognition
-  private async startWebRecognition(callback: (text: string) => void) {
+  private async startWebRecognition(callback: (text: string) => void, errorCallback?: (error: string) => void) {
     if (!("webkitSpeechRecognition" in window)) {
-      console.error("Speech recognition not supported in this browser.");
-      alert("Speech recognition not supported in this browser.");
+      if (errorCallback) errorCallback("Speech recognition not supported");
       return;
     }
 
@@ -99,113 +105,66 @@ export class SpeechRecognitionService {
     this.recognition.interimResults = true;
     this.recognition.lang = "en-US";
 
-    // Log when speech recognition starts
     this.recognition.onstart = () => {
-      console.log("Speech recognition started.");
-      this.resetPauseTimeout(callback); // Start timeout for long pauses
+      this.resetInactivityTimeout(callback);
     };
 
-    // Handle the recognition result (partial and final)
     this.recognition.onresult = (event: SpeechRecognitionEvent) => {
-      let finalTranscript = "";
       let interimTranscript = "";
-
-      console.log("Speech recognition event triggered:", event);
-
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
-          finalTranscript += event.results[i][0].transcript + " ";
-          console.log(`Final transcript: ${event.results[i][0].transcript}`);
+          this.finalTranscript += event.results[i][0].transcript + " ";
         } else {
-          interimTranscript += event.results[i][0].transcript + " ";
-          console.log(`Interim transcript: ${event.results[i][0].transcript}`);
+          interimTranscript += event.results[i][0].transcript;
         }
       }
 
-      // Append the final or interim transcript
-      this.updateTextInput(finalTranscript || interimTranscript, callback);
-
-      // Log and reset the pause timeout each time recognition results are received
-      console.log("Resetting pause timeout due to speech activity.");
-      this.resetPauseTimeout(callback);
+      this.zone.run(() => {
+        callback((this.finalTranscript + interimTranscript).trim());
+        this.resetInactivityTimeout(callback);
+      });
     };
 
-    // Handle errors and log them
-    this.recognition.onerror = (event) => {
-      console.error("Speech recognition error:", event.error);
-
-      // If the error is 'no-speech', handle it gracefully
-      if (event.error === "no-speech") {
-        console.log("No speech detected. Waiting for input...");
-      } else {
-        alert(`Error occurred in speech recognition: ${event.error}`);
-      }
+    this.recognition.onerror = (event: any) => {
+      this.zone.run(() => {
+        if (event.error !== "no-speech") {
+          console.error("Web recognition error:", event.error);
+          if (errorCallback) errorCallback(event.error);
+          this.stopRecognition();
+        }
+      });
     };
 
-    // Handle when recognition ends (auto stops or manually stopped)
     this.recognition.onend = () => {
-      console.log("Speech recognition ended.");
-      clearTimeout(this.timeout); // Clear the pause timeout
-
-      // Check if it ended due to inactivity (which triggers onerror first)
+      clearTimeout(this.timeout);
       if (!this.stoppedManually) {
-        alert("Listening stopped due to inactivity.");
+        this.zone.run(() => callback(this.finalTranscript.trim()));
       }
     };
 
-    // Log starting the recognition process and begin listening
-    console.log("Starting speech recognition...");
-    this.stoppedManually = false;
     this.recognition.start();
   }
 
-  // Update the text input area with transcripts
-  private updateTextInput(transcript: string, callback: (text: string) => void) {
-    this.textInput += transcript;
-    callback(this.textInput.trim());
-  }
-
-  // Reset the timeout that detects long pauses in speech recognition
-  private resetPauseTimeout(callback: (text: string) => void) {
-    clearTimeout(this.timeout);
-
-    // Set timeout for 10 seconds of inactivity
-    this.timeout = setTimeout(() => {
-      console.log("Timeout due to inactivity.");
-      this.stopWebRecognition(); // Stop recognition due to inactivity
-      alert("Listening stopped due to inactivity.");
-      callback(this.textInput.trim());
-    }, 10000); // Adjust this value as needed (10 seconds)
-  }
-
-  // Stop web speech recognition manually
-  private stopWebRecognition() {
+  private async stopWebRecognition() {
     if (this.recognition) {
-      this.stoppedManually = true;
       this.recognition.stop();
     }
   }
 
-  // // Stop web speech recognition
-  // private stopWebRecognition() {
-  //   if (this.recognition) {
-  //     this.recognition.stop();
-  //   }
-  // }
+  private resetInactivityTimeout(callback: (text: string) => void) {
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => {
+      if (!this.stoppedManually) {
+        this.stopRecognition();
+      }
+    }, this.INACTIVITY_TIMEOUT_MS);
+  }
 
-  // // Update text input and call the callback
-  // private updateTextInput(transcript: string, callback: (text: string) => void) {
-  //   this.textInput += transcript;
-  //   callback(this.textInput.trim());
-  // }
-
-  // // Reset the timeout for long pauses
-  // private resetPauseTimeout(callback: (text: string) => void) {
-  //   clearTimeout(this.timeout);
-  //   this.timeout = setTimeout(() => {
-  //     this.stopRecognition();
-  //     callback(this.textInput.trim()); // Optionally send final input after stopping
-  //     alert("Listening stopped due to inactivity.");
-  //   }, this.PAUSE_TIMEOUT_MS);
-  // }
+  private async triggerHaptic(style: ImpactStyle) {
+    if (this.isNative) {
+      try {
+        await Haptics.impact({ style });
+      } catch (e) {}
+    }
+  }
 }

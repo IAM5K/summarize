@@ -9,6 +9,16 @@ const routes: Routes = [
     component: ExpensesPage,
   },
   {
+    path: "add",
+    loadComponent: () =>
+      import("./components/add-edit-expense/add-edit-expense.component").then((m) => m.AddEditExpenseComponent),
+  },
+  {
+    path: "edit/:id",
+    loadComponent: () =>
+      import("./components/add-edit-expense/add-edit-expense.component").then((m) => m.AddEditExpenseComponent),
+  },
+  {
     path: "analyze",
     loadChildren: () => import("./components/analyze/analyze.module").then((m) => m.AnalyzeModule),
   },

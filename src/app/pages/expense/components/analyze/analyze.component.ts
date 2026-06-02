@@ -15,10 +15,9 @@ import { ExpenseService } from "src/app/services/expense/expense.service";
 Chart.register(...registerables);
 
 @Component({
-    selector: "app-analyze",
-    templateUrl: "./analyze.component.html",
-    styleUrls: ["./analyze.component.scss"],
-    standalone: false
+  selector: "app-analyze",
+  templateUrl: "./analyze.component.html",
+  styleUrls: ["./analyze.component.scss"],
 })
 export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
@@ -438,7 +437,10 @@ export class AnalyzeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
     this.expenseService.clearAnalysisData();
   }
+<<<<<<< expense/add-expense-by-voice
+=======
   returnToExpense() {
     this.router.navigateByUrl("expenses");
   }
+>>>>>>> master
 }
